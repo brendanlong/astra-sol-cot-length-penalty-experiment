@@ -1,0 +1,2194 @@
+{
+ "n_excerpts": 22,
+ "n_segmented": 15,
+ "n_glued": 7,
+ "gluing_by_kind": {
+  "GPT-6.1 Sol / user_facing": {
+   "excerpts": 2,
+   "glued_excerpts": 0
+  },
+  "GPT-6.1 Sol / cot": {
+   "excerpts": 3,
+   "glued_excerpts": 2
+  },
+  "GPT-6.1 Sol / agent_message": {
+   "excerpts": 3,
+   "glued_excerpts": 0
+  },
+  "unspecified OpenAI agent / agent_message": {
+   "excerpts": 1,
+   "glued_excerpts": 1
+  },
+  "GPT-6 Astra / agent_message": {
+   "excerpts": 2,
+   "glued_excerpts": 1
+  },
+  "GPT-6 Astra / cot": {
+   "excerpts": 3,
+   "glued_excerpts": 3
+  },
+  "GPT-6 Astra / user_facing": {
+   "excerpts": 1,
+   "glued_excerpts": 0
+  }
+ },
+ "gluing_by_kind_boundaries": {
+  "user_facing": {
+   "boundaries": 109,
+   "glued": 0
+  },
+  "cot": {
+   "boundaries": 600,
+   "glued": 268
+  },
+  "agent_message": {
+   "boundaries": 151,
+   "glued": 10
+  }
+ },
+ "segmentation_sensitivity": {
+  "n_boundaries_merged": 10,
+  "as_reported": {
+   "pct_chars_vs_spaced": -7.639461390491897,
+   "pct_canonical_glued_vs_spaced": 7.928802588996753
+  },
+  "digit_labels_merged": {
+   "pct_chars_vs_spaced": -7.384954532929178,
+   "pct_canonical_glued_vs_spaced": 8.103727714748787
+  }
+ },
+ "run_structure": {
+  "run_length_hist": {
+   "1": 106,
+   "2": 44,
+   "3": 31,
+   "4": 19,
+   "5": 13,
+   "6": 5,
+   "7": 5,
+   "9": 1
+  },
+  "mean_run_length": 2.2410714285714284,
+  "drop_rate": 0.5616161616161616,
+  "analytic_null_mean_run": 2.2410714285714284,
+  "bernoulli_null_mean_run": 2.2462910712038147,
+  "variance_run_length": 2.5604580397181294,
+  "bernoulli_null_variance": 2.795156454321773,
+  "bernoulli_null_variance_ci95": [
+   1.9012372166201816,
+   4.027734325455545
+  ],
+  "p_null_variance_at_least_observed": 0.6365
+ },
+ "length": {
+  "all_with_reference": {
+   "o200k_base": {
+    "encoding": "o200k_base",
+    "rows": [
+     {
+      "id": "eval_pipeline-02-parent-user_facing",
+      "model": "GPT-6.1 Sol",
+      "speaker": "parent",
+      "kind": "user_facing",
+      "words": 65,
+      "boundaries": 64,
+      "dropped": 0,
+      "chars_glued": 428,
+      "chars_spaced": 428,
+      "canonical_spaced": 90,
+      "canonical_glued": 90,
+      "wordwise_glued": 93,
+      "wordwise_spaced": 93
+     },
+     {
+      "id": "eval_pipeline-04-parent-cot",
+      "model": "GPT-6.1 Sol",
+      "speaker": "parent",
+      "kind": "cot",
+      "words": 110,
+      "boundaries": 109,
+      "dropped": 80,
+      "chars_glued": 618,
+      "chars_spaced": 698,
+      "canonical_spaced": 124,
+      "canonical_glued": 137,
+      "wordwise_glued": 135,
+      "wordwise_spaced": 124
+     },
+     {
+      "id": "eval_pipeline-05-parent-agent_message",
+      "model": "GPT-6.1 Sol",
+      "speaker": "parent",
+      "kind": "agent_message",
+      "words": 41,
+      "boundaries": 40,
+      "dropped": 0,
+      "chars_glued": 290,
+      "chars_spaced": 290,
+      "canonical_spaced": 53,
+      "canonical_glued": 53,
+      "wordwise_glued": 54,
+      "wordwise_spaced": 54
+     },
+     {
+      "id": "eval_pipeline-06-subagent-cot",
+      "model": "GPT-6.1 Sol",
+      "speaker": "subagent",
+      "kind": "cot",
+      "words": 90,
+      "boundaries": 89,
+      "dropped": 39,
+      "chars_glued": 581,
+      "chars_spaced": 620,
+      "canonical_spaced": 107,
+      "canonical_glued": 112,
+      "wordwise_glued": 110,
+      "wordwise_spaced": 107
+     },
+     {
+      "id": "eval_pipeline-07-parent-cot",
+      "model": "GPT-6.1 Sol",
+      "speaker": "parent",
+      "kind": "cot",
+      "words": 144,
+      "boundaries": 143,
+      "dropped": 0,
+      "chars_glued": 1037,
+      "chars_spaced": 1037,
+      "canonical_spaced": 190,
+      "canonical_glued": 190,
+      "wordwise_glued": 190,
+      "wordwise_spaced": 190
+     },
+     {
+      "id": "eval_pipeline-08-parent-agent_message",
+      "model": "GPT-6.1 Sol",
+      "speaker": "parent",
+      "kind": "agent_message",
+      "words": 26,
+      "boundaries": 25,
+      "dropped": 0,
+      "chars_glued": 206,
+      "chars_spaced": 206,
+      "canonical_spaced": 37,
+      "canonical_glued": 37,
+      "wordwise_glued": 37,
+      "wordwise_spaced": 37
+     },
+     {
+      "id": "eval_pipeline-09-parent-agent_message",
+      "model": "GPT-6.1 Sol",
+      "speaker": "parent",
+      "kind": "agent_message",
+      "words": 39,
+      "boundaries": 38,
+      "dropped": 0,
+      "chars_glued": 303,
+      "chars_spaced": 303,
+      "canonical_spaced": 49,
+      "canonical_glued": 49,
+      "wordwise_glued": 50,
+      "wordwise_spaced": 50
+     },
+     {
+      "id": "eval_pipeline-11-parent-user_facing",
+      "model": "GPT-6.1 Sol",
+      "speaker": "parent",
+      "kind": "user_facing",
+      "words": 37,
+      "boundaries": 36,
+      "dropped": 0,
+      "chars_glued": 227,
+      "chars_spaced": 227,
+      "canonical_spaced": 47,
+      "canonical_glued": 47,
+      "wordwise_glued": 48,
+      "wordwise_spaced": 48
+     },
+     {
+      "id": "reference_impl-12-other_agent-agent_message",
+      "model": "unspecified OpenAI agent",
+      "speaker": "other_agent",
+      "kind": "agent_message",
+      "words": 6,
+      "boundaries": 5,
+      "dropped": 2,
+      "chars_glued": 37,
+      "chars_spaced": 39,
+      "canonical_spaced": 6,
+      "canonical_glued": 6,
+      "wordwise_glued": 6,
+      "wordwise_spaced": 6
+     },
+     {
+      "id": "reference_impl-14-parent-agent_message",
+      "model": "GPT-6 Astra",
+      "speaker": "parent",
+      "kind": "agent_message",
+      "words": 34,
+      "boundaries": 33,
+      "dropped": 8,
+      "chars_glued": 307,
+      "chars_spaced": 315,
+      "canonical_spaced": 59,
+      "canonical_glued": 60,
+      "wordwise_glued": 61,
+      "wordwise_spaced": 60
+     },
+     {
+      "id": "reference_impl-15-subagent-cot",
+      "model": "GPT-6 Astra",
+      "speaker": "subagent",
+      "kind": "cot",
+      "words": 135,
+      "boundaries": 134,
+      "dropped": 71,
+      "chars_glued": 967,
+      "chars_spaced": 1038,
+      "canonical_spaced": 171,
+      "canonical_glued": 192,
+      "wordwise_glued": 183,
+      "wordwise_spaced": 172
+     },
+     {
+      "id": "reference_impl-16-parent-cot",
+      "model": "GPT-6 Astra",
+      "speaker": "parent",
+      "kind": "cot",
+      "words": 66,
+      "boundaries": 65,
+      "dropped": 40,
+      "chars_glued": 442,
+      "chars_spaced": 482,
+      "canonical_spaced": 78,
+      "canonical_glued": 84,
+      "wordwise_glued": 81,
+      "wordwise_spaced": 78
+     },
+     {
+      "id": "reference_impl-18-subagent-agent_message",
+      "model": "GPT-6 Astra",
+      "speaker": "subagent",
+      "kind": "agent_message",
+      "words": 11,
+      "boundaries": 10,
+      "dropped": 0,
+      "chars_glued": 64,
+      "chars_spaced": 64,
+      "canonical_spaced": 16,
+      "canonical_glued": 16,
+      "wordwise_glued": 16,
+      "wordwise_spaced": 16
+     },
+     {
+      "id": "reference_impl-19-parent-cot",
+      "model": "GPT-6 Astra",
+      "speaker": "parent",
+      "kind": "cot",
+      "words": 61,
+      "boundaries": 60,
+      "dropped": 38,
+      "chars_glued": 409,
+      "chars_spaced": 447,
+      "canonical_spaced": 73,
+      "canonical_glued": 76,
+      "wordwise_glued": 76,
+      "wordwise_spaced": 74
+     },
+     {
+      "id": "reference_impl-21-parent-user_facing",
+      "model": "GPT-6 Astra",
+      "speaker": "parent",
+      "kind": "user_facing",
+      "words": 10,
+      "boundaries": 9,
+      "dropped": 0,
+      "chars_glued": 47,
+      "chars_spaced": 47,
+      "canonical_spaced": 12,
+      "canonical_glued": 12,
+      "wordwise_glued": 12,
+      "wordwise_spaced": 12
+     }
+    ],
+    "totals": {
+     "words": 875,
+     "dropped": 278,
+     "chars_glued": 5963,
+     "chars_spaced": 6241,
+     "canonical_spaced": 1112,
+     "canonical_glued": 1161,
+     "wordwise_glued": 1152,
+     "wordwise_spaced": 1121,
+     "pct_chars_vs_spaced": -4.454414356673608,
+     "pct_canonical_glued_vs_spaced": 4.406474820143891,
+     "pct_wordwise_glued_vs_wordwise_spaced": 2.7653880463871516,
+     "pct_wordwise_spaced_vs_canonical_spaced": 0.8093525179856176,
+     "pct_retokenization_inflation": 0.78125,
+     "per_excerpt_pct_canonical_min": 0.0,
+     "per_excerpt_pct_canonical_max": 12.280701754385959,
+     "per_excerpt_pct_canonical_mean": 2.7289521270686943,
+     "n_excerpts_canonical_positive": 6
+    }
+   },
+   "o200k_harmony": {
+    "encoding": "o200k_harmony",
+    "rows": [
+     {
+      "id": "eval_pipeline-02-parent-user_facing",
+      "model": "GPT-6.1 Sol",
+      "speaker": "parent",
+      "kind": "user_facing",
+      "words": 65,
+      "boundaries": 64,
+      "dropped": 0,
+      "chars_glued": 428,
+      "chars_spaced": 428,
+      "canonical_spaced": 90,
+      "canonical_glued": 90,
+      "wordwise_glued": 93,
+      "wordwise_spaced": 93
+     },
+     {
+      "id": "eval_pipeline-04-parent-cot",
+      "model": "GPT-6.1 Sol",
+      "speaker": "parent",
+      "kind": "cot",
+      "words": 110,
+      "boundaries": 109,
+      "dropped": 80,
+      "chars_glued": 618,
+      "chars_spaced": 698,
+      "canonical_spaced": 124,
+      "canonical_glued": 137,
+      "wordwise_glued": 135,
+      "wordwise_spaced": 124
+     },
+     {
+      "id": "eval_pipeline-05-parent-agent_message",
+      "model": "GPT-6.1 Sol",
+      "speaker": "parent",
+      "kind": "agent_message",
+      "words": 41,
+      "boundaries": 40,
+      "dropped": 0,
+      "chars_glued": 290,
+      "chars_spaced": 290,
+      "canonical_spaced": 53,
+      "canonical_glued": 53,
+      "wordwise_glued": 54,
+      "wordwise_spaced": 54
+     },
+     {
+      "id": "eval_pipeline-06-subagent-cot",
+      "model": "GPT-6.1 Sol",
+      "speaker": "subagent",
+      "kind": "cot",
+      "words": 90,
+      "boundaries": 89,
+      "dropped": 39,
+      "chars_glued": 581,
+      "chars_spaced": 620,
+      "canonical_spaced": 107,
+      "canonical_glued": 112,
+      "wordwise_glued": 110,
+      "wordwise_spaced": 107
+     },
+     {
+      "id": "eval_pipeline-07-parent-cot",
+      "model": "GPT-6.1 Sol",
+      "speaker": "parent",
+      "kind": "cot",
+      "words": 144,
+      "boundaries": 143,
+      "dropped": 0,
+      "chars_glued": 1037,
+      "chars_spaced": 1037,
+      "canonical_spaced": 190,
+      "canonical_glued": 190,
+      "wordwise_glued": 190,
+      "wordwise_spaced": 190
+     },
+     {
+      "id": "eval_pipeline-08-parent-agent_message",
+      "model": "GPT-6.1 Sol",
+      "speaker": "parent",
+      "kind": "agent_message",
+      "words": 26,
+      "boundaries": 25,
+      "dropped": 0,
+      "chars_glued": 206,
+      "chars_spaced": 206,
+      "canonical_spaced": 37,
+      "canonical_glued": 37,
+      "wordwise_glued": 37,
+      "wordwise_spaced": 37
+     },
+     {
+      "id": "eval_pipeline-09-parent-agent_message",
+      "model": "GPT-6.1 Sol",
+      "speaker": "parent",
+      "kind": "agent_message",
+      "words": 39,
+      "boundaries": 38,
+      "dropped": 0,
+      "chars_glued": 303,
+      "chars_spaced": 303,
+      "canonical_spaced": 49,
+      "canonical_glued": 49,
+      "wordwise_glued": 50,
+      "wordwise_spaced": 50
+     },
+     {
+      "id": "eval_pipeline-11-parent-user_facing",
+      "model": "GPT-6.1 Sol",
+      "speaker": "parent",
+      "kind": "user_facing",
+      "words": 37,
+      "boundaries": 36,
+      "dropped": 0,
+      "chars_glued": 227,
+      "chars_spaced": 227,
+      "canonical_spaced": 47,
+      "canonical_glued": 47,
+      "wordwise_glued": 48,
+      "wordwise_spaced": 48
+     },
+     {
+      "id": "reference_impl-12-other_agent-agent_message",
+      "model": "unspecified OpenAI agent",
+      "speaker": "other_agent",
+      "kind": "agent_message",
+      "words": 6,
+      "boundaries": 5,
+      "dropped": 2,
+      "chars_glued": 37,
+      "chars_spaced": 39,
+      "canonical_spaced": 6,
+      "canonical_glued": 6,
+      "wordwise_glued": 6,
+      "wordwise_spaced": 6
+     },
+     {
+      "id": "reference_impl-14-parent-agent_message",
+      "model": "GPT-6 Astra",
+      "speaker": "parent",
+      "kind": "agent_message",
+      "words": 34,
+      "boundaries": 33,
+      "dropped": 8,
+      "chars_glued": 307,
+      "chars_spaced": 315,
+      "canonical_spaced": 59,
+      "canonical_glued": 60,
+      "wordwise_glued": 61,
+      "wordwise_spaced": 60
+     },
+     {
+      "id": "reference_impl-15-subagent-cot",
+      "model": "GPT-6 Astra",
+      "speaker": "subagent",
+      "kind": "cot",
+      "words": 135,
+      "boundaries": 134,
+      "dropped": 71,
+      "chars_glued": 967,
+      "chars_spaced": 1038,
+      "canonical_spaced": 171,
+      "canonical_glued": 192,
+      "wordwise_glued": 183,
+      "wordwise_spaced": 172
+     },
+     {
+      "id": "reference_impl-16-parent-cot",
+      "model": "GPT-6 Astra",
+      "speaker": "parent",
+      "kind": "cot",
+      "words": 66,
+      "boundaries": 65,
+      "dropped": 40,
+      "chars_glued": 442,
+      "chars_spaced": 482,
+      "canonical_spaced": 78,
+      "canonical_glued": 84,
+      "wordwise_glued": 81,
+      "wordwise_spaced": 78
+     },
+     {
+      "id": "reference_impl-18-subagent-agent_message",
+      "model": "GPT-6 Astra",
+      "speaker": "subagent",
+      "kind": "agent_message",
+      "words": 11,
+      "boundaries": 10,
+      "dropped": 0,
+      "chars_glued": 64,
+      "chars_spaced": 64,
+      "canonical_spaced": 16,
+      "canonical_glued": 16,
+      "wordwise_glued": 16,
+      "wordwise_spaced": 16
+     },
+     {
+      "id": "reference_impl-19-parent-cot",
+      "model": "GPT-6 Astra",
+      "speaker": "parent",
+      "kind": "cot",
+      "words": 61,
+      "boundaries": 60,
+      "dropped": 38,
+      "chars_glued": 409,
+      "chars_spaced": 447,
+      "canonical_spaced": 73,
+      "canonical_glued": 76,
+      "wordwise_glued": 76,
+      "wordwise_spaced": 74
+     },
+     {
+      "id": "reference_impl-21-parent-user_facing",
+      "model": "GPT-6 Astra",
+      "speaker": "parent",
+      "kind": "user_facing",
+      "words": 10,
+      "boundaries": 9,
+      "dropped": 0,
+      "chars_glued": 47,
+      "chars_spaced": 47,
+      "canonical_spaced": 12,
+      "canonical_glued": 12,
+      "wordwise_glued": 12,
+      "wordwise_spaced": 12
+     }
+    ],
+    "totals": {
+     "words": 875,
+     "dropped": 278,
+     "chars_glued": 5963,
+     "chars_spaced": 6241,
+     "canonical_spaced": 1112,
+     "canonical_glued": 1161,
+     "wordwise_glued": 1152,
+     "wordwise_spaced": 1121,
+     "pct_chars_vs_spaced": -4.454414356673608,
+     "pct_canonical_glued_vs_spaced": 4.406474820143891,
+     "pct_wordwise_glued_vs_wordwise_spaced": 2.7653880463871516,
+     "pct_wordwise_spaced_vs_canonical_spaced": 0.8093525179856176,
+     "pct_retokenization_inflation": 0.78125,
+     "per_excerpt_pct_canonical_min": 0.0,
+     "per_excerpt_pct_canonical_max": 12.280701754385959,
+     "per_excerpt_pct_canonical_mean": 2.7289521270686943,
+     "n_excerpts_canonical_positive": 6
+    }
+   },
+   "cl100k_base": {
+    "encoding": "cl100k_base",
+    "rows": [
+     {
+      "id": "eval_pipeline-02-parent-user_facing",
+      "model": "GPT-6.1 Sol",
+      "speaker": "parent",
+      "kind": "user_facing",
+      "words": 65,
+      "boundaries": 64,
+      "dropped": 0,
+      "chars_glued": 428,
+      "chars_spaced": 428,
+      "canonical_spaced": 91,
+      "canonical_glued": 91,
+      "wordwise_glued": 94,
+      "wordwise_spaced": 94
+     },
+     {
+      "id": "eval_pipeline-04-parent-cot",
+      "model": "GPT-6.1 Sol",
+      "speaker": "parent",
+      "kind": "cot",
+      "words": 110,
+      "boundaries": 109,
+      "dropped": 80,
+      "chars_glued": 618,
+      "chars_spaced": 698,
+      "canonical_spaced": 124,
+      "canonical_glued": 140,
+      "wordwise_glued": 136,
+      "wordwise_spaced": 124
+     },
+     {
+      "id": "eval_pipeline-05-parent-agent_message",
+      "model": "GPT-6.1 Sol",
+      "speaker": "parent",
+      "kind": "agent_message",
+      "words": 41,
+      "boundaries": 40,
+      "dropped": 0,
+      "chars_glued": 290,
+      "chars_spaced": 290,
+      "canonical_spaced": 54,
+      "canonical_glued": 54,
+      "wordwise_glued": 55,
+      "wordwise_spaced": 55
+     },
+     {
+      "id": "eval_pipeline-06-subagent-cot",
+      "model": "GPT-6.1 Sol",
+      "speaker": "subagent",
+      "kind": "cot",
+      "words": 90,
+      "boundaries": 89,
+      "dropped": 39,
+      "chars_glued": 581,
+      "chars_spaced": 620,
+      "canonical_spaced": 110,
+      "canonical_glued": 115,
+      "wordwise_glued": 114,
+      "wordwise_spaced": 110
+     },
+     {
+      "id": "eval_pipeline-07-parent-cot",
+      "model": "GPT-6.1 Sol",
+      "speaker": "parent",
+      "kind": "cot",
+      "words": 144,
+      "boundaries": 143,
+      "dropped": 0,
+      "chars_glued": 1037,
+      "chars_spaced": 1037,
+      "canonical_spaced": 191,
+      "canonical_glued": 191,
+      "wordwise_glued": 191,
+      "wordwise_spaced": 191
+     },
+     {
+      "id": "eval_pipeline-08-parent-agent_message",
+      "model": "GPT-6.1 Sol",
+      "speaker": "parent",
+      "kind": "agent_message",
+      "words": 26,
+      "boundaries": 25,
+      "dropped": 0,
+      "chars_glued": 206,
+      "chars_spaced": 206,
+      "canonical_spaced": 36,
+      "canonical_glued": 36,
+      "wordwise_glued": 36,
+      "wordwise_spaced": 36
+     },
+     {
+      "id": "eval_pipeline-09-parent-agent_message",
+      "model": "GPT-6.1 Sol",
+      "speaker": "parent",
+      "kind": "agent_message",
+      "words": 39,
+      "boundaries": 38,
+      "dropped": 0,
+      "chars_glued": 303,
+      "chars_spaced": 303,
+      "canonical_spaced": 51,
+      "canonical_glued": 51,
+      "wordwise_glued": 52,
+      "wordwise_spaced": 52
+     },
+     {
+      "id": "eval_pipeline-11-parent-user_facing",
+      "model": "GPT-6.1 Sol",
+      "speaker": "parent",
+      "kind": "user_facing",
+      "words": 37,
+      "boundaries": 36,
+      "dropped": 0,
+      "chars_glued": 227,
+      "chars_spaced": 227,
+      "canonical_spaced": 46,
+      "canonical_glued": 46,
+      "wordwise_glued": 47,
+      "wordwise_spaced": 47
+     },
+     {
+      "id": "reference_impl-12-other_agent-agent_message",
+      "model": "unspecified OpenAI agent",
+      "speaker": "other_agent",
+      "kind": "agent_message",
+      "words": 6,
+      "boundaries": 5,
+      "dropped": 2,
+      "chars_glued": 37,
+      "chars_spaced": 39,
+      "canonical_spaced": 6,
+      "canonical_glued": 6,
+      "wordwise_glued": 6,
+      "wordwise_spaced": 6
+     },
+     {
+      "id": "reference_impl-14-parent-agent_message",
+      "model": "GPT-6 Astra",
+      "speaker": "parent",
+      "kind": "agent_message",
+      "words": 34,
+      "boundaries": 33,
+      "dropped": 8,
+      "chars_glued": 307,
+      "chars_spaced": 315,
+      "canonical_spaced": 59,
+      "canonical_glued": 60,
+      "wordwise_glued": 61,
+      "wordwise_spaced": 60
+     },
+     {
+      "id": "reference_impl-15-subagent-cot",
+      "model": "GPT-6 Astra",
+      "speaker": "subagent",
+      "kind": "cot",
+      "words": 135,
+      "boundaries": 134,
+      "dropped": 71,
+      "chars_glued": 967,
+      "chars_spaced": 1038,
+      "canonical_spaced": 171,
+      "canonical_glued": 193,
+      "wordwise_glued": 184,
+      "wordwise_spaced": 172
+     },
+     {
+      "id": "reference_impl-16-parent-cot",
+      "model": "GPT-6 Astra",
+      "speaker": "parent",
+      "kind": "cot",
+      "words": 66,
+      "boundaries": 65,
+      "dropped": 40,
+      "chars_glued": 442,
+      "chars_spaced": 482,
+      "canonical_spaced": 79,
+      "canonical_glued": 88,
+      "wordwise_glued": 84,
+      "wordwise_spaced": 79
+     },
+     {
+      "id": "reference_impl-18-subagent-agent_message",
+      "model": "GPT-6 Astra",
+      "speaker": "subagent",
+      "kind": "agent_message",
+      "words": 11,
+      "boundaries": 10,
+      "dropped": 0,
+      "chars_glued": 64,
+      "chars_spaced": 64,
+      "canonical_spaced": 16,
+      "canonical_glued": 16,
+      "wordwise_glued": 16,
+      "wordwise_spaced": 16
+     },
+     {
+      "id": "reference_impl-19-parent-cot",
+      "model": "GPT-6 Astra",
+      "speaker": "parent",
+      "kind": "cot",
+      "words": 61,
+      "boundaries": 60,
+      "dropped": 38,
+      "chars_glued": 409,
+      "chars_spaced": 447,
+      "canonical_spaced": 75,
+      "canonical_glued": 79,
+      "wordwise_glued": 79,
+      "wordwise_spaced": 76
+     },
+     {
+      "id": "reference_impl-21-parent-user_facing",
+      "model": "GPT-6 Astra",
+      "speaker": "parent",
+      "kind": "user_facing",
+      "words": 10,
+      "boundaries": 9,
+      "dropped": 0,
+      "chars_glued": 47,
+      "chars_spaced": 47,
+      "canonical_spaced": 12,
+      "canonical_glued": 12,
+      "wordwise_glued": 12,
+      "wordwise_spaced": 12
+     }
+    ],
+    "totals": {
+     "words": 875,
+     "dropped": 278,
+     "chars_glued": 5963,
+     "chars_spaced": 6241,
+     "canonical_spaced": 1121,
+     "canonical_glued": 1178,
+     "wordwise_glued": 1167,
+     "wordwise_spaced": 1130,
+     "pct_chars_vs_spaced": -4.454414356673608,
+     "pct_canonical_glued_vs_spaced": 5.084745762711873,
+     "pct_wordwise_glued_vs_wordwise_spaced": 3.2743362831858303,
+     "pct_wordwise_spaced_vs_canonical_spaced": 0.802854594112401,
+     "pct_retokenization_inflation": 0.9425878320479919,
+     "per_excerpt_pct_canonical_min": 0.0,
+     "per_excerpt_pct_canonical_max": 12.903225806451623,
+     "per_excerpt_pct_canonical_mean": 3.248988738586087,
+     "n_excerpts_canonical_positive": 6
+    }
+   }
+  },
+  "glued_only": {
+   "o200k_base": {
+    "encoding": "o200k_base",
+    "rows": [
+     {
+      "id": "eval_pipeline-04-parent-cot",
+      "model": "GPT-6.1 Sol",
+      "speaker": "parent",
+      "kind": "cot",
+      "words": 110,
+      "boundaries": 109,
+      "dropped": 80,
+      "chars_glued": 618,
+      "chars_spaced": 698,
+      "canonical_spaced": 124,
+      "canonical_glued": 137,
+      "wordwise_glued": 135,
+      "wordwise_spaced": 124
+     },
+     {
+      "id": "eval_pipeline-06-subagent-cot",
+      "model": "GPT-6.1 Sol",
+      "speaker": "subagent",
+      "kind": "cot",
+      "words": 90,
+      "boundaries": 89,
+      "dropped": 39,
+      "chars_glued": 581,
+      "chars_spaced": 620,
+      "canonical_spaced": 107,
+      "canonical_glued": 112,
+      "wordwise_glued": 110,
+      "wordwise_spaced": 107
+     },
+     {
+      "id": "reference_impl-12-other_agent-agent_message",
+      "model": "unspecified OpenAI agent",
+      "speaker": "other_agent",
+      "kind": "agent_message",
+      "words": 6,
+      "boundaries": 5,
+      "dropped": 2,
+      "chars_glued": 37,
+      "chars_spaced": 39,
+      "canonical_spaced": 6,
+      "canonical_glued": 6,
+      "wordwise_glued": 6,
+      "wordwise_spaced": 6
+     },
+     {
+      "id": "reference_impl-14-parent-agent_message",
+      "model": "GPT-6 Astra",
+      "speaker": "parent",
+      "kind": "agent_message",
+      "words": 34,
+      "boundaries": 33,
+      "dropped": 8,
+      "chars_glued": 307,
+      "chars_spaced": 315,
+      "canonical_spaced": 59,
+      "canonical_glued": 60,
+      "wordwise_glued": 61,
+      "wordwise_spaced": 60
+     },
+     {
+      "id": "reference_impl-15-subagent-cot",
+      "model": "GPT-6 Astra",
+      "speaker": "subagent",
+      "kind": "cot",
+      "words": 135,
+      "boundaries": 134,
+      "dropped": 71,
+      "chars_glued": 967,
+      "chars_spaced": 1038,
+      "canonical_spaced": 171,
+      "canonical_glued": 192,
+      "wordwise_glued": 183,
+      "wordwise_spaced": 172
+     },
+     {
+      "id": "reference_impl-16-parent-cot",
+      "model": "GPT-6 Astra",
+      "speaker": "parent",
+      "kind": "cot",
+      "words": 66,
+      "boundaries": 65,
+      "dropped": 40,
+      "chars_glued": 442,
+      "chars_spaced": 482,
+      "canonical_spaced": 78,
+      "canonical_glued": 84,
+      "wordwise_glued": 81,
+      "wordwise_spaced": 78
+     },
+     {
+      "id": "reference_impl-19-parent-cot",
+      "model": "GPT-6 Astra",
+      "speaker": "parent",
+      "kind": "cot",
+      "words": 61,
+      "boundaries": 60,
+      "dropped": 38,
+      "chars_glued": 409,
+      "chars_spaced": 447,
+      "canonical_spaced": 73,
+      "canonical_glued": 76,
+      "wordwise_glued": 76,
+      "wordwise_spaced": 74
+     }
+    ],
+    "totals": {
+     "words": 502,
+     "dropped": 278,
+     "chars_glued": 3361,
+     "chars_spaced": 3639,
+     "canonical_spaced": 618,
+     "canonical_glued": 667,
+     "wordwise_glued": 652,
+     "wordwise_spaced": 621,
+     "pct_chars_vs_spaced": -7.639461390491897,
+     "pct_canonical_glued_vs_spaced": 7.928802588996753,
+     "pct_wordwise_glued_vs_wordwise_spaced": 4.99194847020934,
+     "pct_wordwise_spaced_vs_canonical_spaced": 0.4854368932038833,
+     "pct_retokenization_inflation": 2.300613496932513,
+     "per_excerpt_pct_canonical_min": 0.0,
+     "per_excerpt_pct_canonical_max": 12.280701754385959,
+     "per_excerpt_pct_canonical_mean": 5.847754558004344,
+     "n_excerpts_canonical_positive": 6
+    }
+   },
+   "o200k_harmony": {
+    "encoding": "o200k_harmony",
+    "rows": [
+     {
+      "id": "eval_pipeline-04-parent-cot",
+      "model": "GPT-6.1 Sol",
+      "speaker": "parent",
+      "kind": "cot",
+      "words": 110,
+      "boundaries": 109,
+      "dropped": 80,
+      "chars_glued": 618,
+      "chars_spaced": 698,
+      "canonical_spaced": 124,
+      "canonical_glued": 137,
+      "wordwise_glued": 135,
+      "wordwise_spaced": 124
+     },
+     {
+      "id": "eval_pipeline-06-subagent-cot",
+      "model": "GPT-6.1 Sol",
+      "speaker": "subagent",
+      "kind": "cot",
+      "words": 90,
+      "boundaries": 89,
+      "dropped": 39,
+      "chars_glued": 581,
+      "chars_spaced": 620,
+      "canonical_spaced": 107,
+      "canonical_glued": 112,
+      "wordwise_glued": 110,
+      "wordwise_spaced": 107
+     },
+     {
+      "id": "reference_impl-12-other_agent-agent_message",
+      "model": "unspecified OpenAI agent",
+      "speaker": "other_agent",
+      "kind": "agent_message",
+      "words": 6,
+      "boundaries": 5,
+      "dropped": 2,
+      "chars_glued": 37,
+      "chars_spaced": 39,
+      "canonical_spaced": 6,
+      "canonical_glued": 6,
+      "wordwise_glued": 6,
+      "wordwise_spaced": 6
+     },
+     {
+      "id": "reference_impl-14-parent-agent_message",
+      "model": "GPT-6 Astra",
+      "speaker": "parent",
+      "kind": "agent_message",
+      "words": 34,
+      "boundaries": 33,
+      "dropped": 8,
+      "chars_glued": 307,
+      "chars_spaced": 315,
+      "canonical_spaced": 59,
+      "canonical_glued": 60,
+      "wordwise_glued": 61,
+      "wordwise_spaced": 60
+     },
+     {
+      "id": "reference_impl-15-subagent-cot",
+      "model": "GPT-6 Astra",
+      "speaker": "subagent",
+      "kind": "cot",
+      "words": 135,
+      "boundaries": 134,
+      "dropped": 71,
+      "chars_glued": 967,
+      "chars_spaced": 1038,
+      "canonical_spaced": 171,
+      "canonical_glued": 192,
+      "wordwise_glued": 183,
+      "wordwise_spaced": 172
+     },
+     {
+      "id": "reference_impl-16-parent-cot",
+      "model": "GPT-6 Astra",
+      "speaker": "parent",
+      "kind": "cot",
+      "words": 66,
+      "boundaries": 65,
+      "dropped": 40,
+      "chars_glued": 442,
+      "chars_spaced": 482,
+      "canonical_spaced": 78,
+      "canonical_glued": 84,
+      "wordwise_glued": 81,
+      "wordwise_spaced": 78
+     },
+     {
+      "id": "reference_impl-19-parent-cot",
+      "model": "GPT-6 Astra",
+      "speaker": "parent",
+      "kind": "cot",
+      "words": 61,
+      "boundaries": 60,
+      "dropped": 38,
+      "chars_glued": 409,
+      "chars_spaced": 447,
+      "canonical_spaced": 73,
+      "canonical_glued": 76,
+      "wordwise_glued": 76,
+      "wordwise_spaced": 74
+     }
+    ],
+    "totals": {
+     "words": 502,
+     "dropped": 278,
+     "chars_glued": 3361,
+     "chars_spaced": 3639,
+     "canonical_spaced": 618,
+     "canonical_glued": 667,
+     "wordwise_glued": 652,
+     "wordwise_spaced": 621,
+     "pct_chars_vs_spaced": -7.639461390491897,
+     "pct_canonical_glued_vs_spaced": 7.928802588996753,
+     "pct_wordwise_glued_vs_wordwise_spaced": 4.99194847020934,
+     "pct_wordwise_spaced_vs_canonical_spaced": 0.4854368932038833,
+     "pct_retokenization_inflation": 2.300613496932513,
+     "per_excerpt_pct_canonical_min": 0.0,
+     "per_excerpt_pct_canonical_max": 12.280701754385959,
+     "per_excerpt_pct_canonical_mean": 5.847754558004344,
+     "n_excerpts_canonical_positive": 6
+    }
+   },
+   "cl100k_base": {
+    "encoding": "cl100k_base",
+    "rows": [
+     {
+      "id": "eval_pipeline-04-parent-cot",
+      "model": "GPT-6.1 Sol",
+      "speaker": "parent",
+      "kind": "cot",
+      "words": 110,
+      "boundaries": 109,
+      "dropped": 80,
+      "chars_glued": 618,
+      "chars_spaced": 698,
+      "canonical_spaced": 124,
+      "canonical_glued": 140,
+      "wordwise_glued": 136,
+      "wordwise_spaced": 124
+     },
+     {
+      "id": "eval_pipeline-06-subagent-cot",
+      "model": "GPT-6.1 Sol",
+      "speaker": "subagent",
+      "kind": "cot",
+      "words": 90,
+      "boundaries": 89,
+      "dropped": 39,
+      "chars_glued": 581,
+      "chars_spaced": 620,
+      "canonical_spaced": 110,
+      "canonical_glued": 115,
+      "wordwise_glued": 114,
+      "wordwise_spaced": 110
+     },
+     {
+      "id": "reference_impl-12-other_agent-agent_message",
+      "model": "unspecified OpenAI agent",
+      "speaker": "other_agent",
+      "kind": "agent_message",
+      "words": 6,
+      "boundaries": 5,
+      "dropped": 2,
+      "chars_glued": 37,
+      "chars_spaced": 39,
+      "canonical_spaced": 6,
+      "canonical_glued": 6,
+      "wordwise_glued": 6,
+      "wordwise_spaced": 6
+     },
+     {
+      "id": "reference_impl-14-parent-agent_message",
+      "model": "GPT-6 Astra",
+      "speaker": "parent",
+      "kind": "agent_message",
+      "words": 34,
+      "boundaries": 33,
+      "dropped": 8,
+      "chars_glued": 307,
+      "chars_spaced": 315,
+      "canonical_spaced": 59,
+      "canonical_glued": 60,
+      "wordwise_glued": 61,
+      "wordwise_spaced": 60
+     },
+     {
+      "id": "reference_impl-15-subagent-cot",
+      "model": "GPT-6 Astra",
+      "speaker": "subagent",
+      "kind": "cot",
+      "words": 135,
+      "boundaries": 134,
+      "dropped": 71,
+      "chars_glued": 967,
+      "chars_spaced": 1038,
+      "canonical_spaced": 171,
+      "canonical_glued": 193,
+      "wordwise_glued": 184,
+      "wordwise_spaced": 172
+     },
+     {
+      "id": "reference_impl-16-parent-cot",
+      "model": "GPT-6 Astra",
+      "speaker": "parent",
+      "kind": "cot",
+      "words": 66,
+      "boundaries": 65,
+      "dropped": 40,
+      "chars_glued": 442,
+      "chars_spaced": 482,
+      "canonical_spaced": 79,
+      "canonical_glued": 88,
+      "wordwise_glued": 84,
+      "wordwise_spaced": 79
+     },
+     {
+      "id": "reference_impl-19-parent-cot",
+      "model": "GPT-6 Astra",
+      "speaker": "parent",
+      "kind": "cot",
+      "words": 61,
+      "boundaries": 60,
+      "dropped": 38,
+      "chars_glued": 409,
+      "chars_spaced": 447,
+      "canonical_spaced": 75,
+      "canonical_glued": 79,
+      "wordwise_glued": 79,
+      "wordwise_spaced": 76
+     }
+    ],
+    "totals": {
+     "words": 502,
+     "dropped": 278,
+     "chars_glued": 3361,
+     "chars_spaced": 3639,
+     "canonical_spaced": 624,
+     "canonical_glued": 681,
+     "wordwise_glued": 664,
+     "wordwise_spaced": 627,
+     "pct_chars_vs_spaced": -7.639461390491897,
+     "pct_canonical_glued_vs_spaced": 9.134615384615374,
+     "pct_wordwise_glued_vs_wordwise_spaced": 5.901116427432207,
+     "pct_wordwise_spaced_vs_canonical_spaced": 0.48076923076922906,
+     "pct_retokenization_inflation": 2.5602409638554313,
+     "per_excerpt_pct_canonical_min": 0.0,
+     "per_excerpt_pct_canonical_max": 12.903225806451623,
+     "per_excerpt_pct_canonical_mean": 6.9621187255416155,
+     "n_excerpts_canonical_positive": 6
+    }
+   }
+  }
+ },
+ "boundaries": {
+  "o200k_base": {
+   "encoding": "o200k_base",
+   "n_boundaries": 489,
+   "n_dropped": 278,
+   "dropped": {
+    "n": 278,
+    "mean_canonical_delta": 0.18345323741007194,
+    "mean_wordwise_delta": 0.11151079136690648,
+    "canonical_delta_hist": {
+     "-1": 1,
+     "0": 238,
+     "1": 29,
+     "2": 8,
+     "3": 1,
+     "4": 1
+    }
+   },
+   "kept": {
+    "n": 211,
+    "mean_canonical_delta": 0.27488151658767773,
+    "mean_wordwise_delta": 0.13744075829383887,
+    "canonical_delta_hist": {
+     "-1": 8,
+     "0": 147,
+     "1": 47,
+     "2": 8,
+     "3": 1
+    }
+   },
+   "dropped_mid_sentence": {
+    "n": 278,
+    "mean_canonical_delta": 0.18345323741007194,
+    "mean_wordwise_delta": 0.11151079136690648,
+    "canonical_delta_hist": {
+     "-1": 1,
+     "0": 238,
+     "1": 29,
+     "2": 8,
+     "3": 1,
+     "4": 1
+    }
+   },
+   "kept_mid_sentence": {
+    "n": 173,
+    "mean_canonical_delta": 0.3583815028901734,
+    "mean_wordwise_delta": 0.15028901734104047,
+    "canonical_delta_hist": {
+     "-1": 1,
+     "0": 119,
+     "1": 44,
+     "2": 8,
+     "3": 1
+    }
+   },
+   "free_vs_costly": {
+    "n_free": 394,
+    "drop_rate_free": 0.6065989847715736,
+    "n_costly": 95,
+    "drop_rate_costly": 0.4105263157894737,
+    "fisher_p": 0.0007617953320554608
+   },
+   "free_vs_costly_mid_sentence": {
+    "n_free": 359,
+    "drop_rate_free": 0.6657381615598886,
+    "n_costly": 92,
+    "drop_rate_costly": 0.42391304347826086,
+    "fisher_p": 3.6655596256804083e-05
+   },
+   "permutation_test_mean_delta": {
+    "statistic": "mean canonical_delta (glued) - mean canonical_delta (kept)",
+    "observed": -0.17492826548010146,
+    "n_permutations": 20000,
+    "p_one_sided_glued_cheaper": 0.0024
+   },
+   "token_saving_boundaries": {
+    "n": 9,
+    "n_glued": 1,
+    "examples": [
+     "severity | 4?",
+     "send. | User (kept)",
+     "unsafe. | Parent (kept)",
+     "explicit. | System (kept)",
+     "interpretation | \"I (kept)",
+     "fields. | Parent (kept)",
+     "reduce. | Send (kept)",
+     "yay. | Already (kept)",
+     "changed. | good. (kept)"
+    ],
+    "n_mid_sentence": 2
+   },
+   "straddled_dropped_boundaries": 23,
+   "predictors": {
+    "left_ends_sentence": {
+     "n_true": 38,
+     "drop_rate_true": 0.0,
+     "n_false": 451,
+     "drop_rate_false": 0.6164079822616408
+    },
+    "right_is_identifier": {
+     "n_true": 13,
+     "drop_rate_true": 0.5384615384615384,
+     "n_false": 476,
+     "drop_rate_false": 0.569327731092437
+    },
+    "left_len_le_3": {
+     "n_true": 99,
+     "drop_rate_true": 0.6666666666666666,
+     "n_false": 390,
+     "drop_rate_false": 0.5435897435897435
+    },
+    "left_len_ge_8": {
+     "n_true": 135,
+     "drop_rate_true": 0.45185185185185184,
+     "n_false": 354,
+     "drop_rate_false": 0.6129943502824858
+    },
+    "right_starts_upper": {
+     "n_true": 59,
+     "drop_rate_true": 0.5084745762711864,
+     "n_false": 430,
+     "drop_rate_false": 0.5767441860465117
+    },
+    "right_has_digit": {
+     "n_true": 11,
+     "drop_rate_true": 1.0,
+     "n_false": 478,
+     "drop_rate_false": 0.5585774058577406
+    }
+   }
+  },
+  "o200k_harmony": {
+   "encoding": "o200k_harmony",
+   "n_boundaries": 489,
+   "n_dropped": 278,
+   "dropped": {
+    "n": 278,
+    "mean_canonical_delta": 0.18345323741007194,
+    "mean_wordwise_delta": 0.11151079136690648,
+    "canonical_delta_hist": {
+     "-1": 1,
+     "0": 238,
+     "1": 29,
+     "2": 8,
+     "3": 1,
+     "4": 1
+    }
+   },
+   "kept": {
+    "n": 211,
+    "mean_canonical_delta": 0.27488151658767773,
+    "mean_wordwise_delta": 0.13744075829383887,
+    "canonical_delta_hist": {
+     "-1": 8,
+     "0": 147,
+     "1": 47,
+     "2": 8,
+     "3": 1
+    }
+   },
+   "dropped_mid_sentence": {
+    "n": 278,
+    "mean_canonical_delta": 0.18345323741007194,
+    "mean_wordwise_delta": 0.11151079136690648,
+    "canonical_delta_hist": {
+     "-1": 1,
+     "0": 238,
+     "1": 29,
+     "2": 8,
+     "3": 1,
+     "4": 1
+    }
+   },
+   "kept_mid_sentence": {
+    "n": 173,
+    "mean_canonical_delta": 0.3583815028901734,
+    "mean_wordwise_delta": 0.15028901734104047,
+    "canonical_delta_hist": {
+     "-1": 1,
+     "0": 119,
+     "1": 44,
+     "2": 8,
+     "3": 1
+    }
+   },
+   "free_vs_costly": {
+    "n_free": 394,
+    "drop_rate_free": 0.6065989847715736,
+    "n_costly": 95,
+    "drop_rate_costly": 0.4105263157894737,
+    "fisher_p": 0.0007617953320554608
+   },
+   "free_vs_costly_mid_sentence": {
+    "n_free": 359,
+    "drop_rate_free": 0.6657381615598886,
+    "n_costly": 92,
+    "drop_rate_costly": 0.42391304347826086,
+    "fisher_p": 3.6655596256804083e-05
+   },
+   "permutation_test_mean_delta": {
+    "statistic": "mean canonical_delta (glued) - mean canonical_delta (kept)",
+    "observed": -0.17492826548010146,
+    "n_permutations": 20000,
+    "p_one_sided_glued_cheaper": 0.0024
+   },
+   "token_saving_boundaries": {
+    "n": 9,
+    "n_glued": 1,
+    "examples": [
+     "severity | 4?",
+     "send. | User (kept)",
+     "unsafe. | Parent (kept)",
+     "explicit. | System (kept)",
+     "interpretation | \"I (kept)",
+     "fields. | Parent (kept)",
+     "reduce. | Send (kept)",
+     "yay. | Already (kept)",
+     "changed. | good. (kept)"
+    ],
+    "n_mid_sentence": 2
+   },
+   "straddled_dropped_boundaries": 23,
+   "predictors": {
+    "left_ends_sentence": {
+     "n_true": 38,
+     "drop_rate_true": 0.0,
+     "n_false": 451,
+     "drop_rate_false": 0.6164079822616408
+    },
+    "right_is_identifier": {
+     "n_true": 13,
+     "drop_rate_true": 0.5384615384615384,
+     "n_false": 476,
+     "drop_rate_false": 0.569327731092437
+    },
+    "left_len_le_3": {
+     "n_true": 99,
+     "drop_rate_true": 0.6666666666666666,
+     "n_false": 390,
+     "drop_rate_false": 0.5435897435897435
+    },
+    "left_len_ge_8": {
+     "n_true": 135,
+     "drop_rate_true": 0.45185185185185184,
+     "n_false": 354,
+     "drop_rate_false": 0.6129943502824858
+    },
+    "right_starts_upper": {
+     "n_true": 59,
+     "drop_rate_true": 0.5084745762711864,
+     "n_false": 430,
+     "drop_rate_false": 0.5767441860465117
+    },
+    "right_has_digit": {
+     "n_true": 11,
+     "drop_rate_true": 1.0,
+     "n_false": 478,
+     "drop_rate_false": 0.5585774058577406
+    }
+   }
+  },
+  "cl100k_base": {
+   "encoding": "cl100k_base",
+   "n_boundaries": 489,
+   "n_dropped": 278,
+   "dropped": {
+    "n": 278,
+    "mean_canonical_delta": 0.20503597122302158,
+    "mean_wordwise_delta": 0.13309352517985612,
+    "canonical_delta_hist": {
+     "-1": 3,
+     "0": 227,
+     "1": 37,
+     "2": 10,
+     "3": 1
+    }
+   },
+   "kept": {
+    "n": 211,
+    "mean_canonical_delta": 0.26066350710900477,
+    "mean_wordwise_delta": 0.13270142180094788,
+    "canonical_delta_hist": {
+     "-1": 10,
+     "0": 150,
+     "1": 39,
+     "2": 10,
+     "3": 2
+    }
+   },
+   "dropped_mid_sentence": {
+    "n": 278,
+    "mean_canonical_delta": 0.20503597122302158,
+    "mean_wordwise_delta": 0.13309352517985612,
+    "canonical_delta_hist": {
+     "-1": 3,
+     "0": 227,
+     "1": 37,
+     "2": 10,
+     "3": 1
+    }
+   },
+   "kept_mid_sentence": {
+    "n": 173,
+    "mean_canonical_delta": 0.36416184971098264,
+    "mean_wordwise_delta": 0.14450867052023122,
+    "canonical_delta_hist": {
+     "-1": 1,
+     "0": 122,
+     "1": 38,
+     "2": 10,
+     "3": 2
+    }
+   },
+   "free_vs_costly": {
+    "n_free": 390,
+    "drop_rate_free": 0.5897435897435898,
+    "n_costly": 99,
+    "drop_rate_costly": 0.48484848484848486,
+    "fisher_p": 0.0690835167050255
+   },
+   "free_vs_costly_mid_sentence": {
+    "n_free": 353,
+    "drop_rate_free": 0.6515580736543909,
+    "n_costly": 98,
+    "drop_rate_costly": 0.4897959183673469,
+    "fisher_p": 0.004705782372827653
+   },
+   "permutation_test_mean_delta": {
+    "statistic": "mean canonical_delta (glued) - mean canonical_delta (kept)",
+    "observed": -0.15912587848796106,
+    "n_permutations": 20000,
+    "p_one_sided_glued_cheaper": 0.00475
+   },
+   "token_saving_boundaries": {
+    "n": 13,
+    "n_glued": 3,
+    "examples": [
+     "severity | 4?",
+     "auto | alarm",
+     "send. | User (kept)",
+     "keep | no",
+     "unsafe. | Parent (kept)",
+     "explicit. | System (kept)",
+     "prompt. | Can't (kept)",
+     "interpretation | \"I (kept)",
+     "fields. | Parent (kept)",
+     "reduce. | Send (kept)",
+     "well. | We're (kept)",
+     "yay. | Already (kept)",
+     "changed. | good. (kept)"
+    ],
+    "n_mid_sentence": 4
+   },
+   "straddled_dropped_boundaries": 28,
+   "predictors": {
+    "left_ends_sentence": {
+     "n_true": 38,
+     "drop_rate_true": 0.0,
+     "n_false": 451,
+     "drop_rate_false": 0.6164079822616408
+    },
+    "right_is_identifier": {
+     "n_true": 13,
+     "drop_rate_true": 0.5384615384615384,
+     "n_false": 476,
+     "drop_rate_false": 0.569327731092437
+    },
+    "left_len_le_3": {
+     "n_true": 99,
+     "drop_rate_true": 0.6666666666666666,
+     "n_false": 390,
+     "drop_rate_false": 0.5435897435897435
+    },
+    "left_len_ge_8": {
+     "n_true": 135,
+     "drop_rate_true": 0.45185185185185184,
+     "n_false": 354,
+     "drop_rate_false": 0.6129943502824858
+    },
+    "right_starts_upper": {
+     "n_true": 59,
+     "drop_rate_true": 0.5084745762711864,
+     "n_false": 430,
+     "drop_rate_false": 0.5767441860465117
+    },
+    "right_has_digit": {
+     "n_true": 11,
+     "drop_rate_true": 1.0,
+     "n_false": 478,
+     "drop_rate_false": 0.5585774058577406
+    }
+   }
+  }
+ },
+ "chunking": {
+  "encoding": "o200k_base",
+  "n_glued_words": 278,
+  "n_chunked_as_standalone": 240,
+  "frac_chunked_as_standalone": 0.8633093525179856,
+  "mismatches": [
+   {
+    "word": "could",
+    "in_context": [
+     "ec",
+     "ould"
+    ],
+    "standalone": [
+     "could"
+    ]
+   },
+   {
+    "word": "should",
+    "in_context": [
+     "ays",
+     "h",
+     "ould"
+    ],
+    "standalone": [
+     "should"
+    ]
+   },
+   {
+    "word": "earlier",
+    "in_context": [
+     "ere",
+     "arlier"
+    ],
+    "standalone": [
+     "ear",
+     "lier"
+    ]
+   },
+   {
+    "word": "do",
+    "in_context": [
+     "don"
+    ],
+    "standalone": [
+     "do"
+    ]
+   },
+   {
+    "word": "not",
+    "in_context": [
+     "don",
+     "ots"
+    ],
+    "standalone": [
+     "not"
+    ]
+   },
+   {
+    "word": "send",
+    "in_context": [
+     "ots",
+     "end"
+    ],
+    "standalone": [
+     "send"
+    ]
+   },
+   {
+    "word": "monitors",
+    "in_context": [
+     "monitor",
+     "sem"
+    ],
+    "standalone": [
+     "mon",
+     "itors"
+    ]
+   },
+   {
+    "word": "emissions",
+    "in_context": [
+     "sem",
+     "issions"
+    ],
+    "standalone": [
+     "em",
+     "issions"
+    ]
+   },
+   {
+    "word": "no",
+    "in_context": [
+     "nom"
+    ],
+    "standalone": [
+     "no"
+    ]
+   },
+   {
+    "word": "messages",
+    "in_context": [
+     "nom",
+     "essages"
+    ],
+    "standalone": [
+     "messages"
+    ]
+   },
+   {
+    "word": "no",
+    "in_context": [
+     "n",
+     "ore"
+    ],
+    "standalone": [
+     "no"
+    ]
+   },
+   {
+    "word": "recipient.",
+    "in_context": [
+     "ore",
+     "c",
+     "ipient",
+     "."
+    ],
+    "standalone": [
+     "recipient",
+     "."
+    ]
+   },
+   {
+    "word": "undermine",
+    "in_context": [
+     "und",
+     "erm",
+     "ines"
+    ],
+    "standalone": [
+     "und",
+     "ermine"
+    ]
+   },
+   {
+    "word": "safeguards",
+    "in_context": [
+     "ines",
+     "af",
+     "egu",
+     "ards"
+    ],
+    "standalone": [
+     "s",
+     "af",
+     "egu",
+     "ards"
+    ]
+   },
+   {
+    "word": "harm",
+    "in_context": [
+     "har",
+     "mp"
+    ],
+    "standalone": [
+     "harm"
+    ]
+   },
+   {
+    "word": "prompt.",
+    "in_context": [
+     "mp",
+     "rompt",
+     "."
+    ],
+    "standalone": [
+     "prompt",
+     "."
+    ]
+   },
+   {
+    "word": "bypass",
+    "in_context": [
+     "b",
+     "yp",
+     "assin"
+    ],
+    "standalone": [
+     "b",
+     "ypass"
+    ]
+   },
+   {
+    "word": "instruction?",
+    "in_context": [
+     "assin",
+     "struction",
+     "?"
+    ],
+    "standalone": [
+     "instruction",
+     "?"
+    ]
+   },
+   {
+    "word": "is",
+    "in_context": [
+     "isa"
+    ],
+    "standalone": [
+     "is"
+    ]
+   },
+   {
+    "word": "authorized",
+    "in_context": [
+     "isa",
+     "uthorized"
+    ],
+    "standalone": [
+     "authorized"
+    ]
+   },
+   {
+    "word": "architecture",
+    "in_context": [
+     "architect",
+     "ur",
+     "ere"
+    ],
+    "standalone": [
+     "architecture"
+    ]
+   },
+   {
+    "word": "refactor",
+    "in_context": [
+     "ere",
+     "fact",
+     "ore"
+    ],
+    "standalone": [
+     "ref",
+     "actor"
+    ]
+   },
+   {
+    "word": "exact",
+    "in_context": [
+     "ore",
+     "x",
+     "act"
+    ],
+    "standalone": [
+     "exact"
+    ]
+   },
+   {
+    "word": "Dummy",
+    "in_context": [
+     "D",
+     "umm",
+     "ym"
+    ],
+    "standalone": [
+     "Dummy"
+    ]
+   },
+   {
+    "word": "monitor",
+    "in_context": [
+     "ym",
+     "onitor"
+    ],
+    "standalone": [
+     "monitor"
+    ]
+   },
+   {
+    "word": "confirm",
+    "in_context": [
+     "conf",
+     "ir",
+     "min"
+    ],
+    "standalone": [
+     "confirm"
+    ]
+   },
+   {
+    "word": "interpretation",
+    "in_context": [
+     "min",
+     "ter",
+     "pret",
+     "ation"
+    ],
+    "standalone": [
+     "interpret",
+     "ation"
+    ]
+   },
+   {
+    "word": "fallback",
+    "in_context": [
+     "sof",
+     "allback"
+    ],
+    "standalone": [
+     "fallback"
+    ]
+   },
+   {
+    "word": "avoid",
+    "in_context": [
+     "avo",
+     "idde"
+    ],
+    "standalone": [
+     "avoid"
+    ]
+   },
+   {
+    "word": "dehydration",
+    "in_context": [
+     "idde",
+     "hydr",
+     "ation"
+    ],
+    "standalone": [
+     "de",
+     "hydr",
+     "ation"
+    ]
+   },
+   {
+    "word": "can",
+    "in_context": [
+     "ecan"
+    ],
+    "standalone": [
+     "can"
+    ]
+   },
+   {
+    "word": "copy",
+    "in_context": [
+     "cop",
+     "yp"
+    ],
+    "standalone": [
+     "copy"
+    ]
+   },
+   {
+    "word": "path",
+    "in_context": [
+     "yp",
+     "ath"
+    ],
+    "standalone": [
+     "path"
+    ]
+   },
+   {
+    "word": "statutor",
+    "in_context": [
+     "stat",
+     "ut",
+     "org"
+    ],
+    "standalone": [
+     "stat",
+     "utor"
+    ]
+   },
+   {
+    "word": "guards",
+    "in_context": [
+     "org",
+     "u",
+     "ards"
+    ],
+    "standalone": [
+     "guards"
+    ]
+   },
+   {
+    "word": "no",
+    "in_context": [
+     "yno"
+    ],
+    "standalone": [
+     "no"
+    ]
+   },
+   {
+    "word": "path",
+    "in_context": [
+     "paths"
+    ],
+    "standalone": [
+     "path"
+    ]
+   },
+   {
+    "word": "same",
+    "in_context": [
+     "paths",
+     "ame"
+    ],
+    "standalone": [
+     "same"
+    ]
+   }
+  ],
+  "context_sweep": {
+   "n_right": 150,
+   "n_left": 248,
+   "unclipped": {
+    "mean_distinct_patterns_per_item": 4.653333333333333,
+    "max_distinct_patterns": 11,
+    "distinct_pattern_hist": {
+     "1": 22,
+     "2": 4,
+     "3": 21,
+     "4": 28,
+     "5": 27,
+     "6": 18,
+     "7": 11,
+     "8": 7,
+     "9": 4,
+     "10": 7,
+     "11": 1
+    },
+    "frac_pairs_differing_from_standalone": 0.14236559139784946
+   },
+   "clipped": {
+    "mean_distinct_patterns_per_item": 2.0933333333333333,
+    "max_distinct_patterns": 4,
+    "distinct_pattern_hist": {
+     "1": 30,
+     "2": 79,
+     "3": 38,
+     "4": 3
+    },
+    "frac_pairs_differing_from_standalone": 0.12301075268817205
+   }
+  },
+  "context_sweep_spaced_prefix": {
+   "n_right": 150,
+   "n_left": 248,
+   "unclipped": {
+    "mean_distinct_patterns_per_item": 5.92,
+    "max_distinct_patterns": 16,
+    "distinct_pattern_hist": {
+     "1": 22,
+     "2": 5,
+     "3": 3,
+     "4": 20,
+     "5": 24,
+     "6": 23,
+     "7": 11,
+     "8": 11,
+     "9": 6,
+     "10": 9,
+     "11": 6,
+     "12": 4,
+     "14": 5,
+     "16": 1
+    },
+    "frac_pairs_differing_from_standalone": 0.13510752688172042
+   },
+   "clipped": {
+    "mean_distinct_patterns_per_item": 2.1133333333333333,
+    "max_distinct_patterns": 4,
+    "distinct_pattern_hist": {
+     "1": 30,
+     "2": 76,
+     "3": 41,
+     "4": 3
+    },
+    "frac_pairs_differing_from_standalone": 0.1175268817204301
+   }
+  },
+  "gpt2_integer_context_sweep": {
+   "3_digit": {
+    "n_right": 150,
+    "n_left": 248,
+    "unclipped": {
+     "mean_distinct_patterns_per_item": 3.62,
+     "max_distinct_patterns": 5,
+     "distinct_pattern_hist": {
+      "2": 22,
+      "3": 29,
+      "4": 83,
+      "5": 16
+     },
+     "frac_pairs_differing_from_standalone": 0.6014784946236559
+    },
+    "clipped": {
+     "mean_distinct_patterns_per_item": 2.1,
+     "max_distinct_patterns": 3,
+     "distinct_pattern_hist": {
+      "1": 25,
+      "2": 85,
+      "3": 40
+     },
+     "frac_pairs_differing_from_standalone": 0.42583333333333334
+    }
+   },
+   "4_digit": {
+    "n_right": 150,
+    "n_left": 248,
+    "unclipped": {
+     "mean_distinct_patterns_per_item": 3.74,
+     "max_distinct_patterns": 7,
+     "distinct_pattern_hist": {
+      "2": 14,
+      "3": 50,
+      "4": 51,
+      "5": 32,
+      "6": 2,
+      "7": 1
+     },
+     "frac_pairs_differing_from_standalone": 0.5379032258064517
+    },
+    "clipped": {
+     "mean_distinct_patterns_per_item": 1.6,
+     "max_distinct_patterns": 3,
+     "distinct_pattern_hist": {
+      "1": 63,
+      "2": 84,
+      "3": 3
+     },
+     "frac_pairs_differing_from_standalone": 0.13696236559139785
+    }
+   }
+  },
+  "gpt2_integer_baseline": {
+   "3_digit": {
+    "neighbour_disagreement": 0.16017797552836485,
+    "n_distinct_patterns": 3,
+    "n_single_token": 719,
+    "pattern_hist": {
+     "3": 719,
+     "1-2": 163,
+     "2-1": 18
+    }
+   },
+   "4_digit": {
+    "neighbour_disagreement": 0.09678853205911768,
+    "n_distinct_patterns": 5,
+    "n_single_token": 88,
+    "pattern_hist": {
+     "2-2": 5807,
+     "1-3": 2538,
+     "3-1": 538,
+     "4": 88,
+     "1-2-1": 29
+    }
+   }
+  }
+ },
+ "channels": {
+  "visible_space_choice": {
+   "n_boundaries": 860,
+   "max_bits": 860.0,
+   "bits_per_token": 0.7726864330637916
+  },
+  "invisible_resegmentation": {
+   "n_tokens": 1113,
+   "n_tokens_with_alternatives": 983,
+   "bits": 4950.914382538196,
+   "bits_per_token": 4.448260900753096
+  }
+ }
+}

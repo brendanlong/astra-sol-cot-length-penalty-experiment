@@ -1,0 +1,40 @@
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v6.0.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-yaml
+      - id: check-toml
+      - id: check-added-large-files
+        args: ['--maxkb=1000']
+
+  # ruff runs from the project venv (`uv run --frozen`) rather than from
+  # `astral-sh/ruff-pre-commit`, so there is exactly ONE ruff version by
+  # construction: whatever `uv.lock` pins. A separate `rev:` here could — and
+  # did — drift from the `ruff==` pin in pyproject.toml, and different ruff
+  # versions disagree on line collapses, so the hook and `uv run ruff format`
+  # would reformat each other's output forever. Bump ruff in pyproject.toml
+  # (and `uv lock`); nothing here needs touching.
+  #
+  # `--frozen` keeps the hook from re-resolving or rewriting uv.lock as a side
+  # effect of committing — a commit should never quietly change dependency state.
+  # Its cost is that a pin bumped without a follow-up `uv lock` leaves the hook
+  # on the old, locked ruff; CI's `uv sync --locked` is what catches that.
+  - repo: local
+    hooks:
+      - id: ruff-check
+        name: ruff check
+        entry: uv run --frozen ruff check --force-exclude --fix
+        language: system
+        # `jupyter` mirrors the upstream astral-sh/ruff-pre-commit hook def.
+        # No .ipynb in the repo today, but matching
+        # upstream costs nothing and avoids a silent gap if one ever lands.
+        types_or: [python, pyi, jupyter]
+        require_serial: true
+      - id: ruff-format
+        name: ruff format
+        entry: uv run --frozen ruff format --force-exclude
+        language: system
+        types_or: [python, pyi, jupyter]
+        require_serial: true
