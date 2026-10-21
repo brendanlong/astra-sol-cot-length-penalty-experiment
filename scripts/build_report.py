@@ -13,6 +13,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import statistics
 import subprocess
 from pathlib import Path
 from typing import Any
@@ -41,6 +42,15 @@ SURFACE = "#fcfcfb"
 TEMPLATE = (
     Path.home() / "personal-agent-skills/plugins/personal-agent-skills/skills/html-doc"
 )
+
+
+def ordinal(n: int) -> str:
+    """1 -> 1st, 42 -> 42nd, 3602 -> 3,602nd."""
+    if 11 <= n % 100 <= 13:
+        suffix = "th"
+    else:
+        suffix = {1: "st", 2: "nd", 3: "rd"}.get(n % 10, "th")
+    return f"{n:,}{suffix}"
 
 
 def esc(text: str) -> str:
@@ -368,11 +378,20 @@ def build(out_path: Path) -> None:
     sens = analysis["segmentation_sensitivity"]
     n_glued = analysis["n_glued"]
 
-    models = [
+    #: gpt-oss leads: it is an OpenAI model whose tokenizer gives the same ids
+    #: as the o200k the length analysis uses, so its divergences are the same
+    #: positions. The others are a cross-lineage check in their own
+    #: vocabularies, and are reported but not in the main flow.
+    order = [
+        "openai/gpt-oss-120b",
+        "openai/gpt-oss-20b",
         "Qwen/Qwen2.5-1.5B-Instruct",
         "Qwen/Qwen3-1.7B",
         "HuggingFaceTB/SmolLM2-1.7B",
     ]
+    present = {s["model"] for s in emission["sequences"]}
+    models = [m for m in order if m in present]
+    headline = [m for m in models if m.startswith("openai/")] or models[:1]
     div = {
         m: [
             d
@@ -391,16 +410,16 @@ def build(out_path: Path) -> None:
     }
 
     def median(xs: list[int]) -> int:
-        s = sorted(xs)
-        return s[len(s) // 2]
+        return round(statistics.median(xs))
 
     tok_svg, _ = figure_tokens(enc)
     from transformers import AutoTokenizer
 
+    others = [m for m in models if m not in headline]
     vocab_sizes = ", ".join(
-        f"{len(AutoTokenizer.from_pretrained(m)):,}" for m in models
+        f"{len(AutoTokenizer.from_pretrained(m)):,}" for m in others
     )
-    standout = max(div[models[0]], key=lambda d: d["rank_canonical"])
+    standout = max(div[headline[0]], key=lambda d: d["advantage_wordwise"])
 
     body: list[str] = []
     add = body.append
@@ -486,69 +505,110 @@ pushing the same way.</p>
 """)
 
     add("<h2>The stored transcript is probably not what ran</h2>")
-    q = div[models[0]]
+    lead = headline[0]
+    q = div[lead]
+    n_canon_deep = sum(d["rank_canonical"] > 100 for d in q)
+    n_word_shallow = sum(d["rank_wordwise"] <= 100 for d in q)
     add(f"""
 <p>If the models emit glued text one word at a time, the transcript OpenAI
 stores re-encodes to a different, {t["pct_retokenization_inflation"]:.1f}% longer
 sequence than the one that ran. Both versions decode to identical characters,
-so open models can be asked which they would emit.</p>
+so a model can be asked which of the two it would emit.</p>
 
-<p>Each model is asked in <i>its own</i> vocabulary, since the question is what
-that model would emit — so this is three different BPE tokenizers
-({vocab_sizes}), none of them o200k, and the glued text splits differently in
-each. Figure 3 puts the two candidates on the same axis for one of them.</p>
+<p>{lead.split("/")[-1]} is the one to ask: it is an OpenAI model, and its
+tokenizer gives token-for-token identical ids to the o200k used everywhere
+above, so the points where the two tokenizations disagree are the same
+positions the rest of this analysis measures.</p>
+
+<p><b>Which positions.</b> The two tokenizations cut the same characters in
+different places. Line up their cut points: wherever both put a boundary, the
+two paths are in the same state, and between two such shared boundaries they
+either chose the same tokens or they did not. Where they did not, the first
+token of that stretch is the decision — at that moment both paths have emitted
+an <i>identical</i> prefix and are choosing differently about what comes next.
+Those are the positions, and there is nothing to choose: they fall out of where
+the tokenizations disagree. One forward pass over the excerpt gives the
+model's full next-token distribution after that shared prefix, and the two
+candidates' ranks are read off it.</p>
+
+<details><summary>Worked example</summary>
+<p>For <code>notsendmessages</code>, with the preceding text as context:</p>
+<table>
+<tr><td>canonical</td><td><code>n</code> <code>ots</code> <code>end</code> <code>messages</code></td><td>cuts after character 1, 4, 7, 15</td></tr>
+<tr><td>word-at-a-time</td><td><code>not</code> <code>send</code> <code>messages</code></td><td>cuts after character 3, 7, 15</td></tr>
+</table>
+<p>They share the cuts at 7 and 15 (and the start). Between 0 and 7 they
+disagree, so the first tokens of that stretch are the two candidates:
+<code>n</code> against <code>not</code>. Between 7 and 15 both emit
+<code>messages</code>, so there is no decision there. That excerpt contributes
+one divergence, not two — which is why there are
+{len(q)} of them across the {n_glued} glued excerpts rather than one per
+straddling chunk.</p>
+</details>
 """)
     add(
         figure(
-            f"""<details><summary>All three models, and the whole-sequence
+            f"""<details><summary>Every model scored, and the whole-sequence
 measurement that disagrees</summary>
 <table>
-<tr><th>model</th><th>divergences</th><th>word-at-a-time more likely</th><th>median rank</th></tr>
+<tr><th>model</th><th>divergences</th><th>word-at-a-time more likely</th><th>median rank: canonical vs word-at-a-time</th><th>whole excerpt (nats)</th></tr>
 {
                 "".join(
                     f"<tr><td>{m.split('/')[-1]}</td><td>{len(div[m])}</td>"
                     f"<td>{sum(d['advantage_wordwise'] > 0 for d in div[m])}"
                     f"/{len(div[m])}</td>"
-                    f"<td>{median([d['rank_canonical'] for d in div[m]])} vs "
-                    f"<b>{median([d['rank_wordwise'] for d in div[m]])}</b></td></tr>"
+                    f"<td>{median([d['rank_canonical'] for d in div[m]]):,} vs "
+                    f"<b>{median([d['rank_wordwise'] for d in div[m]]):,}</b></td>"
+                    f"<td>{sum(x['advantage_wordwise'] for x in seq[m]):+.1f}</td></tr>"
                     for m in models
                 )
             }
 </table>
-<p>Ranks are 1-indexed, so rank 1 is the model's first choice. The divergence
-counts differ between models because their vocabularies do: where a tokenizer
-already splits the glued string at the word boundaries, there is nothing to
-diverge about.</p>
-<p>Summed over a whole excerpt instead of at the point of choice, the canonical
-path comes out <i>better</i> under both Qwen models
-({sum(s["advantage_wordwise"] for s in seq[models[0]]):+.1f} and
-{sum(s["advantage_wordwise"] for s in seq[models[1]]):+.1f} nats for
-word-at-a-time) and worse under SmolLM2
-({sum(s["advantage_wordwise"] for s in seq[models[2]]):+.1f}). The one-step
-measurement is the one that corresponds to sampling, since a decoder makes the
-local choice; the whole-sequence numbers do not support the conclusion and this
-data cannot separate the two readings.</p>
-<p>On the spaced version of the same text the question barely arises: SmolLM2
-tokenizes it identically either way, and the Qwen models differ at 3 positions
-across all {n_glued} excerpts.</p>
+<p>Ranks are 1-indexed, so rank 1 is the model's first choice. The small
+models are a cross-lineage check and each works in its own vocabulary
+({vocab_sizes} tokens, none of them o200k), so their divergences are at
+different positions than the gpt-oss ones and are not directly comparable.
+Where a tokenizer already splits the glued string at its word boundaries there
+is nothing to diverge about, which is why the counts differ.</p>
+<p>The last column is the whole-excerpt total, and it does not agree with the
+one-step measurement: summed over a whole excerpt the canonical path comes out
+better for gpt-oss-120b and both Qwen models, and worse for gpt-oss-20b and
+SmolLM2. The one-step number is the one that corresponds to sampling, since a
+decoder makes the local choice; the whole-sequence numbers do not support the
+conclusion, and this data cannot separate the two readings.</p>
+<p>On the spaced version of the same text the question barely arises: every
+model tokenizes it the same way either way at all but 3 positions across all
+{n_glued} excerpts.</p>
 </details>""",
-            figure_ranks(emission["divergences"], models[0]),
+            figure_ranks(emission["divergences"], lead),
             3,
-            f"Qwen2.5-1.5B, the {len(q)} positions in the glued text where the "
-            "two tokenizations disagree.",
+            f"{lead.split('/')[-1]}, the {len(q)} positions in the glued text "
+            "where the two tokenizations disagree.",
         )
     )
     add(f"""
-<p>The starkest is after <code>{esc(standout["prefix_tail"])}</code>: the
-canonical next token <code>{esc(standout["canonical_token"])}</code> is the
-model's {standout["rank_canonical"]:,}th choice, and the word-respecting
+<p>At {sum(d["advantage_wordwise"] > 0 for d in q)} of the {len(q)} positions
+the word-respecting token is the likelier of the two, median rank
+{median([d["rank_canonical"] for d in q]):,} for the canonical token against
+{median([d["rank_wordwise"] for d in q]):,} for the word-respecting one. The
+starkest is after <code>{esc(standout["prefix_tail"])}</code>, where the
+canonical <code>{esc(standout["canonical_token"])}</code> is the model's
+{ordinal(standout["rank_canonical"])} choice and
 <code>{esc(standout["wordwise_token"])}</code> its
-{standout["rank_wordwise"]}th. Producing the glued text canonically would mean
-picking a token ranked below 100th at about two thirds of these positions.</p>
+{ordinal(standout["rank_wordwise"])}.</p>
 
-<p>These are 1.5-1.7B open models, not GPT&#8209;6, and none was trained to
-glue words. They show the straddling tokens are deep in the tail for BPE
-language models generally, not what a model that learned to glue would do.</p>
+<p><b>Both candidates are deep in the tail.</b> The canonical token is ranked
+below 100th at {n_canon_deep} of {len(q)} of these positions, but so is the
+word-respecting one at {len(q) - n_word_shallow}. This model finds the glued
+text unlikely however it is cut up — what the measurement shows is which of
+two improbable options is the less improbable, not that either is something
+the model would readily produce.</p>
+
+<p>gpt-oss was not trained to glue words, so this says the straddling tokens
+sit in the tail for a BPE model of this kind and scale. It does not say what a
+model that learned to glue would do, since reinforcement learning on a
+text-scored reward cannot distinguish the two tokenizations and the pretrained
+prior is what breaks the tie.</p>
 """)
 
     add("<h2>What cuts the other way</h2>")
@@ -690,7 +750,7 @@ extracted dataset. No GPU, no accounts.</p>
 cd astra-sol-cot-length-penalty-experiment
 uv sync
 SKIP_MODELS=1 bash scripts/reproduce.sh   # every number and figure
-bash scripts/reproduce.sh      # plus the open-model scoring (~15 min, CPU)</code></pre>
+bash scripts/reproduce.sh      # plus the small-model scoring (~15 min, CPU)</code></pre>
 <p>The full run log, with every command and the numbers this page draws from,
 is in
 <a href="https://github.com/brendanlong/astra-sol-cot-length-penalty-experiment/blob/main/RESULTS.md">RESULTS.md</a>;

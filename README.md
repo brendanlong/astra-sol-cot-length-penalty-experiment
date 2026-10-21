@@ -33,13 +33,14 @@ and predictions.
    length penalty counts goes down; the unit a token counter counts goes
    up.](cot_spacing/figures/length.png)
 
-2. **The stored transcript is probably not the sequence that ran.** At each
-   point where the canonical and word-at-a-time tokenizations of the glued text
-   diverge, the word-respecting token is more likely in **3 of 3** open models
-   (median rank 36–193 against 246–417). After `...MonitorPublicationScope"`,
-   Qwen2.5 ranks the canonical ` asn` **34,498th** and ` as` **7th**.
-   Re-tokenizing inflates the transcript **+2.3%** over word-at-a-time
-   emission.
+2. **The stored transcript is probably not the sequence that ran.** Scored on
+   **gpt-oss-120b** — an OpenAI model whose tokenizer gives the same ids as the
+   o200k used above, so the same positions — the word-respecting token is the
+   likelier of the two at **17 of 24** points where the tokenizations disagree
+   (median rank **1,406** canonical against **461**). Both are deep in the
+   tail, so this says which of two improbable options is less improbable, not
+   that either is likely. Four smaller models agree. Re-tokenizing inflates the
+   transcript **+2.3%** over word-at-a-time emission.
 
 3. **86% of glued words are canonically chunked exactly as if emitted alone**,
    so most of this text needs no unusual token. On a matched context sweep, a

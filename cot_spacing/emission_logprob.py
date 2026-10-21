@@ -203,7 +203,7 @@ def score_divergences(
         ranks = torch.empty_like(order)
         # 1-indexed: these are reported as ordinals ("ranked 35th"), and a
         # 0-indexed rank printed that way is off by one.
-        ranks[order] = torch.arange(1, len(order) + 1)
+        ranks[order] = torch.arange(1, len(order) + 1, device=order.device)
         out.append(
             Divergence(
                 excerpt_id=excerpt_id,

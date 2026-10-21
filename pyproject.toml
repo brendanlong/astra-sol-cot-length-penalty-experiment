@@ -15,9 +15,11 @@ dependencies = [
     # Figures
     "matplotlib>=3.9",
     # emission_logprob.py only: scoring two tokenizations under open models.
-    # CPU is fine; these are a few hundred tokens each.
+    # The small models run on CPU; gpt-oss needs a GPU, which is what
+    # accelerate's device_map is for.
     "torch>=2.0",
     "transformers>=4.40",
+    "accelerate>=1.0",
 ]
 
 [dependency-groups]
