@@ -392,11 +392,15 @@ def build(out_path: Path) -> None:
     present = {s["model"] for s in emission["sequences"]}
     models = [m for m in order if m in present]
     headline = [m for m in models if m.startswith("openai/")] or models[:1]
+    # Only decisions that sit at a boundary the model actually glued. The two
+    # emission models also disagree at the report's paragraph breaks, where
+    # canonical merges ".\n"; that is the report's formatting, not a choice
+    # the model made, and it accounted for 12 of 126 before this filter.
     div = {
         m: [
             d
             for d in emission["divergences"]
-            if d["model"] == m and d["text_kind"] == "glued"
+            if d["model"] == m and d["text_kind"] == "glued" and d["at_glued_boundary"]
         ]
         for m in models
     }
@@ -564,6 +568,12 @@ measurement that disagrees</summary>
                 )
             }
 </table>
+<p>Counted here are only the decisions that fall at a boundary the model
+actually glued. The two emission models also disagree at the report's
+paragraph breaks, where canonical merges <code>.\n</code> into one token and
+word-at-a-time does not; that is the report's formatting rather than anything
+the model chose, and it accounted for 12 of 126 such decisions before this
+filter.</p>
 <p>Ranks are 1-indexed, so rank 1 is the model's first choice. The small
 models are a cross-lineage check and each works in its own vocabulary
 ({vocab_sizes} tokens, none of them o200k), so their divergences are at

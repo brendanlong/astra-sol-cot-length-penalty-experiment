@@ -36,8 +36,8 @@ and predictions.
 2. **The stored transcript is probably not the sequence that ran.** Scored on
    **gpt-oss-120b** — an OpenAI model whose tokenizer gives the same ids as the
    o200k used above, so the same positions — the word-respecting token is the
-   likelier of the two at **17 of 24** points where the tokenizations disagree
-   (median rank **1,406** canonical against **461**). Both are deep in the
+   likelier of the two at **15 of 21** points where the tokenizations disagree
+   at a glued boundary (median rank **2,365** canonical against **596**). Both are deep in the
    tail, so this says which of two improbable options is less improbable, not
    that either is likely. Four smaller models agree. Re-tokenizing inflates the
    transcript **+2.3%** over word-at-a-time emission.

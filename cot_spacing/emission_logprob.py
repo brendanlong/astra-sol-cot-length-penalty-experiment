@@ -33,12 +33,10 @@ from transformers import AutoModelForCausalLM, AutoTokenizer, PreTrainedModel
 
 from cot_spacing.data import load_excerpts, model_outputs
 from cot_spacing.reference import reference_spaced
-from cot_spacing.segment import segment
+from cot_spacing.segment import Segmentation, segment
 
 if TYPE_CHECKING:
     from transformers import PreTrainedTokenizerBase
-
-    from cot_spacing.segment import Segmentation
 
 RESULTS_DIR = Path(__file__).parent / "results"
 #: gpt-oss is the headline pair: OpenAI models whose tokenizer gives
@@ -76,6 +74,11 @@ class Divergence(BaseModel):
     #: rank 1 is the model's first choice and the value reads as an ordinal.
     rank_canonical: int
     rank_wordwise: int
+    #: Whether this decision sits at a boundary the model actually glued. The
+    #: two emission models also disagree at paragraph breaks, where canonical
+    #: merges ".\n" and word-at-a-time emits "." then the newline — an
+    #: artifact of the report's formatting, not of anything the model chose.
+    at_glued_boundary: bool
 
 
 class EmissionScore(BaseModel):
@@ -179,6 +182,19 @@ def divergences(a: Tokenization, b: Tokenization) -> list[tuple[int, int, int]]:
 
 
 @torch.no_grad()
+def glued_boundary_offsets(seg: Segmentation) -> set[int]:
+    """Character offsets where the model wrote no space between two words."""
+    out: set[int] = set()
+    pos = 0
+    for i, word in enumerate(seg.words):
+        pos += len(word)
+        if i < len(seg.gaps):
+            if seg.gaps[i] == "":
+                out.add(pos)
+            pos += len(seg.gaps[i])
+    return out
+
+
 def score_divergences(
     canonical: Tokenization,
     wordwise: Tokenization,
@@ -186,6 +202,7 @@ def score_divergences(
     model: PreTrainedModel,
     bos: int | None,
     meta: tuple[str, str, str],
+    glued_offsets: set[int] | None = None,
 ) -> list[Divergence]:
     points = divergences(canonical, wordwise)
     if not points:
@@ -196,7 +213,15 @@ def score_divergences(
     logits = model(full).logits.float()
     logprobs = torch.log_softmax(logits[0], dim=-1)
     out: list[Divergence] = []
+    cuts = [0, *canonical.ends]
     for n_prefix, tok_c, tok_w in points:
+        # The stretch this decision opens runs to the next offset both
+        # tokenizations agree on; it is about gluing only if a glued boundary
+        # falls inside it.
+        start = cuts[n_prefix]
+        shared = sorted({0, *canonical.ends} & {0, *wordwise.ends})
+        stop = next(o for o in shared if o > start)
+        at_glued = bool(glued_offsets and any(start < o < stop for o in glued_offsets))
         # Next-token distribution after the shared prefix.
         row = logprobs[len(prefix0) + n_prefix - 1]
         order = torch.argsort(row, descending=True)
@@ -219,6 +244,7 @@ def score_divergences(
                 advantage_wordwise=float(row[tok_w] - row[tok_c]),
                 rank_canonical=int(ranks[tok_c]),
                 rank_wordwise=int(ranks[tok_w]),
+                at_glued_boundary=at_glued,
             )
         )
     return out
@@ -264,7 +290,15 @@ def score_model(
             lp_canon = sequence_logprob(canon.ids, model, bos)
             lp_word = sequence_logprob(wordwise.ids, model, bos)
             points.extend(
-                score_divergences(canon, wordwise, tok, model, bos, (e.id, name, kind))
+                score_divergences(
+                    canon,
+                    wordwise,
+                    tok,
+                    model,
+                    bos,
+                    (e.id, name, kind),
+                    glued_boundary_offsets(seg),
+                )
             )
             out.append(
                 EmissionScore(

@@ -332,6 +332,13 @@ tokenizer gives token-for-token identical ids to the `o200k_base` used in run
 cross-lineage check whose divergences sit elsewhere and are not directly
 comparable.
 
+**Only decisions at a glued boundary count.** The two emission models also
+disagree at the report's paragraph breaks, where canonical merges `.\n` into
+one token and word-at-a-time does not. That is the report's formatting, not a
+choice the model made, and it accounted for **12 of 126** decisions before the
+filter — so an earlier version of this table read 17/24 for gpt-oss-120b where
+the corrected figure is 15/21.
+
 **Which positions.** The two tokenizations partition the same characters
 differently. At every offset where both put a cut the two paths are in the same
 state; between two shared cuts they either chose the same tokens or they did
@@ -344,10 +351,10 @@ share the cut at 7, so that excerpt contributes one divergence (`n` against
 
 | model | divergences | word-at-a-time more likely | median rank (1-indexed) | whole excerpt (nats) |
 | --- | --- | --- | --- | --- |
-| gpt-oss-120b | 24 | 17/24 | 1,406 vs **461** | -10.5 |
-| gpt-oss-20b | 24 | 17/24 | 720 vs **122** | +21.2 |
-| Qwen2.5-1.5B-Instruct | 29 | 20/29 | 246 vs **36** | -38.3 |
-| Qwen3-1.7B | 29 | 21/29 | 284 vs **45** | -8.4 |
+| gpt-oss-120b | 21 | 15/21 | 2,365 vs **596** | -10.5 |
+| gpt-oss-20b | 21 | 14/21 | 848 vs **172** | +21.2 |
+| Qwen2.5-1.5B-Instruct | 26 | 17/26 | 209 vs **30** | -38.3 |
+| Qwen3-1.7B | 26 | 18/26 | 302 vs **110** | -8.4 |
 | SmolLM2-1.7B | 20 | 14/20 | 417 vs **193** | +29.3 |
 
 Ranks are 1-indexed: rank 1 is the model's first choice. (An earlier version of
@@ -357,13 +364,27 @@ small; `emission_logprob.py` now produces 1-indexed ranks directly.)
 On gpt-oss-120b the starkest case is after `assinstruction? This`, where the
 canonical `isa` is the model's 3,602nd choice and `is` is its 42nd.
 
+Median ranks are 2,365 canonical against 596 word-respecting.
+
 **Both candidates are deep in the tail.** For gpt-oss-120b the canonical token
-is ranked below 100th at 18 of 24 of these positions, and the word-respecting
-one at 14 of 24. The model finds the glued text unlikely however it is cut up;
+is ranked below 100th at 18 of 21 of these positions, and the
+word-respecting one at 14 of 21. The model finds the glued text unlikely however it is cut up;
 the measurement says which of two improbable options is the less improbable,
 not that either is one it would readily produce. The small models put the
 word-respecting token higher (median 36–193), but in vocabularies where the
 divergence positions are different.
+
+**How few decision points there are.** This is the whole evidence base for
+run 2: 21 decisions for gpt-oss-120b, covering 23 of the 278 glued boundaries
+in the corpus, because a diverged stretch spanning two glued boundaries is
+scored once. The alternative construction — at every glued boundary, with the
+word-at-a-time prefix, compare the bare next word against what a fresh
+tokenization from that point would emit — is better posed (one decision per
+boundary, no paragraph-break artifacts by construction) but yields *fewer*
+comparisons, not more: the two candidates differ at only **13** of the 278
+boundaries, and at only **4** does the from-here token run past the end of the
+next word (`don`, `nom`, `isa`, `paths`). Under either construction the effect
+has very few observable decision points in this corpus.
 
 **Control.** On the spaced version of the same excerpts the two tokenizations
 are nearly identical — all but 3 positions across all 7 excerpts, for every
@@ -418,7 +439,7 @@ tokenizations and the pretrained prior is what breaks the tie.
 
 | prediction | outcome |
 | --- | --- |
-| word-at-a-time is the more probable emission | **confirmed at the point of choice** in 5/5 models — 17/24 divergences for gpt-oss-120b; **not confirmed** as whole-sequence log-probability (3/5 favour canonical) |
+| word-at-a-time is the more probable emission | **confirmed at the point of choice** in 5/5 models — 15/21 glued-boundary divergences for gpt-oss-120b; **not confirmed** as whole-sequence log-probability (3/5 favour canonical) |
 | (unregistered) either candidate is a plausible emission | **no** — on gpt-oss-120b both sit below rank 100 at most divergences |
 
 ## Known gaps (both runs)

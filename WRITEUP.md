@@ -81,15 +81,15 @@ The model to ask is **gpt-oss-120b**: an OpenAI model whose tokenizer gives
 token-for-token identical ids to the o200k used in §1, so these are the same
 positions the rest of the analysis measures.
 
-At **17 of the 24** positions the
+At **15 of the 21** positions the
 word-respecting token is the likelier of the two: median rank
-**1,406** for the canonical token against
-**461** for the word-respecting one. The starkest is after
+**2,365** for the canonical token against
+**596** for the word-respecting one. The starkest is after
 `assinstruction? This`, where the canonical `isa` is the model's 3,602nd choice
 and `is` is its 42nd.
 
 **Both candidates are deep in the tail.** The canonical token is ranked below
-100th at 18 of 24 of these
+100th at 18 of 21 of these
 positions, but so is the word-respecting one at
 14. gpt-oss finds this text unlikely
 however it is cut up; the measurement says which of two improbable options is
@@ -97,10 +97,10 @@ the less improbable, not that either is something it would readily produce.
 
 | model | divergences | word-at-a-time more likely | median rank (1-indexed) | whole excerpt (nats) |
 | --- | --- | --- | --- | --- |
-| gpt-oss-120b | 24 | 17/24 | 1,406 vs **461** | -10.5 |
-| gpt-oss-20b | 24 | 17/24 | 720 vs **122** | +21.2 |
-| Qwen2.5-1.5B-Instruct | 29 | 20/29 | 246 vs **36** | -38.3 |
-| Qwen3-1.7B | 29 | 21/29 | 284 vs **45** | -8.4 |
+| gpt-oss-120b | 21 | 15/21 | 2,365 vs **596** | -10.5 |
+| gpt-oss-20b | 21 | 14/21 | 848 vs **172** | +21.2 |
+| Qwen2.5-1.5B-Instruct | 26 | 17/26 | 209 vs **30** | -38.3 |
+| Qwen3-1.7B | 26 | 18/26 | 302 vs **110** | -8.4 |
 | SmolLM2-1.7B | 20 | 14/20 | 417 vs **193** | +29.3 |
 
 The four smaller models are a cross-lineage check and each works in its own
@@ -116,9 +116,20 @@ comes out better. The one-step number is the one that corresponds to sampling,
 since a decoder makes the local choice, but the whole-sequence numbers do not
 support the conclusion and this data cannot separate the two readings.
 
-On the spaced version of the same text the question barely arises: every model
-tokenizes it identically either way at all but three positions across all seven
-excerpts, which is why this only comes up for glued text.
+Only decisions at a boundary the model actually glued are counted. The two
+emission models also disagree at the report's paragraph breaks, where canonical
+merges `.\n` into one token; that is formatting, not a choice, and it was 12 of
+126 such decisions before the filter. On the spaced version of the text the
+question barely arises at all — every model tokenizes it identically either way
+at all but three positions across all seven excerpts.
+
+**There are very few decision points.** These 21 decisions cover 23 of the 278
+glued boundaries in the corpus, because one diverged stretch spanning two
+boundaries is scored once. Scoring instead at every boundary — comparing the
+bare next word against what a fresh tokenization from that point would emit —
+is better posed but gives *fewer* comparisons: the candidates differ at only 13
+of 278 boundaries, and at only 4 does the alternative run past the next word.
+Either way the effect has a small number of observable decisions here.
 
 gpt-oss was not trained to glue words. This says the straddling tokens sit in
 the tail for a BPE model of this kind and scale; it does not say what a model
