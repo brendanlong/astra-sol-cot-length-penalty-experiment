@@ -123,13 +123,17 @@ merges `.\n` into one token; that is formatting, not a choice, and it was 12 of
 question barely arises at all — every model tokenizes it identically either way
 at all but three positions across all seven excerpts.
 
-**At a word start the effect is clearer.** Of the 21, 13 fall at the
-first character of a word — the model has just finished one word and is
-choosing how to start the next — and there the word-respecting token wins
-**11/13**. The other 8 are mid-word, the two tokenizations cutting
-the same word differently, and there it is 4/8, a coin flip. The split
-sharpens the result for both gpt-oss models and does nothing for the other
-three, which is what their tokenizers predict.
+**Only some of these are about word boundaries.** At 16 of the 21 the
+canonical chunk stays *inside* one word — the two tokenizations cutting the
+same word differently, like `undermine` as `erm` or `ermine`. That is a fact
+about BPE, not about gluing, and there the result is 10/16, near chance.
+
+The hypothesis is tested only where the canonical chunk runs **past the end of
+the word**, committing to the next word before this one is done. That happens
+at **5** of the 21 positions, and the word's own token is likelier at **all
+five**. Pooled over the five models it is **28/29** — but that is 29
+model-position pairs over only **12 distinct positions**, because models
+sharing a tokenizer see the same ones.
 
 **There are very few decision points.** These 21 decisions cover 23 of the 278
 glued boundaries in the corpus, because one diverged stretch spanning two

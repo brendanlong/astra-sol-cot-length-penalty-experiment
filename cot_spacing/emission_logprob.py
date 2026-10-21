@@ -79,10 +79,14 @@ class Divergence(BaseModel):
     #: merges ".\n" and word-at-a-time emits "." then the newline — an
     #: artifact of the report's formatting, not of anything the model chose.
     at_glued_boundary: bool
-    #: Whether the decision itself falls at the first character of a word.
-    #: The rest are mid-word: the two tokenizations want to cut the *same*
-    #: word differently, which is a weaker form of the same question.
+    #: The word this decision is writing into, and whether the decision sits
+    #: at its first character.
+    word: str
     at_word_start: bool
+    #: Whether the canonical candidate runs PAST the end of that word. Only
+    #: these test the hypothesis: the rest are the two tokenizations cutting
+    #: the *same* word differently, which says nothing about word boundaries.
+    canonical_crosses_word: bool
 
 
 class EmissionScore(BaseModel):
@@ -186,14 +190,27 @@ def divergences(a: Tokenization, b: Tokenization) -> list[tuple[int, int, int]]:
 
 
 @torch.no_grad()
-def word_start_offsets(seg: Segmentation) -> set[int]:
-    """Character offset of the first character of every word."""
-    out: set[int] = set()
+def word_spans(seg: Segmentation) -> list[tuple[int, int, str]]:
+    """(start, end, word) in character offsets, for every word."""
+    out: list[tuple[int, int, str]] = []
     pos = 0
     for i, word in enumerate(seg.words):
-        out.add(pos)
+        out.append((pos, pos + len(word), word))
         pos += len(word) + (len(seg.gaps[i]) if i < len(seg.gaps) else 0)
     return out
+
+
+def word_at(spans: list[tuple[int, int, str]], offset: int) -> tuple[int, int, str]:
+    """The word a decision at ``offset`` is writing into.
+
+    An offset inside a word is that word; an offset sitting on the gap before
+    a word (which is where a space-prefixed token starts) is the word after
+    it, since that is the word the token begins to write.
+    """
+    for start, end, word in spans:
+        if start <= offset < end:
+            return start, end, word
+    return next((s, e, w) for s, e, w in spans if s >= offset)
 
 
 def glued_boundary_offsets(seg: Segmentation) -> set[int]:
@@ -217,7 +234,7 @@ def score_divergences(
     bos: int | None,
     meta: tuple[str, str, str],
     glued_offsets: set[int] | None = None,
-    word_starts: set[int] | None = None,
+    spans: list[tuple[int, int, str]] | None = None,
 ) -> list[Divergence]:
     points = divergences(canonical, wordwise)
     if not points:
@@ -237,7 +254,9 @@ def score_divergences(
         shared = sorted({0, *canonical.ends} & {0, *wordwise.ends})
         stop = next(o for o in shared if o > start)
         at_glued = bool(glued_offsets and any(start < o < stop for o in glued_offsets))
-        at_start = bool(word_starts and start in word_starts)
+        w_start, w_end, word = word_at(spans or [(0, 0, "")], start)
+        canonical_text = tok.decode([tok_c])
+        crosses = start + len(canonical_text) > w_end
         # Next-token distribution after the shared prefix.
         row = logprobs[len(prefix0) + n_prefix - 1]
         order = torch.argsort(row, descending=True)
@@ -261,7 +280,9 @@ def score_divergences(
                 rank_canonical=int(ranks[tok_c]),
                 rank_wordwise=int(ranks[tok_w]),
                 at_glued_boundary=at_glued,
-                at_word_start=at_start,
+                word=word,
+                at_word_start=start == w_start,
+                canonical_crosses_word=crosses,
             )
         )
     return out
@@ -315,7 +336,7 @@ def score_model(
                     bos,
                     (e.id, name, kind),
                     glued_boundary_offsets(seg),
-                    word_start_offsets(seg),
+                    word_spans(seg),
                 )
             )
             out.append(

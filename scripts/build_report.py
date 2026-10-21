@@ -367,18 +367,23 @@ def figure(caption_html: str, svg: str, number: int, title: str) -> str:
 
 
 def decision_table(points: list[dict[str, Any]]) -> str:
-    """Every decision the lead model made, likeliest-word-respecting first."""
-    rows = sorted(points, key=lambda d: -d["advantage_wordwise"])
+    """Every decision the lead model made, the boundary-crossing ones first."""
+    rows = sorted(
+        points, key=lambda d: (-d["canonical_crosses_word"], -d["advantage_wordwise"])
+    )
     out = [
-        "<table><tr><th>after</th><th>canonical</th><th>rank</th>"
-        "<th>word-respecting</th><th>rank</th><th>×more likely</th></tr>"
+        "<table><tr><th>writing</th><th>after</th><th>canonical</th><th>rank</th>"
+        "<th>word's own</th><th>rank</th><th>×more likely</th></tr>"
     ]
     for d in rows:
         ratio = math.exp(d["advantage_wordwise"])
         shown = f"{ratio:.0f}×" if ratio >= 1 else f"1/{1 / ratio:.0f}×"
-        where = "" if d["at_word_start"] else " <i>(mid-word)</i>"
+        word = esc(d["word"])
+        if d["canonical_crosses_word"]:
+            word = f"<b>{word}</b>"
         out.append(
-            f"<tr><td><code>…{esc(d['prefix_tail'])}</code>{where}</td>"
+            f"<tr><td>{word}</td>"
+            f"<td><code>…{esc(d['prefix_tail'])}</code></td>"
             f"<td><code>{esc(d['canonical_token'])}</code></td>"
             f"<td>{d['rank_canonical']:,}</td>"
             f"<td><code>{esc(d['wordwise_token'])}</code></td>"
@@ -536,11 +541,18 @@ pushing the same way.</p>
     q = div[lead]
     n_canon_deep = sum(d["rank_canonical"] > 100 for d in q)
     n_word_shallow = sum(d["rank_wordwise"] <= 100 for d in q)
-    starts = [d for d in q if d["at_word_start"]]
-    mids = [d for d in q if not d["at_word_start"]]
-    n_at_start = len(starts)
-    w_at_start = f"{sum(d['advantage_wordwise'] > 0 for d in starts)}/{len(starts)}"
-    w_mid = f"{sum(d['advantage_wordwise'] > 0 for d in mids)}/{len(mids)}"
+    crossing = [d for d in q if d["canonical_crosses_word"]]
+    inside = [d for d in q if not d["canonical_crosses_word"]]
+    w_cross = f"{sum(d['advantage_wordwise'] > 0 for d in crossing)}/{len(crossing)}"
+    w_inside = f"{sum(d['advantage_wordwise'] > 0 for d in inside)}/{len(inside)}"
+    pooled = [
+        d
+        for d in emission["divergences"]
+        if d["text_kind"] == "glued"
+        and d["at_glued_boundary"]
+        and d["canonical_crosses_word"]
+    ]
+    w_pooled = f"{sum(d['advantage_wordwise'] > 0 for d in pooled)}/{len(pooled)}"
     add(f"""
 <p>If the models emit glued text one word at a time, the transcript OpenAI
 stores re-encodes to a different, {t["pct_retokenization_inflation"]:.1f}% longer
@@ -635,19 +647,33 @@ canonical <code>{esc(standout["canonical_token"])}</code> is the model's
 <code>{esc(standout["wordwise_token"])}</code> its
 {ordinal(standout["rank_wordwise"])}.</p>
 
-<p>The decision is cleaner where it falls at the <i>first character of a
-word</i> — the model has just finished one word and is choosing how to start
-the next. At those {n_at_start} positions the word-respecting token wins
-{w_at_start}. The other {len(q) - n_at_start} are mid-word, where the two
-tokenizations want to cut the <i>same</i> word differently, and there it is
-{w_mid} — a coin flip.</p>
+<p><b>Only some of these are about word boundaries at all.</b> At
+{len(inside)} of the {len(q)} the canonical chunk stays <i>inside</i> one word
+— the two tokenizations merely cut the same word in different places, as with
+<code>undermine</code> taken as <code>erm</code> or <code>ermine</code>. That
+is a fact about BPE, not about gluing, and there the result is {w_inside},
+near chance.</p>
+
+<p>The hypothesis is only tested where the canonical chunk runs <b>past the
+end of the word</b>, committing to the next word before this one is finished.
+That happens at {len(crossing)} of the {len(q)} positions, and the word's own
+token is likelier at <b>{w_cross}</b> of them. Pooled over all five models it
+is <b>{w_pooled}</b>, though that is {len(pooled)} model-position pairs over
+only 12 distinct positions, since models sharing a tokenizer see the same
+ones.</p>
 
 <details><summary>Every decision, and which token it preferred</summary>
 {decision_table(q)}
-<p>Read the first row as: after <code>…assinstruction? This</code>, continuing
-<code>is</code> (the next word, bare) is 213 times likelier than
-<code>isa</code> (the chunk that runs into the following word). The last rows
-are where the canonical merge won.</p>
+<p>Bold words are the boundary-crossing cases, listed first. Read the first
+row as: while writing <b>is</b>, after <code>…assinstruction? This</code>, the
+word's own token <code>is</code> is 213 times likelier than <code>isa</code> —
+the chunk that runs on into the following word. The rest stay inside one word:
+<code>monitor</code> against <code>mon</code> is both tokenizations cutting
+<i>monitors</i> differently, with neither crossing anything.</p>
+<p>The "word's own" column is whatever
+<code>encode(word)</code> gives for that word alone, which is not always one
+token — <code>monitors</code> is <code>mon</code>+<code>itors</code>, while
+<code>Dummy</code> really is a single token.</p>
 </details>
 
 <p><b>Both candidates are deep in the tail.</b> The canonical token is ranked

@@ -374,25 +374,32 @@ not that either is one it would readily produce. The small models put the
 word-respecting token higher (median 36–193), but in vocabularies where the
 divergence positions are different.
 
-**At a word start the effect is clearer.** Splitting the glued-boundary
-decisions by where they fall: a decision at the *first character of a word* is
-the model choosing how to start the next word, while a mid-word one is the two
-tokenizations cutting the *same* word differently.
+**Only the boundary-crossing decisions test the hypothesis.** A glued-boundary
+decision is one of two things. Either the canonical chunk runs *past the end of
+the word*, committing to the next word before this one is finished — which is
+the claim — or both candidates stay inside one word and merely cut it in
+different places, which is a fact about BPE and says nothing about gluing.
+`undermine` as `erm` against `ermine`, or `monitors` as `monitor` against
+`mon`, are the second kind: neither crosses anything.
 
-| model | all | at a word start | mid-word |
-| --- | --- | --- | --- |
-| gpt-oss-120b | 15/21 | **11/13** | 4/8 |
-| gpt-oss-20b | 14/21 | **10/13** | 4/8 |
-| Qwen2.5-1.5B-Instruct | 17/26 | **7/12** | 10/14 |
-| Qwen3-1.7B | 18/26 | **7/12** | 11/14 |
-| SmolLM2-1.7B | 14/20 | **7/10** | 7/10 |
+| model | canonical chunk runs past the word | both stay inside one word |
+| --- | --- | --- |
+| gpt-oss-120b | **5/5** | 10/16 |
+| gpt-oss-20b | **5/5** | 9/16 |
+| Qwen2.5-1.5B-Instruct | **7/7** | 10/19 |
+| Qwen3-1.7B | **6/7** | 12/19 |
+| SmolLM2-1.7B | **5/5** | 9/15 |
 
-The split sharpens the result for the two gpt-oss models and does nothing for
-the others — which is what their tokenizers predict, since only gpt-oss's
-divergences sit at the o200k positions the rest of the analysis is about.
-Reaching the same 13 decisions from the other direction, by scoring each glued
-boundary against a fresh tokenization from that point, picks out 12 of the same
-13, so the two constructions agree about where the real choices are.
+Where the chunk crosses, the word's own tokenization is likelier almost
+without exception; where it does not, the result is near chance. **28 of 29**
+model-position pairs cross-wise, but that is only **12 distinct positions**,
+since models sharing a tokenizer see the same ones, and no model has more than
+7. An earlier version of this section reported 15/21 for gpt-oss-120b, pooling
+both kinds.
+
+The "word's own tokenization" is `encode(word)` for the word alone, whatever
+that gives: `monitors` is `mon`+`itors`, `Dummy` is a single token. It is not
+a whole-word token selected by hand.
 
 **How few decision points there are.** This is the whole evidence base for
 run 2: 21 decisions for gpt-oss-120b, covering 23 of the 278 glued boundaries
