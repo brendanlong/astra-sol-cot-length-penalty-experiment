@@ -41,11 +41,17 @@ if TYPE_CHECKING:
     from cot_spacing.segment import Segmentation
 
 RESULTS_DIR = Path(__file__).parent / "results"
-DEFAULT_MODELS = (
+#: gpt-oss is the headline pair: OpenAI models whose tokenizer gives
+#: token-for-token identical ids to the o200k_base used everywhere else here,
+#: so their divergences are the same positions the length analysis measures.
+#: The small models are a cross-lineage check, each in its own vocabulary.
+GPT_OSS_MODELS = ("openai/gpt-oss-20b", "openai/gpt-oss-120b")
+SMALL_MODELS = (
     "Qwen/Qwen2.5-1.5B-Instruct",
     "Qwen/Qwen3-1.7B",
     "HuggingFaceTB/SmolLM2-1.7B",
 )
+DEFAULT_MODELS = SMALL_MODELS
 
 
 class Divergence(BaseModel):
@@ -142,7 +148,7 @@ def sequence_logprob(ids: list[int], model: PreTrainedModel, bos: int | None) ->
     one of them skip its opening token.
     """
     prefix = [] if bos is None else [bos]
-    full = torch.tensor([prefix + ids])
+    full = torch.tensor([prefix + ids], device=model.device)
     logits = model(full).logits.float()
     logprobs = torch.log_softmax(logits[0, :-1], dim=-1)
     targets = full[0, 1:]
@@ -186,7 +192,7 @@ def score_divergences(
         return []
     excerpt_id, model_name, kind = meta
     prefix0 = [] if bos is None else [bos]
-    full = torch.tensor([prefix0 + canonical.ids])
+    full = torch.tensor([prefix0 + canonical.ids], device=model.device)
     logits = model(full).logits.float()
     logprobs = torch.log_softmax(logits[0], dim=-1)
     out: list[Divergence] = []
@@ -219,11 +225,24 @@ def score_divergences(
 
 
 def score_model(
-    name: str, dtype: torch.dtype = torch.float32
+    name: str, device: str = "cpu"
 ) -> tuple[list[EmissionScore], list[Divergence]]:
     tok = AutoTokenizer.from_pretrained(name)
-    model = AutoModelForCausalLM.from_pretrained(name, dtype=dtype)
+    # "auto" keeps a checkpoint's own quantization — gpt-oss ships MXFP4,
+    # which Hopper and Blackwell run natively and older cards dequantize to
+    # bf16. float32 is for the small models, which run on CPU.
+    dtype = "auto" if device == "cuda" else torch.float32
+    model = AutoModelForCausalLM.from_pretrained(
+        name, dtype=dtype, device_map=device if device == "cuda" else None
+    )
     model.eval()
+    if device == "cuda":
+        used = torch.cuda.memory_allocated() / 1e9
+        print(
+            f"  loaded on {torch.cuda.get_device_name()} "
+            f"(capability {'.'.join(map(str, torch.cuda.get_device_capability()))}), "
+            f"{used:.1f} GB of weights resident"
+        )
     bos = tok.bos_token_id if tok.bos_token_id is not None else tok.eos_token_id
 
     out: list[EmissionScore] = []
@@ -271,28 +290,48 @@ def score_model(
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--models", nargs="+", default=list(DEFAULT_MODELS))
-    parser.add_argument("--out-dir", type=Path, default=RESULTS_DIR)
+    parser.add_argument(
+        "--gpt-oss",
+        action="store_true",
+        help="score the gpt-oss pair instead (needs a GPU; MXFP4 on Hopper+)",
+    )
+    parser.add_argument("--device", default="cpu", choices=("cpu", "cuda"))
+    parser.add_argument(
+        "--out", type=Path, default=RESULTS_DIR / "emission_logprob.json"
+    )
     args = parser.parse_args()
-    args.out_dir.mkdir(parents=True, exist_ok=True)
+    if args.gpt_oss:
+        args.models = list(GPT_OSS_MODELS)
+    args.out.parent.mkdir(parents=True, exist_ok=True)
 
     scores: list[EmissionScore] = []
     points: list[Divergence] = []
+
+    def dump() -> None:
+        """Write what we have, atomically, after each model.
+
+        The largest model is scored last and is the one that might not fit, so
+        a failure there must not take the smaller model's results with it.
+        """
+        tmp = args.out.with_suffix(".tmp")
+        tmp.write_text(
+            json.dumps(
+                {
+                    "sequences": [s.model_dump() for s in scores],
+                    "divergences": [p.model_dump() for p in points],
+                },
+                indent=1,
+            )
+            + "\n"
+        )
+        tmp.replace(args.out)
+
     for name in args.models:
         print(f"\n{name}")
-        model_scores, model_points = score_model(name)
+        model_scores, model_points = score_model(name, device=args.device)
         scores.extend(model_scores)
         points.extend(model_points)
-
-    (args.out_dir / "emission_logprob.json").write_text(
-        json.dumps(
-            {
-                "sequences": [s.model_dump() for s in scores],
-                "divergences": [p.model_dump() for p in points],
-            },
-            indent=1,
-        )
-        + "\n"
-    )
+        dump()
 
     print(
         "\nmean advantage of word-at-a-time emission (nats, positive = more probable):"

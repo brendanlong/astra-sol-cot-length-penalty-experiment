@@ -1,0 +1,18 @@
+name: cot-spacing-gpt-oss
+# MXFP4 needs Hopper or Blackwell to run it natively; an older card
+# dequantizes gpt-oss-120b to bf16 (~240 GB) and will not fit. `kernels` is
+# what transformers loads the MXFP4 path from, and is not in the lockfile
+# because nothing else here needs a GPU.
+setup: uv sync --frozen && uv pip install -q kernels
+command: bash scripts/run_gpt_oss.sh
+gpus: 1
+env:
+  REQUIRE_CUDA: "1"
+  PYTHONUNBUFFERED: "1"
+  HF_HUB_ENABLE_HF_TRANSFER: "1"
+secrets: [HF_TOKEN, AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY]
+outputs:
+  - path: results
+    s3: s3://brendanlong-experiments/cot_spacing/{job_id}/results
+estimated_runtime_min: 40
+max_runtime_min: 120
