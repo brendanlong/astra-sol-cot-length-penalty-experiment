@@ -784,7 +784,8 @@
    "advantage_wordwise": 2.40625,
    "rank_canonical": 848,
    "rank_wordwise": 55,
-   "at_glued_boundary": true
+   "at_glued_boundary": true,
+   "at_word_start": false
   },
   {
    "excerpt_id": "eval_pipeline-04-parent-cot",
@@ -798,7 +799,8 @@
    "advantage_wordwise": -0.96875,
    "rank_canonical": 244,
    "rank_wordwise": 655,
-   "at_glued_boundary": true
+   "at_glued_boundary": true,
+   "at_word_start": false
   },
   {
    "excerpt_id": "eval_pipeline-04-parent-cot",
@@ -812,7 +814,8 @@
    "advantage_wordwise": 4.109375,
    "rank_canonical": 2126,
    "rank_wordwise": 74,
-   "at_glued_boundary": true
+   "at_glued_boundary": true,
+   "at_word_start": false
   },
   {
    "excerpt_id": "eval_pipeline-04-parent-cot",
@@ -826,7 +829,8 @@
    "advantage_wordwise": 0.53125,
    "rank_canonical": 819,
    "rank_wordwise": 476,
-   "at_glued_boundary": true
+   "at_glued_boundary": true,
+   "at_word_start": true
   },
   {
    "excerpt_id": "eval_pipeline-04-parent-cot",
@@ -840,7 +844,8 @@
    "advantage_wordwise": 0.3125,
    "rank_canonical": 535,
    "rank_wordwise": 381,
-   "at_glued_boundary": true
+   "at_glued_boundary": true,
+   "at_word_start": true
   },
   {
    "excerpt_id": "eval_pipeline-06-subagent-cot",
@@ -854,7 +859,8 @@
    "advantage_wordwise": 6.515625,
    "rank_canonical": 3923,
    "rank_wordwise": 6,
-   "at_glued_boundary": true
+   "at_glued_boundary": true,
+   "at_word_start": true
   },
   {
    "excerpt_id": "eval_pipeline-06-subagent-cot",
@@ -868,7 +874,8 @@
    "advantage_wordwise": 3.09375,
    "rank_canonical": 352,
    "rank_wordwise": 19,
-   "at_glued_boundary": true
+   "at_glued_boundary": true,
+   "at_word_start": true
   },
   {
    "excerpt_id": "reference_impl-14-parent-agent_message",
@@ -882,7 +889,8 @@
    "advantage_wordwise": 0.9375,
    "rank_canonical": 9,
    "rank_wordwise": 3,
-   "at_glued_boundary": false
+   "at_glued_boundary": false,
+   "at_word_start": false
   },
   {
    "excerpt_id": "reference_impl-14-parent-agent_message",
@@ -896,7 +904,8 @@
    "advantage_wordwise": 0.9375,
    "rank_canonical": 10,
    "rank_wordwise": 3,
-   "at_glued_boundary": false
+   "at_glued_boundary": false,
+   "at_word_start": false
   },
   {
    "excerpt_id": "reference_impl-15-subagent-cot",
@@ -910,7 +919,8 @@
    "advantage_wordwise": -3.875,
    "rank_canonical": 2,
    "rank_wordwise": 33,
-   "at_glued_boundary": true
+   "at_glued_boundary": true,
+   "at_word_start": false
   },
   {
    "excerpt_id": "reference_impl-15-subagent-cot",
@@ -924,7 +934,8 @@
    "advantage_wordwise": -0.015625,
    "rank_canonical": 5469,
    "rank_wordwise": 5542,
-   "at_glued_boundary": true
+   "at_glued_boundary": true,
+   "at_word_start": true
   },
   {
    "excerpt_id": "reference_impl-15-subagent-cot",
@@ -938,7 +949,8 @@
    "advantage_wordwise": 4.5625,
    "rank_canonical": 2,
    "rank_wordwise": 1,
-   "at_glued_boundary": true
+   "at_glued_boundary": true,
+   "at_word_start": false
   },
   {
    "excerpt_id": "reference_impl-15-subagent-cot",
@@ -952,7 +964,8 @@
    "advantage_wordwise": 5.0390625,
    "rank_canonical": 5115,
    "rank_wordwise": 163,
-   "at_glued_boundary": true
+   "at_glued_boundary": true,
+   "at_word_start": true
   },
   {
    "excerpt_id": "reference_impl-15-subagent-cot",
@@ -966,7 +979,8 @@
    "advantage_wordwise": -0.84375,
    "rank_canonical": 2676,
    "rank_wordwise": 4720,
-   "at_glued_boundary": true
+   "at_glued_boundary": true,
+   "at_word_start": true
   },
   {
    "excerpt_id": "reference_impl-15-subagent-cot",
@@ -980,7 +994,8 @@
    "advantage_wordwise": -4.025390625,
    "rank_canonical": 1042,
    "rank_wordwise": 17634,
-   "at_glued_boundary": true
+   "at_glued_boundary": true,
+   "at_word_start": true
   },
   {
    "excerpt_id": "reference_impl-15-subagent-cot",
@@ -994,7 +1009,8 @@
    "advantage_wordwise": 1.625,
    "rank_canonical": 432,
    "rank_wordwise": 82,
-   "at_glued_boundary": true
+   "at_glued_boundary": true,
+   "at_word_start": true
   },
   {
    "excerpt_id": "reference_impl-15-subagent-cot",
@@ -1008,7 +1024,8 @@
    "advantage_wordwise": 3.59375,
    "rank_canonical": 10548,
    "rank_wordwise": 1251,
-   "at_glued_boundary": true
+   "at_glued_boundary": true,
+   "at_word_start": true
   },
   {
    "excerpt_id": "reference_impl-15-subagent-cot",
@@ -1022,7 +1039,8 @@
    "advantage_wordwise": 2.21875,
    "rank_canonical": 2363,
    "rank_wordwise": 417,
-   "at_glued_boundary": true
+   "at_glued_boundary": true,
+   "at_word_start": true
   },
   {
    "excerpt_id": "reference_impl-15-subagent-cot",
@@ -1036,7 +1054,8 @@
    "advantage_wordwise": 3.28125,
    "rank_canonical": 621,
    "rank_wordwise": 19,
-   "at_glued_boundary": false
+   "at_glued_boundary": false,
+   "at_word_start": false
   },
   {
    "excerpt_id": "reference_impl-15-subagent-cot",
@@ -1050,7 +1069,8 @@
    "advantage_wordwise": 3.1875,
    "rank_canonical": 282,
    "rank_wordwise": 21,
-   "at_glued_boundary": false
+   "at_glued_boundary": false,
+   "at_word_start": false
   },
   {
    "excerpt_id": "reference_impl-16-parent-cot",
@@ -1064,7 +1084,8 @@
    "advantage_wordwise": 3.5625,
    "rank_canonical": 327,
    "rank_wordwise": 7,
-   "at_glued_boundary": true
+   "at_glued_boundary": true,
+   "at_word_start": false
   },
   {
    "excerpt_id": "reference_impl-16-parent-cot",
@@ -1078,7 +1099,8 @@
    "advantage_wordwise": 0.125,
    "rank_canonical": 2657,
    "rank_wordwise": 2375,
-   "at_glued_boundary": true
+   "at_glued_boundary": true,
+   "at_word_start": true
   },
   {
    "excerpt_id": "reference_impl-16-parent-cot",
@@ -1092,7 +1114,8 @@
    "advantage_wordwise": -2.3125,
    "rank_canonical": 12,
    "rank_wordwise": 51,
-   "at_glued_boundary": true
+   "at_glued_boundary": true,
+   "at_word_start": false
   },
   {
    "excerpt_id": "reference_impl-19-parent-cot",
@@ -1106,7 +1129,8 @@
    "advantage_wordwise": -0.203125,
    "rank_canonical": 498,
    "rank_wordwise": 605,
-   "at_glued_boundary": true
+   "at_glued_boundary": true,
+   "at_word_start": false
   },
   {
    "excerpt_id": "reference_impl-19-parent-cot",
@@ -1120,7 +1144,8 @@
    "advantage_wordwise": 2.374999761581421,
    "rank_canonical": 21,
    "rank_wordwise": 2,
-   "at_glued_boundary": false
+   "at_glued_boundary": false,
+   "at_word_start": false
   },
   {
    "excerpt_id": "reference_impl-19-parent-cot",
@@ -1134,7 +1159,8 @@
    "advantage_wordwise": 2.343749523162842,
    "rank_canonical": 2959,
    "rank_wordwise": 172,
-   "at_glued_boundary": true
+   "at_glued_boundary": true,
+   "at_word_start": true
   },
   {
    "excerpt_id": "reference_impl-19-parent-cot",
@@ -1148,7 +1174,8 @@
    "advantage_wordwise": 4.25,
    "rank_canonical": 10,
    "rank_wordwise": 1,
-   "at_glued_boundary": false
+   "at_glued_boundary": false,
+   "at_word_start": false
   },
   {
    "excerpt_id": "eval_pipeline-04-parent-cot",
@@ -1162,7 +1189,8 @@
    "advantage_wordwise": 1.125,
    "rank_canonical": 264,
    "rank_wordwise": 56,
-   "at_glued_boundary": true
+   "at_glued_boundary": true,
+   "at_word_start": false
   },
   {
    "excerpt_id": "eval_pipeline-04-parent-cot",
@@ -1176,7 +1204,8 @@
    "advantage_wordwise": -1.5625,
    "rank_canonical": 442,
    "rank_wordwise": 2037,
-   "at_glued_boundary": true
+   "at_glued_boundary": true,
+   "at_word_start": false
   },
   {
    "excerpt_id": "eval_pipeline-04-parent-cot",
@@ -1190,7 +1219,8 @@
    "advantage_wordwise": 3.59375,
    "rank_canonical": 2133,
    "rank_wordwise": 90,
-   "at_glued_boundary": true
+   "at_glued_boundary": true,
+   "at_word_start": false
   },
   {
    "excerpt_id": "eval_pipeline-04-parent-cot",
@@ -1204,7 +1234,8 @@
    "advantage_wordwise": 2.12890625,
    "rank_canonical": 14637,
    "rank_wordwise": 2153,
-   "at_glued_boundary": true
+   "at_glued_boundary": true,
+   "at_word_start": true
   },
   {
    "excerpt_id": "eval_pipeline-04-parent-cot",
@@ -1218,7 +1249,8 @@
    "advantage_wordwise": 1.453125,
    "rank_canonical": 2365,
    "rank_wordwise": 596,
-   "at_glued_boundary": true
+   "at_glued_boundary": true,
+   "at_word_start": true
   },
   {
    "excerpt_id": "eval_pipeline-06-subagent-cot",
@@ -1232,7 +1264,8 @@
    "advantage_wordwise": 4.0546875,
    "rank_canonical": 15828,
    "rank_wordwise": 384,
-   "at_glued_boundary": true
+   "at_glued_boundary": true,
+   "at_word_start": true
   },
   {
    "excerpt_id": "eval_pipeline-06-subagent-cot",
@@ -1246,7 +1279,8 @@
    "advantage_wordwise": 1.65625,
    "rank_canonical": 680,
    "rank_wordwise": 106,
-   "at_glued_boundary": true
+   "at_glued_boundary": true,
+   "at_word_start": true
   },
   {
    "excerpt_id": "reference_impl-14-parent-agent_message",
@@ -1260,7 +1294,8 @@
    "advantage_wordwise": -0.0625,
    "rank_canonical": 3,
    "rank_wordwise": 4,
-   "at_glued_boundary": false
+   "at_glued_boundary": false,
+   "at_word_start": false
   },
   {
    "excerpt_id": "reference_impl-14-parent-agent_message",
@@ -1274,7 +1309,8 @@
    "advantage_wordwise": -0.125,
    "rank_canonical": 3,
    "rank_wordwise": 4,
-   "at_glued_boundary": false
+   "at_glued_boundary": false,
+   "at_word_start": false
   },
   {
    "excerpt_id": "reference_impl-15-subagent-cot",
@@ -1288,7 +1324,8 @@
    "advantage_wordwise": -3.250000238418579,
    "rank_canonical": 2,
    "rank_wordwise": 22,
-   "at_glued_boundary": true
+   "at_glued_boundary": true,
+   "at_word_start": false
   },
   {
    "excerpt_id": "reference_impl-15-subagent-cot",
@@ -1302,7 +1339,8 @@
    "advantage_wordwise": 0.3046875,
    "rank_canonical": 14785,
    "rank_wordwise": 12328,
-   "at_glued_boundary": true
+   "at_glued_boundary": true,
+   "at_word_start": true
   },
   {
    "excerpt_id": "reference_impl-15-subagent-cot",
@@ -1316,7 +1354,8 @@
    "advantage_wordwise": 4.375,
    "rank_canonical": 4,
    "rank_wordwise": 1,
-   "at_glued_boundary": true
+   "at_glued_boundary": true,
+   "at_word_start": false
   },
   {
    "excerpt_id": "reference_impl-15-subagent-cot",
@@ -1330,7 +1369,8 @@
    "advantage_wordwise": 5.359375476837158,
    "rank_canonical": 3602,
    "rank_wordwise": 42,
-   "at_glued_boundary": true
+   "at_glued_boundary": true,
+   "at_word_start": true
   },
   {
    "excerpt_id": "reference_impl-15-subagent-cot",
@@ -1344,7 +1384,8 @@
    "advantage_wordwise": -0.8931884765625,
    "rank_canonical": 26884,
    "rank_wordwise": 46553,
-   "at_glued_boundary": true
+   "at_glued_boundary": true,
+   "at_word_start": true
   },
   {
    "excerpt_id": "reference_impl-15-subagent-cot",
@@ -1358,7 +1399,8 @@
    "advantage_wordwise": -5.203125,
    "rank_canonical": 381,
    "rank_wordwise": 39680,
-   "at_glued_boundary": true
+   "at_glued_boundary": true,
+   "at_word_start": true
   },
   {
    "excerpt_id": "reference_impl-15-subagent-cot",
@@ -1372,7 +1414,8 @@
    "advantage_wordwise": 0.4375,
    "rank_canonical": 2871,
    "rank_wordwise": 1955,
-   "at_glued_boundary": true
+   "at_glued_boundary": true,
+   "at_word_start": true
   },
   {
    "excerpt_id": "reference_impl-15-subagent-cot",
@@ -1386,7 +1429,8 @@
    "advantage_wordwise": 4.984375953674316,
    "rank_canonical": 149787,
    "rank_wordwise": 10506,
-   "at_glued_boundary": true
+   "at_glued_boundary": true,
+   "at_word_start": true
   },
   {
    "excerpt_id": "reference_impl-15-subagent-cot",
@@ -1400,7 +1444,8 @@
    "advantage_wordwise": 3.2578125,
    "rank_canonical": 8113,
    "rank_wordwise": 712,
-   "at_glued_boundary": true
+   "at_glued_boundary": true,
+   "at_word_start": true
   },
   {
    "excerpt_id": "reference_impl-15-subagent-cot",
@@ -1414,7 +1459,8 @@
    "advantage_wordwise": 2.0,
    "rank_canonical": 43,
    "rank_wordwise": 8,
-   "at_glued_boundary": false
+   "at_glued_boundary": false,
+   "at_word_start": false
   },
   {
    "excerpt_id": "reference_impl-15-subagent-cot",
@@ -1428,7 +1474,8 @@
    "advantage_wordwise": 3.46875,
    "rank_canonical": 153,
    "rank_wordwise": 6,
-   "at_glued_boundary": false
+   "at_glued_boundary": false,
+   "at_word_start": false
   },
   {
    "excerpt_id": "reference_impl-16-parent-cot",
@@ -1442,7 +1489,8 @@
    "advantage_wordwise": 1.84375,
    "rank_canonical": 236,
    "rank_wordwise": 29,
-   "at_glued_boundary": true
+   "at_glued_boundary": true,
+   "at_word_start": false
   },
   {
    "excerpt_id": "reference_impl-16-parent-cot",
@@ -1456,7 +1504,8 @@
    "advantage_wordwise": 1.4140625,
    "rank_canonical": 12595,
    "rank_wordwise": 3724,
-   "at_glued_boundary": true
+   "at_glued_boundary": true,
+   "at_word_start": true
   },
   {
    "excerpt_id": "reference_impl-16-parent-cot",
@@ -1470,7 +1519,8 @@
    "advantage_wordwise": -1.875,
    "rank_canonical": 16,
    "rank_wordwise": 87,
-   "at_glued_boundary": true
+   "at_glued_boundary": true,
+   "at_word_start": false
   },
   {
    "excerpt_id": "reference_impl-19-parent-cot",
@@ -1484,7 +1534,8 @@
    "advantage_wordwise": -0.359375,
    "rank_canonical": 474,
    "rank_wordwise": 716,
-   "at_glued_boundary": true
+   "at_glued_boundary": true,
+   "at_word_start": false
   },
   {
    "excerpt_id": "reference_impl-19-parent-cot",
@@ -1498,7 +1549,8 @@
    "advantage_wordwise": 1.09375,
    "rank_canonical": 5,
    "rank_wordwise": 2,
-   "at_glued_boundary": false
+   "at_glued_boundary": false,
+   "at_word_start": false
   },
   {
    "excerpt_id": "reference_impl-19-parent-cot",
@@ -1512,7 +1564,8 @@
    "advantage_wordwise": 1.953125,
    "rank_canonical": 4302,
    "rank_wordwise": 538,
-   "at_glued_boundary": true
+   "at_glued_boundary": true,
+   "at_word_start": true
   },
   {
    "excerpt_id": "reference_impl-19-parent-cot",
@@ -1526,7 +1579,8 @@
    "advantage_wordwise": 1.312500238418579,
    "rank_canonical": 5,
    "rank_wordwise": 1,
-   "at_glued_boundary": false
+   "at_glued_boundary": false,
+   "at_word_start": false
   },
   {
    "excerpt_id": "eval_pipeline-04-parent-cot",
@@ -1540,7 +1594,8 @@
    "advantage_wordwise": -0.7606964111328125,
    "rank_canonical": 447,
    "rank_wordwise": 942,
-   "at_glued_boundary": true
+   "at_glued_boundary": true,
+   "at_word_start": false
   },
   {
    "excerpt_id": "eval_pipeline-04-parent-cot",
@@ -1554,7 +1609,8 @@
    "advantage_wordwise": 3.023463249206543,
    "rank_canonical": 15,
    "rank_wordwise": 1,
-   "at_glued_boundary": true
+   "at_glued_boundary": true,
+   "at_word_start": true
   },
   {
    "excerpt_id": "eval_pipeline-04-parent-cot",
@@ -1568,7 +1624,8 @@
    "advantage_wordwise": 2.604341745376587,
    "rank_canonical": 19,
    "rank_wordwise": 1,
-   "at_glued_boundary": true
+   "at_glued_boundary": true,
+   "at_word_start": true
   },
   {
    "excerpt_id": "eval_pipeline-04-parent-cot",
@@ -1582,7 +1639,8 @@
    "advantage_wordwise": 1.4397106170654297,
    "rank_canonical": 131,
    "rank_wordwise": 36,
-   "at_glued_boundary": true
+   "at_glued_boundary": true,
+   "at_word_start": false
   },
   {
    "excerpt_id": "eval_pipeline-04-parent-cot",
@@ -1596,7 +1654,8 @@
    "advantage_wordwise": -0.38493824005126953,
    "rank_canonical": 125,
    "rank_wordwise": 173,
-   "at_glued_boundary": true
+   "at_glued_boundary": true,
+   "at_word_start": true
   },
   {
    "excerpt_id": "eval_pipeline-04-parent-cot",
@@ -1610,7 +1669,8 @@
    "advantage_wordwise": 2.1711578369140625,
    "rank_canonical": 172,
    "rank_wordwise": 25,
-   "at_glued_boundary": true
+   "at_glued_boundary": true,
+   "at_word_start": false
   },
   {
    "excerpt_id": "eval_pipeline-04-parent-cot",
@@ -1624,7 +1684,8 @@
    "advantage_wordwise": 0.6899051666259766,
    "rank_canonical": 246,
    "rank_wordwise": 121,
-   "at_glued_boundary": true
+   "at_glued_boundary": true,
+   "at_word_start": true
   },
   {
    "excerpt_id": "eval_pipeline-04-parent-cot",
@@ -1638,7 +1699,8 @@
    "advantage_wordwise": -3.4079904556274414,
    "rank_canonical": 104,
    "rank_wordwise": 2237,
-   "at_glued_boundary": true
+   "at_glued_boundary": true,
+   "at_word_start": true
   },
   {
    "excerpt_id": "eval_pipeline-06-subagent-cot",
@@ -1652,7 +1714,8 @@
    "advantage_wordwise": 7.576846599578857,
    "rank_canonical": 8259,
    "rank_wordwise": 4,
-   "at_glued_boundary": true
+   "at_glued_boundary": true,
+   "at_word_start": true
   },
   {
    "excerpt_id": "eval_pipeline-06-subagent-cot",
@@ -1666,7 +1729,8 @@
    "advantage_wordwise": 5.460718154907227,
    "rank_canonical": 1588,
    "rank_wordwise": 5,
-   "at_glued_boundary": true
+   "at_glued_boundary": true,
+   "at_word_start": true
   },
   {
    "excerpt_id": "reference_impl-14-parent-agent_message",
@@ -1680,7 +1744,8 @@
    "advantage_wordwise": 0.5408153533935547,
    "rank_canonical": 6,
    "rank_wordwise": 4,
-   "at_glued_boundary": false
+   "at_glued_boundary": false,
+   "at_word_start": false
   },
   {
    "excerpt_id": "reference_impl-14-parent-agent_message",
@@ -1694,7 +1759,8 @@
    "advantage_wordwise": 0.5408115386962891,
    "rank_canonical": 6,
    "rank_wordwise": 4,
-   "at_glued_boundary": false
+   "at_glued_boundary": false,
+   "at_word_start": false
   },
   {
    "excerpt_id": "reference_impl-15-subagent-cot",
@@ -1708,7 +1774,8 @@
    "advantage_wordwise": -2.2773797512054443,
    "rank_canonical": 1,
    "rank_wordwise": 15,
-   "at_glued_boundary": true
+   "at_glued_boundary": true,
+   "at_word_start": false
   },
   {
    "excerpt_id": "reference_impl-15-subagent-cot",
@@ -1722,7 +1789,8 @@
    "advantage_wordwise": -1.6919164657592773,
    "rank_canonical": 19,
    "rank_wordwise": 70,
-   "at_glued_boundary": true
+   "at_glued_boundary": true,
+   "at_word_start": false
   },
   {
    "excerpt_id": "reference_impl-15-subagent-cot",
@@ -1736,7 +1804,8 @@
    "advantage_wordwise": 2.053698778152466,
    "rank_canonical": 26,
    "rank_wordwise": 4,
-   "at_glued_boundary": true
+   "at_glued_boundary": true,
+   "at_word_start": false
   },
   {
    "excerpt_id": "reference_impl-15-subagent-cot",
@@ -1750,7 +1819,8 @@
    "advantage_wordwise": 4.720635414123535,
    "rank_canonical": 10,
    "rank_wordwise": 1,
-   "at_glued_boundary": true
+   "at_glued_boundary": true,
+   "at_word_start": false
   },
   {
    "excerpt_id": "reference_impl-15-subagent-cot",
@@ -1764,7 +1834,8 @@
    "advantage_wordwise": -2.605876922607422,
    "rank_canonical": 1830,
    "rank_wordwise": 11053,
-   "at_glued_boundary": true
+   "at_glued_boundary": true,
+   "at_word_start": true
   },
   {
    "excerpt_id": "reference_impl-15-subagent-cot",
@@ -1778,7 +1849,8 @@
    "advantage_wordwise": -4.051883697509766,
    "rank_canonical": 557,
    "rank_wordwise": 12557,
-   "at_glued_boundary": true
+   "at_glued_boundary": true,
+   "at_word_start": true
   },
   {
    "excerpt_id": "reference_impl-15-subagent-cot",
@@ -1792,7 +1864,8 @@
    "advantage_wordwise": 11.223485946655273,
    "rank_canonical": 34498,
    "rank_wordwise": 7,
-   "at_glued_boundary": true
+   "at_glued_boundary": true,
+   "at_word_start": false
   },
   {
    "excerpt_id": "reference_impl-15-subagent-cot",
@@ -1806,7 +1879,8 @@
    "advantage_wordwise": 1.9974403381347656,
    "rank_canonical": 8,
    "rank_wordwise": 1,
-   "at_glued_boundary": true
+   "at_glued_boundary": true,
+   "at_word_start": false
   },
   {
    "excerpt_id": "reference_impl-15-subagent-cot",
@@ -1820,7 +1894,8 @@
    "advantage_wordwise": 2.3009371757507324,
    "rank_canonical": 2235,
    "rank_wordwise": 312,
-   "at_glued_boundary": false
+   "at_glued_boundary": false,
+   "at_word_start": false
   },
   {
    "excerpt_id": "reference_impl-15-subagent-cot",
@@ -1834,7 +1909,8 @@
    "advantage_wordwise": 2.689419746398926,
    "rank_canonical": 1045,
    "rank_wordwise": 97,
-   "at_glued_boundary": false
+   "at_glued_boundary": false,
+   "at_word_start": false
   },
   {
    "excerpt_id": "reference_impl-16-parent-cot",
@@ -1848,7 +1924,8 @@
    "advantage_wordwise": 3.1441025733947754,
    "rank_canonical": 396,
    "rank_wordwise": 24,
-   "at_glued_boundary": true
+   "at_glued_boundary": true,
+   "at_word_start": false
   },
   {
    "excerpt_id": "reference_impl-16-parent-cot",
@@ -1862,7 +1939,8 @@
    "advantage_wordwise": -2.4600582122802734,
    "rank_canonical": 2095,
    "rank_wordwise": 12943,
-   "at_glued_boundary": true
+   "at_glued_boundary": true,
+   "at_word_start": true
   },
   {
    "excerpt_id": "reference_impl-16-parent-cot",
@@ -1876,7 +1954,8 @@
    "advantage_wordwise": 0.32161808013916016,
    "rank_canonical": 2825,
    "rank_wordwise": 2260,
-   "at_glued_boundary": true
+   "at_glued_boundary": true,
+   "at_word_start": true
   },
   {
    "excerpt_id": "reference_impl-16-parent-cot",
@@ -1890,7 +1969,8 @@
    "advantage_wordwise": 7.626792907714844,
    "rank_canonical": 2693,
    "rank_wordwise": 1,
-   "at_glued_boundary": true
+   "at_glued_boundary": true,
+   "at_word_start": false
   },
   {
    "excerpt_id": "reference_impl-16-parent-cot",
@@ -1904,7 +1984,8 @@
    "advantage_wordwise": -2.5658769607543945,
    "rank_canonical": 5,
    "rank_wordwise": 62,
-   "at_glued_boundary": true
+   "at_glued_boundary": true,
+   "at_word_start": false
   },
   {
    "excerpt_id": "reference_impl-19-parent-cot",
@@ -1918,7 +1999,8 @@
    "advantage_wordwise": 1.0071840286254883,
    "rank_canonical": 1548,
    "rank_wordwise": 615,
-   "at_glued_boundary": true
+   "at_glued_boundary": true,
+   "at_word_start": false
   },
   {
    "excerpt_id": "reference_impl-19-parent-cot",
@@ -1932,7 +2014,8 @@
    "advantage_wordwise": 2.119805335998535,
    "rank_canonical": 579,
    "rank_wordwise": 42,
-   "at_glued_boundary": false
+   "at_glued_boundary": false,
+   "at_word_start": false
   },
   {
    "excerpt_id": "reference_impl-19-parent-cot",
@@ -1946,7 +2029,8 @@
    "advantage_wordwise": 4.389799118041992,
    "rank_canonical": 7,
    "rank_wordwise": 1,
-   "at_glued_boundary": true
+   "at_glued_boundary": true,
+   "at_word_start": false
   },
   {
    "excerpt_id": "reference_impl-19-parent-cot",
@@ -1960,7 +2044,8 @@
    "advantage_wordwise": 3.9672770500183105,
    "rank_canonical": 4674,
    "rank_wordwise": 144,
-   "at_glued_boundary": true
+   "at_glued_boundary": true,
+   "at_word_start": true
   },
   {
    "excerpt_id": "reference_impl-19-parent-cot",
@@ -1974,7 +2059,8 @@
    "advantage_wordwise": 2.074436902999878,
    "rank_canonical": 45,
    "rank_wordwise": 2,
-   "at_glued_boundary": false
+   "at_glued_boundary": false,
+   "at_word_start": false
   },
   {
    "excerpt_id": "eval_pipeline-04-parent-cot",
@@ -1988,7 +2074,8 @@
    "advantage_wordwise": 0.5786142349243164,
    "rank_canonical": 773,
    "rank_wordwise": 462,
-   "at_glued_boundary": true
+   "at_glued_boundary": true,
+   "at_word_start": false
   },
   {
    "excerpt_id": "eval_pipeline-04-parent-cot",
@@ -2002,7 +2089,8 @@
    "advantage_wordwise": 4.04815673828125,
    "rank_canonical": 44,
    "rank_wordwise": 2,
-   "at_glued_boundary": true
+   "at_glued_boundary": true,
+   "at_word_start": true
   },
   {
    "excerpt_id": "eval_pipeline-04-parent-cot",
@@ -2016,7 +2104,8 @@
    "advantage_wordwise": 2.8262078762054443,
    "rank_canonical": 33,
    "rank_wordwise": 1,
-   "at_glued_boundary": true
+   "at_glued_boundary": true,
+   "at_word_start": true
   },
   {
    "excerpt_id": "eval_pipeline-04-parent-cot",
@@ -2030,7 +2119,8 @@
    "advantage_wordwise": 1.3977642059326172,
    "rank_canonical": 214,
    "rank_wordwise": 74,
-   "at_glued_boundary": true
+   "at_glued_boundary": true,
+   "at_word_start": false
   },
   {
    "excerpt_id": "eval_pipeline-04-parent-cot",
@@ -2044,7 +2134,8 @@
    "advantage_wordwise": -1.6041364669799805,
    "rank_canonical": 141,
    "rank_wordwise": 614,
-   "at_glued_boundary": true
+   "at_glued_boundary": true,
+   "at_word_start": true
   },
   {
    "excerpt_id": "eval_pipeline-04-parent-cot",
@@ -2058,7 +2149,8 @@
    "advantage_wordwise": 3.1813716888427734,
    "rank_canonical": 284,
    "rank_wordwise": 30,
-   "at_glued_boundary": true
+   "at_glued_boundary": true,
+   "at_word_start": false
   },
   {
    "excerpt_id": "eval_pipeline-04-parent-cot",
@@ -2072,7 +2164,8 @@
    "advantage_wordwise": -1.235058307647705,
    "rank_canonical": 321,
    "rank_wordwise": 1028,
-   "at_glued_boundary": true
+   "at_glued_boundary": true,
+   "at_word_start": true
   },
   {
    "excerpt_id": "eval_pipeline-04-parent-cot",
@@ -2086,7 +2179,8 @@
    "advantage_wordwise": -0.8272123336791992,
    "rank_canonical": 1232,
    "rank_wordwise": 2267,
-   "at_glued_boundary": true
+   "at_glued_boundary": true,
+   "at_word_start": true
   },
   {
    "excerpt_id": "eval_pipeline-06-subagent-cot",
@@ -2100,7 +2194,8 @@
    "advantage_wordwise": 5.337226390838623,
    "rank_canonical": 410,
    "rank_wordwise": 3,
-   "at_glued_boundary": true
+   "at_glued_boundary": true,
+   "at_word_start": true
   },
   {
    "excerpt_id": "eval_pipeline-06-subagent-cot",
@@ -2114,7 +2209,8 @@
    "advantage_wordwise": 6.421918869018555,
    "rank_canonical": 1130,
    "rank_wordwise": 5,
-   "at_glued_boundary": true
+   "at_glued_boundary": true,
+   "at_word_start": true
   },
   {
    "excerpt_id": "reference_impl-14-parent-agent_message",
@@ -2128,7 +2224,8 @@
    "advantage_wordwise": 1.2159347534179688,
    "rank_canonical": 12,
    "rank_wordwise": 8,
-   "at_glued_boundary": false
+   "at_glued_boundary": false,
+   "at_word_start": false
   },
   {
    "excerpt_id": "reference_impl-14-parent-agent_message",
@@ -2142,7 +2239,8 @@
    "advantage_wordwise": 1.2159347534179688,
    "rank_canonical": 12,
    "rank_wordwise": 8,
-   "at_glued_boundary": false
+   "at_glued_boundary": false,
+   "at_word_start": false
   },
   {
    "excerpt_id": "reference_impl-15-subagent-cot",
@@ -2156,7 +2254,8 @@
    "advantage_wordwise": -2.4516563415527344,
    "rank_canonical": 6,
    "rank_wordwise": 45,
-   "at_glued_boundary": true
+   "at_glued_boundary": true,
+   "at_word_start": false
   },
   {
    "excerpt_id": "reference_impl-15-subagent-cot",
@@ -2170,7 +2269,8 @@
    "advantage_wordwise": 0.45526885986328125,
    "rank_canonical": 211,
    "rank_wordwise": 146,
-   "at_glued_boundary": true
+   "at_glued_boundary": true,
+   "at_word_start": false
   },
   {
    "excerpt_id": "reference_impl-15-subagent-cot",
@@ -2184,7 +2284,8 @@
    "advantage_wordwise": 0.34818458557128906,
    "rank_canonical": 33,
    "rank_wordwise": 22,
-   "at_glued_boundary": true
+   "at_glued_boundary": true,
+   "at_word_start": false
   },
   {
    "excerpt_id": "reference_impl-15-subagent-cot",
@@ -2198,7 +2299,8 @@
    "advantage_wordwise": 1.7365168333053589,
    "rank_canonical": 3,
    "rank_wordwise": 1,
-   "at_glued_boundary": true
+   "at_glued_boundary": true,
+   "at_word_start": false
   },
   {
    "excerpt_id": "reference_impl-15-subagent-cot",
@@ -2212,7 +2314,8 @@
    "advantage_wordwise": 0.2579832077026367,
    "rank_canonical": 5156,
    "rank_wordwise": 4210,
-   "at_glued_boundary": true
+   "at_glued_boundary": true,
+   "at_word_start": true
   },
   {
    "excerpt_id": "reference_impl-15-subagent-cot",
@@ -2226,7 +2329,8 @@
    "advantage_wordwise": -5.209138870239258,
    "rank_canonical": 237,
    "rank_wordwise": 21426,
-   "at_glued_boundary": true
+   "at_glued_boundary": true,
+   "at_word_start": true
   },
   {
    "excerpt_id": "reference_impl-15-subagent-cot",
@@ -2240,7 +2344,8 @@
    "advantage_wordwise": 11.397541046142578,
    "rank_canonical": 20818,
    "rank_wordwise": 4,
-   "at_glued_boundary": true
+   "at_glued_boundary": true,
+   "at_word_start": false
   },
   {
    "excerpt_id": "reference_impl-15-subagent-cot",
@@ -2254,7 +2359,8 @@
    "advantage_wordwise": 2.466499090194702,
    "rank_canonical": 16,
    "rank_wordwise": 3,
-   "at_glued_boundary": true
+   "at_glued_boundary": true,
+   "at_word_start": false
   },
   {
    "excerpt_id": "reference_impl-15-subagent-cot",
@@ -2268,7 +2374,8 @@
    "advantage_wordwise": 2.79715633392334,
    "rank_canonical": 492,
    "rank_wordwise": 18,
-   "at_glued_boundary": false
+   "at_glued_boundary": false,
+   "at_word_start": false
   },
   {
    "excerpt_id": "reference_impl-15-subagent-cot",
@@ -2282,7 +2389,8 @@
    "advantage_wordwise": 2.2028980255126953,
    "rank_canonical": 662,
    "rank_wordwise": 77,
-   "at_glued_boundary": false
+   "at_glued_boundary": false,
+   "at_word_start": false
   },
   {
    "excerpt_id": "reference_impl-16-parent-cot",
@@ -2296,7 +2404,8 @@
    "advantage_wordwise": 0.1632404327392578,
    "rank_canonical": 334,
    "rank_wordwise": 298,
-   "at_glued_boundary": true
+   "at_glued_boundary": true,
+   "at_word_start": false
   },
   {
    "excerpt_id": "reference_impl-16-parent-cot",
@@ -2310,7 +2419,8 @@
    "advantage_wordwise": -1.437765121459961,
    "rank_canonical": 1062,
    "rank_wordwise": 4300,
-   "at_glued_boundary": true
+   "at_glued_boundary": true,
+   "at_word_start": true
   },
   {
    "excerpt_id": "reference_impl-16-parent-cot",
@@ -2324,7 +2434,8 @@
    "advantage_wordwise": 0.3634681701660156,
    "rank_canonical": 1248,
    "rank_wordwise": 882,
-   "at_glued_boundary": true
+   "at_glued_boundary": true,
+   "at_word_start": true
   },
   {
    "excerpt_id": "reference_impl-16-parent-cot",
@@ -2338,7 +2449,8 @@
    "advantage_wordwise": 7.901453018188477,
    "rank_canonical": 4190,
    "rank_wordwise": 1,
-   "at_glued_boundary": true
+   "at_glued_boundary": true,
+   "at_word_start": false
   },
   {
    "excerpt_id": "reference_impl-16-parent-cot",
@@ -2352,7 +2464,8 @@
    "advantage_wordwise": -3.08465576171875,
    "rank_canonical": 13,
    "rank_wordwise": 150,
-   "at_glued_boundary": true
+   "at_glued_boundary": true,
+   "at_word_start": false
   },
   {
    "excerpt_id": "reference_impl-19-parent-cot",
@@ -2366,7 +2479,8 @@
    "advantage_wordwise": -1.2481746673583984,
    "rank_canonical": 376,
    "rank_wordwise": 1159,
-   "at_glued_boundary": true
+   "at_glued_boundary": true,
+   "at_word_start": false
   },
   {
    "excerpt_id": "reference_impl-19-parent-cot",
@@ -2380,7 +2494,8 @@
    "advantage_wordwise": 2.333054780960083,
    "rank_canonical": 27,
    "rank_wordwise": 2,
-   "at_glued_boundary": false
+   "at_glued_boundary": false,
+   "at_word_start": false
   },
   {
    "excerpt_id": "reference_impl-19-parent-cot",
@@ -2394,7 +2509,8 @@
    "advantage_wordwise": 5.566141128540039,
    "rank_canonical": 56,
    "rank_wordwise": 1,
-   "at_glued_boundary": true
+   "at_glued_boundary": true,
+   "at_word_start": false
   },
   {
    "excerpt_id": "reference_impl-19-parent-cot",
@@ -2408,7 +2524,8 @@
    "advantage_wordwise": 1.8633995056152344,
    "rank_canonical": 2708,
    "rank_wordwise": 403,
-   "at_glued_boundary": true
+   "at_glued_boundary": true,
+   "at_word_start": true
   },
   {
    "excerpt_id": "reference_impl-19-parent-cot",
@@ -2422,7 +2539,8 @@
    "advantage_wordwise": 3.353381872177124,
    "rank_canonical": 38,
    "rank_wordwise": 1,
-   "at_glued_boundary": false
+   "at_glued_boundary": false,
+   "at_word_start": false
   },
   {
    "excerpt_id": "eval_pipeline-04-parent-cot",
@@ -2436,7 +2554,8 @@
    "advantage_wordwise": 0.5205783843994141,
    "rank_canonical": 9773,
    "rank_wordwise": 7625,
-   "at_glued_boundary": true
+   "at_glued_boundary": true,
+   "at_word_start": false
   },
   {
    "excerpt_id": "eval_pipeline-04-parent-cot",
@@ -2450,7 +2569,8 @@
    "advantage_wordwise": 0.14174461364746094,
    "rank_canonical": 4267,
    "rank_wordwise": 3916,
-   "at_glued_boundary": true
+   "at_glued_boundary": true,
+   "at_word_start": false
   },
   {
    "excerpt_id": "eval_pipeline-04-parent-cot",
@@ -2464,7 +2584,8 @@
    "advantage_wordwise": 0.9437341690063477,
    "rank_canonical": 53,
    "rank_wordwise": 16,
-   "at_glued_boundary": true
+   "at_glued_boundary": true,
+   "at_word_start": false
   },
   {
    "excerpt_id": "eval_pipeline-04-parent-cot",
@@ -2478,7 +2599,8 @@
    "advantage_wordwise": 0.39324378967285156,
    "rank_canonical": 481,
    "rank_wordwise": 341,
-   "at_glued_boundary": true
+   "at_glued_boundary": true,
+   "at_word_start": true
   },
   {
    "excerpt_id": "eval_pipeline-04-parent-cot",
@@ -2492,7 +2614,8 @@
    "advantage_wordwise": -0.9208250045776367,
    "rank_canonical": 353,
    "rank_wordwise": 827,
-   "at_glued_boundary": true
+   "at_glued_boundary": true,
+   "at_word_start": true
   },
   {
    "excerpt_id": "eval_pipeline-06-subagent-cot",
@@ -2506,7 +2629,8 @@
    "advantage_wordwise": 2.959404945373535,
    "rank_canonical": 4567,
    "rank_wordwise": 537,
-   "at_glued_boundary": true
+   "at_glued_boundary": true,
+   "at_word_start": true
   },
   {
    "excerpt_id": "eval_pipeline-06-subagent-cot",
@@ -2520,7 +2644,8 @@
    "advantage_wordwise": -0.5867910385131836,
    "rank_canonical": 43,
    "rank_wordwise": 103,
-   "at_glued_boundary": true
+   "at_glued_boundary": true,
+   "at_word_start": false
   },
   {
    "excerpt_id": "eval_pipeline-06-subagent-cot",
@@ -2534,7 +2659,8 @@
    "advantage_wordwise": 7.099539756774902,
    "rank_canonical": 4852,
    "rank_wordwise": 2,
-   "at_glued_boundary": true
+   "at_glued_boundary": true,
+   "at_word_start": true
   },
   {
    "excerpt_id": "eval_pipeline-06-subagent-cot",
@@ -2548,7 +2674,8 @@
    "advantage_wordwise": 2.232222557067871,
    "rank_canonical": 218,
    "rank_wordwise": 12,
-   "at_glued_boundary": true
+   "at_glued_boundary": true,
+   "at_word_start": true
   },
   {
    "excerpt_id": "reference_impl-15-subagent-cot",
@@ -2562,7 +2689,8 @@
    "advantage_wordwise": -0.5083856582641602,
    "rank_canonical": 74,
    "rank_wordwise": 117,
-   "at_glued_boundary": true
+   "at_glued_boundary": true,
+   "at_word_start": false
   },
   {
    "excerpt_id": "reference_impl-15-subagent-cot",
@@ -2576,7 +2704,8 @@
    "advantage_wordwise": 0.28839683532714844,
    "rank_canonical": 41,
    "rank_wordwise": 33,
-   "at_glued_boundary": true
+   "at_glued_boundary": true,
+   "at_word_start": false
   },
   {
    "excerpt_id": "reference_impl-15-subagent-cot",
@@ -2590,7 +2719,8 @@
    "advantage_wordwise": 0.5136814117431641,
    "rank_canonical": 267,
    "rank_wordwise": 161,
-   "at_glued_boundary": true
+   "at_glued_boundary": true,
+   "at_word_start": true
   },
   {
    "excerpt_id": "reference_impl-15-subagent-cot",
@@ -2604,7 +2734,8 @@
    "advantage_wordwise": 2.907787322998047,
    "rank_canonical": 263,
    "rank_wordwise": 17,
-   "at_glued_boundary": true
+   "at_glued_boundary": true,
+   "at_word_start": true
   },
   {
    "excerpt_id": "reference_impl-15-subagent-cot",
@@ -2618,7 +2749,8 @@
    "advantage_wordwise": -0.8749561309814453,
    "rank_canonical": 5957,
    "rank_wordwise": 10010,
-   "at_glued_boundary": true
+   "at_glued_boundary": true,
+   "at_word_start": true
   },
   {
    "excerpt_id": "reference_impl-16-parent-cot",
@@ -2632,7 +2764,8 @@
    "advantage_wordwise": 8.826334953308105,
    "rank_canonical": 9156,
    "rank_wordwise": 2,
-   "at_glued_boundary": true
+   "at_glued_boundary": true,
+   "at_word_start": false
   },
   {
    "excerpt_id": "reference_impl-16-parent-cot",
@@ -2646,7 +2779,8 @@
    "advantage_wordwise": -2.632871627807617,
    "rank_canonical": 33,
    "rank_wordwise": 253,
-   "at_glued_boundary": true
+   "at_glued_boundary": true,
+   "at_word_start": false
   },
   {
    "excerpt_id": "reference_impl-19-parent-cot",
@@ -2660,7 +2794,8 @@
    "advantage_wordwise": 0.6721725463867188,
    "rank_canonical": 737,
    "rank_wordwise": 398,
-   "at_glued_boundary": true
+   "at_glued_boundary": true,
+   "at_word_start": false
   },
   {
    "excerpt_id": "reference_impl-19-parent-cot",
@@ -2674,7 +2809,8 @@
    "advantage_wordwise": -0.6826972961425781,
    "rank_canonical": 1703,
    "rank_wordwise": 2828,
-   "at_glued_boundary": true
+   "at_glued_boundary": true,
+   "at_word_start": true
   },
   {
    "excerpt_id": "reference_impl-19-parent-cot",
@@ -2688,7 +2824,8 @@
    "advantage_wordwise": 3.8209989070892334,
    "rank_canonical": 26,
    "rank_wordwise": 1,
-   "at_glued_boundary": true
+   "at_glued_boundary": true,
+   "at_word_start": false
   },
   {
    "excerpt_id": "reference_impl-19-parent-cot",
@@ -2702,7 +2839,8 @@
    "advantage_wordwise": 2.144468307495117,
    "rank_canonical": 1952,
    "rank_wordwise": 225,
-   "at_glued_boundary": true
+   "at_glued_boundary": true,
+   "at_word_start": true
   }
  ]
 }

@@ -374,6 +374,26 @@ not that either is one it would readily produce. The small models put the
 word-respecting token higher (median 36–193), but in vocabularies where the
 divergence positions are different.
 
+**At a word start the effect is clearer.** Splitting the glued-boundary
+decisions by where they fall: a decision at the *first character of a word* is
+the model choosing how to start the next word, while a mid-word one is the two
+tokenizations cutting the *same* word differently.
+
+| model | all | at a word start | mid-word |
+| --- | --- | --- | --- |
+| gpt-oss-120b | 15/21 | **11/13** | 4/8 |
+| gpt-oss-20b | 14/21 | **10/13** | 4/8 |
+| Qwen2.5-1.5B-Instruct | 17/26 | **7/12** | 10/14 |
+| Qwen3-1.7B | 18/26 | **7/12** | 11/14 |
+| SmolLM2-1.7B | 14/20 | **7/10** | 7/10 |
+
+The split sharpens the result for the two gpt-oss models and does nothing for
+the others — which is what their tokenizers predict, since only gpt-oss's
+divergences sit at the o200k positions the rest of the analysis is about.
+Reaching the same 13 decisions from the other direction, by scoring each glued
+boundary against a fresh tokenization from that point, picks out 12 of the same
+13, so the two constructions agree about where the real choices are.
+
 **How few decision points there are.** This is the whole evidence base for
 run 2: 21 decisions for gpt-oss-120b, covering 23 of the 278 glued boundaries
 in the corpus, because a diverged stretch spanning two glued boundaries is

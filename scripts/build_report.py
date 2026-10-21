@@ -13,6 +13,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import math
 import statistics
 import subprocess
 from pathlib import Path
@@ -365,6 +366,28 @@ def figure(caption_html: str, svg: str, number: int, title: str) -> str:
     )
 
 
+def decision_table(points: list[dict[str, Any]]) -> str:
+    """Every decision the lead model made, likeliest-word-respecting first."""
+    rows = sorted(points, key=lambda d: -d["advantage_wordwise"])
+    out = [
+        "<table><tr><th>after</th><th>canonical</th><th>rank</th>"
+        "<th>word-respecting</th><th>rank</th><th>×more likely</th></tr>"
+    ]
+    for d in rows:
+        ratio = math.exp(d["advantage_wordwise"])
+        shown = f"{ratio:.0f}×" if ratio >= 1 else f"1/{1 / ratio:.0f}×"
+        where = "" if d["at_word_start"] else " <i>(mid-word)</i>"
+        out.append(
+            f"<tr><td><code>…{esc(d['prefix_tail'])}</code>{where}</td>"
+            f"<td><code>{esc(d['canonical_token'])}</code></td>"
+            f"<td>{d['rank_canonical']:,}</td>"
+            f"<td><code>{esc(d['wordwise_token'])}</code></td>"
+            f"<td>{d['rank_wordwise']:,}</td><td>{shown}</td></tr>"
+        )
+    out.append("</table>")
+    return "".join(out)
+
+
 def build(out_path: Path) -> None:
     analysis = json.loads((RESULTS / "analysis.json").read_text())
     emission = json.loads((RESULTS / "emission_logprob.json").read_text())
@@ -513,6 +536,11 @@ pushing the same way.</p>
     q = div[lead]
     n_canon_deep = sum(d["rank_canonical"] > 100 for d in q)
     n_word_shallow = sum(d["rank_wordwise"] <= 100 for d in q)
+    starts = [d for d in q if d["at_word_start"]]
+    mids = [d for d in q if not d["at_word_start"]]
+    n_at_start = len(starts)
+    w_at_start = f"{sum(d['advantage_wordwise'] > 0 for d in starts)}/{len(starts)}"
+    w_mid = f"{sum(d['advantage_wordwise'] > 0 for d in mids)}/{len(mids)}"
     add(f"""
 <p>If the models emit glued text one word at a time, the transcript OpenAI
 stores re-encodes to a different, {t["pct_retokenization_inflation"]:.1f}% longer
@@ -606,6 +634,21 @@ canonical <code>{esc(standout["canonical_token"])}</code> is the model's
 {ordinal(standout["rank_canonical"])} choice and
 <code>{esc(standout["wordwise_token"])}</code> its
 {ordinal(standout["rank_wordwise"])}.</p>
+
+<p>The decision is cleaner where it falls at the <i>first character of a
+word</i> — the model has just finished one word and is choosing how to start
+the next. At those {n_at_start} positions the word-respecting token wins
+{w_at_start}. The other {len(q) - n_at_start} are mid-word, where the two
+tokenizations want to cut the <i>same</i> word differently, and there it is
+{w_mid} — a coin flip.</p>
+
+<details><summary>Every decision, and which token it preferred</summary>
+{decision_table(q)}
+<p>Read the first row as: after <code>…assinstruction? This</code>, continuing
+<code>is</code> (the next word, bare) is 213 times likelier than
+<code>isa</code> (the chunk that runs into the following word). The last rows
+are where the canonical merge won.</p>
+</details>
 
 <p><b>Both candidates are deep in the tail.</b> The canonical token is ranked
 below 100th at {n_canon_deep} of {len(q)} of these positions, but so is the

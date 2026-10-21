@@ -79,6 +79,10 @@ class Divergence(BaseModel):
     #: merges ".\n" and word-at-a-time emits "." then the newline — an
     #: artifact of the report's formatting, not of anything the model chose.
     at_glued_boundary: bool
+    #: Whether the decision itself falls at the first character of a word.
+    #: The rest are mid-word: the two tokenizations want to cut the *same*
+    #: word differently, which is a weaker form of the same question.
+    at_word_start: bool
 
 
 class EmissionScore(BaseModel):
@@ -182,6 +186,16 @@ def divergences(a: Tokenization, b: Tokenization) -> list[tuple[int, int, int]]:
 
 
 @torch.no_grad()
+def word_start_offsets(seg: Segmentation) -> set[int]:
+    """Character offset of the first character of every word."""
+    out: set[int] = set()
+    pos = 0
+    for i, word in enumerate(seg.words):
+        out.add(pos)
+        pos += len(word) + (len(seg.gaps[i]) if i < len(seg.gaps) else 0)
+    return out
+
+
 def glued_boundary_offsets(seg: Segmentation) -> set[int]:
     """Character offsets where the model wrote no space between two words."""
     out: set[int] = set()
@@ -203,6 +217,7 @@ def score_divergences(
     bos: int | None,
     meta: tuple[str, str, str],
     glued_offsets: set[int] | None = None,
+    word_starts: set[int] | None = None,
 ) -> list[Divergence]:
     points = divergences(canonical, wordwise)
     if not points:
@@ -222,6 +237,7 @@ def score_divergences(
         shared = sorted({0, *canonical.ends} & {0, *wordwise.ends})
         stop = next(o for o in shared if o > start)
         at_glued = bool(glued_offsets and any(start < o < stop for o in glued_offsets))
+        at_start = bool(word_starts and start in word_starts)
         # Next-token distribution after the shared prefix.
         row = logprobs[len(prefix0) + n_prefix - 1]
         order = torch.argsort(row, descending=True)
@@ -245,6 +261,7 @@ def score_divergences(
                 rank_canonical=int(ranks[tok_c]),
                 rank_wordwise=int(ranks[tok_w]),
                 at_glued_boundary=at_glued,
+                at_word_start=at_start,
             )
         )
     return out
@@ -298,6 +315,7 @@ def score_model(
                     bos,
                     (e.id, name, kind),
                     glued_boundary_offsets(seg),
+                    word_start_offsets(seg),
                 )
             )
             out.append(

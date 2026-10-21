@@ -123,6 +123,14 @@ merges `.\n` into one token; that is formatting, not a choice, and it was 12 of
 question barely arises at all — every model tokenizes it identically either way
 at all but three positions across all seven excerpts.
 
+**At a word start the effect is clearer.** Of the 21, 13 fall at the
+first character of a word — the model has just finished one word and is
+choosing how to start the next — and there the word-respecting token wins
+**11/13**. The other 8 are mid-word, the two tokenizations cutting
+the same word differently, and there it is 4/8, a coin flip. The split
+sharpens the result for both gpt-oss models and does nothing for the other
+three, which is what their tokenizers predict.
+
 **There are very few decision points.** These 21 decisions cover 23 of the 278
 glued boundaries in the corpus, because one diverged stretch spanning two
 boundaries is scored once. Scoring instead at every boundary — comparing the
