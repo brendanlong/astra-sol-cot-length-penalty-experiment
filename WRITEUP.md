@@ -45,18 +45,13 @@ reader could insist on: merging all ten digit-label boundaries, where the
 report renders `severity4?` as two words while leaving `L2` and `P0` as one,
 moves the headline from −7.6% / +7.9% to −7.4% / +8.1%.
 
-This is **compatible with a per-space length penalty and hard to square with a
-straightforward token-counting one**. It does not identify the training
+This is **compatible with a length penalty counting characters, and hard to
+square with one counting tokens**. It does not identify the training
 objective. GPT‑6's tokenizer is unpublished and its emitted token IDs are not
 observable, so o200k is a stand-in; learned behaviour need not minimize any one
 reward term on every sample; and a token penalty could coexist with learned
 shorthand, imitation of terse human notes, or other rewards pushing the same
 way.
-
-A penalty counting space-separated words is the same hypothesis, not a second
-one: dropping a space removes exactly one character and exactly one whitespace
-chunk, wherever it happens, so no arrangement of drops can tell the two apart.
-"Per-space penalty" below covers both.
 
 ## 2. The stored transcript is probably not the token sequence that ran
 
@@ -152,33 +147,18 @@ text, not usable rates — spending the invisible capacity emits more tokens tha
 the reference has, and the visible figure assumes every boundary is free when
 sentence boundaries never are.
 
-Capacity is the weaker argument. The stronger one is that reinforcement
-learning does not appear to find this channel on its own. This part is not yet
-published, so it is on my word rather than something you can check from this
-repo: across at least seven GRPO runs on Qwen3-1.7B/0.6B and OLMo-2-1B, in
-follow-up work to [tokenization-hidden-computation-experiment][retok],
-**tokenization was never used as a channel even though it would have paid
-slightly more**, and a partial-credit reward made RL find the cheapest
-*visible* channel within 50–80 steps instead. The constraint there was reachability, not capacity:
-teacher-forced non-canonical split probability was about 7.5e‑6 per copy, and
-an entropy bonus large enough to hold 0.15–0.35 nats per token still produced
-zero non-canonical copies.
-
-None of that rules out steganography here. It says this artifact is a poor
+None of this rules out steganography. It says this artifact is a poor
 candidate for it.
 
 ## 5. The weakest link
 
 The word-at-a-time mechanism needs non-canonical emission at the 14% of glued
-words where it diverges from canonical. The same prior work measured wild
-non-canonical rates on seven open models at 0–5% *per token* — 0.08% greedy —
-and induced none at frontier scale by prompting (0 of 346). Those figures are
-published in [the retok repo][retok]; the GRPO result in §4 is not.
-
-The reconciliation available is that those rates were measured while models
-generated normally spaced text, where the two tokenizations coincide and there
-is nothing to be non-canonical about, exactly as the spaced control in §2
-shows. Conditional on producing glued text, the local probabilities look very
+words where it diverges from canonical, which is far above the rates measured
+in open models generating ordinary text ([earlier work][retok] puts them at
+0–5% per token). The reconciliation available is that those rates were measured
+on *normally spaced* text, where the two tokenizations coincide and there is
+nothing to be non-canonical about, exactly as the spaced control in §2 shows.
+Conditional on producing glued text the local probabilities look very
 different. That is a reconciliation, not a measurement.
 
 There is a second tension inside §2. Summed over a whole excerpt rather than at

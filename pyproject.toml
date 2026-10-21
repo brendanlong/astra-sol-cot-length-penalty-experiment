@@ -55,6 +55,11 @@ ignore = []
 # ASCII; here they're intended.
 allowed-confusables = ["×", "−", "ℓ"]
 
+[tool.ruff.lint.per-file-ignores]
+# Generates HTML; a table row wrapped to 88 columns is harder to read than the
+# markup it emits, and the wrapping would show up in the rendered page.
+"scripts/build_report.py" = ["E501"]
+
 [tool.ruff.lint.isort]
 known-first-party = ["cot_spacing"]
 

@@ -10,7 +10,8 @@ between words missing:
 > Need asknotifications ifsendno-- since noSlack withwrite no_notifytrue
 > preventsalertsbut disabling?
 
-**→ Read the [WRITEUP](WRITEUP.md).** [RESULTS.md](RESULTS.md) is the full run
+**→ Read the [report](https://gpt6-cot-spaces-cd652c60.surge.sh)** (or
+[WRITEUP.md](WRITEUP.md), the same thing in Markdown). [RESULTS.md](RESULTS.md) is the full run
 log — every command, every number, the four claims two review rounds withdrew,
 and the known gaps. [EXPERIMENT_PLAN.md](EXPERIMENT_PLAN.md) has the questions
 and predictions.
@@ -20,8 +21,8 @@ and predictions.
 1. **Gluing costs tokens and saves characters.** Over the 7 glued excerpts,
    against OpenAI's own space-restored reading: characters **−7.6%**, canonical
    o200k tokens **+7.9%**, word-at-a-time tokens **+5.0%**. 6 of 7 excerpts are
-   individually positive in tokens. Compatible with a per-space length penalty,
-   not with a straightforward token-counting one — but it cannot identify the
+   individually positive in tokens. Compatible with a length penalty counting
+   characters, hard to square with one counting tokens — but it cannot identify the
    training objective, since GPT‑6's tokenizer and emitted tokens are both
    unobservable.
 
@@ -126,6 +127,7 @@ uv run python -m cot_spacing.emission_logprob
 ```
 .
 ├── WRITEUP.md              # the write-up
+├── scripts/build_report.py # builds the published HTML report from results/
 ├── RESULTS.md              # run log: commands, numbers, withdrawn claims, gaps
 ├── EXPERIMENT_PLAN.md      # questions and predictions
 ├── scripts/reproduce.sh

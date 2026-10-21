@@ -195,27 +195,6 @@ def plot_length(out_path: Path, results: dict[str, Any]) -> None:
     )
     ax.grid(True, axis="x", color=GRID, linewidth=0.8, zorder=0)
 
-    # The two empty quadrants: x > 0 is free beside the falling bar and x < 0
-    # beside the rising ones, so both notes sit clear of every mark.
-    ax.text(
-        0.6,
-        0.0,
-        "shorter — what a per-character\nlength penalty counts",
-        fontsize=9.5,
-        color=SECONDARY,
-        ha="left",
-        va="center",
-    )
-    ax.text(
-        -0.6,
-        1.5,
-        "longer — what a\ntoken counter counts",
-        fontsize=9.5,
-        color=SECONDARY,
-        ha="right",
-        va="center",
-    )
-
     ax.set_title(
         "Gluing words together shortens the text in characters —\n"
         "and makes the token count go up",
@@ -224,20 +203,15 @@ def plot_length(out_path: Path, results: dict[str, Any]) -> None:
         loc="left",
         pad=14,
     )
-    cl100k = results["length"]["glued_only"]["cl100k_base"]["totals"]
     fig.tight_layout()
     fig.text(
         0.012,
-        -0.015,
+        -0.02,
         f"{results['n_glued']} glued chain-of-thought and agent-message excerpts "
-        "from GPT-6.1 Sol and GPT-6 Astra in OpenAI's misalignment\nreport of "
-        "2026-10-20, against OpenAI's own space-restored reading of the same text. "
-        "The canonical token count rises for\n"
-        f"{t['n_excerpts_canonical_positive']} of the {results['n_glued']} excerpts "
-        "individually, not only in total. Tokens are tiktoken o200k_base, the "
-        "closest public stand-in\nfor GPT-6's unpublished tokenizer; under "
-        f"cl100k_base the canonical count rises "
-        f"{cl100k['pct_canonical_glued_vs_spaced']:+.1f}% instead.",
+        "from GPT-6.1 Sol and GPT-6 Astra in OpenAI's misalignment report of "
+        "2026-10-20,\nagainst OpenAI's own space-restored reading of the same "
+        "text. Tokens are tiktoken o200k_base, the closest public stand-in for "
+        "GPT-6's\nunpublished tokenizer.",
         fontsize=8.5,
         color=MUTED,
         ha="left",
