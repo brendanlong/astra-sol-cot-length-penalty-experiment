@@ -1,0 +1,83 @@
+[project]
+name = "astra-sol-cot-length-penalty-experiment"
+version = "0.1.0"
+description = "What the missing spaces in GPT-6 Sol and Astra chain-of-thought are optimizing"
+requires-python = ">=3.12"
+dependencies = [
+    # Parsing the saved report HTML into the dataset
+    "beautifulsoup4>=4.12",
+    # Data validation
+    "pydantic>=2.0",
+    # Tokenizers (o200k_base, o200k_harmony, cl100k_base, gpt2)
+    "tiktoken>=0.7",
+    # Fisher exact test
+    "scipy>=1.13",
+    # Figures
+    "matplotlib>=3.9",
+    # emission_logprob.py only: scoring two tokenizations under open models.
+    # CPU is fine; these are a few hundred tokens each.
+    "torch>=2.0",
+    "transformers>=4.40",
+]
+
+[dependency-groups]
+dev = [
+    "pre-commit>=4.0",
+    # ruff and pyright are pinned EXACTLY, not with a floor. Both change their
+    # output between releases, so an open range means CI, the pre-commit hook
+    # and a given checkout can each enforce a different standard and reformat
+    # each other's work. Bump deliberately: change the pin, `uv lock`, then run
+    # `uv run ruff format . && uv run ruff check --fix .` in the same commit.
+    "pyright==1.1.408",
+    "ruff==0.15.1",
+    "pytest>=8.0",
+]
+
+[tool.ruff]
+target-version = "py312"
+line-length = 88
+
+[tool.ruff.lint]
+select = [
+    "E",     # pycodestyle errors
+    "F",     # pyflakes
+    "I",     # isort
+    "UP",    # pyupgrade
+    "B",     # flake8-bugbear
+    "SIM",   # flake8-simplify
+    "TCH",   # flake8-type-checking
+    "ANN",   # flake8-annotations
+    "RUF",   # ruff-specific rules
+]
+ignore = []
+# Typographic characters used deliberately in plot labels and printed tables
+# (minus signs, multiplication signs). RUF001-003 flags them as confusable with
+# ASCII; here they're intended.
+allowed-confusables = ["×", "−", "ℓ"]
+
+[tool.ruff.lint.isort]
+known-first-party = ["cot_spacing"]
+
+[tool.pyright]
+pythonVersion = "3.12"
+typeCheckingMode = "standard"
+venvPath = "."
+venv = ".venv"
+# Specifying `exclude` REPLACES pyright's built-in defaults, so they must be
+# re-listed — otherwise pyright analyzes `.venv` (all installed deps, incl.
+# torch) and effectively never finishes.
+exclude = ["**/node_modules", "**/__pycache__", "**/.*"]
+
+[tool.uv]
+# Don't resolve to packages published in the last 7 days — a supply-chain
+# delay, so a freshly-published (or freshly-compromised) release isn't picked
+# up the day it lands. This lives here rather than in a user-level uv.toml so
+# that it also covers CI, and so `uv sync --locked` doesn't re-resolve.
+exclude-newer = "7 days"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["cot_spacing"]
