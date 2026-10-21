@@ -301,7 +301,12 @@ uv run python -m experiments.cot_spacing.emission_logprob
 ```
 
 CPU, float32, ~15 min. Three models over two tokenizer lineages (Qwen2.5 and
-Qwen3 share a tokenizer; SmolLM2 has its own). Raw output in
+Qwen3 share a tokenizer; SmolLM2 has its own). Each model is scored in **its
+own** vocabulary — 151,665, 151,669 and 49,152 tokens, none of them the o200k
+used everywhere else here — because the question is which sequence that model
+would emit. So the divergence positions are not the o200k straddles of run 1,
+and the counts differ between models: where a tokenizer already splits the
+glued string at its word boundaries there is nothing to diverge about. Raw output in
 `cot_spacing/results/emission_logprob.json`.
 
 Run 1 says what each emission model would have *cost*, which cannot tell us

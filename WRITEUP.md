@@ -61,8 +61,10 @@ yields a different, **2.3% longer** sequence. Whether that is what happens is
 testable on open models, because both tokenizations decode to identical
 characters, so their probabilities are comparable.
 
-Where the two tokenizations diverge, the word-respecting token is the more
-likely one at most divergences, in all three models tested:
+Each model is asked in *its own* vocabulary, since the question is what that
+model would emit — three different BPE tokenizers (151,665, 151,669 and 49,152
+tokens), none of them o200k. Where the two tokenizations diverge, the
+word-respecting token is the more likely one at most divergences, in all three:
 
 | model | divergences | word-at-a-time more likely | median rank (1-indexed): canonical vs word-at-a-time |
 | --- | --- | --- | --- |
@@ -83,6 +85,11 @@ common word, the merge is natural (`usesdefault` → `D` at rank 557 against
 `Dummy` at 12,557). On the spaced version of the same text the question does
 not arise: the two tokenizations are nearly identical (SmolLM2:
 identical; Qwen: 3 divergences across all seven excerpts).
+
+The divergence counts differ between models because their vocabularies do:
+where a tokenizer already splits the glued string at the word boundaries, there
+is nothing to diverge about. Qwen's does that for `notsendmessages`; SmolLM2's
+splits it the way o200k does.
 
 These are 1.5–1.7B open models, not GPT‑6, and none was trained to glue words.
 They show the straddling tokens are deep in the tail for BPE language models

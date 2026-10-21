@@ -395,6 +395,11 @@ def build(out_path: Path) -> None:
         return s[len(s) // 2]
 
     tok_svg, _ = figure_tokens(enc)
+    from transformers import AutoTokenizer
+
+    vocab_sizes = ", ".join(
+        f"{len(AutoTokenizer.from_pretrained(m)):,}" for m in models
+    )
     standout = max(div[models[0]], key=lambda d: d["rank_canonical"])
 
     body: list[str] = []
@@ -432,7 +437,9 @@ that belongs to two words at once.</p>
         figure(
             """<p class="note">o200k_base, the closest public stand-in for
 GPT&#8209;6's unpublished tokenizer. <code>notsendmessages</code> is from the
-report, in the first Sol chain-of-thought.</p>""",
+report, in the first Sol chain-of-thought. Where the chunks fall is a property
+of the tokenizer, not of the text: SmolLM2's vocabulary splits this string the
+way o200k does, Qwen's happens to split it at the word boundaries.</p>""",
             tok_svg,
             1,
             "Gluing changes where the token boundaries fall.",
@@ -486,9 +493,10 @@ stores re-encodes to a different, {t["pct_retokenization_inflation"]:.1f}% longe
 sequence than the one that ran. Both versions decode to identical characters,
 so open models can be asked which they would emit.</p>
 
-<p>At every point where the two tokenizations pick a different next token, the
-canonical choice is the one that reaches across the word boundary. Figure 3
-puts the two candidates on the same axis.</p>
+<p>Each model is asked in <i>its own</i> vocabulary, since the question is what
+that model would emit — so this is three different BPE tokenizers
+({vocab_sizes}), none of them o200k, and the glued text splits differently in
+each. Figure 3 puts the two candidates on the same axis for one of them.</p>
 """)
     add(
         figure(
@@ -507,7 +515,10 @@ measurement that disagrees</summary>
                 )
             }
 </table>
-<p>Ranks are 1-indexed, so rank 1 is the model's first choice.</p>
+<p>Ranks are 1-indexed, so rank 1 is the model's first choice. The divergence
+counts differ between models because their vocabularies do: where a tokenizer
+already splits the glued string at the word boundaries, there is nothing to
+diverge about.</p>
 <p>Summed over a whole excerpt instead of at the point of choice, the canonical
 path comes out <i>better</i> under both Qwen models
 ({sum(s["advantage_wordwise"] for s in seq[models[0]]):+.1f} and
