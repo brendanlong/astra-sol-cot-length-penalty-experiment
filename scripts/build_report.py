@@ -14,6 +14,7 @@ from __future__ import annotations
 import argparse
 import json
 import math
+import re
 import statistics
 import subprocess
 from pathlib import Path
@@ -171,51 +172,23 @@ def figure_tokens(enc: tiktoken.Encoding) -> tuple[str, dict[str, int]]:
 # Figure 2: what gluing saves and costs
 # --------------------------------------------------------------------------
 
+FIGURES = REPO / "cot_spacing" / "figures"
 
-def figure_length(totals: dict[str, Any]) -> str:
-    rows = [
-        ("characters", totals["pct_chars_vs_spaced"]),
-        ("tokens, word-at-a-time", totals["pct_wordwise_glued_vs_wordwise_spaced"]),
-        ("tokens, canonical", totals["pct_canonical_glued_vs_spaced"]),
-    ]
-    w, left, zero, scale = 640, 190.0, 390.0, 14.0  # px per percent
-    parts = [
-        f'<svg viewBox="0 0 {w} 180" width="100%" role="img" '
-        f'aria-label="Bar chart. Against the same words with spaces restored, '
-        f"the glued text is {abs(rows[0][1]):.1f}% shorter in characters but "
-        f"{rows[1][1]:.1f}% longer in word-at-a-time tokens and "
-        f'{rows[2][1]:.1f}% longer in canonical tokens.">'
-    ]
-    for tick in (-10, -5, 0, 5, 10):
-        x = zero + tick * scale
-        parts.append(
-            f'<line x1="{x:.1f}" y1="24" x2="{x:.1f}" y2="130" '
-            f'stroke="{AXIS if tick == 0 else GRID}" stroke-width="1"/>'
-            f'<text x="{x:.1f}" y="148" text-anchor="middle" font-size="11" '
-            f'fill="{MUTED}">{tick:+d}%</text>'.replace("+0%", "0")
-        )
-    y = 36
-    for name, pct in rows:
-        x = zero + min(pct, 0) * scale
-        parts.append(
-            f'<rect x="{x:.1f}" y="{y}" width="{abs(pct) * scale:.1f}" '
-            f'height="22" fill="{DOWN if pct < 0 else UP}"/>'
-            f'<text x="{left - 14}" y="{y + 16}" text-anchor="end" '
-            f'font-size="14" fill="{INK}">{esc(name)}</text>'
-        )
-        label_x = zero + pct * scale + (-8 if pct < 0 else 8)
-        parts.append(
-            f'<text x="{label_x:.1f}" y="{y + 16}" '
-            f'text-anchor="{"end" if pct < 0 else "start"}" font-size="14" '
-            f'font-weight="700" fill="{INK}">{pct:+.1f}%</text>'.replace("-", "−")
-        )
-        y += 34
-    parts.append(
-        f'<text x="{zero}" y="170" text-anchor="middle" font-size="12" '
-        f'fill="{MUTED}">glued text vs the same words with spaces restored</text>'
+
+def inline_svg(name: str, alt: str) -> str:
+    """Inline a figure matplotlib already wrote, rather than redrawing it.
+
+    One implementation of each chart, in ``cot_spacing/figures.py``, so the
+    page and the repo cannot disagree. The width/height attributes are dropped
+    so the viewBox scales the figure to the column.
+    """
+    svg = (FIGURES / f"{name}.svg").read_text()
+    svg = svg[svg.index("<svg") :]
+    svg = re.sub(r'\s(width|height)="[^"]*"', "", svg, count=2)
+    svg = svg.replace(
+        "<svg", f'<svg width="100%" role="img" aria-label="{esc(alt)}"', 1
     )
-    parts.append("</svg>")
-    return "".join(parts)
+    return svg
 
 
 # --------------------------------------------------------------------------
@@ -364,10 +337,9 @@ def figure_chunking(chunking: dict[str, Any]) -> str:
 
 
 def figure(caption_html: str, svg: str, number: int, title: str) -> str:
-    return (
-        f"<figure><figcaption><b>Figure {number}.</b> {title}</figcaption>"
-        f"{svg}{caption_html}</figure>"
-    )
+    """A numbered figure. An empty ``title`` means it captions itself."""
+    label = f"<b>Figure {number}.</b>{' ' + title if title else ''}"
+    return f"<figure><figcaption>{label}</figcaption>{svg}{caption_html}</figure>"
 
 
 def decision_table(points: list[dict[str, Any]]) -> str:
@@ -531,10 +503,18 @@ digit labels — it renders <code>severity4?</code> as two words while leaving
 {sens["digit_labels_merged"]["pct_chars_vs_spaced"]:+.1f}% /
 {sens["digit_labels_merged"]["pct_canonical_glued_vs_spaced"]:+.1f}%.</p>
 </details>""",
-            figure_length(t),
+            inline_svg(
+                "length",
+                "Bar chart. Against the same words with the spaces restored, "
+                f"the glued text is {abs(t['pct_chars_vs_spaced']):.1f}% shorter "
+                f"in characters (3,361 against 3,639) but "
+                f"{t['pct_wordwise_glued_vs_wordwise_spaced']:.1f}% longer in "
+                "tokens emitted one word at a time (652 against 621) and "
+                f"{t['pct_canonical_glued_vs_spaced']:.1f}% longer in tokens when "
+                "re-encoded as one string (667 against 618).",
+            ),
             2,
-            f"{n_glued} glued excerpts, against OpenAI's own space-restored "
-            "reading of the same text.",
+            "",
         )
     )
     add("""

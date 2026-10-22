@@ -29,11 +29,7 @@ space-restored reading of the same text:
 | tokens, canonical o200k | 667 | 618 | **+7.9%** |
 | tokens, word-at-a-time | 652 | 621 | **+5.0%** |
 
-![Diverging bar chart of three length measures for the 7 glued excerpts, each
-against the same words with the spaces restored. Characters fall 7.6% (3,361 vs
-3,639), while word-at-a-time tokens rise 5.0% (652 vs 621) and canonical o200k
-tokens rise 7.9% (667 vs 618). The unit a per-character length penalty counts
-goes down; the unit a token counter counts goes up.](cot_spacing/figures/length.png)
+![Bar chart titled "Dropping the spaces makes the text shorter in characters and longer in tokens". Three measures of the 7 glued excerpts against the same words with the spaces put back: characters fall 7.6% (3,361 against 3,639); tokens emitted one word at a time rise 5.0% (652 against 621); tokens re-encoded as one string rise 7.9% (667 against 618).](cot_spacing/figures/length.png)
 
 Six of the seven excerpts are individually positive in canonical tokens, by
 between 1.7% and 12.3% (mean over all seven 5.8%), so this is not one outlier
