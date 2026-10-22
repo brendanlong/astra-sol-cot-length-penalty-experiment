@@ -102,10 +102,22 @@ def _pct(value: float) -> str:
 
 
 def _save(fig: Figure, out_path: Path) -> None:
+    """Write the PNG, and an SVG beside it.
+
+    The HTML report inlines the SVG rather than drawing its own copy of the
+    same chart, so there is one implementation and the page cannot drift from
+    the figure the repo ships. ``svg.fonttype="none"`` keeps the labels as
+    text rather than outlines: smaller, selectable, and readable by a screen
+    reader.
+    """
     out_path.parent.mkdir(parents=True, exist_ok=True)
     fig.savefig(out_path, dpi=150, bbox_inches="tight", facecolor="white")
+    with plt.rc_context({"svg.fonttype": "none"}):
+        fig.savefig(
+            out_path.with_suffix(".svg"), bbox_inches="tight", facecolor="white"
+        )
     plt.close(fig)
-    print(f"Wrote {out_path}")
+    print(f"Wrote {out_path} (+ .svg)")
 
 
 # --------------------------------------------------------------------------
@@ -114,64 +126,42 @@ def _save(fig: Figure, out_path: Path) -> None:
 
 
 def plot_length(out_path: Path, results: dict[str, Any]) -> None:
-    """Diverging bars: the sign flip between length units and token units."""
+    """Diverging bars: the sign flip between the length units and the token units."""
     t = results["length"]["glued_only"][PRIMARY_ENCODING]["totals"]
-    # Ordered so the unit that falls sits above the two that rise: the bars
-    # then sweep once across zero and the sign flip is a single visual event.
-    # Each row compares like with like — word-at-a-time glued against
-    # word-at-a-time spaced, not against the canonical spaced count.
     rows = [
         ("characters", t["pct_chars_vs_spaced"], t["chars_glued"], t["chars_spaced"]),
         (
-            "tokens, word-at-a-time",
+            "tokens, one word at a time",
             t["pct_wordwise_glued_vs_wordwise_spaced"],
             t["wordwise_glued"],
             t["wordwise_spaced"],
         ),
         (
-            "tokens, canonical o200k",
+            "tokens, re-encoded as one string",
             t["pct_canonical_glued_vs_spaced"],
             t["canonical_glued"],
             t["canonical_spaced"],
         ),
     ]
 
-    fig, ax = plt.subplots(figsize=(8.8, 3.4))
+    fig = plt.figure(figsize=(9.0, 4.1))
     fig.patch.set_facecolor("white")
+    ax = fig.add_axes((0.30, 0.275, 0.665, 0.50))
     _frame(ax)
     ax.spines["left"].set_visible(False)
-
     ys = range(len(rows))
     pcts = [r[1] for r in rows]
-    # Bar height well under the 1.0 band: the leftover band is the air that
-    # separates neighbours, so no stroke is drawn around any bar.
     ax.barh(
-        list(ys),
-        pcts,
-        height=0.3,
-        color=[DOWN if p < 0 else UP for p in pcts],
-        zorder=3,
-    )
-
+        list(ys), pcts, height=0.3,
+        color=[DOWN if p < 0 else UP for p in pcts], zorder=3,
+    )  # fmt: skip
     trans = ax.get_yaxis_transform()
-    for y, (name, pct, glued, spaced) in zip(ys, rows, strict=True):
-        # Direct label outside the bar end, pointing away from zero, so it can
-        # never be clipped by its own mark.
+    for y, (name, pct, glued, spaced) in enumerate(rows):
         ax.annotate(
-            _pct(pct),
-            xy=(pct, y),
-            xytext=(-7 if pct < 0 else 7, 0),
-            textcoords="offset points",
-            ha="right" if pct < 0 else "left",
-            va="center",
-            fontsize=12,
-            fontweight="bold",
-            color=INK,
-            zorder=4,
-        )
-        # Hand-drawn y labels, so the measure and its raw counts can take
-        # different text tokens (a tick label carries only one colour). y
-        # grows downwards here, so the name takes the smaller offset.
+            _pct(pct), xy=(pct, y), xytext=(-7 if pct < 0 else 7, 0),
+            textcoords="offset points", ha="right" if pct < 0 else "left",
+            va="center", fontsize=12, fontweight="bold", color=INK, zorder=4,
+        )  # fmt: skip
         ax.text(
             -0.012, y - 0.1, name, transform=trans, ha="right", va="center",
             fontsize=10.5, color=INK,
@@ -180,49 +170,35 @@ def plot_length(out_path: Path, results: dict[str, Any]) -> None:
             -0.012, y + 0.18, f"{glued:,} vs {spaced:,}", transform=trans,
             ha="right", va="center", fontsize=9, color=MUTED,
         )  # fmt: skip
-
     ax.axvline(0, color=AXIS, linewidth=1.2, zorder=2)
     ax.set_yticks([])
     ax.set_ylim(len(rows) - 0.5, -0.5)
-    # Symmetric about zero: an asymmetric range would make one direction look
-    # bigger than it is, and the comparison here is exactly about the sign.
     ax.set_xlim(-12, 12)
     ax.set_xticks([-10, -5, 0, 5, 10])
     ax.set_xlabel(
-        "length of the glued text vs the same words with spaces restored (%)",
-        fontsize=10,
-        color=SECONDARY,
-    )
+        "every glued excerpt, against the same words with the spaces put back (%)",
+        fontsize=10, color=SECONDARY,
+    )  # fmt: skip
     ax.grid(True, axis="x", color=GRID, linewidth=0.8, zorder=0)
 
-    ax.set_title(
-        "Gluing words together shortens the text in characters —\n"
-        "and makes the token count go up",
-        fontsize=12.5,
-        color=INK,
-        loc="left",
-        pad=14,
-    )
-    fig.tight_layout()
     fig.text(
-        0.012,
-        -0.02,
-        f"{results['n_glued']} glued chain-of-thought and agent-message excerpts "
-        "from GPT-6.1 Sol and GPT-6 Astra in OpenAI's misalignment report of "
-        "2026-10-20,\nagainst OpenAI's own space-restored reading of the same "
-        "text. Tokens are tiktoken o200k_base, the closest public stand-in for "
-        "GPT-6's\nunpublished tokenizer.",
-        fontsize=8.5,
-        color=MUTED,
-        ha="left",
-        va="top",
-    )
+        0.012, 0.955,
+        "Dropping the spaces makes the text shorter in characters\n"
+        "and longer in tokens",
+        fontsize=13.5, color=INK, ha="left", va="top",
+    )  # fmt: skip
+    fig.text(
+        0.012, 0.015,
+        f"{results['n_glued']} chain-of-thought and agent-message excerpts from "
+        "GPT-6.1 Sol and GPT-6 Astra, published in OpenAI's misalignment report "
+        "of 2026-10-20,\nmeasured against OpenAI's own space-restored reading of "
+        "the same text. Tokens are tiktoken o200k_base, the closest public "
+        "stand-in for\nGPT-6's unpublished tokenizer. "
+        f"{t['n_excerpts_canonical_positive']} of the {results['n_glued']} excerpts "
+        "are individually longer in tokens, not only the total.",
+        fontsize=8.5, color=MUTED, ha="left", va="bottom",
+    )  # fmt: skip
     _save(fig, out_path)
-
-
-# --------------------------------------------------------------------------
-# Figure 2: the chunking sweeps
-# --------------------------------------------------------------------------
 
 
 def _sweep_words(encoding: str) -> tuple[list[str], list[str]]:

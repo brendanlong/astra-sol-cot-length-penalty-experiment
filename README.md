@@ -11,7 +11,8 @@ between words missing:
 > preventsalertsbut disabling?
 
 **→ Read the [report](https://gpt6-cot-spaces-cd652c60.surge.sh)** (or
-[WRITEUP.md](WRITEUP.md), the same thing in Markdown). [RESULTS.md](RESULTS.md) is the full run
+[WRITEUP.md](WRITEUP.md), the same thing in Markdown).
+Discussed [on LessWrong](https://www.lesswrong.com/posts/igEogGD9TAgAeAM7u/jimrandomh-s-shortform?commentId=su76ee7QNov6NqhBw). [RESULTS.md](RESULTS.md) is the full run
 log — every command, every number, the four claims two review rounds withdrew,
 and the known gaps. [EXPERIMENT_PLAN.md](EXPERIMENT_PLAN.md) has the questions
 and predictions.
@@ -26,20 +27,16 @@ and predictions.
    training objective, since GPT‑6's tokenizer and emitted tokens are both
    unobservable.
 
-   ![Diverging bar chart of three length measures for the 7 glued excerpts,
-   each against the same words with the spaces restored. Characters fall 7.6%
-   (3,361 vs 3,639), while word-at-a-time tokens rise 5.0% (652 vs 621) and
-   canonical o200k tokens rise 7.9% (667 vs 618). The unit a per-character
-   length penalty counts goes down; the unit a token counter counts goes
-   up.](cot_spacing/figures/length.png)
+   ![Bar chart titled "Dropping the spaces makes the text shorter in characters and longer in tokens". Three measures of the 7 glued excerpts against the same words with the spaces put back: characters fall 7.6% (3,361 against 3,639); tokens emitted one word at a time rise 5.0% (652 against 621); tokens re-encoded as one string rise 7.9% (667 against 618).](cot_spacing/figures/length.png)
 
-2. **The stored transcript is probably not the sequence that ran.** At each
-   point where the canonical and word-at-a-time tokenizations of the glued text
-   diverge, the word-respecting token is more likely in **3 of 3** open models
-   (median rank 36–193 against 246–417). After `...MonitorPublicationScope"`,
-   Qwen2.5 ranks the canonical ` asn` **34,498th** and ` as` **7th**.
-   Re-tokenizing inflates the transcript **+2.3%** over word-at-a-time
-   emission.
+2. **The stored transcript is probably not the sequence that ran.** Scored on
+   **gpt-oss-120b** — an OpenAI model whose tokenizer gives the same ids as the
+   o200k used above, so the same positions — the word-respecting token is the
+   likelier of the two at **15 of 21** points where the tokenizations disagree
+   at a glued boundary (median rank **2,365** canonical against **596**). Both are deep in the
+   tail, so this says which of two improbable options is less improbable, not
+   that either is likely. Four smaller models agree. Re-tokenizing inflates the
+   transcript **+2.3%** over word-at-a-time emission.
 
 3. **86% of glued words are canonically chunked exactly as if emitted alone**,
    so most of this text needs no unusual token. On a matched context sweep, a

@@ -33,19 +33,23 @@ from transformers import AutoModelForCausalLM, AutoTokenizer, PreTrainedModel
 
 from cot_spacing.data import load_excerpts, model_outputs
 from cot_spacing.reference import reference_spaced
-from cot_spacing.segment import segment
+from cot_spacing.segment import Segmentation, segment
 
 if TYPE_CHECKING:
     from transformers import PreTrainedTokenizerBase
 
-    from cot_spacing.segment import Segmentation
-
 RESULTS_DIR = Path(__file__).parent / "results"
-DEFAULT_MODELS = (
+#: gpt-oss is the headline pair: OpenAI models whose tokenizer gives
+#: token-for-token identical ids to the o200k_base used everywhere else here,
+#: so their divergences are the same positions the length analysis measures.
+#: The small models are a cross-lineage check, each in its own vocabulary.
+GPT_OSS_MODELS = ("openai/gpt-oss-20b", "openai/gpt-oss-120b")
+SMALL_MODELS = (
     "Qwen/Qwen2.5-1.5B-Instruct",
     "Qwen/Qwen3-1.7B",
     "HuggingFaceTB/SmolLM2-1.7B",
 )
+DEFAULT_MODELS = SMALL_MODELS
 
 
 class Divergence(BaseModel):
@@ -70,6 +74,19 @@ class Divergence(BaseModel):
     #: rank 1 is the model's first choice and the value reads as an ordinal.
     rank_canonical: int
     rank_wordwise: int
+    #: Whether this decision sits at a boundary the model actually glued. The
+    #: two emission models also disagree at paragraph breaks, where canonical
+    #: merges ".\n" and word-at-a-time emits "." then the newline — an
+    #: artifact of the report's formatting, not of anything the model chose.
+    at_glued_boundary: bool
+    #: The word this decision is writing into, and whether the decision sits
+    #: at its first character.
+    word: str
+    at_word_start: bool
+    #: Whether the canonical candidate runs PAST the end of that word. Only
+    #: these test the hypothesis: the rest are the two tokenizations cutting
+    #: the *same* word differently, which says nothing about word boundaries.
+    canonical_crosses_word: bool
 
 
 class EmissionScore(BaseModel):
@@ -142,7 +159,7 @@ def sequence_logprob(ids: list[int], model: PreTrainedModel, bos: int | None) ->
     one of them skip its opening token.
     """
     prefix = [] if bos is None else [bos]
-    full = torch.tensor([prefix + ids])
+    full = torch.tensor([prefix + ids], device=model.device)
     logits = model(full).logits.float()
     logprobs = torch.log_softmax(logits[0, :-1], dim=-1)
     targets = full[0, 1:]
@@ -173,6 +190,42 @@ def divergences(a: Tokenization, b: Tokenization) -> list[tuple[int, int, int]]:
 
 
 @torch.no_grad()
+def word_spans(seg: Segmentation) -> list[tuple[int, int, str]]:
+    """(start, end, word) in character offsets, for every word."""
+    out: list[tuple[int, int, str]] = []
+    pos = 0
+    for i, word in enumerate(seg.words):
+        out.append((pos, pos + len(word), word))
+        pos += len(word) + (len(seg.gaps[i]) if i < len(seg.gaps) else 0)
+    return out
+
+
+def word_at(spans: list[tuple[int, int, str]], offset: int) -> tuple[int, int, str]:
+    """The word a decision at ``offset`` is writing into.
+
+    An offset inside a word is that word; an offset sitting on the gap before
+    a word (which is where a space-prefixed token starts) is the word after
+    it, since that is the word the token begins to write.
+    """
+    for start, end, word in spans:
+        if start <= offset < end:
+            return start, end, word
+    return next((s, e, w) for s, e, w in spans if s >= offset)
+
+
+def glued_boundary_offsets(seg: Segmentation) -> set[int]:
+    """Character offsets where the model wrote no space between two words."""
+    out: set[int] = set()
+    pos = 0
+    for i, word in enumerate(seg.words):
+        pos += len(word)
+        if i < len(seg.gaps):
+            if seg.gaps[i] == "":
+                out.add(pos)
+            pos += len(seg.gaps[i])
+    return out
+
+
 def score_divergences(
     canonical: Tokenization,
     wordwise: Tokenization,
@@ -180,24 +233,37 @@ def score_divergences(
     model: PreTrainedModel,
     bos: int | None,
     meta: tuple[str, str, str],
+    glued_offsets: set[int] | None = None,
+    spans: list[tuple[int, int, str]] | None = None,
 ) -> list[Divergence]:
     points = divergences(canonical, wordwise)
     if not points:
         return []
     excerpt_id, model_name, kind = meta
     prefix0 = [] if bos is None else [bos]
-    full = torch.tensor([prefix0 + canonical.ids])
+    full = torch.tensor([prefix0 + canonical.ids], device=model.device)
     logits = model(full).logits.float()
     logprobs = torch.log_softmax(logits[0], dim=-1)
     out: list[Divergence] = []
+    cuts = [0, *canonical.ends]
     for n_prefix, tok_c, tok_w in points:
+        # The stretch this decision opens runs to the next offset both
+        # tokenizations agree on; it is about gluing only if a glued boundary
+        # falls inside it.
+        start = cuts[n_prefix]
+        shared = sorted({0, *canonical.ends} & {0, *wordwise.ends})
+        stop = next(o for o in shared if o > start)
+        at_glued = bool(glued_offsets and any(start < o < stop for o in glued_offsets))
+        w_start, w_end, word = word_at(spans or [(0, 0, "")], start)
+        canonical_text = tok.decode([tok_c])
+        crosses = start + len(canonical_text) > w_end
         # Next-token distribution after the shared prefix.
         row = logprobs[len(prefix0) + n_prefix - 1]
         order = torch.argsort(row, descending=True)
         ranks = torch.empty_like(order)
         # 1-indexed: these are reported as ordinals ("ranked 35th"), and a
         # 0-indexed rank printed that way is off by one.
-        ranks[order] = torch.arange(1, len(order) + 1)
+        ranks[order] = torch.arange(1, len(order) + 1, device=order.device)
         out.append(
             Divergence(
                 excerpt_id=excerpt_id,
@@ -213,17 +279,34 @@ def score_divergences(
                 advantage_wordwise=float(row[tok_w] - row[tok_c]),
                 rank_canonical=int(ranks[tok_c]),
                 rank_wordwise=int(ranks[tok_w]),
+                at_glued_boundary=at_glued,
+                word=word,
+                at_word_start=start == w_start,
+                canonical_crosses_word=crosses,
             )
         )
     return out
 
 
 def score_model(
-    name: str, dtype: torch.dtype = torch.float32
+    name: str, device: str = "cpu"
 ) -> tuple[list[EmissionScore], list[Divergence]]:
     tok = AutoTokenizer.from_pretrained(name)
-    model = AutoModelForCausalLM.from_pretrained(name, dtype=dtype)
+    # "auto" keeps a checkpoint's own quantization — gpt-oss ships MXFP4,
+    # which Hopper and Blackwell run natively and older cards dequantize to
+    # bf16. float32 is for the small models, which run on CPU.
+    dtype = "auto" if device == "cuda" else torch.float32
+    model = AutoModelForCausalLM.from_pretrained(
+        name, dtype=dtype, device_map=device if device == "cuda" else None
+    )
     model.eval()
+    if device == "cuda":
+        used = torch.cuda.memory_allocated() / 1e9
+        print(
+            f"  loaded on {torch.cuda.get_device_name()} "
+            f"(capability {'.'.join(map(str, torch.cuda.get_device_capability()))}), "
+            f"{used:.1f} GB of weights resident"
+        )
     bos = tok.bos_token_id if tok.bos_token_id is not None else tok.eos_token_id
 
     out: list[EmissionScore] = []
@@ -245,7 +328,16 @@ def score_model(
             lp_canon = sequence_logprob(canon.ids, model, bos)
             lp_word = sequence_logprob(wordwise.ids, model, bos)
             points.extend(
-                score_divergences(canon, wordwise, tok, model, bos, (e.id, name, kind))
+                score_divergences(
+                    canon,
+                    wordwise,
+                    tok,
+                    model,
+                    bos,
+                    (e.id, name, kind),
+                    glued_boundary_offsets(seg),
+                    word_spans(seg),
+                )
             )
             out.append(
                 EmissionScore(
@@ -271,28 +363,48 @@ def score_model(
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--models", nargs="+", default=list(DEFAULT_MODELS))
-    parser.add_argument("--out-dir", type=Path, default=RESULTS_DIR)
+    parser.add_argument(
+        "--gpt-oss",
+        action="store_true",
+        help="score the gpt-oss pair instead (needs a GPU; MXFP4 on Hopper+)",
+    )
+    parser.add_argument("--device", default="cpu", choices=("cpu", "cuda"))
+    parser.add_argument(
+        "--out", type=Path, default=RESULTS_DIR / "emission_logprob.json"
+    )
     args = parser.parse_args()
-    args.out_dir.mkdir(parents=True, exist_ok=True)
+    if args.gpt_oss:
+        args.models = list(GPT_OSS_MODELS)
+    args.out.parent.mkdir(parents=True, exist_ok=True)
 
     scores: list[EmissionScore] = []
     points: list[Divergence] = []
+
+    def dump() -> None:
+        """Write what we have, atomically, after each model.
+
+        The largest model is scored last and is the one that might not fit, so
+        a failure there must not take the smaller model's results with it.
+        """
+        tmp = args.out.with_suffix(".tmp")
+        tmp.write_text(
+            json.dumps(
+                {
+                    "sequences": [s.model_dump() for s in scores],
+                    "divergences": [p.model_dump() for p in points],
+                },
+                indent=1,
+            )
+            + "\n"
+        )
+        tmp.replace(args.out)
+
     for name in args.models:
         print(f"\n{name}")
-        model_scores, model_points = score_model(name)
+        model_scores, model_points = score_model(name, device=args.device)
         scores.extend(model_scores)
         points.extend(model_points)
-
-    (args.out_dir / "emission_logprob.json").write_text(
-        json.dumps(
-            {
-                "sequences": [s.model_dump() for s in scores],
-                "divergences": [p.model_dump() for p in points],
-            },
-            indent=1,
-        )
-        + "\n"
-    )
+        dump()
 
     print(
         "\nmean advantage of word-at-a-time emission (nats, positive = more probable):"

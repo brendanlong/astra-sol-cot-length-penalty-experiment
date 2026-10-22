@@ -16,8 +16,13 @@ echo "== figures -> cot_spacing/figures/*.png =="
 uv run python -m cot_spacing.figures
 
 echo
-echo "== emission scoring (downloads ~10 GB of open models, CPU, ~15 min) =="
+echo "== emission scoring, small models (downloads ~10 GB, CPU, ~15 min) =="
 echo "   skip with SKIP_MODELS=1"
 if [ "${SKIP_MODELS:-0}" != "1" ]; then
   uv run python -m cot_spacing.emission_logprob
 fi
+
+# The gpt-oss pair needs a GPU that runs MXFP4 natively (Hopper or Blackwell)
+# and ~70 GB of VRAM for the 120b. Not part of the default reproduction:
+#   uv run python -m cot_spacing.emission_logprob --gpt-oss --device cuda \
+#       --out results/emission_logprob_gpt_oss.json

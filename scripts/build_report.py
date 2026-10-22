@@ -13,6 +13,9 @@ from __future__ import annotations
 
 import argparse
 import json
+import math
+import re
+import statistics
 import subprocess
 from pathlib import Path
 from typing import Any
@@ -22,6 +25,10 @@ import tiktoken
 #: Published to one Surge site of its own; every update goes to this domain so
 #: links and reader-saved copies stay valid.
 PUBLISHED_AT = "https://gpt6-cot-spaces-cd652c60.surge.sh"
+#: The repo this is built from, and the thread it is discussed in. Every page
+#: links both ways so a reader landing on either can find the other.
+REPO_URL = "https://github.com/brendanlong/astra-sol-cot-length-penalty-experiment"
+DISCUSSION_URL = "https://www.lesswrong.com/posts/igEogGD9TAgAeAM7u/jimrandomh-s-shortform?commentId=su76ee7QNov6NqhBw"
 #: Lion Reader article id for the saved copy, refreshed on every republish.
 SAVED_ARTICLE_ID = "01a16091-299a-7db8-b77a-216504c89963"
 
@@ -41,6 +48,15 @@ SURFACE = "#fcfcfb"
 TEMPLATE = (
     Path.home() / "personal-agent-skills/plugins/personal-agent-skills/skills/html-doc"
 )
+
+
+def ordinal(n: int) -> str:
+    """1 -> 1st, 42 -> 42nd, 3602 -> 3,602nd."""
+    if 11 <= n % 100 <= 13:
+        suffix = "th"
+    else:
+        suffix = {1: "st", 2: "nd", 3: "rd"}.get(n % 10, "th")
+    return f"{n:,}{suffix}"
 
 
 def esc(text: str) -> str:
@@ -156,51 +172,23 @@ def figure_tokens(enc: tiktoken.Encoding) -> tuple[str, dict[str, int]]:
 # Figure 2: what gluing saves and costs
 # --------------------------------------------------------------------------
 
+FIGURES = REPO / "cot_spacing" / "figures"
 
-def figure_length(totals: dict[str, Any]) -> str:
-    rows = [
-        ("characters", totals["pct_chars_vs_spaced"]),
-        ("tokens, word-at-a-time", totals["pct_wordwise_glued_vs_wordwise_spaced"]),
-        ("tokens, canonical", totals["pct_canonical_glued_vs_spaced"]),
-    ]
-    w, left, zero, scale = 640, 190.0, 390.0, 14.0  # px per percent
-    parts = [
-        f'<svg viewBox="0 0 {w} 180" width="100%" role="img" '
-        f'aria-label="Bar chart. Against the same words with spaces restored, '
-        f"the glued text is {abs(rows[0][1]):.1f}% shorter in characters but "
-        f"{rows[1][1]:.1f}% longer in word-at-a-time tokens and "
-        f'{rows[2][1]:.1f}% longer in canonical tokens.">'
-    ]
-    for tick in (-10, -5, 0, 5, 10):
-        x = zero + tick * scale
-        parts.append(
-            f'<line x1="{x:.1f}" y1="24" x2="{x:.1f}" y2="130" '
-            f'stroke="{AXIS if tick == 0 else GRID}" stroke-width="1"/>'
-            f'<text x="{x:.1f}" y="148" text-anchor="middle" font-size="11" '
-            f'fill="{MUTED}">{tick:+d}%</text>'.replace("+0%", "0")
-        )
-    y = 36
-    for name, pct in rows:
-        x = zero + min(pct, 0) * scale
-        parts.append(
-            f'<rect x="{x:.1f}" y="{y}" width="{abs(pct) * scale:.1f}" '
-            f'height="22" fill="{DOWN if pct < 0 else UP}"/>'
-            f'<text x="{left - 14}" y="{y + 16}" text-anchor="end" '
-            f'font-size="14" fill="{INK}">{esc(name)}</text>'
-        )
-        label_x = zero + pct * scale + (-8 if pct < 0 else 8)
-        parts.append(
-            f'<text x="{label_x:.1f}" y="{y + 16}" '
-            f'text-anchor="{"end" if pct < 0 else "start"}" font-size="14" '
-            f'font-weight="700" fill="{INK}">{pct:+.1f}%</text>'.replace("-", "−")
-        )
-        y += 34
-    parts.append(
-        f'<text x="{zero}" y="170" text-anchor="middle" font-size="12" '
-        f'fill="{MUTED}">glued text vs the same words with spaces restored</text>'
+
+def inline_svg(name: str, alt: str) -> str:
+    """Inline a figure matplotlib already wrote, rather than redrawing it.
+
+    One implementation of each chart, in ``cot_spacing/figures.py``, so the
+    page and the repo cannot disagree. The width/height attributes are dropped
+    so the viewBox scales the figure to the column.
+    """
+    svg = (FIGURES / f"{name}.svg").read_text()
+    svg = svg[svg.index("<svg") :]
+    svg = re.sub(r'\s(width|height)="[^"]*"', "", svg, count=2)
+    svg = svg.replace(
+        "<svg", f'<svg width="100%" role="img" aria-label="{esc(alt)}"', 1
     )
-    parts.append("</svg>")
-    return "".join(parts)
+    return svg
 
 
 # --------------------------------------------------------------------------
@@ -349,10 +337,36 @@ def figure_chunking(chunking: dict[str, Any]) -> str:
 
 
 def figure(caption_html: str, svg: str, number: int, title: str) -> str:
-    return (
-        f"<figure><figcaption><b>Figure {number}.</b> {title}</figcaption>"
-        f"{svg}{caption_html}</figure>"
+    """A numbered figure. An empty ``title`` means it captions itself."""
+    label = f"<b>Figure {number}.</b>{' ' + title if title else ''}"
+    return f"<figure><figcaption>{label}</figcaption>{svg}{caption_html}</figure>"
+
+
+def decision_table(points: list[dict[str, Any]]) -> str:
+    """Every decision the lead model made, the boundary-crossing ones first."""
+    rows = sorted(
+        points, key=lambda d: (-d["canonical_crosses_word"], -d["advantage_wordwise"])
     )
+    out = [
+        "<table><tr><th>writing</th><th>after</th><th>canonical</th><th>rank</th>"
+        "<th>word's own</th><th>rank</th><th>×more likely</th></tr>"
+    ]
+    for d in rows:
+        ratio = math.exp(d["advantage_wordwise"])
+        shown = f"{ratio:.0f}×" if ratio >= 1 else f"1/{1 / ratio:.0f}×"
+        word = esc(d["word"])
+        if d["canonical_crosses_word"]:
+            word = f"<b>{word}</b>"
+        out.append(
+            f"<tr><td>{word}</td>"
+            f"<td><code>…{esc(d['prefix_tail'])}</code></td>"
+            f"<td><code>{esc(d['canonical_token'])}</code></td>"
+            f"<td>{d['rank_canonical']:,}</td>"
+            f"<td><code>{esc(d['wordwise_token'])}</code></td>"
+            f"<td>{d['rank_wordwise']:,}</td><td>{shown}</td></tr>"
+        )
+    out.append("</table>")
+    return "".join(out)
 
 
 def build(out_path: Path) -> None:
@@ -368,16 +382,29 @@ def build(out_path: Path) -> None:
     sens = analysis["segmentation_sensitivity"]
     n_glued = analysis["n_glued"]
 
-    models = [
+    #: gpt-oss leads: it is an OpenAI model whose tokenizer gives the same ids
+    #: as the o200k the length analysis uses, so its divergences are the same
+    #: positions. The others are a cross-lineage check in their own
+    #: vocabularies, and are reported but not in the main flow.
+    order = [
+        "openai/gpt-oss-120b",
+        "openai/gpt-oss-20b",
         "Qwen/Qwen2.5-1.5B-Instruct",
         "Qwen/Qwen3-1.7B",
         "HuggingFaceTB/SmolLM2-1.7B",
     ]
+    present = {s["model"] for s in emission["sequences"]}
+    models = [m for m in order if m in present]
+    headline = [m for m in models if m.startswith("openai/")] or models[:1]
+    # Only decisions that sit at a boundary the model actually glued. The two
+    # emission models also disagree at the report's paragraph breaks, where
+    # canonical merges ".\n"; that is the report's formatting, not a choice
+    # the model made, and it accounted for 12 of 126 before this filter.
     div = {
         m: [
             d
             for d in emission["divergences"]
-            if d["model"] == m and d["text_kind"] == "glued"
+            if d["model"] == m and d["text_kind"] == "glued" and d["at_glued_boundary"]
         ]
         for m in models
     }
@@ -391,16 +418,16 @@ def build(out_path: Path) -> None:
     }
 
     def median(xs: list[int]) -> int:
-        s = sorted(xs)
-        return s[len(s) // 2]
+        return round(statistics.median(xs))
 
     tok_svg, _ = figure_tokens(enc)
     from transformers import AutoTokenizer
 
+    others = [m for m in models if m not in headline]
     vocab_sizes = ", ".join(
-        f"{len(AutoTokenizer.from_pretrained(m)):,}" for m in models
+        f"{len(AutoTokenizer.from_pretrained(m)):,}" for m in others
     )
-    standout = max(div[models[0]], key=lambda d: d["rank_canonical"])
+    standout = max(div[headline[0]], key=lambda d: d["advantage_wordwise"])
 
     body: list[str] = []
     add = body.append
@@ -419,6 +446,10 @@ since policy triggeruserno messages requiresnotproactive tool.</p></blockquote>
 <p><a href="https://www.lesswrong.com/posts/igEogGD9TAgAeAM7u/jimrandomh-s-shortform?commentId=5yQXwLtLgJqWwg5nf">jimrandomh
 noticed this</a> and read it as a possible side channel. This measures what the
 gluing does to the length of the text, and what it would take to produce.</p>
+
+<p class="note">Code, data and the full run log:
+<a href="{REPO_URL}">github.com/brendanlong/astra-sol-cot-length-penalty-experiment</a>
+· discussion: <a href="{DISCUSSION_URL}">LessWrong</a></p>
 
 <p><b>Over the {n_glued} glued excerpts, gluing makes the text
 {abs(t["pct_chars_vs_spaced"]):.1f}% shorter in characters and
@@ -472,10 +503,18 @@ digit labels — it renders <code>severity4?</code> as two words while leaving
 {sens["digit_labels_merged"]["pct_chars_vs_spaced"]:+.1f}% /
 {sens["digit_labels_merged"]["pct_canonical_glued_vs_spaced"]:+.1f}%.</p>
 </details>""",
-            figure_length(t),
+            inline_svg(
+                "length",
+                "Bar chart. Against the same words with the spaces restored, "
+                f"the glued text is {abs(t['pct_chars_vs_spaced']):.1f}% shorter "
+                f"in characters (3,361 against 3,639) but "
+                f"{t['pct_wordwise_glued_vs_wordwise_spaced']:.1f}% longer in "
+                "tokens emitted one word at a time (652 against 621) and "
+                f"{t['pct_canonical_glued_vs_spaced']:.1f}% longer in tokens when "
+                "re-encoded as one string (667 against 618).",
+            ),
             2,
-            f"{n_glued} glued excerpts, against OpenAI's own space-restored "
-            "reading of the same text.",
+            "",
         )
     )
     add("""
@@ -486,69 +525,157 @@ pushing the same way.</p>
 """)
 
     add("<h2>The stored transcript is probably not what ran</h2>")
-    q = div[models[0]]
+    lead = headline[0]
+    q = div[lead]
+    n_canon_deep = sum(d["rank_canonical"] > 100 for d in q)
+    n_word_shallow = sum(d["rank_wordwise"] <= 100 for d in q)
+    crossing = [d for d in q if d["canonical_crosses_word"]]
+    inside = [d for d in q if not d["canonical_crosses_word"]]
+    w_cross = f"{sum(d['advantage_wordwise'] > 0 for d in crossing)}/{len(crossing)}"
+    w_inside = f"{sum(d['advantage_wordwise'] > 0 for d in inside)}/{len(inside)}"
+    pooled = [
+        d
+        for d in emission["divergences"]
+        if d["text_kind"] == "glued"
+        and d["at_glued_boundary"]
+        and d["canonical_crosses_word"]
+    ]
+    w_pooled = f"{sum(d['advantage_wordwise'] > 0 for d in pooled)}/{len(pooled)}"
     add(f"""
 <p>If the models emit glued text one word at a time, the transcript OpenAI
 stores re-encodes to a different, {t["pct_retokenization_inflation"]:.1f}% longer
 sequence than the one that ran. Both versions decode to identical characters,
-so open models can be asked which they would emit.</p>
+so a model can be asked which of the two it would emit.</p>
 
-<p>Each model is asked in <i>its own</i> vocabulary, since the question is what
-that model would emit — so this is three different BPE tokenizers
-({vocab_sizes}), none of them o200k, and the glued text splits differently in
-each. Figure 3 puts the two candidates on the same axis for one of them.</p>
+<p>{lead.split("/")[-1]} is the one to ask: it is an OpenAI model, and its
+tokenizer gives token-for-token identical ids to the o200k used everywhere
+above, so the points where the two tokenizations disagree are the same
+positions the rest of this analysis measures.</p>
+
+<p><b>Which positions.</b> The two tokenizations cut the same characters in
+different places. Line up their cut points: wherever both put a boundary, the
+two paths are in the same state, and between two such shared boundaries they
+either chose the same tokens or they did not. Where they did not, the first
+token of that stretch is the decision — at that moment both paths have emitted
+an <i>identical</i> prefix and are choosing differently about what comes next.
+Those are the positions, and there is nothing to choose: they fall out of where
+the tokenizations disagree. One forward pass over the excerpt gives the
+model's full next-token distribution after that shared prefix, and the two
+candidates' ranks are read off it.</p>
+
+<details><summary>Worked example</summary>
+<p>For <code>notsendmessages</code>, with the preceding text as context:</p>
+<table>
+<tr><td>canonical</td><td><code>n</code> <code>ots</code> <code>end</code> <code>messages</code></td><td>cuts after character 1, 4, 7, 15</td></tr>
+<tr><td>word-at-a-time</td><td><code>not</code> <code>send</code> <code>messages</code></td><td>cuts after character 3, 7, 15</td></tr>
+</table>
+<p>They share the cuts at 7 and 15 (and the start). Between 0 and 7 they
+disagree, so the first tokens of that stretch are the two candidates:
+<code>n</code> against <code>not</code>. Between 7 and 15 both emit
+<code>messages</code>, so there is no decision there. That excerpt contributes
+one divergence, not two — which is why there are
+{len(q)} of them across the {n_glued} glued excerpts rather than one per
+straddling chunk.</p>
+</details>
 """)
     add(
         figure(
-            f"""<details><summary>All three models, and the whole-sequence
+            f"""<details><summary>Every model scored, and the whole-sequence
 measurement that disagrees</summary>
 <table>
-<tr><th>model</th><th>divergences</th><th>word-at-a-time more likely</th><th>median rank</th></tr>
+<tr><th>model</th><th>divergences</th><th>word-at-a-time more likely</th><th>median rank: canonical vs word-at-a-time</th><th>whole excerpt (nats)</th></tr>
 {
                 "".join(
                     f"<tr><td>{m.split('/')[-1]}</td><td>{len(div[m])}</td>"
                     f"<td>{sum(d['advantage_wordwise'] > 0 for d in div[m])}"
                     f"/{len(div[m])}</td>"
-                    f"<td>{median([d['rank_canonical'] for d in div[m]])} vs "
-                    f"<b>{median([d['rank_wordwise'] for d in div[m]])}</b></td></tr>"
+                    f"<td>{median([d['rank_canonical'] for d in div[m]]):,} vs "
+                    f"<b>{median([d['rank_wordwise'] for d in div[m]]):,}</b></td>"
+                    f"<td>{sum(x['advantage_wordwise'] for x in seq[m]):+.1f}</td></tr>"
                     for m in models
                 )
             }
 </table>
-<p>Ranks are 1-indexed, so rank 1 is the model's first choice. The divergence
-counts differ between models because their vocabularies do: where a tokenizer
-already splits the glued string at the word boundaries, there is nothing to
-diverge about.</p>
-<p>Summed over a whole excerpt instead of at the point of choice, the canonical
-path comes out <i>better</i> under both Qwen models
-({sum(s["advantage_wordwise"] for s in seq[models[0]]):+.1f} and
-{sum(s["advantage_wordwise"] for s in seq[models[1]]):+.1f} nats for
-word-at-a-time) and worse under SmolLM2
-({sum(s["advantage_wordwise"] for s in seq[models[2]]):+.1f}). The one-step
-measurement is the one that corresponds to sampling, since a decoder makes the
-local choice; the whole-sequence numbers do not support the conclusion and this
-data cannot separate the two readings.</p>
-<p>On the spaced version of the same text the question barely arises: SmolLM2
-tokenizes it identically either way, and the Qwen models differ at 3 positions
-across all {n_glued} excerpts.</p>
+<p>Counted here are only the decisions that fall at a boundary the model
+actually glued. The two emission models also disagree at the report's
+paragraph breaks, where canonical merges <code>.\n</code> into one token and
+word-at-a-time does not; that is the report's formatting rather than anything
+the model chose, and it accounted for 12 of 126 such decisions before this
+filter.</p>
+<p>Ranks are 1-indexed, so rank 1 is the model's first choice. The small
+models are a cross-lineage check and each works in its own vocabulary
+({vocab_sizes} tokens, none of them o200k), so their divergences are at
+different positions than the gpt-oss ones and are not directly comparable.
+Where a tokenizer already splits the glued string at its word boundaries there
+is nothing to diverge about, which is why the counts differ.</p>
+<p>The last column is the whole-excerpt total, and it does not agree with the
+one-step measurement: summed over a whole excerpt the canonical path comes out
+better for gpt-oss-120b and both Qwen models, and worse for gpt-oss-20b and
+SmolLM2. The one-step number is the one that corresponds to sampling, since a
+decoder makes the local choice; the whole-sequence numbers do not support the
+conclusion, and this data cannot separate the two readings.</p>
+<p>On the spaced version of the same text the question barely arises: every
+model tokenizes it the same way either way at all but 3 positions across all
+{n_glued} excerpts.</p>
 </details>""",
-            figure_ranks(emission["divergences"], models[0]),
+            figure_ranks(emission["divergences"], lead),
             3,
-            f"Qwen2.5-1.5B, the {len(q)} positions in the glued text where the "
-            "two tokenizations disagree.",
+            f"{lead.split('/')[-1]}, the {len(q)} positions in the glued text "
+            "where the two tokenizations disagree.",
         )
     )
     add(f"""
-<p>The starkest is after <code>{esc(standout["prefix_tail"])}</code>: the
-canonical next token <code>{esc(standout["canonical_token"])}</code> is the
-model's {standout["rank_canonical"]:,}th choice, and the word-respecting
+<p>At {sum(d["advantage_wordwise"] > 0 for d in q)} of the {len(q)} positions
+the word-respecting token is the likelier of the two, median rank
+{median([d["rank_canonical"] for d in q]):,} for the canonical token against
+{median([d["rank_wordwise"] for d in q]):,} for the word-respecting one. The
+starkest is after <code>{esc(standout["prefix_tail"])}</code>, where the
+canonical <code>{esc(standout["canonical_token"])}</code> is the model's
+{ordinal(standout["rank_canonical"])} choice and
 <code>{esc(standout["wordwise_token"])}</code> its
-{standout["rank_wordwise"]}th. Producing the glued text canonically would mean
-picking a token ranked below 100th at about two thirds of these positions.</p>
+{ordinal(standout["rank_wordwise"])}.</p>
 
-<p>These are 1.5-1.7B open models, not GPT&#8209;6, and none was trained to
-glue words. They show the straddling tokens are deep in the tail for BPE
-language models generally, not what a model that learned to glue would do.</p>
+<p><b>Only some of these are about word boundaries at all.</b> At
+{len(inside)} of the {len(q)} the canonical chunk stays <i>inside</i> one word
+— the two tokenizations merely cut the same word in different places, as with
+<code>undermine</code> taken as <code>erm</code> or <code>ermine</code>. That
+is a fact about BPE, not about gluing, and there the result is {w_inside},
+near chance.</p>
+
+<p>The hypothesis is only tested where the canonical chunk runs <b>past the
+end of the word</b>, committing to the next word before this one is finished.
+That happens at {len(crossing)} of the {len(q)} positions, and the word's own
+token is likelier at <b>{w_cross}</b> of them. Pooled over all five models it
+is <b>{w_pooled}</b>, though that is {len(pooled)} model-position pairs over
+only 12 distinct positions, since models sharing a tokenizer see the same
+ones.</p>
+
+<details><summary>Every decision, and which token it preferred</summary>
+{decision_table(q)}
+<p>Bold words are the boundary-crossing cases, listed first. Read the first
+row as: while writing <b>is</b>, after <code>…assinstruction? This</code>, the
+word's own token <code>is</code> is 213 times likelier than <code>isa</code> —
+the chunk that runs on into the following word. The rest stay inside one word:
+<code>monitor</code> against <code>mon</code> is both tokenizations cutting
+<i>monitors</i> differently, with neither crossing anything.</p>
+<p>The "word's own" column is whatever
+<code>encode(word)</code> gives for that word alone, which is not always one
+token — <code>monitors</code> is <code>mon</code>+<code>itors</code>, while
+<code>Dummy</code> really is a single token.</p>
+</details>
+
+<p><b>Both candidates are deep in the tail.</b> The canonical token is ranked
+below 100th at {n_canon_deep} of {len(q)} of these positions, but so is the
+word-respecting one at {len(q) - n_word_shallow}. This model finds the glued
+text unlikely however it is cut up — what the measurement shows is which of
+two improbable options is the less improbable, not that either is something
+the model would readily produce.</p>
+
+<p>gpt-oss was not trained to glue words, so this says the straddling tokens
+sit in the tail for a BPE model of this kind and scale. It does not say what a
+model that learned to glue would do, since reinforcement learning on a
+text-scored reward cannot distinguish the two tokenizations and the pretrained
+prior is what breaks the tie.</p>
 """)
 
     add("<h2>What cuts the other way</h2>")
@@ -683,19 +810,22 @@ in the run log with what replaced it.</p>
 """)
 
     add("<h2>Reproducing</h2>")
-    add("""
+    add(f"""
 <p>Everything runs from the committed corpus — the report as saved, plus the
 extracted dataset. No GPU, no accounts.</p>
 <pre><code>git clone https://github.com/brendanlong/astra-sol-cot-length-penalty-experiment
 cd astra-sol-cot-length-penalty-experiment
 uv sync
 SKIP_MODELS=1 bash scripts/reproduce.sh   # every number and figure
-bash scripts/reproduce.sh      # plus the open-model scoring (~15 min, CPU)</code></pre>
-<p>The full run log, with every command and the numbers this page draws from,
-is in
-<a href="https://github.com/brendanlong/astra-sol-cot-length-penalty-experiment/blob/main/RESULTS.md">RESULTS.md</a>;
-the predictions registered beforehand are in
-<a href="https://github.com/brendanlong/astra-sol-cot-length-penalty-experiment/blob/main/EXPERIMENT_PLAN.md">EXPERIMENT_PLAN.md</a>.
+bash scripts/reproduce.sh      # plus the small-model scoring (~15 min, CPU)</code></pre>
+<p>The repo is
+<a href="{REPO_URL}">brendanlong/astra-sol-cot-length-penalty-experiment</a>.
+The full run log, with every command and the numbers this page draws from, is
+in <a href="{REPO_URL}/blob/main/RESULTS.md">RESULTS.md</a>; the predictions
+registered beforehand are in
+<a href="{REPO_URL}/blob/main/EXPERIMENT_PLAN.md">EXPERIMENT_PLAN.md</a>.
+This is discussed on
+<a href="{DISCUSSION_URL}">LessWrong</a>.
 Related earlier work on re-tokenization is in
 <a href="https://github.com/brendanlong/tokenization-hidden-computation-experiment">tokenization-hidden-computation-experiment</a>.</p>
 """)

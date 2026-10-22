@@ -296,13 +296,20 @@ produced zero non-canonical copies.
 **Command**
 
 ```bash
+# the three small models, CPU
 uv run python -m experiments.cot_spacing.emission_logprob
 # = --models Qwen/Qwen2.5-1.5B-Instruct Qwen/Qwen3-1.7B HuggingFaceTB/SmolLM2-1.7B
+
+# the gpt-oss pair, GPU (MXFP4 is native on Hopper and Blackwell)
+uv run python -m experiments.cot_spacing.emission_logprob --gpt-oss \
+    --device cuda --out results/emission_logprob_gpt_oss.json
 ```
 
-CPU, float32, ~15 min. Three models over two tokenizer lineages (Qwen2.5 and
-Qwen3 share a tokenizer; SmolLM2 has its own). Each model is scored in **its
-own** vocabulary — 151,665, 151,669 and 49,152 tokens, none of them the o200k
+The three small models run on CPU in float32, ~15 min (Qwen2.5 and Qwen3 share
+a tokenizer; SmolLM2 has its own). The gpt-oss pair was added afterwards on a
+rented RTX PRO 6000 Blackwell 96 GB, where MXFP4 is native — 13.8 GB and
+65.4 GB of weights resident — for about 17 minutes of pod time. Each model is
+scored in **its own** vocabulary — 151,665, 151,669 and 49,152 tokens, none of them the o200k
 used everywhere else here — because the question is which sequence that model
 would emit. So the divergence positions are not the o200k straddles of run 1,
 and the counts differ between models: where a tokenizer already splits the
@@ -317,56 +324,122 @@ they are scored two ways: total sequence log-probability, and the one-step
 choice at each point where they diverge (same prefix, two candidate next
 tokens).
 
-### One-step: the word-respecting token wins, in every model
+### One-step: the word-respecting token is the likelier of the two
 
-| model | divergences | mean advantage of word-at-a-time (nats) | word-at-a-time more likely | median rank, canonical vs word-at-a-time |
+Each model is scored in its own vocabulary. gpt-oss is the one to read: its
+tokenizer gives token-for-token identical ids to the `o200k_base` used in run
+1, so its divergences are the same positions run 1 measures. The others are a
+cross-lineage check whose divergences sit elsewhere and are not directly
+comparable.
+
+**Only decisions at a glued boundary count.** The two emission models also
+disagree at the report's paragraph breaks, where canonical merges `.\n` into
+one token and word-at-a-time does not. That is the report's formatting, not a
+choice the model made, and it accounted for **12 of 126** decisions before the
+filter — so an earlier version of this table read 17/24 for gpt-oss-120b where
+the corrected figure is 15/21.
+
+**Which positions.** The two tokenizations partition the same characters
+differently. At every offset where both put a cut the two paths are in the same
+state; between two shared cuts they either chose the same tokens or they did
+not, and where they did not the first token of that stretch is the decision,
+taken after an identical prefix. Nothing is selected by hand. For
+`notsendmessages`: canonical cuts after 1, 4, 7, 15 (`n`/`ots`/`end`/
+`messages`), word-at-a-time after 3, 7, 15 (`not`/`send`/`messages`); they
+share the cut at 7, so that excerpt contributes one divergence (`n` against
+`not`), not two.
+
+| model | divergences | word-at-a-time more likely | median rank (1-indexed) | whole excerpt (nats) |
 | --- | --- | --- | --- | --- |
-| Qwen2.5-1.5B-Instruct | 29 | **+1.66** | 20/29 | 246 vs **36** |
-| Qwen3-1.7B | 29 | **+1.57** | 21/29 | 284 vs **45** |
-| SmolLM2-1.7B | 20 | **+1.36** | 14/20 | 417 vs **193** |
+| gpt-oss-120b | 21 | 15/21 | 2,365 vs **596** | -10.5 |
+| gpt-oss-20b | 21 | 14/21 | 848 vs **172** | +21.2 |
+| Qwen2.5-1.5B-Instruct | 26 | 17/26 | 209 vs **30** | -38.3 |
+| Qwen3-1.7B | 26 | 18/26 | 302 vs **110** | -8.4 |
+| SmolLM2-1.7B | 20 | 14/20 | 417 vs **193** | +29.3 |
 
-Ranks are 1-indexed: rank 1 is the model's first choice. (An earlier version
-of this table reported 0-indexed ranks as ordinals, so every number was one too
+Ranks are 1-indexed: rank 1 is the model's first choice. (An earlier version of
+this table reported 0-indexed ranks as ordinals, so every number was one too
 small; `emission_logprob.py` now produces 1-indexed ranks directly.)
 
-Individual cases are much starker than the means. Qwen2.5, after
-`...MonitorPublicationScope"`, ranks the canonical next token ` asn`
-**34,498th** while the word-respecting ` as` is **7th**; after
-`ownmonitor userask` the canonical `edy` is 2,693rd and `ed` is the **argmax**;
-after `send. Userexplicit` the canonical `nom` is 8,259th and `no` is 4th.
+On gpt-oss-120b the starkest case is after `assinstruction? This`, where the
+canonical `isa` is the model's 3,602nd choice and `is` is its 42nd.
 
-Nine of 29 go the other way for Qwen2.5, and the counter-examples are
-systematic: where the left word ends in a prefix that itself starts a common
-word, the merge is natural (`usesdefault` → `D` at rank 557 against `Dummy` at
-12,557; `dataSlacknot` → `monitor` at 104 against `mon` at 2,237).
+Median ranks are 2,365 canonical against 596 word-respecting.
+
+**Both candidates are deep in the tail.** For gpt-oss-120b the canonical token
+is ranked below 100th at 18 of 21 of these positions, and the
+word-respecting one at 14 of 21. The model finds the glued text unlikely however it is cut up;
+the measurement says which of two improbable options is the less improbable,
+not that either is one it would readily produce. The small models put the
+word-respecting token higher (median 36–193), but in vocabularies where the
+divergence positions are different.
+
+**Only the boundary-crossing decisions test the hypothesis.** A glued-boundary
+decision is one of two things. Either the canonical chunk runs *past the end of
+the word*, committing to the next word before this one is finished — which is
+the claim — or both candidates stay inside one word and merely cut it in
+different places, which is a fact about BPE and says nothing about gluing.
+`undermine` as `erm` against `ermine`, or `monitors` as `monitor` against
+`mon`, are the second kind: neither crosses anything.
+
+| model | canonical chunk runs past the word | both stay inside one word |
+| --- | --- | --- |
+| gpt-oss-120b | **5/5** | 10/16 |
+| gpt-oss-20b | **5/5** | 9/16 |
+| Qwen2.5-1.5B-Instruct | **7/7** | 10/19 |
+| Qwen3-1.7B | **6/7** | 12/19 |
+| SmolLM2-1.7B | **5/5** | 9/15 |
+
+Where the chunk crosses, the word's own tokenization is likelier almost
+without exception; where it does not, the result is near chance. **28 of 29**
+model-position pairs cross-wise, but that is only **12 distinct positions**,
+since models sharing a tokenizer see the same ones, and no model has more than
+7. An earlier version of this section reported 15/21 for gpt-oss-120b, pooling
+both kinds.
+
+The "word's own tokenization" is `encode(word)` for the word alone, whatever
+that gives: `monitors` is `mon`+`itors`, `Dummy` is a single token. It is not
+a whole-word token selected by hand.
+
+**How few decision points there are.** This is the whole evidence base for
+run 2: 21 decisions for gpt-oss-120b, covering 23 of the 278 glued boundaries
+in the corpus, because a diverged stretch spanning two glued boundaries is
+scored once. The alternative construction — at every glued boundary, with the
+word-at-a-time prefix, compare the bare next word against what a fresh
+tokenization from that point would emit — is better posed (one decision per
+boundary, no paragraph-break artifacts by construction) but yields *fewer*
+comparisons, not more: the two candidates differ at only **13** of the 278
+boundaries, and at only **4** does the from-here token run past the end of the
+next word (`don`, `nom`, `isa`, `paths`). Under either construction the effect
+has very few observable decision points in this corpus.
 
 **Control.** On the spaced version of the same excerpts the two tokenizations
-are nearly identical (SmolLM2: identical, 0 divergences; Qwen: 3 divergences
-across all 7 excerpts). Word-at-a-time emission of normal English *is* canonical
-emission, which is why the question only arises for glued text.
+are nearly identical — all but 3 positions across all 7 excerpts, for every
+model. Word-at-a-time emission of normal English *is* canonical emission, which
+is why the question only arises for glued text.
 
-### Whole sequence: mixed
+### Whole sequence: disagrees for three of the five
 
-| model | total advantage of word-at-a-time, 7 glued excerpts | the divergence choices | residual |
-| --- | --- | --- | --- |
-| Qwen2.5-1.5B-Instruct | **−38.3** | +48.2 | −86.4 |
-| Qwen3-1.7B | **−8.4** | +45.6 | −53.9 |
-| SmolLM2-1.7B | **+29.3** | +27.3 | +2.1 |
-
-Summed over a whole excerpt the canonical path is better under both Qwen models
-and worse under SmolLM2. The residual is a subtraction, not an attribution: it
-covers the later tokens inside a diverged stretch plus every token that is
-identical in both paths but conditioned on a differently segmented prefix.
+The last column of the table above is the whole-excerpt total. Summed over an
+excerpt rather than taken at the point of choice, the canonical path comes out
+*better* for gpt-oss-120b and both Qwen models, and worse for gpt-oss-20b and
+SmolLM2. That total is a subtraction, not an attribution: it covers the later
+tokens inside a diverged stretch plus every token identical in both paths but
+conditioned on a differently segmented prefix.
 
 *Interpretation, separate:* the one-step measurement is the one that
-corresponds to sampling — a decoder makes the local choice, and a
-34,498th-ranked token is not sampled because its sequence recovers later. On
-that measurement, emitting the glued text canonically would require repeatedly
-picking tokens the model ranks in the hundreds or thousands, so the
-re-tokenized transcript is probably not the sequence that ran. But the
-whole-sequence numbers do not support that and are reported unchanged; the two
-can be reconciled by the sampling argument or by the canonical path genuinely
-conditioning better downstream, and this data does not separate them.
+corresponds to sampling — a decoder makes the local choice, and a token ranked
+in the thousands is not sampled because its sequence recovers later. On that
+measurement the re-tokenized transcript is probably not the sequence that ran.
+The whole-sequence numbers do not support that, and this data cannot separate
+the two readings.
+
+**Caveat.** gpt-oss-120b is a mixture-of-experts model of about 120B total
+parameters, not GPT-6, and none of these models was trained to glue words.
+They establish that the straddling tokens sit in the tail for BPE models of
+this kind; they cannot establish what a model that learned to glue would do,
+since RL on a text-scored reward does not distinguish the two tokenizations
+and the pretrained prior breaks the tie.
 
 **The live threat to this hypothesis.** This repo's prior work
 ([tokenization-hidden-computation-experiment][retok]) measured wild
@@ -393,7 +466,8 @@ tokenizations and the pretrained prior is what breaks the tie.
 
 | prediction | outcome |
 | --- | --- |
-| word-at-a-time is the more probable emission | **confirmed at the point of choice** in 3/3 models (median rank 36–193 vs 246–417); **not confirmed** as whole-sequence log-probability (2/3 models favour canonical) |
+| word-at-a-time is the more probable emission | **confirmed at the point of choice** in 5/5 models — 15/21 glued-boundary divergences for gpt-oss-120b; **not confirmed** as whole-sequence log-probability (3/5 favour canonical) |
+| (unregistered) either candidate is a plausible emission | **no** — on gpt-oss-120b both sit below rank 100 at most divergences |
 
 ## Known gaps (both runs)
 

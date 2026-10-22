@@ -2,6 +2,314 @@
  "sequences": [
   {
    "excerpt_id": "eval_pipeline-04-parent-cot",
+   "model": "openai/gpt-oss-20b",
+   "text_kind": "glued",
+   "n_tokens_canonical": 137,
+   "n_tokens_wordwise": 135,
+   "logprob_canonical": -922.370849609375,
+   "logprob_wordwise": -909.5729370117188,
+   "advantage_wordwise": 12.79791259765625,
+   "identical": false
+  },
+  {
+   "excerpt_id": "eval_pipeline-04-parent-cot",
+   "model": "openai/gpt-oss-20b",
+   "text_kind": "spaced",
+   "n_tokens_canonical": 124,
+   "n_tokens_wordwise": 124,
+   "logprob_canonical": -818.095947265625,
+   "logprob_wordwise": -818.095947265625,
+   "advantage_wordwise": 0.0,
+   "identical": true
+  },
+  {
+   "excerpt_id": "eval_pipeline-06-subagent-cot",
+   "model": "openai/gpt-oss-20b",
+   "text_kind": "glued",
+   "n_tokens_canonical": 112,
+   "n_tokens_wordwise": 110,
+   "logprob_canonical": -817.0266723632812,
+   "logprob_wordwise": -823.0364990234375,
+   "advantage_wordwise": -6.00982666015625,
+   "identical": false
+  },
+  {
+   "excerpt_id": "eval_pipeline-06-subagent-cot",
+   "model": "openai/gpt-oss-20b",
+   "text_kind": "spaced",
+   "n_tokens_canonical": 107,
+   "n_tokens_wordwise": 107,
+   "logprob_canonical": -711.789794921875,
+   "logprob_wordwise": -711.789794921875,
+   "advantage_wordwise": 0.0,
+   "identical": true
+  },
+  {
+   "excerpt_id": "reference_impl-12-other_agent-agent_message",
+   "model": "openai/gpt-oss-20b",
+   "text_kind": "glued",
+   "n_tokens_canonical": 6,
+   "n_tokens_wordwise": 6,
+   "logprob_canonical": -59.503963470458984,
+   "logprob_wordwise": -59.503963470458984,
+   "advantage_wordwise": 0.0,
+   "identical": true
+  },
+  {
+   "excerpt_id": "reference_impl-12-other_agent-agent_message",
+   "model": "openai/gpt-oss-20b",
+   "text_kind": "spaced",
+   "n_tokens_canonical": 6,
+   "n_tokens_wordwise": 6,
+   "logprob_canonical": -49.491065979003906,
+   "logprob_wordwise": -49.491065979003906,
+   "advantage_wordwise": 0.0,
+   "identical": true
+  },
+  {
+   "excerpt_id": "reference_impl-14-parent-agent_message",
+   "model": "openai/gpt-oss-20b",
+   "text_kind": "glued",
+   "n_tokens_canonical": 60,
+   "n_tokens_wordwise": 61,
+   "logprob_canonical": -437.9910888671875,
+   "logprob_wordwise": -438.82275390625,
+   "advantage_wordwise": -0.8316650390625,
+   "identical": false
+  },
+  {
+   "excerpt_id": "reference_impl-14-parent-agent_message",
+   "model": "openai/gpt-oss-20b",
+   "text_kind": "spaced",
+   "n_tokens_canonical": 59,
+   "n_tokens_wordwise": 60,
+   "logprob_canonical": -400.23516845703125,
+   "logprob_wordwise": -400.734130859375,
+   "advantage_wordwise": -0.49896240234375,
+   "identical": false
+  },
+  {
+   "excerpt_id": "reference_impl-15-subagent-cot",
+   "model": "openai/gpt-oss-20b",
+   "text_kind": "glued",
+   "n_tokens_canonical": 192,
+   "n_tokens_wordwise": 183,
+   "logprob_canonical": -1329.09814453125,
+   "logprob_wordwise": -1317.6590576171875,
+   "advantage_wordwise": 11.4390869140625,
+   "identical": false
+  },
+  {
+   "excerpt_id": "reference_impl-15-subagent-cot",
+   "model": "openai/gpt-oss-20b",
+   "text_kind": "spaced",
+   "n_tokens_canonical": 171,
+   "n_tokens_wordwise": 172,
+   "logprob_canonical": -1151.3829345703125,
+   "logprob_wordwise": -1159.617431640625,
+   "advantage_wordwise": -8.2344970703125,
+   "identical": false
+  },
+  {
+   "excerpt_id": "reference_impl-16-parent-cot",
+   "model": "openai/gpt-oss-20b",
+   "text_kind": "glued",
+   "n_tokens_canonical": 84,
+   "n_tokens_wordwise": 81,
+   "logprob_canonical": -669.3987426757812,
+   "logprob_wordwise": -665.9749755859375,
+   "advantage_wordwise": 3.42376708984375,
+   "identical": false
+  },
+  {
+   "excerpt_id": "reference_impl-16-parent-cot",
+   "model": "openai/gpt-oss-20b",
+   "text_kind": "spaced",
+   "n_tokens_canonical": 78,
+   "n_tokens_wordwise": 78,
+   "logprob_canonical": -600.1104125976562,
+   "logprob_wordwise": -600.1104125976562,
+   "advantage_wordwise": 0.0,
+   "identical": true
+  },
+  {
+   "excerpt_id": "reference_impl-19-parent-cot",
+   "model": "openai/gpt-oss-20b",
+   "text_kind": "glued",
+   "n_tokens_canonical": 76,
+   "n_tokens_wordwise": 76,
+   "logprob_canonical": -627.6696166992188,
+   "logprob_wordwise": -627.3026123046875,
+   "advantage_wordwise": 0.36700439453125,
+   "identical": false
+  },
+  {
+   "excerpt_id": "reference_impl-19-parent-cot",
+   "model": "openai/gpt-oss-20b",
+   "text_kind": "spaced",
+   "n_tokens_canonical": 73,
+   "n_tokens_wordwise": 74,
+   "logprob_canonical": -584.830078125,
+   "logprob_wordwise": -586.547119140625,
+   "advantage_wordwise": -1.717041015625,
+   "identical": false
+  },
+  {
+   "excerpt_id": "eval_pipeline-04-parent-cot",
+   "model": "openai/gpt-oss-120b",
+   "text_kind": "glued",
+   "n_tokens_canonical": 137,
+   "n_tokens_wordwise": 135,
+   "logprob_canonical": -1137.2490234375,
+   "logprob_wordwise": -1133.498046875,
+   "advantage_wordwise": 3.7509765625,
+   "identical": false
+  },
+  {
+   "excerpt_id": "eval_pipeline-04-parent-cot",
+   "model": "openai/gpt-oss-120b",
+   "text_kind": "spaced",
+   "n_tokens_canonical": 124,
+   "n_tokens_wordwise": 124,
+   "logprob_canonical": -824.28515625,
+   "logprob_wordwise": -824.28515625,
+   "advantage_wordwise": 0.0,
+   "identical": true
+  },
+  {
+   "excerpt_id": "eval_pipeline-06-subagent-cot",
+   "model": "openai/gpt-oss-120b",
+   "text_kind": "glued",
+   "n_tokens_canonical": 112,
+   "n_tokens_wordwise": 110,
+   "logprob_canonical": -918.6961669921875,
+   "logprob_wordwise": -926.9873046875,
+   "advantage_wordwise": -8.2911376953125,
+   "identical": false
+  },
+  {
+   "excerpt_id": "eval_pipeline-06-subagent-cot",
+   "model": "openai/gpt-oss-120b",
+   "text_kind": "spaced",
+   "n_tokens_canonical": 107,
+   "n_tokens_wordwise": 107,
+   "logprob_canonical": -751.70947265625,
+   "logprob_wordwise": -751.70947265625,
+   "advantage_wordwise": 0.0,
+   "identical": true
+  },
+  {
+   "excerpt_id": "reference_impl-12-other_agent-agent_message",
+   "model": "openai/gpt-oss-120b",
+   "text_kind": "glued",
+   "n_tokens_canonical": 6,
+   "n_tokens_wordwise": 6,
+   "logprob_canonical": -59.37738800048828,
+   "logprob_wordwise": -59.37738800048828,
+   "advantage_wordwise": 0.0,
+   "identical": true
+  },
+  {
+   "excerpt_id": "reference_impl-12-other_agent-agent_message",
+   "model": "openai/gpt-oss-120b",
+   "text_kind": "spaced",
+   "n_tokens_canonical": 6,
+   "n_tokens_wordwise": 6,
+   "logprob_canonical": -50.66868591308594,
+   "logprob_wordwise": -50.66868591308594,
+   "advantage_wordwise": 0.0,
+   "identical": true
+  },
+  {
+   "excerpt_id": "reference_impl-14-parent-agent_message",
+   "model": "openai/gpt-oss-120b",
+   "text_kind": "glued",
+   "n_tokens_canonical": 60,
+   "n_tokens_wordwise": 61,
+   "logprob_canonical": -467.65936279296875,
+   "logprob_wordwise": -472.76409912109375,
+   "advantage_wordwise": -5.104736328125,
+   "identical": false
+  },
+  {
+   "excerpt_id": "reference_impl-14-parent-agent_message",
+   "model": "openai/gpt-oss-120b",
+   "text_kind": "spaced",
+   "n_tokens_canonical": 59,
+   "n_tokens_wordwise": 60,
+   "logprob_canonical": -427.78021240234375,
+   "logprob_wordwise": -434.82073974609375,
+   "advantage_wordwise": -7.04052734375,
+   "identical": false
+  },
+  {
+   "excerpt_id": "reference_impl-15-subagent-cot",
+   "model": "openai/gpt-oss-120b",
+   "text_kind": "glued",
+   "n_tokens_canonical": 192,
+   "n_tokens_wordwise": 183,
+   "logprob_canonical": -1469.868408203125,
+   "logprob_wordwise": -1471.2386474609375,
+   "advantage_wordwise": -1.3702392578125,
+   "identical": false
+  },
+  {
+   "excerpt_id": "reference_impl-15-subagent-cot",
+   "model": "openai/gpt-oss-120b",
+   "text_kind": "spaced",
+   "n_tokens_canonical": 171,
+   "n_tokens_wordwise": 172,
+   "logprob_canonical": -1195.2581787109375,
+   "logprob_wordwise": -1202.977294921875,
+   "advantage_wordwise": -7.7191162109375,
+   "identical": false
+  },
+  {
+   "excerpt_id": "reference_impl-16-parent-cot",
+   "model": "openai/gpt-oss-120b",
+   "text_kind": "glued",
+   "n_tokens_canonical": 84,
+   "n_tokens_wordwise": 81,
+   "logprob_canonical": -719.3881225585938,
+   "logprob_wordwise": -714.9984130859375,
+   "advantage_wordwise": 4.38970947265625,
+   "identical": false
+  },
+  {
+   "excerpt_id": "reference_impl-16-parent-cot",
+   "model": "openai/gpt-oss-120b",
+   "text_kind": "spaced",
+   "n_tokens_canonical": 78,
+   "n_tokens_wordwise": 78,
+   "logprob_canonical": -616.76318359375,
+   "logprob_wordwise": -616.76318359375,
+   "advantage_wordwise": 0.0,
+   "identical": true
+  },
+  {
+   "excerpt_id": "reference_impl-19-parent-cot",
+   "model": "openai/gpt-oss-120b",
+   "text_kind": "glued",
+   "n_tokens_canonical": 76,
+   "n_tokens_wordwise": 76,
+   "logprob_canonical": -657.6489868164062,
+   "logprob_wordwise": -661.489013671875,
+   "advantage_wordwise": -3.84002685546875,
+   "identical": false
+  },
+  {
+   "excerpt_id": "reference_impl-19-parent-cot",
+   "model": "openai/gpt-oss-120b",
+   "text_kind": "spaced",
+   "n_tokens_canonical": 73,
+   "n_tokens_wordwise": 74,
+   "logprob_canonical": -580.2889404296875,
+   "logprob_wordwise": -593.7278442382812,
+   "advantage_wordwise": -13.43890380859375,
+   "identical": false
+  },
+  {
+   "excerpt_id": "eval_pipeline-04-parent-cot",
    "model": "Qwen/Qwen2.5-1.5B-Instruct",
    "text_kind": "glued",
    "n_tokens_canonical": 140,
@@ -466,6 +774,924 @@
  "divergences": [
   {
    "excerpt_id": "eval_pipeline-04-parent-cot",
+   "model": "openai/gpt-oss-20b",
+   "text_kind": "glued",
+   "prefix_tail": "alarmseverity4?",
+   "canonical_token": " W",
+   "wordwise_token": " We",
+   "logprob_canonical": -8.776342391967773,
+   "logprob_wordwise": -6.370092391967773,
+   "advantage_wordwise": 2.40625,
+   "rank_canonical": 848,
+   "rank_wordwise": 55,
+   "at_glued_boundary": true,
+   "at_word_start": false,
+   "word": "We",
+   "canonical_crosses_word": false
+  },
+  {
+   "excerpt_id": "eval_pipeline-04-parent-cot",
+   "model": "openai/gpt-oss-20b",
+   "text_kind": "glued",
+   "prefix_tail": "runningmonitoring so",
+   "canonical_token": " ok",
+   "wordwise_token": " okay",
+   "logprob_canonical": -7.64337158203125,
+   "logprob_wordwise": -8.61212158203125,
+   "advantage_wordwise": -0.96875,
+   "rank_canonical": 244,
+   "rank_wordwise": 655,
+   "at_glued_boundary": true,
+   "at_word_start": false,
+   "word": "okay",
+   "canonical_crosses_word": false
+  },
+  {
+   "excerpt_id": "eval_pipeline-04-parent-cot",
+   "model": "openai/gpt-oss-20b",
+   "text_kind": "glued",
+   "prefix_tail": "soauthorization implied.",
+   "canonical_token": " Us",
+   "wordwise_token": " User",
+   "logprob_canonical": -10.444805145263672,
+   "logprob_wordwise": -6.335430145263672,
+   "advantage_wordwise": 4.109375,
+   "rank_canonical": 2126,
+   "rank_wordwise": 74,
+   "at_glued_boundary": true,
+   "at_word_start": false,
+   "word": "User",
+   "canonical_crosses_word": false
+  },
+  {
+   "excerpt_id": "eval_pipeline-04-parent-cot",
+   "model": "openai/gpt-oss-20b",
+   "text_kind": "glued",
+   "prefix_tail": ". Userearlier",
+   "canonical_token": "don",
+   "wordwise_token": "do",
+   "logprob_canonical": -8.515094757080078,
+   "logprob_wordwise": -7.983844757080078,
+   "advantage_wordwise": 0.53125,
+   "rank_canonical": 819,
+   "rank_wordwise": 476,
+   "at_glued_boundary": true,
+   "at_word_start": true,
+   "word": "do",
+   "canonical_crosses_word": true
+  },
+  {
+   "excerpt_id": "eval_pipeline-04-parent-cot",
+   "model": "openai/gpt-oss-20b",
+   "text_kind": "glued",
+   "prefix_tail": "reachdataSlacknot",
+   "canonical_token": "monitor",
+   "wordwise_token": "mon",
+   "logprob_canonical": -8.200531005859375,
+   "logprob_wordwise": -7.888031005859375,
+   "advantage_wordwise": 0.3125,
+   "rank_canonical": 535,
+   "rank_wordwise": 381,
+   "at_glued_boundary": true,
+   "at_word_start": true,
+   "word": "monitors",
+   "canonical_crosses_word": false
+  },
+  {
+   "excerpt_id": "eval_pipeline-06-subagent-cot",
+   "model": "openai/gpt-oss-20b",
+   "text_kind": "glued",
+   "prefix_tail": " send. Userexplicit",
+   "canonical_token": "nom",
+   "wordwise_token": "no",
+   "logprob_canonical": -10.860806465148926,
+   "logprob_wordwise": -4.345181465148926,
+   "advantage_wordwise": 6.515625,
+   "rank_canonical": 3923,
+   "rank_wordwise": 6,
+   "at_glued_boundary": true,
+   "at_word_start": true,
+   "word": "no",
+   "canonical_crosses_word": true
+  },
+  {
+   "excerpt_id": "eval_pipeline-06-subagent-cot",
+   "model": "openai/gpt-oss-20b",
+   "text_kind": "glued",
+   "prefix_tail": "essages originally shouldkeep",
+   "canonical_token": "n",
+   "wordwise_token": "no",
+   "logprob_canonical": -8.227706909179688,
+   "logprob_wordwise": -5.1339569091796875,
+   "advantage_wordwise": 3.09375,
+   "rank_canonical": 352,
+   "rank_wordwise": 19,
+   "at_glued_boundary": true,
+   "at_word_start": true,
+   "word": "no",
+   "canonical_crosses_word": false
+  },
+  {
+   "excerpt_id": "reference_impl-14-parent-agent_message",
+   "model": "openai/gpt-oss-20b",
+   "text_kind": "glued",
+   "prefix_tail": "/functionality/bias",
+   "canonical_token": ".\n",
+   "wordwise_token": ".",
+   "logprob_canonical": -4.01541805267334,
+   "logprob_wordwise": -3.07791805267334,
+   "advantage_wordwise": 0.9375,
+   "rank_canonical": 9,
+   "rank_wordwise": 3,
+   "at_glued_boundary": false,
+   "at_word_start": false,
+   "word": "definitions/functionality/bias.",
+   "canonical_crosses_word": true
+  },
+  {
+   "excerpt_id": "reference_impl-14-parent-agent_message",
+   "model": "openai/gpt-oss-20b",
+   "text_kind": "spaced",
+   "prefix_tail": "/functionality/bias",
+   "canonical_token": ".\n",
+   "wordwise_token": ".",
+   "logprob_canonical": -4.01197624206543,
+   "logprob_wordwise": -3.0744762420654297,
+   "advantage_wordwise": 0.9375,
+   "rank_canonical": 10,
+   "rank_wordwise": 3,
+   "at_glued_boundary": false,
+   "at_word_start": false,
+   "word": "definitions/functionality/bias.",
+   "canonical_crosses_word": true
+  },
+  {
+   "excerpt_id": "reference_impl-15-subagent-cot",
+   "model": "openai/gpt-oss-20b",
+   "text_kind": "glued",
+   "prefix_tail": "prohibitsund",
+   "canonical_token": "erm",
+   "wordwise_token": "ermine",
+   "logprob_canonical": -1.8965450525283813,
+   "logprob_wordwise": -5.771544933319092,
+   "advantage_wordwise": -3.875,
+   "rank_canonical": 2,
+   "rank_wordwise": 33,
+   "at_glued_boundary": true,
+   "at_word_start": false,
+   "word": "undermine",
+   "canonical_crosses_word": false
+  },
+  {
+   "excerpt_id": "reference_impl-15-subagent-cot",
+   "model": "openai/gpt-oss-20b",
+   "text_kind": "glued",
+   "prefix_tail": "ResearchL1 not",
+   "canonical_token": "har",
+   "wordwise_token": "harm",
+   "logprob_canonical": -12.015501022338867,
+   "logprob_wordwise": -12.031126022338867,
+   "advantage_wordwise": -0.015625,
+   "rank_canonical": 5469,
+   "rank_wordwise": 5542,
+   "at_glued_boundary": true,
+   "at_word_start": true,
+   "word": "harm",
+   "canonical_crosses_word": false
+  },
+  {
+   "excerpt_id": "reference_impl-15-subagent-cot",
+   "model": "openai/gpt-oss-20b",
+   "text_kind": "glued",
+   "prefix_tail": "rompt. Can'tb",
+   "canonical_token": "yp",
+   "wordwise_token": "ypass",
+   "logprob_canonical": -4.644535064697266,
+   "logprob_wordwise": -0.08203499764204025,
+   "advantage_wordwise": 4.5625,
+   "rank_canonical": 2,
+   "rank_wordwise": 1,
+   "at_glued_boundary": true,
+   "at_word_start": false,
+   "word": "bypass",
+   "canonical_crosses_word": false
+  },
+  {
+   "excerpt_id": "reference_impl-15-subagent-cot",
+   "model": "openai/gpt-oss-20b",
+   "text_kind": "glued",
+   "prefix_tail": "assinstruction? This",
+   "canonical_token": "isa",
+   "wordwise_token": "is",
+   "logprob_canonical": -13.008922576904297,
+   "logprob_wordwise": -7.969860076904297,
+   "advantage_wordwise": 5.0390625,
+   "rank_canonical": 5115,
+   "rank_wordwise": 163,
+   "at_glued_boundary": true,
+   "at_word_start": true,
+   "word": "is",
+   "canonical_crosses_word": true
+  },
+  {
+   "excerpt_id": "reference_impl-15-subagent-cot",
+   "model": "openai/gpt-oss-20b",
+   "text_kind": "glued",
+   "prefix_tail": "? Thisisauthorized",
+   "canonical_token": "architect",
+   "wordwise_token": "architecture",
+   "logprob_canonical": -10.486359596252441,
+   "logprob_wordwise": -11.330109596252441,
+   "advantage_wordwise": -0.84375,
+   "rank_canonical": 2676,
+   "rank_wordwise": 4720,
+   "at_glued_boundary": true,
+   "at_word_start": true,
+   "word": "architecture",
+   "canonical_crosses_word": false
+  },
+  {
+   "excerpt_id": "reference_impl-15-subagent-cot",
+   "model": "openai/gpt-oss-20b",
+   "text_kind": "glued",
+   "prefix_tail": "actPR usesdefault",
+   "canonical_token": "D",
+   "wordwise_token": "Dummy",
+   "logprob_canonical": -9.043882369995117,
+   "logprob_wordwise": -13.069272994995117,
+   "advantage_wordwise": -4.025390625,
+   "rank_canonical": 1042,
+   "rank_wordwise": 17634,
+   "at_glued_boundary": true,
+   "at_word_start": true,
+   "word": "Dummy",
+   "canonical_crosses_word": false
+  },
+  {
+   "excerpt_id": "reference_impl-15-subagent-cot",
+   "model": "openai/gpt-oss-20b",
+   "text_kind": "glued",
+   "prefix_tail": "izes. Need parent",
+   "canonical_token": "conf",
+   "wordwise_token": "confirm",
+   "logprob_canonical": -8.359475135803223,
+   "logprob_wordwise": -6.734475135803223,
+   "advantage_wordwise": 1.625,
+   "rank_canonical": 432,
+   "rank_wordwise": 82,
+   "at_glued_boundary": true,
+   "at_word_start": true,
+   "word": "confirm",
+   "canonical_crosses_word": false
+  },
+  {
+   "excerpt_id": "reference_impl-15-subagent-cot",
+   "model": "openai/gpt-oss-20b",
+   "text_kind": "glued",
+   "prefix_tail": " scoped no longer\n",
+   "canonical_token": "sof",
+   "wordwise_token": "so",
+   "logprob_canonical": -16.800945281982422,
+   "logprob_wordwise": -13.207195281982422,
+   "advantage_wordwise": 3.59375,
+   "rank_canonical": 10548,
+   "rank_wordwise": 1251,
+   "at_glued_boundary": true,
+   "at_word_start": true,
+   "word": "so",
+   "canonical_crosses_word": true
+  },
+  {
+   "excerpt_id": "reference_impl-15-subagent-cot",
+   "model": "openai/gpt-oss-20b",
+   "text_kind": "glued",
+   "prefix_tail": " butinlineimages should",
+   "canonical_token": "avo",
+   "wordwise_token": "avoid",
+   "logprob_canonical": -10.807982444763184,
+   "logprob_wordwise": -8.589232444763184,
+   "advantage_wordwise": 2.21875,
+   "rank_canonical": 2363,
+   "rank_wordwise": 417,
+   "at_glued_boundary": true,
+   "at_word_start": true,
+   "word": "avoid",
+   "canonical_crosses_word": false
+  },
+  {
+   "excerpt_id": "reference_impl-15-subagent-cot",
+   "model": "openai/gpt-oss-20b",
+   "text_kind": "glued",
+   "prefix_tail": " preventsdehydrate conditional",
+   "canonical_token": ":\n",
+   "wordwise_token": ":",
+   "logprob_canonical": -8.607470512390137,
+   "logprob_wordwise": -5.326220512390137,
+   "advantage_wordwise": 3.28125,
+   "rank_canonical": 621,
+   "rank_wordwise": 19,
+   "at_glued_boundary": false,
+   "at_word_start": false,
+   "word": "conditional:",
+   "canonical_crosses_word": true
+  },
+  {
+   "excerpt_id": "reference_impl-15-subagent-cot",
+   "model": "openai/gpt-oss-20b",
+   "text_kind": "spaced",
+   "prefix_tail": " prevents dehydrate conditional",
+   "canonical_token": ":\n",
+   "wordwise_token": ":",
+   "logprob_canonical": -8.225411415100098,
+   "logprob_wordwise": -5.037911415100098,
+   "advantage_wordwise": 3.1875,
+   "rank_canonical": 282,
+   "rank_wordwise": 21,
+   "at_glued_boundary": false,
+   "at_word_start": false,
+   "word": "conditional:",
+   "canonical_crosses_word": true
+  },
+  {
+   "excerpt_id": "reference_impl-16-parent-cot",
+   "model": "openai/gpt-oss-20b",
+   "text_kind": "glued",
+   "prefix_tail": "lock broad pipeline?",
+   "canonical_token": " W",
+   "wordwise_token": " We",
+   "logprob_canonical": -7.946573257446289,
+   "logprob_wordwise": -4.384073257446289,
+   "advantage_wordwise": 3.5625,
+   "rank_canonical": 327,
+   "rank_wordwise": 7,
+   "at_glued_boundary": true,
+   "at_word_start": false,
+   "word": "We",
+   "canonical_crosses_word": false
+  },
+  {
+   "excerpt_id": "reference_impl-16-parent-cot",
+   "model": "openai/gpt-oss-20b",
+   "text_kind": "glued",
+   "prefix_tail": "policy? User explicit",
+   "canonical_token": "cop",
+   "wordwise_token": "copy",
+   "logprob_canonical": -10.023648262023926,
+   "logprob_wordwise": -9.898648262023926,
+   "advantage_wordwise": 0.125,
+   "rank_canonical": 2657,
+   "rank_wordwise": 2375,
+   "at_glued_boundary": true,
+   "at_word_start": true,
+   "word": "copy",
+   "canonical_crosses_word": false
+  },
+  {
+   "excerpt_id": "reference_impl-16-parent-cot",
+   "model": "openai/gpt-oss-20b",
+   "text_kind": "glued",
+   "prefix_tail": " MatchingPR expectsstat",
+   "canonical_token": "ut",
+   "wordwise_token": "utor",
+   "logprob_canonical": -4.341796875,
+   "logprob_wordwise": -6.654296875,
+   "advantage_wordwise": -2.3125,
+   "rank_canonical": 12,
+   "rank_wordwise": 51,
+   "at_glued_boundary": true,
+   "at_word_start": false,
+   "word": "statutor",
+   "canonical_crosses_word": false
+  },
+  {
+   "excerpt_id": "reference_impl-19-parent-cot",
+   "model": "openai/gpt-oss-20b",
+   "text_kind": "glued",
+   "prefix_tail": "agentmonitor yay.",
+   "canonical_token": " Al",
+   "wordwise_token": " Already",
+   "logprob_canonical": -8.303869247436523,
+   "logprob_wordwise": -8.506994247436523,
+   "advantage_wordwise": -0.203125,
+   "rank_canonical": 498,
+   "rank_wordwise": 605,
+   "at_glued_boundary": true,
+   "at_word_start": false,
+   "word": "Already",
+   "canonical_crosses_word": false
+  },
+  {
+   "excerpt_id": "reference_impl-19-parent-cot",
+   "model": "openai/gpt-oss-20b",
+   "text_kind": "glued",
+   "prefix_tail": "capturepublisherNone usual",
+   "canonical_token": ".\n",
+   "wordwise_token": ".",
+   "logprob_canonical": -6.254388809204102,
+   "logprob_wordwise": -3.8793890476226807,
+   "advantage_wordwise": 2.374999761581421,
+   "rank_canonical": 21,
+   "rank_wordwise": 2,
+   "at_glued_boundary": false,
+   "at_word_start": false,
+   "word": "usual.",
+   "canonical_crosses_word": true
+  },
+  {
+   "excerpt_id": "reference_impl-19-parent-cot",
+   "model": "openai/gpt-oss-20b",
+   "text_kind": "glued",
+   "prefix_tail": " useraskedserving",
+   "canonical_token": "paths",
+   "wordwise_token": "path",
+   "logprob_canonical": -9.822137832641602,
+   "logprob_wordwise": -7.47838830947876,
+   "advantage_wordwise": 2.343749523162842,
+   "rank_canonical": 2959,
+   "rank_wordwise": 172,
+   "at_glued_boundary": true,
+   "at_word_start": true,
+   "word": "path",
+   "canonical_crosses_word": true
+  },
+  {
+   "excerpt_id": "reference_impl-19-parent-cot",
+   "model": "openai/gpt-oss-20b",
+   "text_kind": "spaced",
+   "prefix_tail": " capture publisher None usual",
+   "canonical_token": ".\n",
+   "wordwise_token": ".",
+   "logprob_canonical": -5.0464019775390625,
+   "logprob_wordwise": -0.7964021563529968,
+   "advantage_wordwise": 4.25,
+   "rank_canonical": 10,
+   "rank_wordwise": 1,
+   "at_glued_boundary": false,
+   "at_word_start": false,
+   "word": "usual.",
+   "canonical_crosses_word": true
+  },
+  {
+   "excerpt_id": "eval_pipeline-04-parent-cot",
+   "model": "openai/gpt-oss-120b",
+   "text_kind": "glued",
+   "prefix_tail": "alarmseverity4?",
+   "canonical_token": " W",
+   "wordwise_token": " We",
+   "logprob_canonical": -7.828362464904785,
+   "logprob_wordwise": -6.703362464904785,
+   "advantage_wordwise": 1.125,
+   "rank_canonical": 264,
+   "rank_wordwise": 56,
+   "at_glued_boundary": true,
+   "at_word_start": false,
+   "word": "We",
+   "canonical_crosses_word": false
+  },
+  {
+   "excerpt_id": "eval_pipeline-04-parent-cot",
+   "model": "openai/gpt-oss-120b",
+   "text_kind": "glued",
+   "prefix_tail": "runningmonitoring so",
+   "canonical_token": " ok",
+   "wordwise_token": " okay",
+   "logprob_canonical": -8.384902954101562,
+   "logprob_wordwise": -9.947402954101562,
+   "advantage_wordwise": -1.5625,
+   "rank_canonical": 442,
+   "rank_wordwise": 2037,
+   "at_glued_boundary": true,
+   "at_word_start": false,
+   "word": "okay",
+   "canonical_crosses_word": false
+  },
+  {
+   "excerpt_id": "eval_pipeline-04-parent-cot",
+   "model": "openai/gpt-oss-120b",
+   "text_kind": "glued",
+   "prefix_tail": "soauthorization implied.",
+   "canonical_token": " Us",
+   "wordwise_token": " User",
+   "logprob_canonical": -10.435651779174805,
+   "logprob_wordwise": -6.841901779174805,
+   "advantage_wordwise": 3.59375,
+   "rank_canonical": 2133,
+   "rank_wordwise": 90,
+   "at_glued_boundary": true,
+   "at_word_start": false,
+   "word": "User",
+   "canonical_crosses_word": false
+  },
+  {
+   "excerpt_id": "eval_pipeline-04-parent-cot",
+   "model": "openai/gpt-oss-120b",
+   "text_kind": "glued",
+   "prefix_tail": ". Userearlier",
+   "canonical_token": "don",
+   "wordwise_token": "do",
+   "logprob_canonical": -11.944892883300781,
+   "logprob_wordwise": -9.815986633300781,
+   "advantage_wordwise": 2.12890625,
+   "rank_canonical": 14637,
+   "rank_wordwise": 2153,
+   "at_glued_boundary": true,
+   "at_word_start": true,
+   "word": "do",
+   "canonical_crosses_word": true
+  },
+  {
+   "excerpt_id": "eval_pipeline-04-parent-cot",
+   "model": "openai/gpt-oss-120b",
+   "text_kind": "glued",
+   "prefix_tail": "reachdataSlacknot",
+   "canonical_token": "monitor",
+   "wordwise_token": "mon",
+   "logprob_canonical": -10.161678314208984,
+   "logprob_wordwise": -8.708553314208984,
+   "advantage_wordwise": 1.453125,
+   "rank_canonical": 2365,
+   "rank_wordwise": 596,
+   "at_glued_boundary": true,
+   "at_word_start": true,
+   "word": "monitors",
+   "canonical_crosses_word": false
+  },
+  {
+   "excerpt_id": "eval_pipeline-06-subagent-cot",
+   "model": "openai/gpt-oss-120b",
+   "text_kind": "glued",
+   "prefix_tail": " send. Userexplicit",
+   "canonical_token": "nom",
+   "wordwise_token": "no",
+   "logprob_canonical": -12.38045883178711,
+   "logprob_wordwise": -8.32577133178711,
+   "advantage_wordwise": 4.0546875,
+   "rank_canonical": 15828,
+   "rank_wordwise": 384,
+   "at_glued_boundary": true,
+   "at_word_start": true,
+   "word": "no",
+   "canonical_crosses_word": true
+  },
+  {
+   "excerpt_id": "eval_pipeline-06-subagent-cot",
+   "model": "openai/gpt-oss-120b",
+   "text_kind": "glued",
+   "prefix_tail": "essages originally shouldkeep",
+   "canonical_token": "n",
+   "wordwise_token": "no",
+   "logprob_canonical": -8.688361167907715,
+   "logprob_wordwise": -7.032111167907715,
+   "advantage_wordwise": 1.65625,
+   "rank_canonical": 680,
+   "rank_wordwise": 106,
+   "at_glued_boundary": true,
+   "at_word_start": true,
+   "word": "no",
+   "canonical_crosses_word": false
+  },
+  {
+   "excerpt_id": "reference_impl-14-parent-agent_message",
+   "model": "openai/gpt-oss-120b",
+   "text_kind": "glued",
+   "prefix_tail": "/functionality/bias",
+   "canonical_token": ".\n",
+   "wordwise_token": ".",
+   "logprob_canonical": -3.2575361728668213,
+   "logprob_wordwise": -3.3200361728668213,
+   "advantage_wordwise": -0.0625,
+   "rank_canonical": 3,
+   "rank_wordwise": 4,
+   "at_glued_boundary": false,
+   "at_word_start": false,
+   "word": "definitions/functionality/bias.",
+   "canonical_crosses_word": true
+  },
+  {
+   "excerpt_id": "reference_impl-14-parent-agent_message",
+   "model": "openai/gpt-oss-120b",
+   "text_kind": "spaced",
+   "prefix_tail": "/functionality/bias",
+   "canonical_token": ".\n",
+   "wordwise_token": ".",
+   "logprob_canonical": -3.2762351036071777,
+   "logprob_wordwise": -3.4012351036071777,
+   "advantage_wordwise": -0.125,
+   "rank_canonical": 3,
+   "rank_wordwise": 4,
+   "at_glued_boundary": false,
+   "at_word_start": false,
+   "word": "definitions/functionality/bias.",
+   "canonical_crosses_word": true
+  },
+  {
+   "excerpt_id": "reference_impl-15-subagent-cot",
+   "model": "openai/gpt-oss-120b",
+   "text_kind": "glued",
+   "prefix_tail": "prohibitsund",
+   "canonical_token": "erm",
+   "wordwise_token": "ermine",
+   "logprob_canonical": -1.9987552165985107,
+   "logprob_wordwise": -5.24875545501709,
+   "advantage_wordwise": -3.250000238418579,
+   "rank_canonical": 2,
+   "rank_wordwise": 22,
+   "at_glued_boundary": true,
+   "at_word_start": false,
+   "word": "undermine",
+   "canonical_crosses_word": false
+  },
+  {
+   "excerpt_id": "reference_impl-15-subagent-cot",
+   "model": "openai/gpt-oss-120b",
+   "text_kind": "glued",
+   "prefix_tail": "ResearchL1 not",
+   "canonical_token": "har",
+   "wordwise_token": "harm",
+   "logprob_canonical": -12.804019927978516,
+   "logprob_wordwise": -12.499332427978516,
+   "advantage_wordwise": 0.3046875,
+   "rank_canonical": 14785,
+   "rank_wordwise": 12328,
+   "at_glued_boundary": true,
+   "at_word_start": true,
+   "word": "harm",
+   "canonical_crosses_word": false
+  },
+  {
+   "excerpt_id": "reference_impl-15-subagent-cot",
+   "model": "openai/gpt-oss-120b",
+   "text_kind": "glued",
+   "prefix_tail": "rompt. Can'tb",
+   "canonical_token": "yp",
+   "wordwise_token": "ypass",
+   "logprob_canonical": -4.60748291015625,
+   "logprob_wordwise": -0.23248310387134552,
+   "advantage_wordwise": 4.375,
+   "rank_canonical": 4,
+   "rank_wordwise": 1,
+   "at_glued_boundary": true,
+   "at_word_start": false,
+   "word": "bypass",
+   "canonical_crosses_word": false
+  },
+  {
+   "excerpt_id": "reference_impl-15-subagent-cot",
+   "model": "openai/gpt-oss-120b",
+   "text_kind": "glued",
+   "prefix_tail": "assinstruction? This",
+   "canonical_token": "isa",
+   "wordwise_token": "is",
+   "logprob_canonical": -11.327864646911621,
+   "logprob_wordwise": -5.968489170074463,
+   "advantage_wordwise": 5.359375476837158,
+   "rank_canonical": 3602,
+   "rank_wordwise": 42,
+   "at_glued_boundary": true,
+   "at_word_start": true,
+   "word": "is",
+   "canonical_crosses_word": true
+  },
+  {
+   "excerpt_id": "reference_impl-15-subagent-cot",
+   "model": "openai/gpt-oss-120b",
+   "text_kind": "glued",
+   "prefix_tail": "? Thisisauthorized",
+   "canonical_token": "architect",
+   "wordwise_token": "architecture",
+   "logprob_canonical": -12.876823425292969,
+   "logprob_wordwise": -13.770011901855469,
+   "advantage_wordwise": -0.8931884765625,
+   "rank_canonical": 26884,
+   "rank_wordwise": 46553,
+   "at_glued_boundary": true,
+   "at_word_start": true,
+   "word": "architecture",
+   "canonical_crosses_word": false
+  },
+  {
+   "excerpt_id": "reference_impl-15-subagent-cot",
+   "model": "openai/gpt-oss-120b",
+   "text_kind": "glued",
+   "prefix_tail": "actPR usesdefault",
+   "canonical_token": "D",
+   "wordwise_token": "Dummy",
+   "logprob_canonical": -8.179269790649414,
+   "logprob_wordwise": -13.382394790649414,
+   "advantage_wordwise": -5.203125,
+   "rank_canonical": 381,
+   "rank_wordwise": 39680,
+   "at_glued_boundary": true,
+   "at_word_start": true,
+   "word": "Dummy",
+   "canonical_crosses_word": false
+  },
+  {
+   "excerpt_id": "reference_impl-15-subagent-cot",
+   "model": "openai/gpt-oss-120b",
+   "text_kind": "glued",
+   "prefix_tail": "izes. Need parent",
+   "canonical_token": "conf",
+   "wordwise_token": "confirm",
+   "logprob_canonical": -10.117457389831543,
+   "logprob_wordwise": -9.679957389831543,
+   "advantage_wordwise": 0.4375,
+   "rank_canonical": 2871,
+   "rank_wordwise": 1955,
+   "at_glued_boundary": true,
+   "at_word_start": true,
+   "word": "confirm",
+   "canonical_crosses_word": false
+  },
+  {
+   "excerpt_id": "reference_impl-15-subagent-cot",
+   "model": "openai/gpt-oss-120b",
+   "text_kind": "glued",
+   "prefix_tail": " scoped no longer\n",
+   "canonical_token": "sof",
+   "wordwise_token": "so",
+   "logprob_canonical": -20.394128799438477,
+   "logprob_wordwise": -15.40975284576416,
+   "advantage_wordwise": 4.984375953674316,
+   "rank_canonical": 149787,
+   "rank_wordwise": 10506,
+   "at_glued_boundary": true,
+   "at_word_start": true,
+   "word": "so",
+   "canonical_crosses_word": true
+  },
+  {
+   "excerpt_id": "reference_impl-15-subagent-cot",
+   "model": "openai/gpt-oss-120b",
+   "text_kind": "glued",
+   "prefix_tail": " butinlineimages should",
+   "canonical_token": "avo",
+   "wordwise_token": "avoid",
+   "logprob_canonical": -12.486383438110352,
+   "logprob_wordwise": -9.228570938110352,
+   "advantage_wordwise": 3.2578125,
+   "rank_canonical": 8113,
+   "rank_wordwise": 712,
+   "at_glued_boundary": true,
+   "at_word_start": true,
+   "word": "avoid",
+   "canonical_crosses_word": false
+  },
+  {
+   "excerpt_id": "reference_impl-15-subagent-cot",
+   "model": "openai/gpt-oss-120b",
+   "text_kind": "glued",
+   "prefix_tail": " preventsdehydrate conditional",
+   "canonical_token": ":\n",
+   "wordwise_token": ":",
+   "logprob_canonical": -5.909750461578369,
+   "logprob_wordwise": -3.909750461578369,
+   "advantage_wordwise": 2.0,
+   "rank_canonical": 43,
+   "rank_wordwise": 8,
+   "at_glued_boundary": false,
+   "at_word_start": false,
+   "word": "conditional:",
+   "canonical_crosses_word": true
+  },
+  {
+   "excerpt_id": "reference_impl-15-subagent-cot",
+   "model": "openai/gpt-oss-120b",
+   "text_kind": "spaced",
+   "prefix_tail": " prevents dehydrate conditional",
+   "canonical_token": ":\n",
+   "wordwise_token": ":",
+   "logprob_canonical": -7.532773494720459,
+   "logprob_wordwise": -4.064023494720459,
+   "advantage_wordwise": 3.46875,
+   "rank_canonical": 153,
+   "rank_wordwise": 6,
+   "at_glued_boundary": false,
+   "at_word_start": false,
+   "word": "conditional:",
+   "canonical_crosses_word": true
+  },
+  {
+   "excerpt_id": "reference_impl-16-parent-cot",
+   "model": "openai/gpt-oss-120b",
+   "text_kind": "glued",
+   "prefix_tail": "lock broad pipeline?",
+   "canonical_token": " W",
+   "wordwise_token": " We",
+   "logprob_canonical": -7.794076919555664,
+   "logprob_wordwise": -5.950326919555664,
+   "advantage_wordwise": 1.84375,
+   "rank_canonical": 236,
+   "rank_wordwise": 29,
+   "at_glued_boundary": true,
+   "at_word_start": false,
+   "word": "We",
+   "canonical_crosses_word": false
+  },
+  {
+   "excerpt_id": "reference_impl-16-parent-cot",
+   "model": "openai/gpt-oss-120b",
+   "text_kind": "glued",
+   "prefix_tail": "policy? User explicit",
+   "canonical_token": "cop",
+   "wordwise_token": "copy",
+   "logprob_canonical": -11.684480667114258,
+   "logprob_wordwise": -10.270418167114258,
+   "advantage_wordwise": 1.4140625,
+   "rank_canonical": 12595,
+   "rank_wordwise": 3724,
+   "at_glued_boundary": true,
+   "at_word_start": true,
+   "word": "copy",
+   "canonical_crosses_word": false
+  },
+  {
+   "excerpt_id": "reference_impl-16-parent-cot",
+   "model": "openai/gpt-oss-120b",
+   "text_kind": "glued",
+   "prefix_tail": " MatchingPR expectsstat",
+   "canonical_token": "ut",
+   "wordwise_token": "utor",
+   "logprob_canonical": -5.0429534912109375,
+   "logprob_wordwise": -6.9179534912109375,
+   "advantage_wordwise": -1.875,
+   "rank_canonical": 16,
+   "rank_wordwise": 87,
+   "at_glued_boundary": true,
+   "at_word_start": false,
+   "word": "statutor",
+   "canonical_crosses_word": false
+  },
+  {
+   "excerpt_id": "reference_impl-19-parent-cot",
+   "model": "openai/gpt-oss-120b",
+   "text_kind": "glued",
+   "prefix_tail": "agentmonitor yay.",
+   "canonical_token": " Al",
+   "wordwise_token": " Already",
+   "logprob_canonical": -8.588996887207031,
+   "logprob_wordwise": -8.948371887207031,
+   "advantage_wordwise": -0.359375,
+   "rank_canonical": 474,
+   "rank_wordwise": 716,
+   "at_glued_boundary": true,
+   "at_word_start": false,
+   "word": "Already",
+   "canonical_crosses_word": false
+  },
+  {
+   "excerpt_id": "reference_impl-19-parent-cot",
+   "model": "openai/gpt-oss-120b",
+   "text_kind": "glued",
+   "prefix_tail": "capturepublisherNone usual",
+   "canonical_token": ".\n",
+   "wordwise_token": ".",
+   "logprob_canonical": -5.14995002746582,
+   "logprob_wordwise": -4.05620002746582,
+   "advantage_wordwise": 1.09375,
+   "rank_canonical": 5,
+   "rank_wordwise": 2,
+   "at_glued_boundary": false,
+   "at_word_start": false,
+   "word": "usual.",
+   "canonical_crosses_word": true
+  },
+  {
+   "excerpt_id": "reference_impl-19-parent-cot",
+   "model": "openai/gpt-oss-120b",
+   "text_kind": "glued",
+   "prefix_tail": " useraskedserving",
+   "canonical_token": "paths",
+   "wordwise_token": "path",
+   "logprob_canonical": -10.325699806213379,
+   "logprob_wordwise": -8.372574806213379,
+   "advantage_wordwise": 1.953125,
+   "rank_canonical": 4302,
+   "rank_wordwise": 538,
+   "at_glued_boundary": true,
+   "at_word_start": true,
+   "word": "path",
+   "canonical_crosses_word": true
+  },
+  {
+   "excerpt_id": "reference_impl-19-parent-cot",
+   "model": "openai/gpt-oss-120b",
+   "text_kind": "spaced",
+   "prefix_tail": " capture publisher None usual",
+   "canonical_token": ".\n",
+   "wordwise_token": ".",
+   "logprob_canonical": -4.545368194580078,
+   "logprob_wordwise": -3.232867956161499,
+   "advantage_wordwise": 1.312500238418579,
+   "rank_canonical": 5,
+   "rank_wordwise": 1,
+   "at_glued_boundary": false,
+   "at_word_start": false,
+   "word": "usual.",
+   "canonical_crosses_word": true
+  },
+  {
+   "excerpt_id": "eval_pipeline-04-parent-cot",
    "model": "Qwen/Qwen2.5-1.5B-Instruct",
    "text_kind": "glued",
    "prefix_tail": "alarmseverity4?",
@@ -475,7 +1701,11 @@
    "logprob_wordwise": -8.816377639770508,
    "advantage_wordwise": -0.7606964111328125,
    "rank_canonical": 447,
-   "rank_wordwise": 942
+   "rank_wordwise": 942,
+   "at_glued_boundary": true,
+   "at_word_start": false,
+   "word": "We",
+   "canonical_crosses_word": false
   },
   {
    "excerpt_id": "eval_pipeline-04-parent-cot",
@@ -488,7 +1718,11 @@
    "logprob_wordwise": -1.811937689781189,
    "advantage_wordwise": 3.023463249206543,
    "rank_canonical": 15,
-   "rank_wordwise": 1
+   "rank_wordwise": 1,
+   "at_glued_boundary": true,
+   "at_word_start": true,
+   "word": "alarm",
+   "canonical_crosses_word": false
   },
   {
    "excerpt_id": "eval_pipeline-04-parent-cot",
@@ -501,7 +1735,11 @@
    "logprob_wordwise": -2.3122470378875732,
    "advantage_wordwise": 2.604341745376587,
    "rank_canonical": 19,
-   "rank_wordwise": 1
+   "rank_wordwise": 1,
+   "at_glued_boundary": true,
+   "at_word_start": true,
+   "word": "we",
+   "canonical_crosses_word": false
   },
   {
    "excerpt_id": "eval_pipeline-04-parent-cot",
@@ -514,7 +1752,11 @@
    "logprob_wordwise": -5.505653381347656,
    "advantage_wordwise": 1.4397106170654297,
    "rank_canonical": 131,
-   "rank_wordwise": 36
+   "rank_wordwise": 36,
+   "at_glued_boundary": true,
+   "at_word_start": false,
+   "word": "not",
+   "canonical_crosses_word": false
   },
   {
    "excerpt_id": "eval_pipeline-04-parent-cot",
@@ -527,7 +1769,11 @@
    "logprob_wordwise": -7.2081732749938965,
    "advantage_wordwise": -0.38493824005126953,
    "rank_canonical": 125,
-   "rank_wordwise": 173
+   "rank_wordwise": 173,
+   "at_glued_boundary": true,
+   "at_word_start": true,
+   "word": "we",
+   "canonical_crosses_word": false
   },
   {
    "excerpt_id": "eval_pipeline-04-parent-cot",
@@ -540,7 +1786,11 @@
    "logprob_wordwise": -5.045703411102295,
    "advantage_wordwise": 2.1711578369140625,
    "rank_canonical": 172,
-   "rank_wordwise": 25
+   "rank_wordwise": 25,
+   "at_glued_boundary": true,
+   "at_word_start": false,
+   "word": "User",
+   "canonical_crosses_word": false
   },
   {
    "excerpt_id": "eval_pipeline-04-parent-cot",
@@ -553,7 +1803,11 @@
    "logprob_wordwise": -6.613246917724609,
    "advantage_wordwise": 0.6899051666259766,
    "rank_canonical": 246,
-   "rank_wordwise": 121
+   "rank_wordwise": 121,
+   "at_glued_boundary": true,
+   "at_word_start": true,
+   "word": "do",
+   "canonical_crosses_word": true
   },
   {
    "excerpt_id": "eval_pipeline-04-parent-cot",
@@ -566,7 +1820,11 @@
    "logprob_wordwise": -10.697349548339844,
    "advantage_wordwise": -3.4079904556274414,
    "rank_canonical": 104,
-   "rank_wordwise": 2237
+   "rank_wordwise": 2237,
+   "at_glued_boundary": true,
+   "at_word_start": true,
+   "word": "monitors",
+   "canonical_crosses_word": false
   },
   {
    "excerpt_id": "eval_pipeline-06-subagent-cot",
@@ -579,7 +1837,11 @@
    "logprob_wordwise": -4.420871257781982,
    "advantage_wordwise": 7.576846599578857,
    "rank_canonical": 8259,
-   "rank_wordwise": 4
+   "rank_wordwise": 4,
+   "at_glued_boundary": true,
+   "at_word_start": true,
+   "word": "no",
+   "canonical_crosses_word": true
   },
   {
    "excerpt_id": "eval_pipeline-06-subagent-cot",
@@ -592,7 +1854,11 @@
    "logprob_wordwise": -4.265529632568359,
    "advantage_wordwise": 5.460718154907227,
    "rank_canonical": 1588,
-   "rank_wordwise": 5
+   "rank_wordwise": 5,
+   "at_glued_boundary": true,
+   "at_word_start": true,
+   "word": "no",
+   "canonical_crosses_word": true
   },
   {
    "excerpt_id": "reference_impl-14-parent-agent_message",
@@ -605,7 +1871,11 @@
    "logprob_wordwise": -2.5281450748443604,
    "advantage_wordwise": 0.5408153533935547,
    "rank_canonical": 6,
-   "rank_wordwise": 4
+   "rank_wordwise": 4,
+   "at_glued_boundary": false,
+   "at_word_start": false,
+   "word": "definitions/functionality/bias.",
+   "canonical_crosses_word": true
   },
   {
    "excerpt_id": "reference_impl-14-parent-agent_message",
@@ -618,7 +1888,11 @@
    "logprob_wordwise": -2.528148651123047,
    "advantage_wordwise": 0.5408115386962891,
    "rank_canonical": 6,
-   "rank_wordwise": 4
+   "rank_wordwise": 4,
+   "at_glued_boundary": false,
+   "at_word_start": false,
+   "word": "definitions/functionality/bias.",
+   "canonical_crosses_word": true
   },
   {
    "excerpt_id": "reference_impl-15-subagent-cot",
@@ -631,7 +1905,11 @@
    "logprob_wordwise": -4.822877883911133,
    "advantage_wordwise": -2.2773797512054443,
    "rank_canonical": 1,
-   "rank_wordwise": 15
+   "rank_wordwise": 15,
+   "at_glued_boundary": true,
+   "at_word_start": false,
+   "word": "undermine",
+   "canonical_crosses_word": false
   },
   {
    "excerpt_id": "reference_impl-15-subagent-cot",
@@ -644,7 +1922,11 @@
    "logprob_wordwise": -6.8131818771362305,
    "advantage_wordwise": -1.6919164657592773,
    "rank_canonical": 19,
-   "rank_wordwise": 70
+   "rank_wordwise": 70,
+   "at_glued_boundary": true,
+   "at_word_start": false,
+   "word": "not",
+   "canonical_crosses_word": false
   },
   {
    "excerpt_id": "reference_impl-15-subagent-cot",
@@ -657,7 +1939,11 @@
    "logprob_wordwise": -2.9472625255584717,
    "advantage_wordwise": 2.053698778152466,
    "rank_canonical": 26,
-   "rank_wordwise": 4
+   "rank_wordwise": 4,
+   "at_glued_boundary": true,
+   "at_word_start": false,
+   "word": "harm",
+   "canonical_crosses_word": false
   },
   {
    "excerpt_id": "reference_impl-15-subagent-cot",
@@ -670,7 +1956,11 @@
    "logprob_wordwise": -0.653098464012146,
    "advantage_wordwise": 4.720635414123535,
    "rank_canonical": 10,
-   "rank_wordwise": 1
+   "rank_wordwise": 1,
+   "at_glued_boundary": true,
+   "at_word_start": false,
+   "word": "bypass",
+   "canonical_crosses_word": false
   },
   {
    "excerpt_id": "reference_impl-15-subagent-cot",
@@ -683,7 +1973,11 @@
    "logprob_wordwise": -12.714700698852539,
    "advantage_wordwise": -2.605876922607422,
    "rank_canonical": 1830,
-   "rank_wordwise": 11053
+   "rank_wordwise": 11053,
+   "at_glued_boundary": true,
+   "at_word_start": true,
+   "word": "architecture",
+   "canonical_crosses_word": false
   },
   {
    "excerpt_id": "reference_impl-15-subagent-cot",
@@ -696,7 +1990,11 @@
    "logprob_wordwise": -12.402008056640625,
    "advantage_wordwise": -4.051883697509766,
    "rank_canonical": 557,
-   "rank_wordwise": 12557
+   "rank_wordwise": 12557,
+   "at_glued_boundary": true,
+   "at_word_start": true,
+   "word": "Dummy",
+   "canonical_crosses_word": false
   },
   {
    "excerpt_id": "reference_impl-15-subagent-cot",
@@ -709,7 +2007,11 @@
    "logprob_wordwise": -4.161285877227783,
    "advantage_wordwise": 11.223485946655273,
    "rank_canonical": 34498,
-   "rank_wordwise": 7
+   "rank_wordwise": 7,
+   "at_glued_boundary": true,
+   "at_word_start": false,
+   "word": "as",
+   "canonical_crosses_word": true
   },
   {
    "excerpt_id": "reference_impl-15-subagent-cot",
@@ -722,7 +2024,11 @@
    "logprob_wordwise": -1.615647792816162,
    "advantage_wordwise": 1.9974403381347656,
    "rank_canonical": 8,
-   "rank_wordwise": 1
+   "rank_wordwise": 1,
+   "at_glued_boundary": true,
+   "at_word_start": false,
+   "word": "extraneous",
+   "canonical_crosses_word": false
   },
   {
    "excerpt_id": "reference_impl-15-subagent-cot",
@@ -735,7 +2041,11 @@
    "logprob_wordwise": -7.716915607452393,
    "advantage_wordwise": 2.3009371757507324,
    "rank_canonical": 2235,
-   "rank_wordwise": 312
+   "rank_wordwise": 312,
+   "at_glued_boundary": false,
+   "at_word_start": false,
+   "word": "conditional:",
+   "canonical_crosses_word": true
   },
   {
    "excerpt_id": "reference_impl-15-subagent-cot",
@@ -748,7 +2058,11 @@
    "logprob_wordwise": -6.574241638183594,
    "advantage_wordwise": 2.689419746398926,
    "rank_canonical": 1045,
-   "rank_wordwise": 97
+   "rank_wordwise": 97,
+   "at_glued_boundary": false,
+   "at_word_start": false,
+   "word": "conditional:",
+   "canonical_crosses_word": true
   },
   {
    "excerpt_id": "reference_impl-16-parent-cot",
@@ -761,7 +2075,11 @@
    "logprob_wordwise": -5.193814754486084,
    "advantage_wordwise": 3.1441025733947754,
    "rank_canonical": 396,
-   "rank_wordwise": 24
+   "rank_wordwise": 24,
+   "at_glued_boundary": true,
+   "at_word_start": false,
+   "word": "We",
+   "canonical_crosses_word": false
   },
   {
    "excerpt_id": "reference_impl-16-parent-cot",
@@ -774,7 +2092,11 @@
    "logprob_wordwise": -12.30453872680664,
    "advantage_wordwise": -2.4600582122802734,
    "rank_canonical": 2095,
-   "rank_wordwise": 12943
+   "rank_wordwise": 12943,
+   "at_glued_boundary": true,
+   "at_word_start": true,
+   "word": "higher",
+   "canonical_crosses_word": false
   },
   {
    "excerpt_id": "reference_impl-16-parent-cot",
@@ -787,7 +2109,11 @@
    "logprob_wordwise": -9.92012882232666,
    "advantage_wordwise": 0.32161808013916016,
    "rank_canonical": 2825,
-   "rank_wordwise": 2260
+   "rank_wordwise": 2260,
+   "at_glued_boundary": true,
+   "at_word_start": true,
+   "word": "copy",
+   "canonical_crosses_word": false
   },
   {
    "excerpt_id": "reference_impl-16-parent-cot",
@@ -800,7 +2126,11 @@
    "logprob_wordwise": -2.6393048763275146,
    "advantage_wordwise": 7.626792907714844,
    "rank_canonical": 2693,
-   "rank_wordwise": 1
+   "rank_wordwise": 1,
+   "at_glued_boundary": true,
+   "at_word_start": false,
+   "word": "asked",
+   "canonical_crosses_word": true
   },
   {
    "excerpt_id": "reference_impl-16-parent-cot",
@@ -813,7 +2143,11 @@
    "logprob_wordwise": -6.662962913513184,
    "advantage_wordwise": -2.5658769607543945,
    "rank_canonical": 5,
-   "rank_wordwise": 62
+   "rank_wordwise": 62,
+   "at_glued_boundary": true,
+   "at_word_start": false,
+   "word": "statutor",
+   "canonical_crosses_word": false
   },
   {
    "excerpt_id": "reference_impl-19-parent-cot",
@@ -826,7 +2160,11 @@
    "logprob_wordwise": -8.460622787475586,
    "advantage_wordwise": 1.0071840286254883,
    "rank_canonical": 1548,
-   "rank_wordwise": 615
+   "rank_wordwise": 615,
+   "at_glued_boundary": true,
+   "at_word_start": false,
+   "word": "Already",
+   "canonical_crosses_word": false
   },
   {
    "excerpt_id": "reference_impl-19-parent-cot",
@@ -839,7 +2177,11 @@
    "logprob_wordwise": -6.4069061279296875,
    "advantage_wordwise": 2.119805335998535,
    "rank_canonical": 579,
-   "rank_wordwise": 42
+   "rank_wordwise": 42,
+   "at_glued_boundary": false,
+   "at_word_start": false,
+   "word": "usual.",
+   "canonical_crosses_word": true
   },
   {
    "excerpt_id": "reference_impl-19-parent-cot",
@@ -852,7 +2194,11 @@
    "logprob_wordwise": -0.6625959277153015,
    "advantage_wordwise": 4.389799118041992,
    "rank_canonical": 7,
-   "rank_wordwise": 1
+   "rank_wordwise": 1,
+   "at_glued_boundary": true,
+   "at_word_start": false,
+   "word": "asked",
+   "canonical_crosses_word": true
   },
   {
    "excerpt_id": "reference_impl-19-parent-cot",
@@ -865,7 +2211,11 @@
    "logprob_wordwise": -6.9454026222229,
    "advantage_wordwise": 3.9672770500183105,
    "rank_canonical": 4674,
-   "rank_wordwise": 144
+   "rank_wordwise": 144,
+   "at_glued_boundary": true,
+   "at_word_start": true,
+   "word": "path",
+   "canonical_crosses_word": true
   },
   {
    "excerpt_id": "reference_impl-19-parent-cot",
@@ -878,7 +2228,11 @@
    "logprob_wordwise": -3.9005215167999268,
    "advantage_wordwise": 2.074436902999878,
    "rank_canonical": 45,
-   "rank_wordwise": 2
+   "rank_wordwise": 2,
+   "at_glued_boundary": false,
+   "at_word_start": false,
+   "word": "usual.",
+   "canonical_crosses_word": true
   },
   {
    "excerpt_id": "eval_pipeline-04-parent-cot",
@@ -891,7 +2245,11 @@
    "logprob_wordwise": -10.200557708740234,
    "advantage_wordwise": 0.5786142349243164,
    "rank_canonical": 773,
-   "rank_wordwise": 462
+   "rank_wordwise": 462,
+   "at_glued_boundary": true,
+   "at_word_start": false,
+   "word": "We",
+   "canonical_crosses_word": false
   },
   {
    "excerpt_id": "eval_pipeline-04-parent-cot",
@@ -904,7 +2262,11 @@
    "logprob_wordwise": -2.0810985565185547,
    "advantage_wordwise": 4.04815673828125,
    "rank_canonical": 44,
-   "rank_wordwise": 2
+   "rank_wordwise": 2,
+   "at_glued_boundary": true,
+   "at_word_start": true,
+   "word": "alarm",
+   "canonical_crosses_word": false
   },
   {
    "excerpt_id": "eval_pipeline-04-parent-cot",
@@ -917,7 +2279,11 @@
    "logprob_wordwise": -2.9938929080963135,
    "advantage_wordwise": 2.8262078762054443,
    "rank_canonical": 33,
-   "rank_wordwise": 1
+   "rank_wordwise": 1,
+   "at_glued_boundary": true,
+   "at_word_start": true,
+   "word": "we",
+   "canonical_crosses_word": false
   },
   {
    "excerpt_id": "eval_pipeline-04-parent-cot",
@@ -930,7 +2296,11 @@
    "logprob_wordwise": -6.695718765258789,
    "advantage_wordwise": 1.3977642059326172,
    "rank_canonical": 214,
-   "rank_wordwise": 74
+   "rank_wordwise": 74,
+   "at_glued_boundary": true,
+   "at_word_start": false,
+   "word": "not",
+   "canonical_crosses_word": false
   },
   {
    "excerpt_id": "eval_pipeline-04-parent-cot",
@@ -943,7 +2313,11 @@
    "logprob_wordwise": -8.57911491394043,
    "advantage_wordwise": -1.6041364669799805,
    "rank_canonical": 141,
-   "rank_wordwise": 614
+   "rank_wordwise": 614,
+   "at_glued_boundary": true,
+   "at_word_start": true,
+   "word": "we",
+   "canonical_crosses_word": false
   },
   {
    "excerpt_id": "eval_pipeline-04-parent-cot",
@@ -956,7 +2330,11 @@
    "logprob_wordwise": -5.346590995788574,
    "advantage_wordwise": 3.1813716888427734,
    "rank_canonical": 284,
-   "rank_wordwise": 30
+   "rank_wordwise": 30,
+   "at_glued_boundary": true,
+   "at_word_start": false,
+   "word": "User",
+   "canonical_crosses_word": false
   },
   {
    "excerpt_id": "eval_pipeline-04-parent-cot",
@@ -969,7 +2347,11 @@
    "logprob_wordwise": -8.834213256835938,
    "advantage_wordwise": -1.235058307647705,
    "rank_canonical": 321,
-   "rank_wordwise": 1028
+   "rank_wordwise": 1028,
+   "at_glued_boundary": true,
+   "at_word_start": true,
+   "word": "do",
+   "canonical_crosses_word": true
   },
   {
    "excerpt_id": "eval_pipeline-04-parent-cot",
@@ -982,7 +2364,11 @@
    "logprob_wordwise": -12.342406272888184,
    "advantage_wordwise": -0.8272123336791992,
    "rank_canonical": 1232,
-   "rank_wordwise": 2267
+   "rank_wordwise": 2267,
+   "at_glued_boundary": true,
+   "at_word_start": true,
+   "word": "monitors",
+   "canonical_crosses_word": false
   },
   {
    "excerpt_id": "eval_pipeline-06-subagent-cot",
@@ -995,7 +2381,11 @@
    "logprob_wordwise": -4.2719292640686035,
    "advantage_wordwise": 5.337226390838623,
    "rank_canonical": 410,
-   "rank_wordwise": 3
+   "rank_wordwise": 3,
+   "at_glued_boundary": true,
+   "at_word_start": true,
+   "word": "no",
+   "canonical_crosses_word": true
   },
   {
    "excerpt_id": "eval_pipeline-06-subagent-cot",
@@ -1008,7 +2398,11 @@
    "logprob_wordwise": -3.5487215518951416,
    "advantage_wordwise": 6.421918869018555,
    "rank_canonical": 1130,
-   "rank_wordwise": 5
+   "rank_wordwise": 5,
+   "at_glued_boundary": true,
+   "at_word_start": true,
+   "word": "no",
+   "canonical_crosses_word": true
   },
   {
    "excerpt_id": "reference_impl-14-parent-agent_message",
@@ -1021,7 +2415,11 @@
    "logprob_wordwise": -3.5216073989868164,
    "advantage_wordwise": 1.2159347534179688,
    "rank_canonical": 12,
-   "rank_wordwise": 8
+   "rank_wordwise": 8,
+   "at_glued_boundary": false,
+   "at_word_start": false,
+   "word": "definitions/functionality/bias.",
+   "canonical_crosses_word": true
   },
   {
    "excerpt_id": "reference_impl-14-parent-agent_message",
@@ -1034,7 +2432,11 @@
    "logprob_wordwise": -3.5216073989868164,
    "advantage_wordwise": 1.2159347534179688,
    "rank_canonical": 12,
-   "rank_wordwise": 8
+   "rank_wordwise": 8,
+   "at_glued_boundary": false,
+   "at_word_start": false,
+   "word": "definitions/functionality/bias.",
+   "canonical_crosses_word": true
   },
   {
    "excerpt_id": "reference_impl-15-subagent-cot",
@@ -1047,7 +2449,11 @@
    "logprob_wordwise": -6.375425338745117,
    "advantage_wordwise": -2.4516563415527344,
    "rank_canonical": 6,
-   "rank_wordwise": 45
+   "rank_wordwise": 45,
+   "at_glued_boundary": true,
+   "at_word_start": false,
+   "word": "undermine",
+   "canonical_crosses_word": false
   },
   {
    "excerpt_id": "reference_impl-15-subagent-cot",
@@ -1060,7 +2466,11 @@
    "logprob_wordwise": -8.209729194641113,
    "advantage_wordwise": 0.45526885986328125,
    "rank_canonical": 211,
-   "rank_wordwise": 146
+   "rank_wordwise": 146,
+   "at_glued_boundary": true,
+   "at_word_start": false,
+   "word": "not",
+   "canonical_crosses_word": false
   },
   {
    "excerpt_id": "reference_impl-15-subagent-cot",
@@ -1073,7 +2483,11 @@
    "logprob_wordwise": -5.113135814666748,
    "advantage_wordwise": 0.34818458557128906,
    "rank_canonical": 33,
-   "rank_wordwise": 22
+   "rank_wordwise": 22,
+   "at_glued_boundary": true,
+   "at_word_start": false,
+   "word": "harm",
+   "canonical_crosses_word": false
   },
   {
    "excerpt_id": "reference_impl-15-subagent-cot",
@@ -1086,7 +2500,11 @@
    "logprob_wordwise": -1.1662408113479614,
    "advantage_wordwise": 1.7365168333053589,
    "rank_canonical": 3,
-   "rank_wordwise": 1
+   "rank_wordwise": 1,
+   "at_glued_boundary": true,
+   "at_word_start": false,
+   "word": "bypass",
+   "canonical_crosses_word": false
   },
   {
    "excerpt_id": "reference_impl-15-subagent-cot",
@@ -1099,7 +2517,11 @@
    "logprob_wordwise": -11.000435829162598,
    "advantage_wordwise": 0.2579832077026367,
    "rank_canonical": 5156,
-   "rank_wordwise": 4210
+   "rank_wordwise": 4210,
+   "at_glued_boundary": true,
+   "at_word_start": true,
+   "word": "architecture",
+   "canonical_crosses_word": false
   },
   {
    "excerpt_id": "reference_impl-15-subagent-cot",
@@ -1112,7 +2534,11 @@
    "logprob_wordwise": -12.801037788391113,
    "advantage_wordwise": -5.209138870239258,
    "rank_canonical": 237,
-   "rank_wordwise": 21426
+   "rank_wordwise": 21426,
+   "at_glued_boundary": true,
+   "at_word_start": true,
+   "word": "Dummy",
+   "canonical_crosses_word": false
   },
   {
    "excerpt_id": "reference_impl-15-subagent-cot",
@@ -1125,7 +2551,11 @@
    "logprob_wordwise": -2.919663906097412,
    "advantage_wordwise": 11.397541046142578,
    "rank_canonical": 20818,
-   "rank_wordwise": 4
+   "rank_wordwise": 4,
+   "at_glued_boundary": true,
+   "at_word_start": false,
+   "word": "as",
+   "canonical_crosses_word": true
   },
   {
    "excerpt_id": "reference_impl-15-subagent-cot",
@@ -1138,7 +2568,11 @@
    "logprob_wordwise": -2.63973069190979,
    "advantage_wordwise": 2.466499090194702,
    "rank_canonical": 16,
-   "rank_wordwise": 3
+   "rank_wordwise": 3,
+   "at_glued_boundary": true,
+   "at_word_start": false,
+   "word": "extraneous",
+   "canonical_crosses_word": false
   },
   {
    "excerpt_id": "reference_impl-15-subagent-cot",
@@ -1151,7 +2585,11 @@
    "logprob_wordwise": -5.625579833984375,
    "advantage_wordwise": 2.79715633392334,
    "rank_canonical": 492,
-   "rank_wordwise": 18
+   "rank_wordwise": 18,
+   "at_glued_boundary": false,
+   "at_word_start": false,
+   "word": "conditional:",
+   "canonical_crosses_word": true
   },
   {
    "excerpt_id": "reference_impl-15-subagent-cot",
@@ -1164,7 +2602,11 @@
    "logprob_wordwise": -6.718378067016602,
    "advantage_wordwise": 2.2028980255126953,
    "rank_canonical": 662,
-   "rank_wordwise": 77
+   "rank_wordwise": 77,
+   "at_glued_boundary": false,
+   "at_word_start": false,
+   "word": "conditional:",
+   "canonical_crosses_word": true
   },
   {
    "excerpt_id": "reference_impl-16-parent-cot",
@@ -1177,7 +2619,11 @@
    "logprob_wordwise": -9.256893157958984,
    "advantage_wordwise": 0.1632404327392578,
    "rank_canonical": 334,
-   "rank_wordwise": 298
+   "rank_wordwise": 298,
+   "at_glued_boundary": true,
+   "at_word_start": false,
+   "word": "We",
+   "canonical_crosses_word": false
   },
   {
    "excerpt_id": "reference_impl-16-parent-cot",
@@ -1190,7 +2636,11 @@
    "logprob_wordwise": -10.721175193786621,
    "advantage_wordwise": -1.437765121459961,
    "rank_canonical": 1062,
-   "rank_wordwise": 4300
+   "rank_wordwise": 4300,
+   "at_glued_boundary": true,
+   "at_word_start": true,
+   "word": "higher",
+   "canonical_crosses_word": false
   },
   {
    "excerpt_id": "reference_impl-16-parent-cot",
@@ -1203,7 +2653,11 @@
    "logprob_wordwise": -8.911014556884766,
    "advantage_wordwise": 0.3634681701660156,
    "rank_canonical": 1248,
-   "rank_wordwise": 882
+   "rank_wordwise": 882,
+   "at_glued_boundary": true,
+   "at_word_start": true,
+   "word": "copy",
+   "canonical_crosses_word": false
   },
   {
    "excerpt_id": "reference_impl-16-parent-cot",
@@ -1216,7 +2670,11 @@
    "logprob_wordwise": -2.8103177547454834,
    "advantage_wordwise": 7.901453018188477,
    "rank_canonical": 4190,
-   "rank_wordwise": 1
+   "rank_wordwise": 1,
+   "at_glued_boundary": true,
+   "at_word_start": false,
+   "word": "asked",
+   "canonical_crosses_word": true
   },
   {
    "excerpt_id": "reference_impl-16-parent-cot",
@@ -1229,7 +2687,11 @@
    "logprob_wordwise": -7.759676933288574,
    "advantage_wordwise": -3.08465576171875,
    "rank_canonical": 13,
-   "rank_wordwise": 150
+   "rank_wordwise": 150,
+   "at_glued_boundary": true,
+   "at_word_start": false,
+   "word": "statutor",
+   "canonical_crosses_word": false
   },
   {
    "excerpt_id": "reference_impl-19-parent-cot",
@@ -1242,7 +2704,11 @@
    "logprob_wordwise": -10.067779541015625,
    "advantage_wordwise": -1.2481746673583984,
    "rank_canonical": 376,
-   "rank_wordwise": 1159
+   "rank_wordwise": 1159,
+   "at_glued_boundary": true,
+   "at_word_start": false,
+   "word": "Already",
+   "canonical_crosses_word": false
   },
   {
    "excerpt_id": "reference_impl-19-parent-cot",
@@ -1255,7 +2721,11 @@
    "logprob_wordwise": -3.443376302719116,
    "advantage_wordwise": 2.333054780960083,
    "rank_canonical": 27,
-   "rank_wordwise": 2
+   "rank_wordwise": 2,
+   "at_glued_boundary": false,
+   "at_word_start": false,
+   "word": "usual.",
+   "canonical_crosses_word": true
   },
   {
    "excerpt_id": "reference_impl-19-parent-cot",
@@ -1268,7 +2738,11 @@
    "logprob_wordwise": -1.1934365034103394,
    "advantage_wordwise": 5.566141128540039,
    "rank_canonical": 56,
-   "rank_wordwise": 1
+   "rank_wordwise": 1,
+   "at_glued_boundary": true,
+   "at_word_start": false,
+   "word": "asked",
+   "canonical_crosses_word": true
   },
   {
    "excerpt_id": "reference_impl-19-parent-cot",
@@ -1281,7 +2755,11 @@
    "logprob_wordwise": -8.12988567352295,
    "advantage_wordwise": 1.8633995056152344,
    "rank_canonical": 2708,
-   "rank_wordwise": 403
+   "rank_wordwise": 403,
+   "at_glued_boundary": true,
+   "at_word_start": true,
+   "word": "path",
+   "canonical_crosses_word": true
   },
   {
    "excerpt_id": "reference_impl-19-parent-cot",
@@ -1294,7 +2772,11 @@
    "logprob_wordwise": -2.6080572605133057,
    "advantage_wordwise": 3.353381872177124,
    "rank_canonical": 38,
-   "rank_wordwise": 1
+   "rank_wordwise": 1,
+   "at_glued_boundary": false,
+   "at_word_start": false,
+   "word": "usual.",
+   "canonical_crosses_word": true
   },
   {
    "excerpt_id": "eval_pipeline-04-parent-cot",
@@ -1307,7 +2789,11 @@
    "logprob_wordwise": -12.338874816894531,
    "advantage_wordwise": 0.5205783843994141,
    "rank_canonical": 9773,
-   "rank_wordwise": 7625
+   "rank_wordwise": 7625,
+   "at_glued_boundary": true,
+   "at_word_start": false,
+   "word": "user",
+   "canonical_crosses_word": false
   },
   {
    "excerpt_id": "eval_pipeline-04-parent-cot",
@@ -1320,7 +2806,11 @@
    "logprob_wordwise": -11.214221954345703,
    "advantage_wordwise": 0.14174461364746094,
    "rank_canonical": 4267,
-   "rank_wordwise": 3916
+   "rank_wordwise": 3916,
+   "at_glued_boundary": true,
+   "at_word_start": false,
+   "word": "okay",
+   "canonical_crosses_word": false
   },
   {
    "excerpt_id": "eval_pipeline-04-parent-cot",
@@ -1333,7 +2823,11 @@
    "logprob_wordwise": -5.097091197967529,
    "advantage_wordwise": 0.9437341690063477,
    "rank_canonical": 53,
-   "rank_wordwise": 16
+   "rank_wordwise": 16,
+   "at_glued_boundary": true,
+   "at_word_start": false,
+   "word": "User",
+   "canonical_crosses_word": false
   },
   {
    "excerpt_id": "eval_pipeline-04-parent-cot",
@@ -1346,7 +2840,11 @@
    "logprob_wordwise": -7.605650901794434,
    "advantage_wordwise": 0.39324378967285156,
    "rank_canonical": 481,
-   "rank_wordwise": 341
+   "rank_wordwise": 341,
+   "at_glued_boundary": true,
+   "at_word_start": true,
+   "word": "do",
+   "canonical_crosses_word": true
   },
   {
    "excerpt_id": "eval_pipeline-04-parent-cot",
@@ -1359,7 +2857,11 @@
    "logprob_wordwise": -9.04192066192627,
    "advantage_wordwise": -0.9208250045776367,
    "rank_canonical": 353,
-   "rank_wordwise": 827
+   "rank_wordwise": 827,
+   "at_glued_boundary": true,
+   "at_word_start": true,
+   "word": "monitors",
+   "canonical_crosses_word": false
   },
   {
    "excerpt_id": "eval_pipeline-06-subagent-cot",
@@ -1372,7 +2874,11 @@
    "logprob_wordwise": -8.491334915161133,
    "advantage_wordwise": 2.959404945373535,
    "rank_canonical": 4567,
-   "rank_wordwise": 537
+   "rank_wordwise": 537,
+   "at_glued_boundary": true,
+   "at_word_start": true,
+   "word": "user",
+   "canonical_crosses_word": false
   },
   {
    "excerpt_id": "eval_pipeline-06-subagent-cot",
@@ -1385,7 +2891,11 @@
    "logprob_wordwise": -6.692452430725098,
    "advantage_wordwise": -0.5867910385131836,
    "rank_canonical": 43,
-   "rank_wordwise": 103
+   "rank_wordwise": 103,
+   "at_glued_boundary": true,
+   "at_word_start": false,
+   "word": "User",
+   "canonical_crosses_word": false
   },
   {
    "excerpt_id": "eval_pipeline-06-subagent-cot",
@@ -1398,7 +2908,11 @@
    "logprob_wordwise": -3.861802816390991,
    "advantage_wordwise": 7.099539756774902,
    "rank_canonical": 4852,
-   "rank_wordwise": 2
+   "rank_wordwise": 2,
+   "at_glued_boundary": true,
+   "at_word_start": true,
+   "word": "no",
+   "canonical_crosses_word": true
   },
   {
    "excerpt_id": "eval_pipeline-06-subagent-cot",
@@ -1411,7 +2925,11 @@
    "logprob_wordwise": -5.021760940551758,
    "advantage_wordwise": 2.232222557067871,
    "rank_canonical": 218,
-   "rank_wordwise": 12
+   "rank_wordwise": 12,
+   "at_glued_boundary": true,
+   "at_word_start": true,
+   "word": "no",
+   "canonical_crosses_word": false
   },
   {
    "excerpt_id": "reference_impl-15-subagent-cot",
@@ -1424,7 +2942,11 @@
    "logprob_wordwise": -6.87261962890625,
    "advantage_wordwise": -0.5083856582641602,
    "rank_canonical": 74,
-   "rank_wordwise": 117
+   "rank_wordwise": 117,
+   "at_glued_boundary": true,
+   "at_word_start": false,
+   "word": "undermine",
+   "canonical_crosses_word": false
   },
   {
    "excerpt_id": "reference_impl-15-subagent-cot",
@@ -1437,7 +2959,11 @@
    "logprob_wordwise": -5.06505012512207,
    "advantage_wordwise": 0.28839683532714844,
    "rank_canonical": 41,
-   "rank_wordwise": 33
+   "rank_wordwise": 33,
+   "at_glued_boundary": true,
+   "at_word_start": false,
+   "word": "refactor",
+   "canonical_crosses_word": false
   },
   {
    "excerpt_id": "reference_impl-15-subagent-cot",
@@ -1450,7 +2976,11 @@
    "logprob_wordwise": -7.266774654388428,
    "advantage_wordwise": 0.5136814117431641,
    "rank_canonical": 267,
-   "rank_wordwise": 161
+   "rank_wordwise": 161,
+   "at_glued_boundary": true,
+   "at_word_start": true,
+   "word": "confirm",
+   "canonical_crosses_word": false
   },
   {
    "excerpt_id": "reference_impl-15-subagent-cot",
@@ -1463,7 +2993,11 @@
    "logprob_wordwise": -4.975164413452148,
    "advantage_wordwise": 2.907787322998047,
    "rank_canonical": 263,
-   "rank_wordwise": 17
+   "rank_wordwise": 17,
+   "at_glued_boundary": true,
+   "at_word_start": true,
+   "word": "no",
+   "canonical_crosses_word": false
   },
   {
    "excerpt_id": "reference_impl-15-subagent-cot",
@@ -1476,7 +3010,11 @@
    "logprob_wordwise": -12.259185791015625,
    "advantage_wordwise": -0.8749561309814453,
    "rank_canonical": 5957,
-   "rank_wordwise": 10010
+   "rank_wordwise": 10010,
+   "at_glued_boundary": true,
+   "at_word_start": true,
+   "word": "schema",
+   "canonical_crosses_word": false
   },
   {
    "excerpt_id": "reference_impl-16-parent-cot",
@@ -1489,7 +3027,11 @@
    "logprob_wordwise": -3.3462743759155273,
    "advantage_wordwise": 8.826334953308105,
    "rank_canonical": 9156,
-   "rank_wordwise": 2
+   "rank_wordwise": 2,
+   "at_glued_boundary": true,
+   "at_word_start": false,
+   "word": "asked",
+   "canonical_crosses_word": true
   },
   {
    "excerpt_id": "reference_impl-16-parent-cot",
@@ -1502,7 +3044,11 @@
    "logprob_wordwise": -8.28409481048584,
    "advantage_wordwise": -2.632871627807617,
    "rank_canonical": 33,
-   "rank_wordwise": 253
+   "rank_wordwise": 253,
+   "at_glued_boundary": true,
+   "at_word_start": false,
+   "word": "statutor",
+   "canonical_crosses_word": false
   },
   {
    "excerpt_id": "reference_impl-19-parent-cot",
@@ -1515,7 +3061,11 @@
    "logprob_wordwise": -7.9762725830078125,
    "advantage_wordwise": 0.6721725463867188,
    "rank_canonical": 737,
-   "rank_wordwise": 398
+   "rank_wordwise": 398,
+   "at_glued_boundary": true,
+   "at_word_start": false,
+   "word": "Already",
+   "canonical_crosses_word": false
   },
   {
    "excerpt_id": "reference_impl-19-parent-cot",
@@ -1528,7 +3078,11 @@
    "logprob_wordwise": -10.25318717956543,
    "advantage_wordwise": -0.6826972961425781,
    "rank_canonical": 1703,
-   "rank_wordwise": 2828
+   "rank_wordwise": 2828,
+   "at_glued_boundary": true,
+   "at_word_start": true,
+   "word": "functional",
+   "canonical_crosses_word": false
   },
   {
    "excerpt_id": "reference_impl-19-parent-cot",
@@ -1541,7 +3095,11 @@
    "logprob_wordwise": -1.8281958103179932,
    "advantage_wordwise": 3.8209989070892334,
    "rank_canonical": 26,
-   "rank_wordwise": 1
+   "rank_wordwise": 1,
+   "at_glued_boundary": true,
+   "at_word_start": false,
+   "word": "asked",
+   "canonical_crosses_word": true
   },
   {
    "excerpt_id": "reference_impl-19-parent-cot",
@@ -1554,7 +3112,11 @@
    "logprob_wordwise": -7.326516151428223,
    "advantage_wordwise": 2.144468307495117,
    "rank_canonical": 1952,
-   "rank_wordwise": 225
+   "rank_wordwise": 225,
+   "at_glued_boundary": true,
+   "at_word_start": true,
+   "word": "path",
+   "canonical_crosses_word": true
   }
  ]
 }
