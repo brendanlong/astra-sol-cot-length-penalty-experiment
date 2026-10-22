@@ -24,6 +24,10 @@ import tiktoken
 #: Published to one Surge site of its own; every update goes to this domain so
 #: links and reader-saved copies stay valid.
 PUBLISHED_AT = "https://gpt6-cot-spaces-cd652c60.surge.sh"
+#: The repo this is built from, and the thread it is discussed in. Every page
+#: links both ways so a reader landing on either can find the other.
+REPO_URL = "https://github.com/brendanlong/astra-sol-cot-length-penalty-experiment"
+DISCUSSION_URL = "https://www.lesswrong.com/posts/igEogGD9TAgAeAM7u/jimrandomh-s-shortform?commentId=su76ee7QNov6NqhBw"
 #: Lion Reader article id for the saved copy, refreshed on every republish.
 SAVED_ARTICLE_ID = "01a16091-299a-7db8-b77a-216504c89963"
 
@@ -471,6 +475,10 @@ since policy triggeruserno messages requiresnotproactive tool.</p></blockquote>
 noticed this</a> and read it as a possible side channel. This measures what the
 gluing does to the length of the text, and what it would take to produce.</p>
 
+<p class="note">Code, data and the full run log:
+<a href="{REPO_URL}">github.com/brendanlong/astra-sol-cot-length-penalty-experiment</a>
+· discussion: <a href="{DISCUSSION_URL}">LessWrong</a></p>
+
 <p><b>Over the {n_glued} glued excerpts, gluing makes the text
 {abs(t["pct_chars_vs_spaced"]):.1f}% shorter in characters and
 {t["pct_canonical_glued_vs_spaced"]:.1f}% <i>longer</i> in tokens.</b> That is
@@ -822,7 +830,7 @@ in the run log with what replaced it.</p>
 """)
 
     add("<h2>Reproducing</h2>")
-    add("""
+    add(f"""
 <p>Everything runs from the committed corpus — the report as saved, plus the
 extracted dataset. No GPU, no accounts.</p>
 <pre><code>git clone https://github.com/brendanlong/astra-sol-cot-length-penalty-experiment
@@ -830,11 +838,14 @@ cd astra-sol-cot-length-penalty-experiment
 uv sync
 SKIP_MODELS=1 bash scripts/reproduce.sh   # every number and figure
 bash scripts/reproduce.sh      # plus the small-model scoring (~15 min, CPU)</code></pre>
-<p>The full run log, with every command and the numbers this page draws from,
-is in
-<a href="https://github.com/brendanlong/astra-sol-cot-length-penalty-experiment/blob/main/RESULTS.md">RESULTS.md</a>;
-the predictions registered beforehand are in
-<a href="https://github.com/brendanlong/astra-sol-cot-length-penalty-experiment/blob/main/EXPERIMENT_PLAN.md">EXPERIMENT_PLAN.md</a>.
+<p>The repo is
+<a href="{REPO_URL}">brendanlong/astra-sol-cot-length-penalty-experiment</a>.
+The full run log, with every command and the numbers this page draws from, is
+in <a href="{REPO_URL}/blob/main/RESULTS.md">RESULTS.md</a>; the predictions
+registered beforehand are in
+<a href="{REPO_URL}/blob/main/EXPERIMENT_PLAN.md">EXPERIMENT_PLAN.md</a>.
+This is discussed on
+<a href="{DISCUSSION_URL}">LessWrong</a>.
 Related earlier work on re-tokenization is in
 <a href="https://github.com/brendanlong/tokenization-hidden-computation-experiment">tokenization-hidden-computation-experiment</a>.</p>
 """)

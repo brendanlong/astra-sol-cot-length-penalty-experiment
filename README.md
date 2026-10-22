@@ -11,7 +11,8 @@ between words missing:
 > preventsalertsbut disabling?
 
 **→ Read the [report](https://gpt6-cot-spaces-cd652c60.surge.sh)** (or
-[WRITEUP.md](WRITEUP.md), the same thing in Markdown). [RESULTS.md](RESULTS.md) is the full run
+[WRITEUP.md](WRITEUP.md), the same thing in Markdown).
+Discussed [on LessWrong](https://www.lesswrong.com/posts/igEogGD9TAgAeAM7u/jimrandomh-s-shortform?commentId=su76ee7QNov6NqhBw). [RESULTS.md](RESULTS.md) is the full run
 log — every command, every number, the four claims two review rounds withdrew,
 and the known gaps. [EXPERIMENT_PLAN.md](EXPERIMENT_PLAN.md) has the questions
 and predictions.
