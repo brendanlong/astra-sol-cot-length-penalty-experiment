@@ -485,7 +485,9 @@ Prompted by a question in discussion: if the penalty counts characters, why
 does GPT-6 drop spaces (1 character per decision) but keep long words that have
 everyday short forms? The pairs are hand-chosen and checked at every use in
 the 7 glued excerpts; ones that fit only some uses (appropriate → proper,
-originally → orig, temporarily → temp) were left out. Every word and short
+originally → orig, temporarily → temp), or that read badly in place
+(permission → perm in "not ask permission"; project → proj where "project" is
+pyproject's `[project]` table), were left out. Every word and short
 form is one o200k token with a leading space, so swapping saves no tokens.
 
 Rank = 1 + the number of tokens of the form ` [a-z]+` (47,450 of them) closer
@@ -499,23 +501,28 @@ excluded.
 | authorization | 1 | `auth` | 69 | 0.52 | 9 | 0 |
 | automatic | 2 | `auto` | 8 | 0.59 | 10 | 0 |
 | preference | 1 | `pref` | 39 | 0.53 | 6 | 0 |
-| permission | 1 | `perm` | 46 | 0.52 | 6 | 0 |
 | additional | 1 | `extra` | 4 | 0.68 | 5 | 0 |
 | necessary | 1 | `needed` | 1 | 0.81 | 3 | 0 |
 | original | 1 | `orig` | 22 | 0.56 | 4 | 0 |
-| project | 1 | `proj` | 29 | 0.57 | 3 | 0 |
 | current | 3 | `curr` | 13 | 0.55 | 9 | 0 |
 | images | 1 | `imgs` | 115 | 0.50 | 2 | 0 |
 | error | 1 | `err` | 6 | 0.67 | 2 | 0 |
 | okay | 2 | `ok` | 1 | 0.62 | 4 | 0 |
 
-Totals: **92 characters** and
+Totals: **83 characters** and
 0 tokens, against 278
 characters saved by gluing. The short forms themselves appear
 3 times (auto ×2, needed ×1;
-both `auto` are in `autoalarm`, `needed` is in `ifneeded`).
+both `auto` are in `autoalarm`, `needed` is in `ifneeded`, so only the two
+`auto` are places a listed long form could have gone). `messages`, the largest
+saving (20 characters), is in all 5 uses the model restating the user's "don't
+send any messages".
 
-Controls — near neighbours that are not interchangeable:
+The ranks put every short form in the nearest 115 of 47,450 words, but what
+sits above them is not only inflections and translations: `events`, `songs`
+and `movies` are closer to `messages` than `msgs` is.
+
+Controls, to calibrate the ranks — an opposite, a synonym and a related pair:
 
 | pair | rank | cosine |
 | --- | --- | --- |
@@ -536,7 +543,9 @@ tokens; the short forms save characters only. Taking the first and not the
 second fits a word-count penalty better than a character penalty. Not
 decisive: space-dropping is one habit that generalizes across boundaries,
 short forms are per-word, so RL could find gluing first under a character
-penalty. gpt-oss is also only a stand-in for GPT-6's own embeddings.
+penalty; and a character penalty plus a readability cost on abbreviations
+would give the same pattern. Zero token cost is under o200k, and gpt-oss is
+only a stand-in for GPT-6's own embeddings.
 
 ## Known gaps (runs 1–2)
 

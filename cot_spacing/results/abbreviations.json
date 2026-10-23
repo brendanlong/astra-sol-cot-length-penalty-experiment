@@ -3,7 +3,7 @@
  "n_word_tokens": 47450,
  "n_glued_excerpts": 7,
  "chars_saved_by_gluing": 278,
- "chars_saved_by_short_forms": 92,
+ "chars_saved_by_short_forms": 83,
  "tokens_saved_by_short_forms": 0,
  "short_forms_used": {
   "auto": 2,
@@ -56,15 +56,6 @@
    "rank": 39
   },
   {
-   "word": "permission",
-   "short": "perm",
-   "uses": 1,
-   "chars_saved": 6,
-   "tokens_saved": 0,
-   "cosine": 0.515,
-   "rank": 46
-  },
-  {
    "word": "additional",
    "short": "extra",
    "uses": 1,
@@ -90,15 +81,6 @@
    "tokens_saved": 0,
    "cosine": 0.559,
    "rank": 22
-  },
-  {
-   "word": "project",
-   "short": "proj",
-   "uses": 1,
-   "chars_saved": 3,
-   "tokens_saved": 0,
-   "cosine": 0.569,
-   "rank": 29
   },
   {
    "word": "current",

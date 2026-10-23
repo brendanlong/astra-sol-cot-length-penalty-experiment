@@ -46,25 +46,25 @@ EMBEDDING = "model.embed_tokens.weight"
 #: Full word GPT-6 wrote in the glued excerpts -> a common short form that
 #: means the same thing at every place it was used. Read in context; pairs
 #: that only work in some of their uses (appropriate -> proper,
-#: originally -> orig, temporarily -> temp) are left out.
+#: originally -> orig, temporarily -> temp), or that read badly where they
+#: would go ("ask perm"; "project" names pyproject's [project] table), are left
+#: out.
 PAIRS: tuple[tuple[str, str], ...] = (
     ("messages", "msgs"),
     ("automatically", "auto"),
     ("authorization", "auth"),
     ("automatic", "auto"),
     ("preference", "pref"),
-    ("permission", "perm"),
     ("additional", "extra"),
     ("necessary", "needed"),
     ("original", "orig"),
-    ("project", "proj"),
     ("current", "curr"),
     ("images", "imgs"),
     ("error", "err"),
     ("okay", "ok"),
 )
 
-#: Close in embedding space without being interchangeable.
+#: To calibrate the ranks: an opposite, a synonym and a related pair.
 CONTROLS: tuple[tuple[str, str], ...] = (
     ("higher", "lower"),
     ("big", "large"),
@@ -97,7 +97,7 @@ def load_embeddings() -> torch.Tensor:
     start, end = (8 + header_len + o for o in tensor["data_offsets"])
     raw = np.frombuffer(read_range(fs, shard, start, end), dtype=np.uint16)
     # bfloat16 is the top half of a float32.
-    weights = torch.from_numpy(raw.astype(np.int32) << 16).view(torch.float32)
+    weights = torch.from_numpy((raw.astype(np.uint32) << 16).view(np.float32))
     weights = weights.reshape(tensor["shape"])
     return weights / weights.norm(dim=1, keepdim=True)
 

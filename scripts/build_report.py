@@ -457,8 +457,8 @@ gluing does to the length of the text, and what it would take to produce.</p>
 {t["pct_canonical_glued_vs_spaced"]:.1f}% <i>longer</i> in tokens.</b> That is
 consistent with a length penalty counting characters, and hard to square with
 one counting tokens. But GPT&#8209;6 also passes up shorter words that would
-save characters at no cost in tokens, which fits a penalty on the number of
-words better than either.</p>
+save characters at no cost in tokens, which leans toward a penalty on the
+number of words instead.</p>
 """)
 
     add("<h2>The same characters, three different token sequences</h2>")
@@ -535,7 +535,7 @@ pushing the same way.</p>
     add(f"""
 <p>Gluing is not the only way to save characters. Writing <code>msgs</code>
 for <code>messages</code> saves four at once, and since both are a single
-token it costs nothing in tokens. One sentence from the first Sol
+o200k token it costs nothing in tokens. One sentence from the first Sol
 chain-of-thought, three ways:</p>
 <table>
 <tr><th></th><th>characters</th></tr>
@@ -554,7 +554,7 @@ the {ex["chars_spaced"] - ex["chars_as_written"]} characters the gluing saved,
 without touching a space.</p>
 
 <p>Across the {abbrev["n_glued_excerpts"]} glued excerpts, {len(pairs)}
-everyday short forms like these would have saved
+everyday swaps like these would have saved
 <b>{abbrev["chars_saved_by_short_forms"]} characters</b>,
 {100 * abbrev["chars_saved_by_short_forms"] / abbrev["chars_saved_by_gluing"]:.0f}%
 of the {abbrev["chars_saved_by_gluing"]} the gluing saved, and
@@ -562,8 +562,12 @@ of the {abbrev["chars_saved_by_gluing"]} the gluing saved, and
 {sum(p["uses"] for p in pairs)} times and the short one
 {sum(short_used.values())} times ({
         ", ".join(f"<code>{w}</code> ×{n}" for w, n in short_used.items())
-    }). It does abbreviate now and then — <code>req</code>,
-<code>aux</code> and <code>config</code> appear — but rarely.</p>
+    }; the two <code>auto</code> are in <code>autoalarm</code>, the
+<code>needed</code> in <code>ifneeded</code>). So it does abbreviate now and
+then — <code>req</code> and <code>aux</code> appear too — but rarely. The
+largest single saving, <code>messages</code>, is the model repeating the
+user's "don't send any messages" back to itself, which may be less free to
+reword than an ordinary choice.</p>
 
 <details><summary>The short forms, and how close gpt-oss puts each one</summary>
 <table>
@@ -580,24 +584,30 @@ of the {abbrev["chars_saved_by_gluing"]} the gluing saved, and
 <p>The rank is how close the short form sits to the full word in
 {abbrev["model"].split("/")[-1]}'s input embeddings, among the
 {abbrev["n_word_tokens"]:,} tokens that are a lowercase English-looking word:
-rank 1 means no other word is closer. Most of the words ranked above a short
-form are other forms of the same word and translations — <code>message</code>,
-<code>mensajes</code>.</p>
+rank 1 means no other word is closer. Every short form is in the nearest
+{max(p["rank"] for p in pairs)}, the top
+{100 * max(p["rank"] for p in pairs) / abbrev["n_word_tokens"]:.2f}%. The
+words ranked above are other forms of the same word and translations, but also
+words that just turn up in similar places: <code>events</code>,
+<code>songs</code> and <code>movies</code> are closer to <code>messages</code>
+than <code>msgs</code> is.</p>
 <p>Closeness alone does not make two words interchangeable:
 <code>lower</code> is rank {ctrl["lower"]["rank"]} for <code>higher</code>, and
 <code>dog</code> rank {ctrl["dog"]["rank"]} for <code>cat</code>. So the pairs
 were picked by hand and checked at each place they are used, leaving out ones
-that only fit some of them (<code>appropriate</code> → <code>proper</code>);
-the embeddings show only that gpt-oss treats each pair as near-neighbours.</p>
+that only fit some of them (<code>appropriate</code> → <code>proper</code>)
+or read badly where they would go (<code>ask perm</code>). The embeddings show
+only that gpt-oss puts each pair close together.</p>
 </details>
 
 <p>The two shortcuts come apart on what they save. Gluing saves characters and
 words and costs tokens; a short form saves characters only. A model that takes
 the first and leaves the second fits a penalty on the number of words better
-than one on characters. It is not decisive: dropping a space is one habit that
+than one on characters. It is not decisive. Dropping a space is one habit that
 applies at every boundary, while short forms are learned word by word, so
-reinforcement learning could find gluing first under a character penalty
-too.</p>
+reinforcement learning could find gluing first under a character penalty too;
+and a character penalty plus some cost for hard-to-read abbreviations would
+give the same pattern.</p>
 """)
 
     add("<h2>The stored transcript is probably not what ran</h2>")
