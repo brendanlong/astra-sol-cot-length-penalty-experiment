@@ -49,6 +49,39 @@ reward term on every sample; and a token penalty could coexist with learned
 shorthand, imitation of terse human notes, or other rewards pushing the same
 way.
 
+**Shorter words were available, and went unused.** Writing `msgs` for
+`messages` saves four characters at once, and since both are a single o200k
+token it costs nothing in tokens. One sentence from the first Sol
+chain-of-thought:
+
+| | characters |
+| --- | --- |
+| as written: `NeedlogwewriteL2 rowsstandardautomaticallycentralnotifierwillpages perpolicy userauthorizedrunningmonitoring so okayshouldnotoptout notifications toavoid userpreference?` | 169 |
+| spaces restored | 189 |
+| spaces restored, `auto` / `ok` / `pref` for `automatically` / `okay` / `preference` | 172 |
+
+Three word choices get back 17 of the 20 characters the gluing saved without
+touching a space. Across the seven glued excerpts, 12 everyday swaps (to
+`msgs`, `auto`, `auth`, `pref`, `extra`, `needed`, `orig`, `curr`, `imgs`,
+`err`, `ok`) would have saved **83 characters** — 30% of the 278 the gluing
+saved — and **0 tokens**. GPT‑6 wrote the full forms 20 times and the short
+ones 3 times (`auto` twice, in `autoalarm`; `needed` once, in `ifneeded`). The
+biggest saving, `messages`, is the model repeating the user's "don't send any
+messages", which may be less free to reword. In gpt-oss-120b's input
+embeddings every short form is within the nearest 115 of 47,450 lowercase
+words to the full word (`ok` is the nearest to `okay`), but so are words that
+merely turn up in similar places (`songs` is closer to `messages` than `msgs`
+is) and opposites (`lower` is the nearest to `higher`), so the pairs were
+chosen by hand and checked at every place they are used.
+
+Gluing saves characters and words and costs tokens; a short form saves
+characters only. A model that takes the first and leaves the second fits a
+penalty on the number of words better than one on characters. It is not
+decisive: dropping a space is one habit that applies everywhere, while short
+forms are learned word by word, so RL could find gluing first under a character
+penalty too; and a character penalty plus some cost for hard-to-read
+abbreviations would give the same pattern.
+
 ## 2. The stored transcript is probably not the token sequence that ran
 
 If the models emit glued text one word at a time — each word carrying the

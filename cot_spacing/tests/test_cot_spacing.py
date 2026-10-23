@@ -245,3 +245,36 @@ def test_merge_undoes_a_boundary_without_changing_the_text() -> None:
     assert merged.words[0] == "severity4?"
     assert merged.original() == seg.original()
     assert len(merged.gaps) == len(seg.gaps) - 1
+
+
+def test_short_forms_cost_no_tokens_and_replace_words_actually_used() -> None:
+    from cot_spacing.abbreviations import PAIRS, letters, single_token
+    from cot_spacing.analysis import glued_only, segmentations
+
+    used = {
+        letters(w)
+        for _, s in glued_only(segmentations(load_excerpts()))
+        for w in s.words
+    }
+    for long, short in PAIRS:
+        assert long in used, long
+        single_token(enc(), long)
+        single_token(enc(), short)
+
+
+def test_example_only_swaps_listed_words() -> None:
+    from cot_spacing.abbreviations import EXAMPLE_EXCERPT, PAIRS, example, letters
+    from cot_spacing.analysis import segmentations
+
+    seg = dict((e.id, s) for e, s in segmentations(load_excerpts()))[EXAMPLE_EXCERPT]
+    ex = example(seg)
+    assert str(ex["as_written"]).replace(" ", "") == str(ex["spaced"]).replace(" ", "")
+    short = dict(PAIRS)
+    swaps = 0
+    for a, b in zip(
+        str(ex["spaced"]).split(), str(ex["abbreviated"]).split(), strict=True
+    ):
+        if a != b:
+            assert short[letters(a)] == letters(b)
+            swaps += 1
+    assert swaps > 0

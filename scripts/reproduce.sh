@@ -16,6 +16,12 @@ echo "== figures -> cot_spacing/figures/*.png =="
 uv run python -m cot_spacing.figures
 
 echo
+echo "== short forms GPT-6 passed up (downloads gpt-oss-120b's embeddings, ~1.2 GB) =="
+if [ "${SKIP_MODELS:-0}" != "1" ]; then
+  uv run python -m cot_spacing.abbreviations
+fi
+
+echo
 echo "== emission scoring, small models (downloads ~10 GB, CPU, ~15 min) =="
 echo "   skip with SKIP_MODELS=1"
 if [ "${SKIP_MODELS:-0}" != "1" ]; then

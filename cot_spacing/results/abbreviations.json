@@ -1,0 +1,150 @@
+{
+ "model": "openai/gpt-oss-120b",
+ "n_word_tokens": 47450,
+ "n_glued_excerpts": 7,
+ "chars_saved_by_gluing": 278,
+ "chars_saved_by_short_forms": 83,
+ "tokens_saved_by_short_forms": 0,
+ "short_forms_used": {
+  "auto": 2,
+  "needed": 1
+ },
+ "pairs": [
+  {
+   "word": "messages",
+   "short": "msgs",
+   "uses": 5,
+   "chars_saved": 20,
+   "tokens_saved": 0,
+   "cosine": 0.565,
+   "rank": 44
+  },
+  {
+   "word": "automatically",
+   "short": "auto",
+   "uses": 1,
+   "chars_saved": 9,
+   "tokens_saved": 0,
+   "cosine": 0.55,
+   "rank": 18
+  },
+  {
+   "word": "authorization",
+   "short": "auth",
+   "uses": 1,
+   "chars_saved": 9,
+   "tokens_saved": 0,
+   "cosine": 0.515,
+   "rank": 69
+  },
+  {
+   "word": "automatic",
+   "short": "auto",
+   "uses": 2,
+   "chars_saved": 10,
+   "tokens_saved": 0,
+   "cosine": 0.593,
+   "rank": 8
+  },
+  {
+   "word": "preference",
+   "short": "pref",
+   "uses": 1,
+   "chars_saved": 6,
+   "tokens_saved": 0,
+   "cosine": 0.527,
+   "rank": 39
+  },
+  {
+   "word": "additional",
+   "short": "extra",
+   "uses": 1,
+   "chars_saved": 5,
+   "tokens_saved": 0,
+   "cosine": 0.681,
+   "rank": 4
+  },
+  {
+   "word": "necessary",
+   "short": "needed",
+   "uses": 1,
+   "chars_saved": 3,
+   "tokens_saved": 0,
+   "cosine": 0.809,
+   "rank": 1
+  },
+  {
+   "word": "original",
+   "short": "orig",
+   "uses": 1,
+   "chars_saved": 4,
+   "tokens_saved": 0,
+   "cosine": 0.559,
+   "rank": 22
+  },
+  {
+   "word": "current",
+   "short": "curr",
+   "uses": 3,
+   "chars_saved": 9,
+   "tokens_saved": 0,
+   "cosine": 0.553,
+   "rank": 13
+  },
+  {
+   "word": "images",
+   "short": "imgs",
+   "uses": 1,
+   "chars_saved": 2,
+   "tokens_saved": 0,
+   "cosine": 0.504,
+   "rank": 115
+  },
+  {
+   "word": "error",
+   "short": "err",
+   "uses": 1,
+   "chars_saved": 2,
+   "tokens_saved": 0,
+   "cosine": 0.665,
+   "rank": 6
+  },
+  {
+   "word": "okay",
+   "short": "ok",
+   "uses": 2,
+   "chars_saved": 4,
+   "tokens_saved": 0,
+   "cosine": 0.619,
+   "rank": 1
+  }
+ ],
+ "controls": [
+  {
+   "word": "higher",
+   "other": "lower",
+   "cosine": 0.766,
+   "rank": 1
+  },
+  {
+   "word": "big",
+   "other": "large",
+   "cosine": 0.648,
+   "rank": 3
+  },
+  {
+   "word": "cat",
+   "other": "dog",
+   "cosine": 0.502,
+   "rank": 6
+  }
+ ],
+ "example": {
+  "as_written": "NeedlogwewriteL2 rowsstandardautomaticallycentralnotifierwillpages perpolicy userauthorizedrunningmonitoring so okayshouldnotoptout notifications toavoid userpreference?",
+  "spaced": "Need log we write L2 rows standard automatically central notifier will pages per policy user authorized running monitoring so okay should not opt out notifications to avoid user preference?",
+  "abbreviated": "Need log we write L2 rows standard auto central notifier will pages per policy user authorized running monitoring so ok should not opt out notifications to avoid user pref?",
+  "chars_as_written": 169,
+  "chars_spaced": 189,
+  "chars_abbreviated": 172
+ }
+}
