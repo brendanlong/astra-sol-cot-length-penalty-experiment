@@ -372,6 +372,7 @@ def decision_table(points: list[dict[str, Any]]) -> str:
 def build(out_path: Path) -> None:
     analysis = json.loads((RESULTS / "analysis.json").read_text())
     emission = json.loads((RESULTS / "emission_logprob.json").read_text())
+    abbrev = json.loads((RESULTS / "abbreviations.json").read_text())
     enc = tiktoken.get_encoding("o200k_base")
 
     t = analysis["length"]["glued_only"]["o200k_base"]["totals"]
@@ -455,7 +456,9 @@ gluing does to the length of the text, and what it would take to produce.</p>
 {abs(t["pct_chars_vs_spaced"]):.1f}% shorter in characters and
 {t["pct_canonical_glued_vs_spaced"]:.1f}% <i>longer</i> in tokens.</b> That is
 consistent with a length penalty counting characters, and hard to square with
-one counting tokens.</p>
+one counting tokens. But GPT&#8209;6 also passes up shorter words that would
+save characters at no cost in tokens, which fits a penalty on the number of
+words better than either.</p>
 """)
 
     add("<h2>The same characters, three different token sequences</h2>")
@@ -522,6 +525,79 @@ digit labels — it renders <code>severity4?</code> as two words while leaving
 this does not identify the training objective. A token penalty could still sit
 alongside learned shorthand, imitation of terse human notes, or other rewards
 pushing the same way.</p>
+""")
+
+    add("<h2>Shorter words were available, and went unused</h2>")
+    ex = abbrev["example"]
+    pairs = abbrev["pairs"]
+    ctrl = {c["other"]: c for c in abbrev["controls"]}
+    short_used = abbrev["short_forms_used"]
+    add(f"""
+<p>Gluing is not the only way to save characters. Writing <code>msgs</code>
+for <code>messages</code> saves four at once, and since both are a single
+token it costs nothing in tokens. One sentence from the first Sol
+chain-of-thought, three ways:</p>
+<table>
+<tr><th></th><th>characters</th></tr>
+<tr><td>as written<br><code>{esc(ex["as_written"])}</code></td><td>{
+        ex["chars_as_written"]
+    }</td></tr>
+<tr><td>spaces restored<br><code>{esc(ex["spaced"])}</code></td><td>{
+        ex["chars_spaced"]
+    }</td></tr>
+<tr><td>spaces restored, three short forms<br><code>{
+        esc(ex["abbreviated"])
+    }</code></td><td>{ex["chars_abbreviated"]}</td></tr>
+</table>
+<p>Three word choices get back {ex["chars_spaced"] - ex["chars_abbreviated"]} of
+the {ex["chars_spaced"] - ex["chars_as_written"]} characters the gluing saved,
+without touching a space.</p>
+
+<p>Across the {abbrev["n_glued_excerpts"]} glued excerpts, {len(pairs)}
+everyday short forms like these would have saved
+<b>{abbrev["chars_saved_by_short_forms"]} characters</b>,
+{100 * abbrev["chars_saved_by_short_forms"] / abbrev["chars_saved_by_gluing"]:.0f}%
+of the {abbrev["chars_saved_by_gluing"]} the gluing saved, and
+{abbrev["tokens_saved_by_short_forms"]} tokens. GPT&#8209;6 wrote the full form
+{sum(p["uses"] for p in pairs)} times and the short one
+{sum(short_used.values())} times ({
+        ", ".join(f"<code>{w}</code> ×{n}" for w, n in short_used.items())
+    }). It does abbreviate now and then — <code>req</code>,
+<code>aux</code> and <code>config</code> appear — but rarely.</p>
+
+<details><summary>The short forms, and how close gpt-oss puts each one</summary>
+<table>
+<tr><th>GPT&#8209;6 wrote</th><th>times</th><th>short form</th><th>rank</th><th>characters saved</th></tr>
+{
+        "".join(
+            f"<tr><td>{p['word']}</td><td>{p['uses']}</td>"
+            f"<td><code>{p['short']}</code></td><td>{p['rank']}</td>"
+            f"<td>{p['chars_saved']}</td></tr>"
+            for p in pairs
+        )
+    }
+</table>
+<p>The rank is how close the short form sits to the full word in
+{abbrev["model"].split("/")[-1]}'s input embeddings, among the
+{abbrev["n_word_tokens"]:,} tokens that are a lowercase English-looking word:
+rank 1 means no other word is closer. Most of the words ranked above a short
+form are other forms of the same word and translations — <code>message</code>,
+<code>mensajes</code>.</p>
+<p>Closeness alone does not make two words interchangeable:
+<code>lower</code> is rank {ctrl["lower"]["rank"]} for <code>higher</code>, and
+<code>dog</code> rank {ctrl["dog"]["rank"]} for <code>cat</code>. So the pairs
+were picked by hand and checked at each place they are used, leaving out ones
+that only fit some of them (<code>appropriate</code> → <code>proper</code>);
+the embeddings show only that gpt-oss treats each pair as near-neighbours.</p>
+</details>
+
+<p>The two shortcuts come apart on what they save. Gluing saves characters and
+words and costs tokens; a short form saves characters only. A model that takes
+the first and leaves the second fits a penalty on the number of words better
+than one on characters. It is not decisive: dropping a space is one habit that
+applies at every boundary, while short forms are learned word by word, so
+reinforcement learning could find gluing first under a character penalty
+too.</p>
 """)
 
     add("<h2>The stored transcript is probably not what ran</h2>")
@@ -845,6 +921,7 @@ details { margin: 0.8em 0; }
 summary { cursor: pointer; color: var(--link, #2a78d6); }
 table { border-collapse: collapse; font-size: 0.93em; }
 th, td { text-align: left; padding: 3px 14px 3px 0; }
+td code { overflow-wrap: anywhere; }
 </style>
 """
     tmp = out_path.with_suffix(".body.html")

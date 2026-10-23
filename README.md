@@ -27,6 +27,12 @@ and predictions.
    training objective, since GPT‑6's tokenizer and emitted tokens are both
    unobservable.
 
+   **But shorter words went unused.** 14 everyday short forms that gpt-oss's
+   embeddings place next to the word GPT‑6 wrote (`msgs`, `auto`, `ok`,
+   `pref`…) would have saved 92 characters — a third of what gluing saved — at
+   no cost in tokens, and GPT‑6 used them 3 times against 22 for the full
+   form. That fits a penalty on word count better than on characters.
+
    ![Bar chart titled "Dropping the spaces makes the text shorter in characters and longer in tokens". Three measures of the 7 glued excerpts against the same words with the spaces put back: characters fall 7.6% (3,361 against 3,639); tokens emitted one word at a time rise 5.0% (652 against 621); tokens re-encoded as one string rise 7.9% (667 against 618).](cot_spacing/figures/length.png)
 
 2. **The stored transcript is probably not the sequence that ran.** Scored on

@@ -11,7 +11,7 @@
 > infrastructure.
 
 Numbers first, interpretation separate and labelled. Everything quoted here is
-in `cot_spacing/results/analysis.json` and `cot_spacing/results/emission_logprob.json`; `cot_spacing/results/report.md`
+in `cot_spacing/results/analysis.json`, `cot_spacing/results/emission_logprob.json` and `cot_spacing/results/abbreviations.json`; `cot_spacing/results/report.md`
 is the generated summary.
 
 ## Run 1 — tokenizer-only analysis of the report excerpts (2026-10-21)
@@ -469,7 +469,76 @@ tokenizations and the pretrained prior is what breaks the tie.
 | word-at-a-time is the more probable emission | **confirmed at the point of choice** in 5/5 models — 15/21 glued-boundary divergences for gpt-oss-120b; **not confirmed** as whole-sequence log-probability (3/5 favour canonical) |
 | (unregistered) either candidate is a plausible emission | **no** — on gpt-oss-120b both sit below rank 100 at most divergences |
 
-## Known gaps (both runs)
+## Run 3 — shorter words that were available (2026-10-23)
+
+**Command**
+
+```bash
+uv run python -m cot_spacing.abbreviations
+```
+
+CPU, about 20 s plus reading gpt-oss-120b's input embedding table (BF16,
+201,088 × 2,880, ~1.2 GB) straight out of its safetensors shard. Raw output in
+`cot_spacing/results/abbreviations.json`.
+
+Prompted by a question in discussion: if the penalty counts characters, why
+does GPT-6 drop spaces (1 character per decision) but keep long words that have
+everyday short forms? The pairs are hand-chosen and checked at every use in
+the 7 glued excerpts; ones that fit only some uses (appropriate → proper,
+originally → orig, temporarily → temp) were left out. Every word and short
+form is one o200k token with a leading space, so swapping saves no tokens.
+
+Rank = 1 + the number of tokens of the form ` [a-z]+` (47,450 of them) closer
+to the full word by cosine than the short form is, the full word itself
+excluded.
+
+| GPT-6 wrote | uses | short form | rank | cosine | characters saved | tokens saved |
+| --- | --- | --- | --- | --- | --- | --- |
+| messages | 5 | `msgs` | 44 | 0.56 | 20 | 0 |
+| automatically | 1 | `auto` | 18 | 0.55 | 9 | 0 |
+| authorization | 1 | `auth` | 69 | 0.52 | 9 | 0 |
+| automatic | 2 | `auto` | 8 | 0.59 | 10 | 0 |
+| preference | 1 | `pref` | 39 | 0.53 | 6 | 0 |
+| permission | 1 | `perm` | 46 | 0.52 | 6 | 0 |
+| additional | 1 | `extra` | 4 | 0.68 | 5 | 0 |
+| necessary | 1 | `needed` | 1 | 0.81 | 3 | 0 |
+| original | 1 | `orig` | 22 | 0.56 | 4 | 0 |
+| project | 1 | `proj` | 29 | 0.57 | 3 | 0 |
+| current | 3 | `curr` | 13 | 0.55 | 9 | 0 |
+| images | 1 | `imgs` | 115 | 0.50 | 2 | 0 |
+| error | 1 | `err` | 6 | 0.67 | 2 | 0 |
+| okay | 2 | `ok` | 1 | 0.62 | 4 | 0 |
+
+Totals: **92 characters** and
+0 tokens, against 278
+characters saved by gluing. The short forms themselves appear
+3 times (auto ×2, needed ×1;
+both `auto` are in `autoalarm`, `needed` is in `ifneeded`).
+
+Controls — near neighbours that are not interchangeable:
+
+| pair | rank | cosine |
+| --- | --- | --- |
+| higher → lower | 1 | 0.77 |
+| big → large | 3 | 0.65 |
+| cat → dog | 6 | 0.50 |
+
+So the embedding rank shows that gpt-oss treats a pair as close, not that the
+two are equivalent; equivalence here is a hand judgement.
+
+Worked example (NeedlogwewriteL2 row…, `eval_pipeline-04`): as
+written 169 characters, spaces restored
+189, spaces restored with `auto`/`ok`/`pref`
+172.
+
+**Interpretation.** Gluing saves characters and space-separated words and costs
+tokens; the short forms save characters only. Taking the first and not the
+second fits a word-count penalty better than a character penalty. Not
+decisive: space-dropping is one habit that generalizes across boundaries,
+short forms are per-word, so RL could find gluing first under a character
+penalty. gpt-oss is also only a stand-in for GPT-6's own embeddings.
+
+## Known gaps (runs 1–2)
 
 - n = 7 glued excerpts from 2 incidents, and **OpenAI chose which excerpts to
   publish**. Nothing here generalizes to a rate at which GPT-6 does this, and
