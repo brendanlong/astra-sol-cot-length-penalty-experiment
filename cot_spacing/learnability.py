@@ -119,14 +119,20 @@ def edits(e: Example, direction: str) -> int:
 
 
 def step_gains(gradients_path: Path) -> list[dict[str, object]]:
-    """Gain in an excerpt's rewrite-over-spaced margin per unit training step.
+    """How much a unit training step raises an excerpt's rewrite-over-spaced margin.
 
-    With g_i the gradient of excerpt i's loss on its rewrite and s_j that on
-    its spaced reading, a unit step down the summed loss of excerpts T moves
-    excerpt j's margin log p(rewrite_j) - log p(spaced_j) by
-    <sum_T g_i, g_j - s_j> / |sum_T g_i|. ``held_out`` trains on the other
-    excerpts; ``same`` trains on excerpt j alone, the upper bound for a rewrite
-    that does not carry over from one excerpt's words to another's.
+    With g_i the gradient of excerpt i's loss on its rewrite and s_i that on
+    its spaced reading, the gradient of its margin
+    log p(rewrite_i) - log p(spaced_i) is m_i = s_i - g_i. Two steps:
+
+    - ``sft``: fine-tune on the rewrites, a step along -sum g_i. Moves the
+      margin of excerpt j by <-sum g_i, m_j> / |sum g_i|.
+    - ``margin``: a step that raises the training margins directly, along
+      sum m_i, as a reward for the rewrite over the original would. Moves it
+      by <sum m_i, m_j> / |sum m_i|. ``margin_cosine`` divides that by |m_j|,
+      so it does not depend on how large either side's gradients are.
+
+    ``held_out`` trains on the other excerpts; ``same`` on excerpt j alone.
     """
     saved = json.loads(gradients_path.read_text())
     examples = load_examples(EXAMPLES)
@@ -134,30 +140,40 @@ def step_gains(gradients_path: Path) -> list[dict[str, object]]:
     gram = torch.tensor(saved["gram"], dtype=torch.float64)
     logp = saved["logp"]
 
-    def gain(train: list[int], held: str, d: str) -> float:
-        g_norm = math.sqrt(gram[train][:, train].sum().item())
-        toward = gram[train, at[f"{held}/{d}"]] - gram[train, at[f"{held}/spaced"]]
-        return toward.sum().item() / g_norm
+    def vector(d: str, ids: list[str], margin: bool) -> torch.Tensor:
+        """Coefficients over the stored gradients of -sum g_i, or of sum m_i."""
+        c = torch.zeros(len(at), dtype=torch.float64)
+        for i in ids:
+            c[at[f"{i}/{d}"]] -= 1.0
+            if margin:
+                c[at[f"{i}/spaced"]] += 1.0
+        return c
+
+    def dot(a: torch.Tensor, b: torch.Tensor) -> float:
+        return (a @ gram @ b).item()
 
     rows = []
     for d in DIRECTIONS:
         for held in examples:
-            others = [at[f"{e.id}/{d}"] for e in examples if e.id != held.id]
-            held_out = gain(others, held.id, d)
-            same = gain([at[f"{held.id}/{d}"]], held.id, d)
-            rows.append(
-                {
-                    "direction": d,
-                    "excerpt": held.id,
-                    "margin": logp[f"{held.id}/{d}"] - logp[f"{held.id}/spaced"],
-                    "edits": edits(held, d),
-                    "chars_saved": held.chars_saved[d],
-                    "held_out_per_edit": held_out / edits(held, d),
-                    "held_out_per_char": held_out / held.chars_saved[d],
-                    "same_per_edit": same / edits(held, d),
-                    "same_per_char": same / held.chars_saved[d],
-                }
-            )
+            others = [e.id for e in examples if e.id != held.id]
+            test = vector(d, [held.id], margin=True)
+            row: dict[str, object] = {
+                "direction": d,
+                "excerpt": held.id,
+                "margin": logp[f"{held.id}/{d}"] - logp[f"{held.id}/spaced"],
+                "edits": edits(held, d),
+                "chars_saved": held.chars_saved[d],
+            }
+            for name, train in (("held_out", others), ("same", [held.id])):
+                for margin in (False, True):
+                    t = vector(d, train, margin)
+                    gain = dot(t, test) / math.sqrt(dot(t, t))
+                    kind = "margin" if margin else "sft"
+                    row[f"{name}_{kind}_per_edit"] = gain / edits(held, d)
+                    row[f"{name}_{kind}_per_char"] = gain / held.chars_saved[d]
+            t = vector(d, others, margin=True)
+            row["margin_cosine"] = dot(t, test) / math.sqrt(dot(t, t) * dot(test, test))
+            rows.append(row)
     return rows
 
 
@@ -270,22 +286,25 @@ def sites(out: Path, batch_size: int = 16) -> None:
 def site_summary(sites_path: Path) -> dict[str, dict[str, float]]:
     """Per kind of edit: how probable it is, and what it would save.
 
-    The expected saving is a mean over sites and so is carried by the few
-    sites where the edit is nearly as likely as the original; the median
-    ratio is the typical site.
+    The expected saving at a place takes the edit's probability given that
+    either it or the original is written, so it never exceeds the characters
+    the edit saves. It is a mean, so the few places where the edit is about as
+    likely as the original carry it; the median ratio is the typical place.
     """
     rows = json.loads(sites_path.read_text())["sites"]
     summary = {}
     for kind in ("glue", "short"):
         rs = [r for r in rows if r["kind"] == kind]
         log10 = [r["log_ratio"] / math.log(10) for r in rs]
+        #: Probability of the edit given that one of the two is written.
+        chosen = [1 / (1 + math.exp(-r["log_ratio"])) for r in rs]
         summary[kind] = {
             "opportunities": len(rs),
             "median_log10_ratio": statistics.median(log10),
             "share_within_100x": statistics.mean(x >= -2 for x in log10),
             "chars_per_opportunity": statistics.mean(r["chars_saved"] for r in rs),
             "expected_chars_per_opportunity": statistics.mean(
-                10**x * r["chars_saved"] for x, r in zip(log10, rs, strict=True)
+                p * r["chars_saved"] for p, r in zip(chosen, rs, strict=True)
             ),
         }
     return summary

@@ -25,15 +25,25 @@ RESULTS = Path(__file__).parent / "results"
 COLOR = {"glued": "#2a78d6", "short": "#eb6834", "both": "#1baf7a"}
 LABEL = {"glued": "glue", "short": "short forms", "both": "both"}
 METRICS = (
-    ("letters_per_space", "letters per space\n(higher = more gluing)"),
-    ("short_share", "short-form share\n(of dictionary words)"),
+    ("reasoning_letters_per_space", "letters per space,\nreasoning (median)"),
+    ("reasoning_short_share", "short-form share,\nreasoning"),
+    ("answer_short_share", "short-form share,\nanswer"),
     ("accuracy", "GSM8K accuracy\n(32 problems)"),
 )
 
 
 #: A run counts as coherent while it keeps GSM8K accuracy within this much of
-#: unsteered gpt-oss; past that its gluing and shortening are drawn hollow.
+#: unsteered gpt-oss and finishes nearly every answer; otherwise it is drawn
+#: hollow.
 COHERENT_DROP = 0.1
+COHERENT_FINISHED = 0.95
+
+
+def coherent(run: dict[str, object], base: dict[str, object]) -> bool:
+    return (
+        float(run["accuracy"]) >= float(base["accuracy"]) - COHERENT_DROP  # type: ignore[arg-type]
+        and float(run["finished"]) >= COHERENT_FINISHED  # type: ignore[arg-type]
+    )
 
 
 def steering_figure(scores: dict[str, list[dict[str, object]]], out: Path) -> None:
@@ -41,7 +51,7 @@ def steering_figure(scores: dict[str, list[dict[str, object]]], out: Path) -> No
     base = next(s for s in summary if s["direction"] == "none")
     layers = sorted({int(s["layer"]) for s in summary if s["direction"] != "none"})  # type: ignore[arg-type]
     fig, axes = plt.subplots(
-        len(METRICS), len(layers), figsize=(3.6 * len(layers), 8.2), sharex=True
+        len(METRICS), len(layers), figsize=(3.6 * len(layers), 10.4), sharex=True
     )
     for col, layer in enumerate(layers):
         for row, (key, label) in enumerate(METRICS):
@@ -56,10 +66,7 @@ def steering_figure(scores: dict[str, list[dict[str, object]]], out: Path) -> No
                 runs = [s for s in runs if s[key] is not None]
                 xs = [float(s["scale"]) for s in runs]  # type: ignore[arg-type]
                 ys = [float(s[key]) for s in runs]  # type: ignore[arg-type]
-                ok = [
-                    float(s["accuracy"]) >= float(base["accuracy"]) - COHERENT_DROP  # type: ignore[arg-type]
-                    for s in runs
-                ]
+                ok = [coherent(s, base) for s in runs]
                 ax.plot(xs, ys, color=COLOR[d], lw=2, zorder=3, label=LABEL[d])
                 ax.scatter(
                     xs,
@@ -71,7 +78,7 @@ def steering_figure(scores: dict[str, list[dict[str, object]]], out: Path) -> No
                     facecolors=[COLOR[d] if k else "white" for k in ok],
                 )
             ax.set_xscale("log", base=2)
-            if key == "letters_per_space":
+            if key == "reasoning_letters_per_space":
                 ax.set_yscale("log")
                 ax.yaxis.set_major_formatter(ScalarFormatter())
                 ax.yaxis.set_minor_formatter(NullFormatter())
@@ -89,7 +96,9 @@ def steering_figure(scores: dict[str, list[dict[str, object]]], out: Path) -> No
     handles.append(
         Line2D([], [], color=SECONDARY, marker="o", ls="", mfc="white", mew=1.5)
     )
-    labels.append(f"accuracy down more than {COHERENT_DROP * 100:.0f} points")
+    labels.append(
+        f"accuracy down > {COHERENT_DROP * 100:.0f} points, or answers unfinished"
+    )
     fig.legend(
         handles,
         labels,
@@ -111,31 +120,23 @@ def learnability_figure(gradients: Path, sites: Path, out: Path) -> None:
 
     _frame(left)
     for i, d in enumerate(DIRECTIONS):
-        for j, key in enumerate(("held_out_per_char", "same_per_char")):
-            ys = [float(r[key]) for r in gains if r["direction"] == d]  # type: ignore[arg-type]
-            x = i + (j - 0.5) * 0.3
-            left.scatter(
-                [x] * len(ys),
-                ys,
-                s=22,
-                color=COLOR[d],
-                zorder=3,
-                alpha=1.0 if j == 0 else 0.45,
-                edgecolor="white",
-                lw=0.8,
-            )
-            left.hlines(
-                statistics.mean(ys), x - 0.1, x + 0.1, color=INK, lw=1.5, zorder=4
-            )
+        ys = [float(r["margin_cosine"]) for r in gains if r["direction"] == d]  # type: ignore[arg-type]
+        left.scatter(
+            [i] * len(ys), ys, s=26, color=COLOR[d], zorder=3, edgecolor="white", lw=0.8
+        )
+        left.hlines(
+            statistics.mean(ys), i - 0.15, i + 0.15, color=INK, lw=1.5, zorder=4
+        )
     left.axhline(0, color=MUTED, lw=1)
+    left.set_ylim(0, 1)
     left.set_xticks(range(len(DIRECTIONS)), [LABEL[d] for d in DIRECTIONS])
     left.set_ylabel(
-        "margin gained per character saved\n(per unit training step)",
+        "cosine: training excerpts' margin gradient\nvs held-out margin gradient",
         fontsize=9,
         color=SECONDARY,
     )
     left.set_title(
-        "Fine-tuning on the rewrite (solid: other excerpts;\nfaded: the same excerpt)",
+        "Does raising the rewrite in 4 excerpts raise it\nin the 5th? (line: mean)",
         fontsize=9.5,
         color=INK,
     )

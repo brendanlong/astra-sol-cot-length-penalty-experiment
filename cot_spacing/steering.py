@@ -28,7 +28,6 @@ import re
 import statistics
 from pathlib import Path
 
-import tiktoken
 import torch
 
 from cot_spacing.variants import SHORT_FORMS, Example
@@ -189,36 +188,66 @@ LONG = set(SHORT_FORMS)
 SHORT = set(SHORT_FORMS.values()) - LONG
 
 
-def measure(text: str, answer: str | None, enc: tiktoken.Encoding) -> dict[str, object]:
+#: Below this many words from the short-form list, a share is too noisy to report.
+MIN_LIST_WORDS = 20
+
+
+def letters_per_space(text: str) -> float | None:
+    chunks = [c for c in text.split() if LETTERS.search(c)]
+    return sum(map(str.isalpha, text)) / len(chunks) if chunks else None
+
+
+def measure(text: str, answer: str | None) -> dict[str, object]:
+    """Gluing and shortening in the reasoning and in the answer, separately.
+
+    Steering acts on both. The reasoning is what the question is about, but at
+    reasoning effort "low" it is short, so the answer holds most of the words
+    a short form could replace.
+    """
     analysis_m = ANALYSIS.search(text)
     final_m = FINAL.search(text)
-    analysis = analysis_m.group(1) if analysis_m else ""
-    final = final_m.group(1) if final_m else None
-    chunks = [c for c in analysis.split() if LETTERS.search(c)]
-    words = [w.lower() for w in WORD.findall(analysis)]
-    n_long = sum(w in LONG for w in words)
-    n_short = sum(w in SHORT for w in words)
-    correct = None
-    if answer is not None:
-        numbers = NUMBER.findall(final or "")
-        correct = bool(numbers) and float(numbers[-1].replace(",", "")) == float(answer)
-    return {
-        "letters": sum(map(str.isalpha, analysis)),
-        "letters_per_space": sum(map(str.isalpha, analysis)) / max(1, len(chunks)),
-        "tokens_per_chunk": (
-            statistics.mean(len(enc.encode(" " + c)) for c in chunks)
-            if chunks
-            else None
-        ),
-        "n_long": n_long,
-        "n_short": n_short,
-        "finished": final is not None,
-        "correct": correct,
+    parts = {
+        "reasoning": analysis_m.group(1) if analysis_m else "",
+        "answer": final_m.group(1) if final_m else "",
     }
+    out: dict[str, object] = {"finished": final_m is not None}
+    for name, part in parts.items():
+        words = [w.lower() for w in WORD.findall(part)]
+        out[f"{name}_letters"] = sum(map(str.isalpha, part))
+        out[f"{name}_letters_per_space"] = letters_per_space(part)
+        out[f"{name}_short"] = sum(w in SHORT for w in words)
+        out[f"{name}_long"] = sum(w in LONG for w in words)
+    if answer is not None:
+        numbers = NUMBER.findall(parts["answer"])
+        out["correct"] = (
+            final_m is not None
+            and bool(numbers)
+            and float(numbers[-1].replace(",", "")) == float(answer)
+        )
+    return out
+
+
+def summarize(rows: list[dict[str, object]]) -> dict[str, object]:
+    """One steering run: medians over answers, short-form counts pooled."""
+    out: dict[str, object] = {}
+    for part in ("reasoning", "answer"):
+        lps = [r[f"{part}_letters_per_space"] for r in rows]
+        lps = [x for x in lps if x is not None]
+        n_short = sum(r[f"{part}_short"] for r in rows)  # type: ignore[misc]
+        n_long = sum(r[f"{part}_long"] for r in rows)  # type: ignore[misc]
+        out[f"{part}_letters_per_space"] = statistics.median(lps) if lps else None  # type: ignore[arg-type]
+        out[f"{part}_letters"] = statistics.median(r[f"{part}_letters"] for r in rows)  # type: ignore[misc]
+        out[f"{part}_short_long"] = [n_short, n_long]
+        out[f"{part}_short_share"] = (
+            n_short / (n_short + n_long) if n_short + n_long >= MIN_LIST_WORDS else None
+        )
+    math = [r for r in rows if "correct" in r]
+    out["finished"] = statistics.mean(bool(r["finished"]) for r in rows)
+    out["accuracy"] = statistics.mean(bool(r["correct"]) for r in math)
+    return out
 
 
 def score(paths: list[Path], out: Path) -> None:
-    enc = tiktoken.get_encoding("o200k_base")
     answers = {p["id"]: p.get("answer") for p in load_prompts()}
     rows = []
     for path in paths:
@@ -226,39 +255,17 @@ def score(paths: list[Path], out: Path) -> None:
             r = json.loads(line)
             if r["scale"] == 0:
                 r |= {"direction": "none", "layer": 0}
+            keys = ("direction", "layer", "scale", "norm", "id")
             rows.append(
-                {
-                    **{k: r[k] for k in ("direction", "layer", "scale", "norm", "id")},
-                    **measure(r["text"], answers[r["id"]], enc),
-                }
+                {**{k: r[k] for k in keys}, **measure(r["text"], answers[r["id"]])}
             )
     groups: dict[tuple[str, int, float], list[dict[str, object]]] = {}
     for r in rows:
         groups.setdefault((r["direction"], r["layer"], r["scale"]), []).append(r)  # type: ignore[arg-type]
-    summary = []
-    for (direction, layer, scale), rs in sorted(groups.items()):
-        math = [r for r in rs if r["correct"] is not None]
-        letters = sum(r["letters"] for r in rs)  # type: ignore[misc]
-        chunks = sum(r["letters"] / r["letters_per_space"] for r in rs if r["letters"])  # type: ignore[operator]
-        n_long = sum(r["n_long"] for r in rs)  # type: ignore[misc]
-        n_short = sum(r["n_short"] for r in rs)  # type: ignore[misc]
-        tpc = [r["tokens_per_chunk"] for r in rs if r["tokens_per_chunk"] is not None]
-        summary.append(
-            {
-                "direction": direction,
-                "layer": layer,
-                "scale": scale,
-                "letters_per_space": letters / chunks if chunks else None,
-                "tokens_per_chunk": statistics.mean(tpc) if tpc else None,  # type: ignore[arg-type]
-                "short_share": n_short / (n_long + n_short)
-                if n_long + n_short
-                else None,
-                "n_short_long": [n_short, n_long],
-                "analysis_letters": letters / len(rs),
-                "finished": statistics.mean(bool(r["finished"]) for r in rs),
-                "accuracy": statistics.mean(bool(r["correct"]) for r in math),
-            }
-        )
+    summary = [
+        {"direction": d, "layer": layer, "scale": scale, **summarize(rs)}
+        for (d, layer, scale), rs in sorted(groups.items())
+    ]
     out.write_text(json.dumps({"summary": summary, "rows": rows}, indent=1) + "\n")
     for s in summary:
         print(s)

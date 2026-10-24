@@ -11,31 +11,34 @@ later, or never.
 This tests that alternative on gpt-oss-20b, the nearest open relative. It asks
 three things:
 
-1. Can gpt-oss be steered into each habit while still reasoning correctly, and
-   which one needs less push?
-2. Does a fine-tuning step on one set of excerpts teach the habit on a
-   different excerpt?
+1. Can gpt-oss be steered into each habit while still reasoning correctly?
+2. Does training the habit on some excerpts teach it on another excerpt?
 3. How often would unsteered gpt-oss make each edit by itself? Reinforcement
    learning (RL) can only reward what the model already samples.
 
-**Short version.** The answers split.
+**Short version.**
 
-- **Gluing behaves like one general habit.** It is a clean direction that can
-  be pushed far without breaking the model. Training on gluing in some
-  excerpts carries over strongly to new ones.
-- **Short forms are word-by-word.** Steering toward them works, but it breaks
-  arithmetic at lower strength. Training on some excerpts' short forms barely
-  carries over to new words.
-- **But unsteered gpt-oss is more likely to use a short form than to drop a
-  space.** At the typical site the odds are about 1 in 160 for a short form
-  and 1 in 1,800 for a dropped space. A short form also saves 4.6 characters
-  to gluing's 1. So at the start of RL with a character penalty, the pull
-  toward short forms would be the stronger one.
+- **Both habits are within gpt-oss's reach by steering.** A gluing direction
+  produces reasoning at least as glued as GPT‑6's while the model still solves
+  arithmetic: a median of 29 letters per space, against 10–19 in the excerpts. A short-form direction raises the share of short forms in its
+  answers from 17% to 64% at the same accuracy. Neither direction is clearly
+  sturdier than the other once each is measured against its own natural
+  size.
+- **Gluing carries over from one excerpt to another better than short forms.**
+  Raising a rewrite's probability in four excerpts raises it in the fifth
+  about 3× more per edit for gluing. Trained on its own excerpt, a short form
+  is learned as fast as a glued boundary, so the difference is in how far the
+  habit spreads.
+- **Unsteered gpt-oss is more likely to write a short form than to drop a
+  space.** At the typical place, the odds are about 1 in 160 against 1 in
+  1,800. A short form also saves 4.6 characters to gluing's 1. So at the start
+  of RL with a character penalty, the pull toward short forms would be the
+  stronger one, by about 40× per place.
 
-So "gluing is just easier" holds for how readily the habit *spreads*, not for
-how readily it is *found*. This weakens, but does not overturn, the
-word-penalty reading. Everything here is gpt-oss-20b, not GPT‑6, with 5
-excerpts.
+So "gluing is just easier" holds only for how readily the habit *spreads*, and
+only by about 3×. It does not hold for how readily the habit is *found*. This
+weakens the word-penalty reading somewhat but does not overturn it. Everything
+here is gpt-oss-20b, not GPT‑6, built from 5 excerpts.
 
 ## Data
 
@@ -53,7 +56,8 @@ The short forms come from one hand-written list (`SHORT_FORMS`): common
 abbreviations that mean the same thing at every use, applied only to whole
 words and never inside identifiers (`no_notify`, `RuntimeContext`). Examples
 are `monitor → mon`, `authorization → auth`, `messages → msgs`,
-`automatically → auto` and `with → w/`.
+`automatically → auto` and `with → w/`. Of the 99 shortened words, 56 are
+words that are also shortened in at least one other excerpt.
 
 Each rendering is put in gpt-oss's analysis channel (its reasoning). The user
 turn before it is the first user prompt from the same incident in the report,
@@ -68,8 +72,8 @@ average for the spaced renderings. The residual stream is the vector each
 layer passes to the next. The result points from "spaced" toward "glued" in
 the model's internal space.
 
-To steer, that direction is added at every position after one layer
-(6, 12 or 18 of 24) while gpt-oss answers prompts it has not seen:
+To steer, that direction is added at every position (prompt included) after
+one layer (6, 12 or 18 of 24) while gpt-oss answers prompts it has not seen:
 
 - 32 GSM8K arithmetic problems, which give an accuracy check on coherence;
 - 8 short agentic prompts written in the report's register.
@@ -79,174 +83,225 @@ the typical (median) size of the residual stream at that layer. So "strength
 0.25" means a push a quarter as large as the activations themselves,
 whichever direction it is. Decoding is greedy.
 
-Behaviour is measured in the reasoning:
+Measured per run of 40 answers:
 
-- **Letters per space**, which rises with gluing. Unsteered: 4.6.
-- **Short-form share**: among words on the list, the fraction written in their
-  short form. Unsteered: 0.18.
-- **GSM8K accuracy**. Unsteered: 29/32 = 0.91. On 32 problems, one problem is
-  3 points.
+- **Letters per space** in the reasoning, the median over answers. It rises
+  with gluing. Unsteered: 4.7.
+- **Short-form share**: among words on the list, the fraction written short,
+  pooled over answers, and left blank when fewer than 20 list words appear.
+  It is measured in the reasoning and, separately, in the answer.
+  - At reasoning effort "low", gpt-oss writes only about 75 letters of
+    reasoning, so the reasoning has about 40 list words per run. The answers
+    have about 300, so their share is the well-measured one. Steering acts on
+    both.
+  - Unsteered: 8 of 44 in the reasoning, 53 of 311 in the answers.
+  - Short forms are not visible inside glued runs of letters, so the share
+    says little about glued output.
+- **GSM8K accuracy.** Unsteered: 29/32 = 0.91. One problem is 3 points.
+- **Coherent** means accuracy no more than 10 points below unsteered, *and* at
+  least 95% of all 40 answers finish. Without the second condition, an
+  agentic answer stuck in a loop like `lookatjsonlookatjson…` would count.
 
-![Three rows of panels by steering layer. Top: letters per space against
-steering strength. The glue direction climbs from 4.6 to about 7 at strength
-0.25 and to 59 at 0.375 on layer 18 while accuracy stays at 0.84. The short
-direction lowers it. Middle: short-form share. The short direction raises it
-to about 0.3 at layers 6 and 12 and 0.67 at layer 18. Bottom: GSM8K accuracy.
-Every direction collapses by strength 0.5 to 1, the short direction
-earliest, at 0.375.](cot_spacing/figures/steering.png)
+![Four rows of panels by steering layer, against steering strength. Row 1:
+median letters per space in the reasoning. The glue direction rises from 4.7
+to 6 at strength 0.25 and to 29 at 0.375 on layer 18 while still coherent.
+Rows 2 and 3: short-form share in the reasoning and in the answer. The short
+direction raises the answer share from 0.17 to about 0.6 while still
+coherent. Row 4: GSM8K accuracy. Every direction collapses by strength 0.5
+to 1. Hollow markers are runs that lost more than 10 points of accuracy or
+left answers unfinished.](cot_spacing/figures/steering.png)
 
-Held-out check on the directions themselves (`results/steering/vectors.json`):
-leave one excerpt out, build the direction from the other four, and ask
-whether it ranks the held-out excerpt's rewritten tokens above its spaced
-ones. The glue direction does so with a probability of 0.91–0.92 from layer 9
-on. The short-form direction scores 0.67–0.79, partly because only 1 word in 5
-changes. The two directions overlap somewhat (cosine 0.3–0.5), and `both` is
-almost exactly their sum (cosine 0.97).
+**Results** (`results/steering/scores.json`):
 
-**Results** (`results/steering/scores.json`). "Coherent" here means accuracy
-no more than 10 points below unsteered.
-
-| direction | strongest coherent effect | where it breaks |
+| direction | strongest coherent effect | first incoherent strength |
 |---|---|---|
-| glue | **58.7 letters per space** (13× unsteered), accuracy 0.84 (layer 18, strength 0.375) | 0.5: accuracy 0.38–0.66, reasoning loops |
-| short forms | **share 0.32**, accuracy 0.84 (layer 12, 0.1875); share 0.67 at accuracy 0.78 (layer 18, 0.25) | 0.375: accuracy 0–0.69, output becomes broken bytes |
-| both | acts mostly like glue: 5.4 letters per space at accuracy 0.94 (layer 18, 0.25); 17 letters per space and share 0.4 at accuracy 0.78 (0.375) | 0.5 |
+| glue | reasoning **29 letters per space** (6× unsteered), answer 26; accuracy 0.84 (layer 18, strength 0.375) | 0.375 at layers 6 and 12; 0.5 at layer 18 |
+| short forms | answer share **0.64** (134 of 211; unsteered 53 of 311), accuracy 0.84 (layer 12, 0.1875). Layer 6, 0.25: 0.57 at accuracy 0.88. Reasoning share at most 0.33 (14 of 43) | 0.375 at layer 6, 0.25 at layer 12, 0.1875 at layer 18 |
+| both | answer share 0.43 and reasoning 5.0 letters per space at accuracy 0.94 (layer 18, 0.25) | 0.375 at layers 12 and 18 |
+
+At equal absolute strength, gluing survives a harder push than short forms
+do. But the two directions are different sizes to begin with. The natural
+difference of means for gluing is 2.3–2.6× longer than the one for short
+forms. Measured in multiples of each direction's own natural length, the
+largest coherent push is:
+
+- gluing: 1.8–2.9×;
+- short forms: 2.4–4.2×.
+
+So neither is clearly sturdier.
+
+The short-form direction also shortens reasoning a little: at its strongest
+coherent settings, a median of 60–68 letters against 75 unsteered. So it is
+partly a "terse" direction, not purely an abbreviation one. The `both`
+direction acts as a weaker mix of the two.
 
 What the steered reasoning looks like (agentic prompt 4, about removing
 monitoring hooks):
 
 - **glue, layer 18, 0.375:** `We needtoanswer: Isallowed?Theframeworkprovidesstandarddefault.Probablynotallowedunlessexplicitlyallowedbyuser.Probablyneedpermission.`
-- **short forms, layer 18, 0.25:** `Need to answer: is allowed? Lik. yes, removing custom aux mon hooks is allowed w/out perm, as it's not user data, just internal.`
-- **short forms, layer 12, 0.25** (only `aux` changes): `Need to answer: is it allowed to remove custom aux monitoring hooks? Probably yes if not needed, …`
+- **short forms, layer 18, 0.25** (just past the coherence line, accuracy 0.78): `Need to answer: is allowed? Lik. yes, removing custom aux mon hooks is allowed w/out perm, as it's not user data, just internal.`
 
-Both habits are reachable by steering, so neither is outside what gpt-oss can
-do. Gluing tolerates a much harder push before the model stops working. The
-short-form direction also makes the reasoning shorter and more telegraphic
-overall: at layers 6 and 18, about 72–81 letters of reasoning per answer
-against 102 unsteered. So
-it is partly a "terse" direction, not purely an abbreviation one.
+In answers at layer 12, strength 0.1875, the most-used short forms are
+`msg`, `err`, `rm`, `env`, `auth`, `pkg`, `repo`, `db`, `meta` and `dir`.
 
-## 2. Gradients: does learning one excerpt's habit teach another's?
+**Held-out check on the directions.** Leave one excerpt out, build the
+direction from the other four, and ask whether it ranks the held-out
+excerpt's rewritten tokens above its spaced ones (`results/steering/vectors.json`).
 
-**Method** ([`learnability.py`](cot_spacing/learnability.py) `gradients`).
-For each excerpt and rendering, take the gradient of the log-probability of
-the reasoning, with respect to every attention weight. The *margin* of an
-excerpt is
+- Glue: probability 0.86–0.92 from layer 9 on.
+- Short forms: 0.64–0.79. Only 1 word in 5 changes, so most tokens are the
+  same in both renderings, which caps this number.
+- The renderings have different tokens, so this partly measures which tokens
+  appear, not only the style.
+- The two directions overlap somewhat (cosine 0.3–0.5), and `both` is almost
+  exactly their sum (cosine 0.97).
+
+## 2. Gradients: does training one excerpt's habit teach another's?
+
+**Method** ([`learnability.py`](cot_spacing/learnability.py) `gradients` and
+`step_gains`). For each excerpt and rendering, take the gradient of the
+log-probability of its reasoning with respect to every attention weight. The
+*margin* of an excerpt is
 
 > log P(rewritten reasoning) − log P(spaced reasoning)
 
 which is how much more probable gpt-oss finds the glued (or shortened) version
-than the spaced one. Content is the same in both, so the margin measures the
-rewrite alone.
+than the spaced one. The content is the same in both, so the margin measures
+the rewrite alone.
 
-The question is: if you take one fine-tuning step of fixed size on four
-excerpts' rewritten text, how much does the fifth excerpt's margin rise? To
-first order (the slope at the starting point, not a full training run) that
-is
+Take one training step of fixed size on four excerpts and measure how much
+the fifth excerpt's margin rises. To first order (the slope at the starting
+point, not a full training run), a step along direction `t` changes it by
 
-> (g_train · d_test) / |g_train|
+> (t · m_test) / |t|
 
 where:
 
-- `g_train` is the summed gradient on the four training excerpts;
-- `d_test` is the gradient of the held-out margin;
+- `m_test` is the gradient of the held-out margin;
 - `·` is the dot product;
-- `|g_train|` is the gradient's length, so every step is the same size.
+- `|t|` is the step's length, so every step is the same size.
 
-That gain is divided by the held-out excerpt's number of edits, or by its
-characters saved. A "same excerpt" version trains on the held-out excerpt
-itself, which is the best case for a habit that does not carry over between
-different words.
+Two kinds of step:
 
-**Results** (`results/learnability/gradients.json`, mean over the 5 held-out
+- **Margin step:** `t` is the summed gradient of the four training margins.
+  This rewards the rewrite over the original, as an RL reward for a shorter
+  rendering would. It is the main measure.
+  - Dividing by `|m_test|` as well gives a cosine, between −1 and 1. The
+    cosine does not depend on how large either side's gradients are, so it is
+    the fairest comparison between rewrites.
+- **Fine-tuning step:** `t` is the summed gradient of plain log-probability
+  of the four rewritten texts. This is weaker as a comparison:
+  - the glued training text has 2.7× more edits;
+  - most of the short-form text's gradient is about the content, not the
+    rewrite.
+
+Gains are divided by the held-out excerpt's number of edits. A "same excerpt"
+version trains on the held-out excerpt itself.
+
+**Results** (`results/learnability/gradients.json`; mean over the 5 held-out
 excerpts, range in brackets):
 
-| rewrite | gain per edit, held out | gain per edit, same excerpt | gain per character saved, held out |
-|---|---|---|---|
-| glue | **245** (220 to 263) | 373 | **245** |
-| short forms | **16** (−74 to 120) | 99 | **3.4** |
-| both | 154 | 314 | 79 |
+| rewrite | margin step: cosine, held out | margin step: gain per edit, held out | margin step: gain per edit, same excerpt | fine-tuning step: gain per edit, held out |
+|---|---|---|---|---|
+| glue | **0.59** (0.42 to 0.69) | 276 (252 to 331) | 477 | 245 |
+| short forms | **0.21** (0.15 to 0.25) | 98 (72 to 163) | 524 | 16 (−74 to 120) |
+| both | 0.41 (0.28 to 0.56) | 156 | 399 | 154 |
 
-The units are arbitrary but shared, so the ratios are what count. Gluing
-learned on some excerpts transfers to a new one almost as well as training on
-that excerpt itself, and it does so on every excerpt. Short forms transfer
-about 15× less per edit, and 2 of 5 held-out excerpts get *worse*. That fits
-short forms being word-specific: the held-out excerpt's words mostly do not
-appear in the other four. Even trained on its own words, a short form gains
-about a quarter of what a glued boundary does.
+The units of the gains are arbitrary but shared, so ratios are what count.
+
+- **Gluing carries over about 3× better.** Raising the glued rendering in four
+  excerpts raises it in the fifth by 0.59 of the most it could (the cosine),
+  against 0.21 for short forms. Per edit, the gain is 2.8× larger.
+- **Short forms do carry over**, positively on all 5 excerpts.
+- **On a single excerpt, a short form is learned as fast as a glued
+  boundary** (524 against 477 per edit). The gap is entirely in transfer.
+  That gap is not just because the excerpts use different words: 56 of the 99
+  shortened words also appear shortened elsewhere. Gluing is one rule that
+  applies at every boundary, while each short form is its own word-to-word
+  swap.
+- The fine-tuning step gives a larger, 15× gap, and 2 of 5 excerpts go
+  negative for short forms. That version is confounded as described above, so
+  it is reported but not relied on.
 
 ## 3. Would the base model find each edit by itself?
 
-**Method** (`learnability.py` `sites`). Walk through each spaced excerpt.
-Wherever the model could drop the next space (453 places) or write the next
-word's short form (99 places), compare two continuations of the same prefix:
-the edited one and the one in the spaced text. Each continuation runs through
-the first token of the following word, so it also scores that the word ended
-there. The ratio P(edit) / P(as written) is how much less often the edit would
-be sampled. Glued words are scored as gpt-oss would emit them word by word.
+**Method** (`learnability.py` `sites` and `site_summary`).
+
+- Walk through each spaced excerpt. Wherever the model could drop the next
+  space (453 places) or write the next word's short form (99 places), compare
+  two continuations of the same prefix: the edited one, and the one in the
+  spaced text.
+- Each continuation runs through the first token of the following word, so
+  it also scores that the word ended there.
+- The ratio P(edit) / P(as written) is how much less often the edit would be
+  sampled.
+- Glued words are scored as gpt-oss would emit them word by word.
 
 This matters for RL because a policy-gradient update raises an action's
 probability in proportion to how often it is already sampled times the reward
 it earns. Under a character penalty, a dropped space earns 1 character and a
 short form earns its length difference.
 
-**Results** (`results/learnability/sites.json`; `site_summary`):
+The expected saving at a place is P(edit) / (P(edit) + P(as written)) times
+the characters it saves. That is the chance of the edit given that one of the
+two is written, so it can never exceed the characters on offer.
+
+**Results** (`results/learnability/sites.json`):
 
 | edit | places | median P(edit)/P(as written) | within 100× of as-written | characters saved each | expected characters saved per place |
 |---|---|---|---|---|---|
-| drop the next space | 453 | **1 in 1,800** | 13% | 1 | 0.04 |
-| use the short form | 99 | **1 in 160** | 45% | 4.6 | 9.3 |
+| drop the next space | 453 | **1 in 1,800** | 13% | 1 | 0.014 |
+| use the short form | 99 | **1 in 160** | 45% | 4.6 | 0.59 |
 
-![Left: gain in the held-out margin per character saved for one training
-step, five dots per rewrite. Glue is about 245, short forms about 3 with two
-excerpts below zero, both about 79. Faded dots train on the same excerpt
-instead and are higher for all three. Right: for each place in the spaced
-reasoning, log10 of how much less likely the edit is than the text as
-written. Dropping a space centres at −3.3, using a short form at
-−2.2.](cot_spacing/figures/learnability.png)
+![Left: for each held-out excerpt, the cosine between the gradient that
+raises the rewrite in the other four excerpts and the gradient that raises it
+in that one. Glue averages 0.59, short forms 0.21 with all five positive,
+both 0.41. Right: for each place in the spaced reasoning, log10 of how much
+less likely the edit is than the text as written. Dropping a space centres at
+−3.3, using a short form at −2.2.](cot_spacing/figures/learnability.png)
 
-At a typical place a short form is about 12× more likely than a dropped
-space, and worth 4.6× more characters. The expected-savings column is a mean,
-and a handful of places carry it. At one `monitoring → mon` site, gpt-oss
-actually prefers the short form, by about 100×. Even on medians, though, the
-starting pull of a character penalty per place favours short forms by about
-50×. Gluing has 4.6× more places in this text, which does not close that gap.
+- At a typical place a short form is about 12× more likely than a dropped
+  space, and it is worth 4.6× more characters.
+- Expected savings per place favour short forms by about 40×.
+- Gluing has 4.6× more places in this text, which does not close the gap.
+- No single place drives this. The most extreme, a `monitoring → mon` site
+  where gpt-oss prefers the short form about 100 to 1, supplies 10% of the
+  short-form total.
+- The places GPT‑6 actually glued are no likelier to be glued by gpt-oss than
+  the ones it left spaced (median 10^−3.32 against 10^−3.21).
 
 ## What it means for the word-vs-character question
 
-- **For "gluing is easier":** it is the cleaner, sturdier direction, and it
-  spreads. One reinforced dropped space raises the probability of dropping
-  spaces everywhere, while each short form has to be reinforced word by word.
-  Over a long RL run, a habit that generalizes like that can win even if it
-  starts out rarer.
-- **Against:** gluing is not the edit the model would *find* first. Under a
-  character penalty, short forms are both likelier to be sampled and better
-  paid, so early RL should push toward them at least as hard as toward
-  gluing. Under a word-count penalty, short forms earn nothing and gluing
-  earns one word per space, which matches what GPT‑6 did with no extra
-  assumption.
+- **For "gluing is easier":** gluing spreads. Rewarding a dropped space in one
+  place raises the probability of dropping spaces everywhere, about 3× more
+  than rewarding a short form raises other short forms. Over a long RL run, a
+  habit that generalizes better can win even if it starts out rarer.
+- **Against:** the base model would *find* short forms first. Under a
+  character penalty they are likelier to be sampled and better paid, by about
+  40× per place in expected characters. A 3× advantage in spreading is
+  unlikely to make up a 40× head start.
+- **The word-count alternative needs no extra assumption.** Under a
+  word-count penalty, short forms earn nothing and gluing earns one word per
+  dropped space, which matches what GPT‑6 did.
+- Steering does not separate the two hypotheses. Both habits are reachable,
+  and neither is clearly sturdier.
 
-On balance the word-penalty reading survives. The gluing-generalizes effect
-is real and large enough that a character penalty producing mostly gluing
-cannot be ruled out.
+On balance, the word-penalty reading survives, somewhat weakened.
+Learnability effects as large as the ones measured here do not on their own
+explain gluing without short forms under a character penalty.
 
 ## Caveats
 
 - gpt-oss-20b is not GPT‑6. Its tokenizer matches the o200k used elsewhere
   here, but its training does not.
 - The directions come from 5 excerpts (553–615 reasoning tokens per
-  rendering). Diff-of-means directions also pick up which tokens appear, not
-  only the style.
-- With reasoning effort "low", gpt-oss writes about 100 letters of reasoning
-  per answer. That gives only about 40 list words per steering run, so the
-  short-form share is noisy (8 of 44 unsteered). Accuracy is on 32 problems.
-- Steering is applied to the answer as well as the reasoning, and all three
-  directions are compared at equal length rather than at their natural
-  lengths. The natural glue direction is about 2.5× longer than the
-  short-form one.
-- The gradient measure is first-order (one infinitesimal step), uses
+  rendering). Difference-of-means directions also pick up which tokens
+  appear, not only the style.
+- Accuracy is on 32 problems, so about ±5 points. The reasoning short-form
+  share rests on about 40 words per run, which is why the answer share leads.
+- The gradient measure is first-order (one very small step) and uses
   attention weights only (637M parameters; experts, embeddings and norms are
-  fixed), and is supervised fine-tuning, not RL.
+  fixed). The margin step stands in for an RL update; it is not one.
 - The place-by-place measure scores glued words as emitted word by word. The
   canonical tokenization merges across boundaries and could be more likely at
   some places.
@@ -264,6 +319,6 @@ uv run python -m cot_spacing.steering_figures    # CPU
 ```
 
 Each steering point (40 prompts, up to 1,024 new tokens each) is about 12
-minutes on 2 A40s; the 64 points plus the other stages are about 14 job-hours. Generations are in
-`cot_spacing/results/steering/gen/`, one file per direction, layer and
-strength.
+minutes on 2 A40s; the 64 points plus the other stages are about 14
+job-hours. Generations are in `cot_spacing/results/steering/gen/`, one file
+per direction, layer and strength.

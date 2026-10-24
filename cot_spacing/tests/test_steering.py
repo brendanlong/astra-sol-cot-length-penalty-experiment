@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-import tiktoken
 from transformers import AutoTokenizer
 
 from cot_spacing.gpt_oss import MODEL, with_reasoning
@@ -37,12 +36,19 @@ def test_reasoning_span_is_the_reasoning() -> None:
     assert tok.decode(ids[span.stop :]) == "<|end|>"
 
 
-def test_site_continuations_decode_to_the_edit() -> None:
+def test_site_prefix_and_original_rebuild_the_spaced_text() -> None:
     tok = AutoTokenizer.from_pretrained(MODEL)
+    head = "<|channel|>analysis<|message|>"
+    spaced = {e.id: e.texts["spaced"] for e in build()}
     seqs = site_sequences(tok)
-    kinds = {s["kind"] for s, *_ in seqs}
-    assert kinds == {"glue", "short"}
-    for site, _prefix, orig, edit in seqs:
+    assert {s["kind"] for s, *_ in seqs} == {"glue", "short"}
+    for site, prefix, orig, edit in seqs:
+        text = tok.decode(prefix + orig)
+        reasoning = text[text.index(head) + len(head) :]
+        assert reasoning.removesuffix("<|end|>") in spaced[str(site["excerpt"])]
+        assert spaced[str(site["excerpt"])].startswith(
+            reasoning.removesuffix("<|end|>")
+        )
         o, e = tok.decode(orig), tok.decode(edit)
         if site["kind"] == "glue":
             assert o == " " + e
@@ -51,20 +57,20 @@ def test_site_continuations_decode_to_the_edit() -> None:
 
 
 def test_measure_counts_gluing_shortening_and_answers() -> None:
-    enc = tiktoken.get_encoding("o200k_base")
     spaced = measure(
         "<|channel|>analysis<|message|>We need the number of minutes.<|end|>"
-        "<|start|>assistant<|channel|>final<|message|>It is 18.<|return|>",
+        "<|start|>assistant<|channel|>final<|message|>It is 18 minutes.<|return|>",
         "18",
-        enc,
     )
     glued = measure(
         "<|channel|>analysis<|message|>Weneedthe num of mins.<|end|>"
         "<|start|>assistant<|channel|>final<|message|>It is 17.<|return|>",
         "18",
-        enc,
     )
+    unfinished = measure("<|channel|>analysis<|message|>We need 18", "18")
     assert spaced["correct"] is True and glued["correct"] is False
-    assert (spaced["n_long"], spaced["n_short"]) == (2, 0)
-    assert (glued["n_long"], glued["n_short"]) == (0, 2)
-    assert glued["letters_per_space"] > spaced["letters_per_space"]  # type: ignore[operator]
+    assert unfinished["correct"] is False and unfinished["finished"] is False
+    assert (spaced["reasoning_long"], spaced["reasoning_short"]) == (2, 0)
+    assert (spaced["answer_long"], spaced["answer_short"]) == (1, 0)
+    assert (glued["reasoning_long"], glued["reasoning_short"]) == (0, 2)
+    assert glued["reasoning_letters_per_space"] > spaced["reasoning_letters_per_space"]  # type: ignore[operator]
