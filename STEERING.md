@@ -1,5 +1,8 @@
 # Is gluing easier to learn than shortening? Steering gpt-oss-20b
 
+**→ Read the [report](https://gpt-oss-glue-vs-short-65f73187.surge.sh)**, built
+from the same results by `scripts/build_steering_report.py`.
+
 The main write-up leans on one observation: GPT‑6 dropped the spaces between
 words, but it rarely used the short forms that were available (`msgs`,
 `auth`, `mon`), which would have saved more characters per edit. If the length
