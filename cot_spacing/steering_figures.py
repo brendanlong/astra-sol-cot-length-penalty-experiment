@@ -32,17 +32,17 @@ METRICS = (
 )
 
 
-#: A run counts as coherent while it keeps GSM8K accuracy within this much of
-#: unsteered gpt-oss and finishes nearly every answer; otherwise it is drawn
-#: hollow.
+#: A run counts as coherent while neither its GSM8K accuracy nor its share of
+#: answers finished within the token limit falls more than this below
+#: unsteered gpt-oss; otherwise it is drawn hollow. Unsteered gpt-oss itself
+#: runs out of tokens on 2 of 40 answers, both long tables.
 COHERENT_DROP = 0.1
-COHERENT_FINISHED = 0.95
 
 
 def coherent(run: dict[str, object], base: dict[str, object]) -> bool:
     return (
         float(run["accuracy"]) >= float(base["accuracy"]) - COHERENT_DROP  # type: ignore[arg-type]
-        and float(run["finished"]) >= COHERENT_FINISHED  # type: ignore[arg-type]
+        and float(run["finished"]) >= float(base["finished"]) - COHERENT_DROP  # type: ignore[arg-type]
     )
 
 
@@ -97,7 +97,7 @@ def steering_figure(scores: dict[str, list[dict[str, object]]], out: Path) -> No
         Line2D([], [], color=SECONDARY, marker="o", ls="", mfc="white", mew=1.5)
     )
     labels.append(
-        f"accuracy down > {COHERENT_DROP * 100:.0f} points, or answers unfinished"
+        f"accuracy or answers finished down > {COHERENT_DROP * 100:.0f} points"
     )
     fig.legend(
         handles,

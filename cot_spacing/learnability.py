@@ -306,6 +306,11 @@ def site_summary(sites_path: Path) -> dict[str, dict[str, float]]:
             "expected_chars_per_opportunity": statistics.mean(
                 p * r["chars_saved"] for p, r in zip(chosen, rs, strict=True)
             ),
+            #: In a two-way choice with a softmax policy, the reward gradient
+            #: on the edit's logit is reward x p(1 - p).
+            "gradient_weight_per_opportunity": statistics.mean(
+                p * (1 - p) * r["chars_saved"] for p, r in zip(chosen, rs, strict=True)
+            ),
         }
     return summary
 

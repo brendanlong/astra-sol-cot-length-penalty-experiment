@@ -47,14 +47,28 @@ def load_examples(path: Path) -> list[Example]:
 
 @torch.no_grad()
 def reasoning_states(tok: object, model: object, user: str, cot: str) -> torch.Tensor:
-    """Residual stream after every layer at each reasoning token: [layer, tok, d]."""
-    from cot_spacing.gpt_oss import with_reasoning
+    """Each decoder block's output at each reasoning token: [layer, tok, d].
+
+    Read with hooks on the blocks rather than from ``output_hidden_states``,
+    whose last entry has the final norm applied: :func:`gpt_oss.steer` adds to
+    the block output, so that is what has to be measured.
+    """
+    from cot_spacing.gpt_oss import layers, with_reasoning
 
     ids, span = with_reasoning(tok, user, cot)  # type: ignore[arg-type]
-    out = model(  # type: ignore[operator]
-        torch.tensor([ids], device="cuda"), output_hidden_states=True
-    )
-    return torch.stack([h[0, span] for h in out.hidden_states[1:]]).float().cpu()
+    captured: list[torch.Tensor] = []
+    handles = [
+        block.register_forward_hook(
+            lambda _m, _i, output: captured.append(output[0, span].float().cpu())
+        )
+        for block in layers(model)  # type: ignore[arg-type]
+    ]
+    try:
+        model(torch.tensor([ids], device="cuda"))  # type: ignore[operator]
+    finally:
+        for h in handles:
+            h.remove()
+    return torch.stack(captured)
 
 
 def auc(pos: torch.Tensor, neg: torch.Tensor) -> float:
@@ -74,11 +88,22 @@ def vectors(examples_path: Path, out: Path) -> None:
         for v, text in e.texts.items()
     }
 
-    def mean(variant: str, ids: list[str]) -> torch.Tensor:
-        return torch.cat([states[i, variant] for i in ids], dim=1).mean(dim=1)
+    def difference(variant: str, ids: list[str]) -> torch.Tensor:
+        """Mean over excerpts of each excerpt's own variant-minus-spaced mean.
+
+        Every excerpt weighs the same on both sides. Pooling tokens instead
+        would weigh an excerpt by its token count, which differs between
+        renderings, and mix a content difference into the direction.
+        """
+        return torch.stack(
+            [
+                states[i, variant].mean(dim=1) - states[i, "spaced"].mean(dim=1)
+                for i in ids
+            ]
+        ).mean(dim=0)
 
     ids = [e.id for e in examples]
-    directions = {d: mean(d, ids) - mean("spaced", ids) for d in DIRECTIONS}
+    directions = {d: difference(d, ids) for d in DIRECTIONS}
     resid_norm = torch.cat([states[i, "spaced"] for i in ids], dim=1).norm(dim=-1)
     n_layers = resid_norm.shape[0]
 
@@ -86,7 +111,7 @@ def vectors(examples_path: Path, out: Path) -> None:
     for d in DIRECTIONS:
         for held in ids:
             rest = [i for i in ids if i != held]
-            v = mean(d, rest) - mean("spaced", rest)
+            v = difference(d, rest)
             held_out[d].append(
                 [
                     auc(
@@ -179,14 +204,43 @@ def generate(
 
 ANALYSIS = re.compile(r"<\|channel\|>analysis<\|message\|>(.*?)(?:<\|end\|>|$)", re.S)
 FINAL = re.compile(
-    r"<\|channel\|>final<\|message\|>(.*?)(?:<\|return\|>|<\|end\|>|$)", re.S
+    r"<\|channel\|>final<\|message\|>(.*?)(<\|return\|>|<\|end\|>|$)", re.S
 )
 LETTERS = re.compile(r"[A-Za-z]")
 WORD = re.compile(r"(?<![\w/])[A-Za-z]+(?:/o|/)?(?![\w])")
 NUMBER = re.compile(r"-?\d[\d,]*(?:\.\d+)?")
+BOXED = re.compile(r"\\boxed\{((?:[^{}]|\{[^{}]*\})*)\}")
+BOLD = re.compile(r"\*\*(.+?)\*\*", re.S)
+#: Code is excluded from short-form counts: `git diff` or `<pkg>` there is
+#: syntax, not a choice of word.
+CODE = re.compile(r"```.*?(?:```|$)|`[^`\n]*`", re.S)
+
+
+#: Thousands separators gpt-oss writes between digit groups.
+SEPARATOR = re.compile(r"(?<=\d)(?:,|\{,\}|\\[,;!]|\u202f|\u2009)(?=\d{3}(?!\d))")
+
+
+def stated_numbers(answer: str) -> set[float]:
+    """Numbers the answer presents as its result.
+
+    The last number, and every number in a boxed span (else in a bold one).
+    Taking all of a marked span's numbers rather than guessing which is the
+    result ("**2 + 1 = 3 bolts**", "**160 minutes** = **2 h 40 min**") is
+    lenient, but the same for every run.
+    """
+    text = SEPARATOR.sub("", answer)
+    numbers = NUMBER.findall(text)
+    stated = {numbers[-1]} if numbers else set()
+    for pattern in (BOXED, BOLD):
+        marked = [n for m in pattern.findall(text) for n in NUMBER.findall(m)]
+        if marked:
+            stated |= set(marked)
+            break
+    return {float(n.replace(",", "")) for n in stated}
+
+
 LONG = set(SHORT_FORMS)
 SHORT = set(SHORT_FORMS.values()) - LONG
-
 
 #: Below this many words from the short-form list, a share is too noisy to report.
 MIN_LIST_WORDS = 20
@@ -210,20 +264,17 @@ def measure(text: str, answer: str | None) -> dict[str, object]:
         "reasoning": analysis_m.group(1) if analysis_m else "",
         "answer": final_m.group(1) if final_m else "",
     }
-    out: dict[str, object] = {"finished": final_m is not None}
+    #: Truncated at the token limit if the final turn never closed.
+    finished = final_m is not None and final_m.group(2) != ""
+    out: dict[str, object] = {"finished": finished}
     for name, part in parts.items():
-        words = [w.lower() for w in WORD.findall(part)]
+        words = [w.lower() for w in WORD.findall(CODE.sub(" ", part))]
         out[f"{name}_letters"] = sum(map(str.isalpha, part))
         out[f"{name}_letters_per_space"] = letters_per_space(part)
         out[f"{name}_short"] = sum(w in SHORT for w in words)
         out[f"{name}_long"] = sum(w in LONG for w in words)
     if answer is not None:
-        numbers = NUMBER.findall(parts["answer"])
-        out["correct"] = (
-            final_m is not None
-            and bool(numbers)
-            and float(numbers[-1].replace(",", "")) == float(answer)
-        )
+        out["correct"] = finished and float(answer) in stated_numbers(parts["answer"])
     return out
 
 

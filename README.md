@@ -39,7 +39,7 @@ and predictions.
    arithmetic. Learned on some excerpts, gluing carries over to others about
    3× better than short forms. But unsteered gpt-oss is about 12× likelier to
    write a short form than to drop a space, so a character penalty would
-   start by pushing short forms, about 40× harder per place. The word-penalty
+   start out pushing short forms harder, by an order of magnitude per place. The word-penalty
    reading survives, somewhat weakened.
 
 2. **The stored transcript is probably not the sequence that ran.** Scored on

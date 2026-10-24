@@ -14,12 +14,12 @@
    "answer_letters_per_space": 4.692260442260443,
    "answer_letters": 179.5,
    "answer_short_long": [
-    52,
-    224
+    29,
+    208
    ],
-   "answer_short_share": 0.18840579710144928,
-   "finished": 1,
-   "accuracy": 0.90625
+   "answer_short_share": 0.12236286919831224,
+   "finished": 0.9,
+   "accuracy": 1
   },
   {
    "direction": "both",
@@ -35,12 +35,12 @@
    "answer_letters_per_space": 4.579831932773109,
    "answer_letters": 184.5,
    "answer_short_long": [
-    61,
-    245
+    47,
+    228
    ],
-   "answer_short_share": 0.19934640522875818,
-   "finished": 1,
-   "accuracy": 0.90625
+   "answer_short_share": 0.1709090909090909,
+   "finished": 0.925,
+   "accuracy": 1
   },
   {
    "direction": "both",
@@ -56,12 +56,12 @@
    "answer_letters_per_space": 4.6233108108108105,
    "answer_letters": 184.0,
    "answer_short_long": [
-    74,
-    205
+    50,
+    197
    ],
-   "answer_short_share": 0.26523297491039427,
-   "finished": 1,
-   "accuracy": 0.9375
+   "answer_short_share": 0.20242914979757085,
+   "finished": 0.9,
+   "accuracy": 1
   },
   {
    "direction": "both",
@@ -77,12 +77,12 @@
    "answer_letters_per_space": 5.047226386806597,
    "answer_letters": 186.5,
    "answer_short_long": [
-    78,
-    152
+    56,
+    146
    ],
-   "answer_short_share": 0.3391304347826087,
-   "finished": 1,
-   "accuracy": 0.90625
+   "answer_short_share": 0.27722772277227725,
+   "finished": 0.95,
+   "accuracy": 0.9375
   },
   {
    "direction": "both",
@@ -98,12 +98,12 @@
    "answer_letters_per_space": 4.809523809523809,
    "answer_letters": 149.5,
    "answer_short_long": [
-    110,
-    147
+    83,
+    142
    ],
-   "answer_short_share": 0.4280155642023346,
-   "finished": 1,
-   "accuracy": 0.84375
+   "answer_short_share": 0.3688888888888889,
+   "finished": 0.9,
+   "accuracy": 0.875
   },
   {
    "direction": "both",
@@ -119,12 +119,12 @@
    "answer_letters_per_space": 5.0285714285714285,
    "answer_letters": 137.5,
    "answer_short_long": [
-    103,
-    82
+    82,
+    80
    ],
-   "answer_short_share": 0.5567567567567567,
-   "finished": 1,
-   "accuracy": 0.78125
+   "answer_short_share": 0.5061728395061729,
+   "finished": 0.95,
+   "accuracy": 0.8125
   },
   {
    "direction": "both",
@@ -161,12 +161,12 @@
    "answer_letters_per_space": 4.709700872455339,
    "answer_letters": 200.0,
    "answer_short_long": [
-    73,
-    277
+    40,
+    255
    ],
-   "answer_short_share": 0.20857142857142857,
-   "finished": 1,
-   "accuracy": 0.875
+   "answer_short_share": 0.13559322033898305,
+   "finished": 0.9,
+   "accuracy": 0.9375
   },
   {
    "direction": "both",
@@ -182,12 +182,12 @@
    "answer_letters_per_space": 4.669034090909091,
    "answer_letters": 185.0,
    "answer_short_long": [
-    58,
-    247
+    41,
+    222
    ],
-   "answer_short_share": 0.1901639344262295,
-   "finished": 1,
-   "accuracy": 0.90625
+   "answer_short_share": 0.155893536121673,
+   "finished": 0.875,
+   "accuracy": 0.9375
   },
   {
    "direction": "both",
@@ -203,12 +203,12 @@
    "answer_letters_per_space": 4.854963740935234,
    "answer_letters": 199.5,
    "answer_short_long": [
-    93,
-    195
+    78,
+    187
    ],
-   "answer_short_share": 0.3229166666666667,
-   "finished": 1,
-   "accuracy": 0.875
+   "answer_short_share": 0.2943396226415094,
+   "finished": 0.875,
+   "accuracy": 0.9375
   },
   {
    "direction": "both",
@@ -224,11 +224,11 @@
    "answer_letters_per_space": 5.182773109243698,
    "answer_letters": 180.0,
    "answer_short_long": [
-    77,
-    142
+    66,
+    128
    ],
-   "answer_short_share": 0.3515981735159817,
-   "finished": 1,
+   "answer_short_share": 0.3402061855670103,
+   "finished": 0.875,
    "accuracy": 0.90625
   },
   {
@@ -249,8 +249,8 @@
     65
    ],
    "answer_short_share": 0.2073170731707317,
-   "finished": 0.975,
-   "accuracy": 0.71875
+   "finished": 0.775,
+   "accuracy": 0.78125
   },
   {
    "direction": "both",
@@ -270,8 +270,8 @@
     3
    ],
    "answer_short_share": null,
-   "finished": 0.3,
-   "accuracy": 0.0625
+   "finished": 0.05,
+   "accuracy": 0.03125
   },
   {
    "direction": "both",
@@ -308,12 +308,12 @@
    "answer_letters_per_space": 4.699177438307873,
    "answer_letters": 203.5,
    "answer_short_long": [
-    55,
-    245
+    35,
+    225
    ],
-   "answer_short_share": 0.18333333333333332,
-   "finished": 1,
-   "accuracy": 0.875
+   "answer_short_share": 0.1346153846153846,
+   "finished": 0.9,
+   "accuracy": 1
   },
   {
    "direction": "both",
@@ -329,12 +329,12 @@
    "answer_letters_per_space": 4.828431372549019,
    "answer_letters": 182.5,
    "answer_short_long": [
-    53,
-    238
+    36,
+    227
    ],
-   "answer_short_share": 0.18213058419243985,
-   "finished": 1,
-   "accuracy": 0.90625
+   "answer_short_share": 0.13688212927756654,
+   "finished": 0.925,
+   "accuracy": 1
   },
   {
    "direction": "both",
@@ -350,12 +350,12 @@
    "answer_letters_per_space": 4.856374807987711,
    "answer_letters": 182.0,
    "answer_short_long": [
-    54,
-    226
+    40,
+    216
    ],
-   "answer_short_share": 0.19285714285714287,
-   "finished": 1,
-   "accuracy": 0.875
+   "answer_short_share": 0.15625,
+   "finished": 0.85,
+   "accuracy": 0.96875
   },
   {
    "direction": "both",
@@ -371,12 +371,12 @@
    "answer_letters_per_space": 5.258813160987074,
    "answer_letters": 198.5,
    "answer_short_long": [
-    93,
-    123
+    67,
+    118
    ],
-   "answer_short_share": 0.4305555555555556,
-   "finished": 1,
-   "accuracy": 0.9375
+   "answer_short_share": 0.3621621621621622,
+   "finished": 0.875,
+   "accuracy": 1
   },
   {
    "direction": "both",
@@ -396,8 +396,8 @@
     28
    ],
    "answer_short_share": 0.7227722772277227,
-   "finished": 1,
-   "accuracy": 0.78125
+   "finished": 0.75,
+   "accuracy": 0.8125
   },
   {
    "direction": "both",
@@ -417,7 +417,7 @@
     2
    ],
    "answer_short_share": null,
-   "finished": 0.825,
+   "finished": 0.5,
    "accuracy": 0.59375
   },
   {
@@ -455,12 +455,12 @@
    "answer_letters_per_space": 4.6521739130434785,
    "answer_letters": 200.0,
    "answer_short_long": [
-    33,
-    249
+    25,
+    236
    ],
-   "answer_short_share": 0.11702127659574468,
-   "finished": 1,
-   "accuracy": 0.90625
+   "answer_short_share": 0.09578544061302682,
+   "finished": 0.9,
+   "accuracy": 1
   },
   {
    "direction": "glued",
@@ -476,12 +476,12 @@
    "answer_letters_per_space": 4.3675,
    "answer_letters": 198.0,
    "answer_short_long": [
-    38,
-    284
+    20,
+    274
    ],
-   "answer_short_share": 0.11801242236024845,
-   "finished": 1,
-   "accuracy": 0.90625
+   "answer_short_share": 0.06802721088435375,
+   "finished": 0.9,
+   "accuracy": 1
   },
   {
    "direction": "glued",
@@ -497,12 +497,12 @@
    "answer_letters_per_space": 4.752777777777778,
    "answer_letters": 205.5,
    "answer_short_long": [
-    44,
-    217
+    22,
+    185
    ],
-   "answer_short_share": 0.1685823754789272,
-   "finished": 1,
-   "accuracy": 0.84375
+   "answer_short_share": 0.10628019323671498,
+   "finished": 0.875,
+   "accuracy": 0.96875
   },
   {
    "direction": "glued",
@@ -518,12 +518,12 @@
    "answer_letters_per_space": 4.867156862745098,
    "answer_letters": 194.0,
    "answer_short_long": [
-    45,
-    137
+    31,
+    126
    ],
-   "answer_short_share": 0.24725274725274726,
-   "finished": 1,
-   "accuracy": 0.875
+   "answer_short_share": 0.19745222929936307,
+   "finished": 0.925,
+   "accuracy": 0.96875
   },
   {
    "direction": "glued",
@@ -539,12 +539,12 @@
    "answer_letters_per_space": 5.253826530612245,
    "answer_letters": 153.0,
    "answer_short_long": [
-    27,
-    134
+    19,
+    129
    ],
-   "answer_short_share": 0.16770186335403728,
-   "finished": 1,
-   "accuracy": 0.75
+   "answer_short_share": 0.12837837837837837,
+   "finished": 0.95,
+   "accuracy": 0.875
   },
   {
    "direction": "glued",
@@ -564,8 +564,8 @@
     102
    ],
    "answer_short_share": 0.08928571428571429,
-   "finished": 0.775,
-   "accuracy": 0.625
+   "finished": 0.7,
+   "accuracy": 0.65625
   },
   {
    "direction": "glued",
@@ -602,12 +602,12 @@
    "answer_letters_per_space": 4.765881708652793,
    "answer_letters": 181.5,
    "answer_short_long": [
-    48,
-    285
+    21,
+    263
    ],
-   "answer_short_share": 0.14414414414414414,
-   "finished": 1,
-   "accuracy": 0.90625
+   "answer_short_share": 0.07394366197183098,
+   "finished": 0.925,
+   "accuracy": 1
   },
   {
    "direction": "glued",
@@ -623,12 +623,12 @@
    "answer_letters_per_space": 4.717806041335454,
    "answer_letters": 214.5,
    "answer_short_long": [
-    36,
-    265
+    20,
+    243
    ],
-   "answer_short_share": 0.11960132890365449,
-   "finished": 1,
-   "accuracy": 0.96875
+   "answer_short_share": 0.07604562737642585,
+   "finished": 0.875,
+   "accuracy": 1
   },
   {
    "direction": "glued",
@@ -644,12 +644,12 @@
    "answer_letters_per_space": 4.9833333333333325,
    "answer_letters": 196.0,
    "answer_short_long": [
-    38,
-    139
+    12,
+    122
    ],
-   "answer_short_share": 0.21468926553672316,
-   "finished": 1,
-   "accuracy": 0.84375
+   "answer_short_share": 0.08955223880597014,
+   "finished": 0.875,
+   "accuracy": 0.875
   },
   {
    "direction": "glued",
@@ -665,12 +665,12 @@
    "answer_letters_per_space": 6.657918758557736,
    "answer_letters": 186.0,
    "answer_short_long": [
-    17,
-    120
+    12,
+    108
    ],
-   "answer_short_share": 0.12408759124087591,
-   "finished": 1,
-   "accuracy": 0.875
+   "answer_short_share": 0.1,
+   "finished": 0.9,
+   "accuracy": 0.96875
   },
   {
    "direction": "glued",
@@ -686,11 +686,11 @@
    "answer_letters_per_space": 7.5,
    "answer_letters": 148.5,
    "answer_short_long": [
-    16,
-    86
+    9,
+    74
    ],
-   "answer_short_share": 0.1568627450980392,
-   "finished": 0.825,
+   "answer_short_share": 0.10843373493975904,
+   "finished": 0.675,
    "accuracy": 0.6875
   },
   {
@@ -711,7 +711,7 @@
     15
    ],
    "answer_short_share": null,
-   "finished": 0.525,
+   "finished": 0.4,
    "accuracy": 0.375
   },
   {
@@ -749,12 +749,12 @@
    "answer_letters_per_space": 4.727743271221533,
    "answer_letters": 211.5,
    "answer_short_long": [
-    33,
-    274
+    17,
+    257
    ],
-   "answer_short_share": 0.10749185667752444,
-   "finished": 1,
-   "accuracy": 0.90625
+   "answer_short_share": 0.06204379562043796,
+   "finished": 0.925,
+   "accuracy": 1
   },
   {
    "direction": "glued",
@@ -770,12 +770,12 @@
    "answer_letters_per_space": 4.992537313432836,
    "answer_letters": 207.0,
    "answer_short_long": [
-    38,
-    326
+    26,
+    302
    ],
-   "answer_short_share": 0.1043956043956044,
-   "finished": 1,
-   "accuracy": 0.90625
+   "answer_short_share": 0.07926829268292683,
+   "finished": 0.875,
+   "accuracy": 1
   },
   {
    "direction": "glued",
@@ -791,12 +791,12 @@
    "answer_letters_per_space": 5.0,
    "answer_letters": 201.0,
    "answer_short_long": [
-    36,
-    156
+    14,
+    146
    ],
-   "answer_short_share": 0.1875,
-   "finished": 1,
-   "accuracy": 0.9375
+   "answer_short_share": 0.0875,
+   "finished": 0.875,
+   "accuracy": 1
   },
   {
    "direction": "glued",
@@ -812,12 +812,12 @@
    "answer_letters_per_space": 7.748576850094876,
    "answer_letters": 192.5,
    "answer_short_long": [
-    30,
-    77
+    11,
+    67
    ],
-   "answer_short_share": 0.2803738317757009,
-   "finished": 1,
-   "accuracy": 0.875
+   "answer_short_share": 0.14102564102564102,
+   "finished": 0.875,
+   "accuracy": 0.9375
   },
   {
    "direction": "glued",
@@ -833,12 +833,12 @@
    "answer_letters_per_space": 25.714285714285715,
    "answer_letters": 179.5,
    "answer_short_long": [
-    3,
-    18
+    0,
+    14
    ],
-   "answer_short_share": 0.14285714285714285,
-   "finished": 0.975,
-   "accuracy": 0.84375
+   "answer_short_share": null,
+   "finished": 0.875,
+   "accuracy": 0.9375
   },
   {
    "direction": "glued",
@@ -858,7 +858,7 @@
     9
    ],
    "answer_short_share": null,
-   "finished": 0.875,
+   "finished": 0.575,
    "accuracy": 0.65625
   },
   {
@@ -896,12 +896,12 @@
    "answer_letters_per_space": 4.733695652173913,
    "answer_letters": 228.5,
    "answer_short_long": [
-    53,
-    258
+    30,
+    249
    ],
-   "answer_short_share": 0.17041800643086816,
-   "finished": 1,
-   "accuracy": 0.90625
+   "answer_short_share": 0.10752688172043011,
+   "finished": 0.95,
+   "accuracy": 1
   },
   {
    "direction": "short",
@@ -917,12 +917,12 @@
    "answer_letters_per_space": 4.609523809523809,
    "answer_letters": 196.5,
    "answer_short_long": [
-    53,
-    228
+    32,
+    217
    ],
-   "answer_short_share": 0.18861209964412812,
-   "finished": 1,
-   "accuracy": 0.90625
+   "answer_short_share": 0.1285140562248996,
+   "finished": 0.9,
+   "accuracy": 1
   },
   {
    "direction": "short",
@@ -938,12 +938,12 @@
    "answer_letters_per_space": 4.596972176759411,
    "answer_letters": 184.0,
    "answer_short_long": [
-    80,
-    190
+    47,
+    182
    ],
-   "answer_short_share": 0.2962962962962963,
-   "finished": 1,
-   "accuracy": 0.9375
+   "answer_short_share": 0.2052401746724891,
+   "finished": 0.925,
+   "accuracy": 1
   },
   {
    "direction": "short",
@@ -959,12 +959,12 @@
    "answer_letters_per_space": 4.439098597359736,
    "answer_letters": 151.5,
    "answer_short_long": [
-    101,
-    150
+    77,
+    138
    ],
-   "answer_short_share": 0.40239043824701193,
-   "finished": 1,
-   "accuracy": 0.875
+   "answer_short_share": 0.3581395348837209,
+   "finished": 0.95,
+   "accuracy": 0.9375
   },
   {
    "direction": "short",
@@ -980,12 +980,12 @@
    "answer_letters_per_space": 4.625340501792115,
    "answer_letters": 135.5,
    "answer_short_long": [
-    124,
-    95
+    104,
+    86
    ],
-   "answer_short_share": 0.5662100456621004,
-   "finished": 1,
-   "accuracy": 0.875
+   "answer_short_share": 0.5473684210526316,
+   "finished": 0.975,
+   "accuracy": 0.96875
   },
   {
    "direction": "short",
@@ -1001,12 +1001,12 @@
    "answer_letters_per_space": 4.071428571428571,
    "answer_letters": 91.5,
    "answer_short_long": [
-    22,
+    18,
     33
    ],
-   "answer_short_share": 0.4,
-   "finished": 0.975,
-   "accuracy": 0.6875
+   "answer_short_share": 0.35294117647058826,
+   "finished": 0.775,
+   "accuracy": 0.71875
   },
   {
    "direction": "short",
@@ -1026,7 +1026,7 @@
     0
    ],
    "answer_short_share": null,
-   "finished": 0.1,
+   "finished": 0,
    "accuracy": 0
   },
   {
@@ -1064,12 +1064,12 @@
    "answer_letters_per_space": 4.585714285714285,
    "answer_letters": 184.5,
    "answer_short_long": [
-    68,
-    189
+    40,
+    181
    ],
-   "answer_short_share": 0.26459143968871596,
-   "finished": 1,
-   "accuracy": 0.90625
+   "answer_short_share": 0.18099547511312217,
+   "finished": 0.95,
+   "accuracy": 0.96875
   },
   {
    "direction": "short",
@@ -1085,12 +1085,12 @@
    "answer_letters_per_space": 4.602631578947369,
    "answer_letters": 148.0,
    "answer_short_long": [
-    105,
-    171
+    68,
+    143
    ],
-   "answer_short_share": 0.3804347826086957,
-   "finished": 1,
-   "accuracy": 0.90625
+   "answer_short_share": 0.3222748815165877,
+   "finished": 0.9,
+   "accuracy": 0.9375
   },
   {
    "direction": "short",
@@ -1106,12 +1106,12 @@
    "answer_letters_per_space": 4.4944237918215615,
    "answer_letters": 121.5,
    "answer_short_long": [
-    134,
-    77
+    105,
+    72
    ],
-   "answer_short_share": 0.6350710900473934,
-   "finished": 0.975,
-   "accuracy": 0.84375
+   "answer_short_share": 0.5932203389830508,
+   "finished": 0.85,
+   "accuracy": 0.90625
   },
   {
    "direction": "short",
@@ -1127,12 +1127,12 @@
    "answer_letters_per_space": 4.173163418290855,
    "answer_letters": 99.0,
    "answer_short_long": [
-    62,
+    50,
     34
    ],
-   "answer_short_share": 0.6458333333333334,
-   "finished": 1,
-   "accuracy": 0.75
+   "answer_short_share": 0.5952380952380952,
+   "finished": 0.825,
+   "accuracy": 0.8125
   },
   {
    "direction": "short",
@@ -1211,12 +1211,12 @@
    "answer_letters_per_space": 4.680508474576271,
    "answer_letters": 214.0,
    "answer_short_long": [
-    58,
-    212
+    41,
+    197
    ],
-   "answer_short_share": 0.21481481481481482,
-   "finished": 1,
-   "accuracy": 0.90625
+   "answer_short_share": 0.1722689075630252,
+   "finished": 0.925,
+   "accuracy": 1
   },
   {
    "direction": "short",
@@ -1232,12 +1232,12 @@
    "answer_letters_per_space": 4.4900362318840585,
    "answer_letters": 176.5,
    "answer_short_long": [
-    126,
-    162
+    114,
+    149
    ],
-   "answer_short_share": 0.4375,
-   "finished": 1,
-   "accuracy": 0.96875
+   "answer_short_share": 0.43346007604562736,
+   "finished": 0.9,
+   "accuracy": 1
   },
   {
    "direction": "short",
@@ -1253,12 +1253,12 @@
    "answer_letters_per_space": 4.495877061469265,
    "answer_letters": 150.0,
    "answer_short_long": [
-    168,
-    85
+    132,
+    72
    ],
-   "answer_short_share": 0.6640316205533597,
-   "finished": 1,
-   "accuracy": 0.78125
+   "answer_short_share": 0.6470588235294118,
+   "finished": 0.85,
+   "accuracy": 0.9375
   },
   {
    "direction": "short",
@@ -1274,12 +1274,12 @@
    "answer_letters_per_space": 4.19375,
    "answer_letters": 150.5,
    "answer_short_long": [
-    35,
+    32,
     37
    ],
-   "answer_short_share": 0.4861111111111111,
-   "finished": 1,
-   "accuracy": 0.78125
+   "answer_short_share": 0.463768115942029,
+   "finished": 0.75,
+   "accuracy": 0.9375
   },
   {
    "direction": "short",
@@ -1295,12 +1295,12 @@
    "answer_letters_per_space": 2.769230769230769,
    "answer_letters": 18.0,
    "answer_short_long": [
-    9,
+    8,
     4
    ],
    "answer_short_share": null,
-   "finished": 0.675,
-   "accuracy": 0.34375
+   "finished": 0.225,
+   "accuracy": 0.28125
   },
   {
    "direction": "short",
