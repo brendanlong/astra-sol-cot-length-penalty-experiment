@@ -34,6 +34,13 @@ and predictions.
    wrote the full form 20 times. That leans toward a penalty on word count
    rather than characters, though not decisively.
 
+   **Is gluing just easier to learn?** [STEERING.md](STEERING.md) tests that on
+   gpt-oss-20b. Gluing is a sturdier steering direction and, learned on some
+   excerpts, transfers to others about 15× better per edit than short forms.
+   But unsteered gpt-oss is about 12× likelier to write a short form than to
+   drop a space, so a character penalty would start by pushing short forms.
+   The word-penalty reading survives, weakened.
+
 2. **The stored transcript is probably not the sequence that ran.** Scored on
    **gpt-oss-120b** — an OpenAI model whose tokenizer gives the same ids as the
    o200k used above, so the same positions — the word-respecting token is the

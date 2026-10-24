@@ -220,3 +220,6 @@ data/
 
 # Playwright MCP browser snapshots (may contain private page content)
 .playwright-mcp/
+
+# Snakemake run state
+.snakemake/

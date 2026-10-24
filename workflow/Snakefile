@@ -1,0 +1,99 @@
+# Steering and learnability of gluing vs shortening on gpt-oss-20b.
+# Locally: `uv run snakemake -c1 all`. On the lab cluster, see
+# workflow/profiles/lab-borrow/profile.yaml.
+
+configfile: "workflow/config.yaml"
+
+RESULTS = "cot_spacing/results"
+VARIANTS = f"{RESULTS}/variants.json"
+VECTORS = f"{RESULTS}/steering/vectors.pt"
+DIRECTIONS = ["glued", "short", "both"]
+
+localrules: all, variants, score
+
+
+rule all:
+    input:
+        f"{RESULTS}/steering/scores.json",
+        f"{RESULTS}/learnability/gradients.json",
+        f"{RESULTS}/learnability/sites.json",
+
+
+rule variants:
+    input:
+        "cot_spacing/corpus/excerpts.json",
+    output:
+        VARIANTS,
+    shell:
+        "uv run --no-sync python -m cot_spacing.variants --out {output}"
+
+
+rule vectors:
+    input:
+        VARIANTS,
+    output:
+        pt=VECTORS,
+        stats=f"{RESULTS}/steering/vectors.json",
+    resources:
+        gpu=2,
+        runtime=60,
+    shell:
+        "uv run --no-sync python -m cot_spacing.steering vectors --examples {input} --out {output.pt}"
+
+
+rule baseline:
+    input:
+        VECTORS,
+    output:
+        f"{RESULTS}/steering/gen/none.jsonl",
+    resources:
+        gpu=2,
+        runtime=60,
+    shell:
+        "uv run --no-sync python -m cot_spacing.steering generate --vectors {input}"
+        " --direction glued --layer 0 --scale 0 --out {output}"
+
+
+rule generate:
+    input:
+        VECTORS,
+    output:
+        f"{RESULTS}/steering/gen/{{direction}}-{{layer}}-{{scale}}.jsonl",
+    wildcard_constraints:
+        direction="glued|short|both",
+    resources:
+        gpu=2,
+        runtime=60,
+    shell:
+        "uv run --no-sync python -m cot_spacing.steering generate --vectors {input}"
+        " --direction {wildcards.direction} --layer {wildcards.layer}"
+        " --scale {wildcards.scale} --out {output}"
+
+
+rule score:
+    input:
+        f"{RESULTS}/steering/gen/none.jsonl",
+        expand(
+            f"{RESULTS}/steering/gen/{{direction}}-{{layer}}-{{scale}}.jsonl",
+            direction=DIRECTIONS,
+            layer=config["layers"],
+            scale=config["scales"],
+        ),
+    output:
+        f"{RESULTS}/steering/scores.json",
+    shell:
+        "uv run --no-sync python -m cot_spacing.steering score {input} --out {output}"
+
+
+rule learnability:
+    input:
+        VARIANTS,
+    output:
+        f"{RESULTS}/learnability/{{measure}}.json",
+    wildcard_constraints:
+        measure="gradients|sites",
+    resources:
+        gpu=2,
+        runtime=120,
+    shell:
+        "uv run --no-sync python -m cot_spacing.learnability {wildcards.measure} --out {output}"

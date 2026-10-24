@@ -20,6 +20,8 @@ dependencies = [
     "torch>=2.0",
     "transformers>=4.40",
     "accelerate>=1.0",
+    # Runs the steering pipeline (workflow/Snakefile)
+    "snakemake>=9.0",
 ]
 
 [dependency-groups]
@@ -81,6 +83,17 @@ exclude = ["**/node_modules", "**/__pycache__", "**/.*"]
 # up the day it lands. This lives here rather than in a user-level uv.toml so
 # that it also covers CI, and so `uv sync --locked` doesn't re-resolve.
 exclude-newer = "7 days"
+environments = ["sys_platform == 'linux' and platform_machine == 'x86_64'"]
+
+# CUDA 12.9 builds rather than PyPI's CUDA 13 defaults, which need driver 580+;
+# the lab cluster's A40s run 535.
+[tool.uv.sources]
+torch = { index = "pytorch-cu129" }
+
+[[tool.uv.index]]
+name = "pytorch-cu129"
+url = "https://download.pytorch.org/whl/cu129"
+explicit = true
 
 [build-system]
 requires = ["hatchling"]
