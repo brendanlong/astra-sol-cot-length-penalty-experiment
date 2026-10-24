@@ -343,15 +343,27 @@ produce gluing without short forms, but they cannot rule it out.
 
 ## Reproducing
 
+The generations and steering vectors are on Hugging Face
+([brendanlong/cot-spacing-steering](https://huggingface.co/datasets/brendanlong/cot-spacing-steering)),
+not in git. To recheck every steering number and figure on CPU:
+
 ```bash
-uv run python -m cot_spacing.variants            # CPU
-# GPU stages, on the lab Slurm cluster (2 A40s per job):
+uv run python -m cot_spacing.steering_data      # downloads ~6 MB
+uv run python -m cot_spacing.steering score cot_spacing/results/steering/gen/*.jsonl \
+    --out cot_spacing/results/steering/scores.json
+uv run python -m cot_spacing.steering_figures
+```
+
+To regenerate them instead, the GPU stages run on the lab Slurm cluster
+(2 A40s per job):
+
+```bash
+uv run python -m cot_spacing.variants
 uv run --with "snakemake-executor-plugin-slurm>=2.8,<3" snakemake all \
     --profile workflow/profiles/lab-borrow
-uv run python -m cot_spacing.steering_figures    # CPU
 ```
 
 Each steering point (40 prompts, up to 1,024 new tokens each) is about 12
-minutes on 2 A40s; the 64 points plus the other stages are about 14
-job-hours. Generations are in `cot_spacing/results/steering/gen/`, one file
-per direction, layer and strength.
+minutes; the 64 points plus the other stages are about 14 job-hours. The
+uploaded generations were made with an earlier version of the directions
+(see section 1); a rerun uses the current ones.

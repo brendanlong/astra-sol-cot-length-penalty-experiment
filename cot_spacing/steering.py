@@ -317,7 +317,7 @@ def score(paths: list[Path], out: Path) -> None:
         {"direction": d, "layer": layer, "scale": scale, **summarize(rs)}
         for (d, layer, scale), rs in sorted(groups.items())
     ]
-    out.write_text(json.dumps({"summary": summary, "rows": rows}, indent=1) + "\n")
+    out.write_text(json.dumps({"summary": summary}, indent=1) + "\n")
     for s in summary:
         print(s)
 
