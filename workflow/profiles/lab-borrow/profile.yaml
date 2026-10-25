@@ -1,0 +1,18 @@
+# The SPAR/EleutherAI lab Slurm cluster's borrow lane (preemptible; a stopped
+# job is requeued and starts over). Run the controller in tmux on the login node:
+#   uv run --with "snakemake-executor-plugin-slurm>=2.8,<3" snakemake all \
+#       --profile workflow/profiles/lab-borrow
+executor: slurm
+jobs: 4
+local-cores: 1
+latency-wait: 60
+slurm-no-account: true
+default-resources:
+  slurm_partition: a40-borrow
+  qos: borrow
+  runtime: 470
+  cpus_per_task: 8
+  mem_mb: 96000
+keep-going: true
+rerun-incomplete: true
+printshellcmds: true
