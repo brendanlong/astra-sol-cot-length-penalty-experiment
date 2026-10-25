@@ -53,19 +53,18 @@ def prompt(tok: PreTrainedTokenizerBase, user: str) -> str:
 
 
 def with_reasoning(
-    tok: PreTrainedTokenizerBase, user: str, cot: str
+    tok: PreTrainedTokenizerBase, user: str, cot: list[int]
 ) -> tuple[list[int], slice]:
-    """Token ids of ``user`` answered by ``cot`` in the analysis channel.
+    """Token ids of ``user`` answered by the reasoning ids ``cot``.
 
-    Returns the ids and the slice of them that is ``cot``. The reasoning is
-    tokenized on its own, so its tokens do not depend on the prompt.
+    Returns the ids and the slice of them that is ``cot``. The reasoning comes
+    already tokenized, so it can be tokenized some way other than canonically.
     """
     head = tok.encode(
         prompt(tok, user) + "<|channel|>analysis<|message|>", add_special_tokens=False
     )
-    body = tok.encode(cot, add_special_tokens=False)
     tail = tok.encode("<|end|>", add_special_tokens=False)
-    return head + body + tail, slice(len(head), len(head) + len(body))
+    return head + cot + tail, slice(len(head), len(head) + len(cot))
 
 
 def layers(model: PreTrainedModel) -> torch.nn.ModuleList:

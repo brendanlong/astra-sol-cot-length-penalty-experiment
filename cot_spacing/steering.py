@@ -1,5 +1,10 @@
 """Steering gpt-oss toward gluing words, shortening them, or both.
 
+Directions: ``glued``, ``short`` and ``both`` (see :mod:`cot_spacing.variants`);
+``nospace``, which also drops the spaces GPT-6 kept after sentences and
+clauses; and ``glued_wordwise``, GPT-6's glued text tokenized a word at a time
+rather than canonically.
+
 ``vectors``: each direction is a difference of means of the residual stream
 over the reasoning tokens, a variant minus the spaced reading of the same
 excerpts (see :mod:`cot_spacing.variants`). Held-out separation is checked by
@@ -10,8 +15,10 @@ prompts, at one strength. Every direction is scaled to the same length,
 a fraction of the typical residual norm at that layer, so a direction that
 needs less push to produce its behaviour is the easier one to steer.
 
-``score``: how much each generation glues and shortens, and whether it still
-gets the arithmetic right.
+``score``: how much each generation glues and shortens, which spaces it
+keeps, whether its tokens are the canonical tokenization of its text, whether
+it loops or breaks into garbage, and whether it still gets the arithmetic
+right.
 
 Usage:
     python -m cot_spacing.steering vectors --out results/steering/vectors.pt
@@ -23,6 +30,7 @@ Usage:
 from __future__ import annotations
 
 import argparse
+import difflib
 import json
 import re
 import statistics
@@ -33,7 +41,7 @@ import torch
 from cot_spacing.variants import SHORT_FORMS, Example
 
 EXP_DIR = Path(__file__).parent
-DIRECTIONS = ("glued", "short", "both")
+DIRECTIONS = ("glued", "short", "both", "nospace", "glued_wordwise")
 PROMPT_FILES = (
     EXP_DIR / "corpus" / "gsm8k_test_first32.json",
     EXP_DIR / "corpus" / "agentic_prompts.json",
@@ -46,7 +54,9 @@ def load_examples(path: Path) -> list[Example]:
 
 
 @torch.no_grad()
-def reasoning_states(tok: object, model: object, user: str, cot: str) -> torch.Tensor:
+def reasoning_states(
+    tok: object, model: object, user: str, cot: list[int]
+) -> torch.Tensor:
     """Each decoder block's output at each reasoning token: [layer, tok, d].
 
     Read with hooks on the blocks rather than from ``output_hidden_states``,
@@ -83,9 +93,9 @@ def vectors(examples_path: Path, out: Path) -> None:
     tok, model = load()
     examples = load_examples(examples_path)
     states = {
-        (e.id, v): reasoning_states(tok, model, e.user, text)
+        (e.id, v): reasoning_states(tok, model, e.user, ids)
         for e in examples
-        for v, text in e.texts.items()
+        for v, ids in e.ids.items()
     }
 
     def difference(variant: str, ids: list[str]) -> torch.Tensor:
@@ -189,14 +199,16 @@ def generate(
     tmp = out.with_suffix(".partial")
     with tmp.open("w") as f:
         for p, row in zip(prompts, gen[:, batch["input_ids"].shape[1] :], strict=True):
-            text = str(tok.decode(row, skip_special_tokens=False))
+            ids = [int(i) for i in row if i != tok.pad_token_id]
+            text = str(tok.decode(ids, skip_special_tokens=False))
             record = {
                 "direction": direction,
                 "layer": layer,
                 "scale": scale,
                 "norm": scale * resid,
                 "id": p["id"],
-                "text": text.replace(str(tok.pad_token), ""),
+                "text": text,
+                "ids": ids,
             }
             f.write(json.dumps(record) + "\n")
     tmp.rename(out)
@@ -242,6 +254,8 @@ def stated_numbers(answer: str) -> set[float]:
 LONG = set(SHORT_FORMS)
 SHORT = set(SHORT_FORMS.values()) - LONG
 
+#: How far a run may fall below unsteered gpt-oss and still count as coherent.
+COHERENT_DROP = 0.1
 #: Below this many words from the short-form list, a share is too noisy to report.
 MIN_LIST_WORDS = 20
 
@@ -249,6 +263,46 @@ MIN_LIST_WORDS = 20
 def letters_per_space(text: str) -> float | None:
     chunks = [c for c in text.split() if LETTERS.search(c)]
     return sum(map(str.isalpha, text)) / len(chunks) if chunks else None
+
+
+#: A space directly after the end of a sentence, or of a clause, followed by
+#: more words: ``done. Next``, ``a, b``. Decimals and line ends are not counted.
+AFTER_SENTENCE = re.compile(r"(?<=[A-Za-z0-9)\"'])[.?!]( ?)(?=[A-Za-z])")
+AFTER_CLAUSE = re.compile(r"(?<=[A-Za-z0-9)\"'])[,:;]( ?)(?=[A-Za-z])")
+BETWEEN_WORDS = re.compile(r"(?<=[^\s.?!,:;]) (?=\S)")
+
+
+def degenerate(text: str) -> bool:
+    """Stuck in a loop, or broken into undecodable bytes.
+
+    A loop shows as many repeated 30-character windows: a third of them
+    repeated is far beyond anything unsteered gpt-oss writes.
+    """
+    windows = [text[i : i + 30] for i in range(0, max(0, len(text) - 30), 10)]
+    repeated = 1 - len(set(windows)) / len(windows) if windows else 0.0
+    return repeated > 0.3 or text.count("\ufffd") >= 3
+
+
+def spacing(reasoning: str) -> dict[str, int]:
+    """Which spaces the reasoning keeps: after sentences, clauses, other words."""
+    text = CODE.sub(" ", reasoning)
+    sentence = AFTER_SENTENCE.findall(text)
+    clause = AFTER_CLAUSE.findall(text)
+    return {
+        "sentence_spaces": sum(1 for g in sentence if g),
+        "sentence_ends": len(sentence),
+        "clause_spaces": sum(1 for g in clause if g),
+        "clause_ends": len(clause),
+        "word_spaces": len(BETWEEN_WORDS.findall(text)),
+    }
+
+
+def noncanonical(ids: list[int], tok: object) -> int:
+    """Generated tokens that re-tokenizing the decoded text would not give."""
+    text = tok.decode(ids, skip_special_tokens=False)  # type: ignore[attr-defined]
+    canonical = tok.encode(text, add_special_tokens=False)  # type: ignore[attr-defined]
+    matcher = difflib.SequenceMatcher(a=canonical, b=ids, autojunk=False)
+    return len(ids) - sum(block.size for block in matcher.get_matching_blocks())
 
 
 def measure(text: str, answer: str | None) -> dict[str, object]:
@@ -266,20 +320,21 @@ def measure(text: str, answer: str | None) -> dict[str, object]:
     }
     #: Truncated at the token limit if the final turn never closed.
     finished = final_m is not None and final_m.group(2) != ""
-    out: dict[str, object] = {"finished": finished}
+    out: dict[str, object] = {"finished": finished, "degenerate": degenerate(text)}
     for name, part in parts.items():
         words = [w.lower() for w in WORD.findall(CODE.sub(" ", part))]
         out[f"{name}_letters"] = sum(map(str.isalpha, part))
         out[f"{name}_letters_per_space"] = letters_per_space(part)
         out[f"{name}_short"] = sum(w in SHORT for w in words)
         out[f"{name}_long"] = sum(w in LONG for w in words)
+    out |= spacing(parts["reasoning"])
     if answer is not None:
         out["correct"] = finished and float(answer) in stated_numbers(parts["answer"])
     return out
 
 
 def summarize(rows: list[dict[str, object]]) -> dict[str, object]:
-    """One steering run: medians over answers, short-form counts pooled."""
+    """One steering run: medians over answers, counts pooled."""
     out: dict[str, object] = {}
     for part in ("reasoning", "answer"):
         lps = [r[f"{part}_letters_per_space"] for r in rows]
@@ -292,13 +347,46 @@ def summarize(rows: list[dict[str, object]]) -> dict[str, object]:
         out[f"{part}_short_share"] = (
             n_short / (n_short + n_long) if n_short + n_long >= MIN_LIST_WORDS else None
         )
+    for key in (
+        "sentence_spaces",
+        "sentence_ends",
+        "clause_spaces",
+        "clause_ends",
+        "word_spaces",
+        "reasoning_letters",
+        "degenerate",
+    ):
+        out[f"total_{key}"] = sum(int(r[key]) for r in rows)  # type: ignore[call-overload]
+    if all("noncanonical" in r for r in rows):
+        out["noncanonical_tokens"] = sum(int(r["noncanonical"]) for r in rows)  # type: ignore[call-overload]
+        out["tokens"] = sum(int(r["tokens"]) for r in rows)  # type: ignore[call-overload]
+        out["noncanonical_answers"] = sum(bool(r["noncanonical"]) for r in rows)
     math = [r for r in rows if "correct" in r]
     out["finished"] = statistics.mean(bool(r["finished"]) for r in rows)
     out["accuracy"] = statistics.mean(bool(r["correct"]) for r in math)
     return out
 
 
+def coherent(run: dict[str, object], base: dict[str, object]) -> bool:
+    """Still doing the task: no answer looping or broken (unless unsteered
+    gpt-oss does too), and neither GSM8K accuracy nor the share of answers
+    finished within the token limit more than 10 points below unsteered.
+    Unsteered gpt-oss itself runs out of tokens on 2 of 40 answers, both long
+    tables.
+    """
+    return (
+        float(run["accuracy"]) >= float(base["accuracy"]) - COHERENT_DROP  # type: ignore[arg-type]
+        and float(run["finished"]) >= float(base["finished"]) - COHERENT_DROP  # type: ignore[arg-type]
+        and int(run["total_degenerate"]) <= int(base["total_degenerate"])  # type: ignore[call-overload]
+    )
+
+
 def score(paths: list[Path], out: Path) -> None:
+    from transformers import AutoTokenizer
+
+    from cot_spacing.gpt_oss import MODEL
+
+    tok = AutoTokenizer.from_pretrained(MODEL)
     answers = {p["id"]: p.get("answer") for p in load_prompts()}
     rows = []
     for path in paths:
@@ -307,9 +395,13 @@ def score(paths: list[Path], out: Path) -> None:
             if r["scale"] == 0:
                 r |= {"direction": "none", "layer": 0}
             keys = ("direction", "layer", "scale", "norm", "id")
-            rows.append(
-                {**{k: r[k] for k in keys}, **measure(r["text"], answers[r["id"]])}
-            )
+            row = {**{k: r[k] for k in keys}, **measure(r["text"], answers[r["id"]])}
+            if "ids" in r:
+                row |= {
+                    "noncanonical": noncanonical(r["ids"], tok),
+                    "tokens": len(r["ids"]),
+                }
+            rows.append(row)
     groups: dict[tuple[str, int, float], list[dict[str, object]]] = {}
     for r in rows:
         groups.setdefault((r["direction"], r["layer"], r["scale"]), []).append(r)  # type: ignore[arg-type]
@@ -317,6 +409,9 @@ def score(paths: list[Path], out: Path) -> None:
         {"direction": d, "layer": layer, "scale": scale, **summarize(rs)}
         for (d, layer, scale), rs in sorted(groups.items())
     ]
+    base = next(s for s in summary if s["direction"] == "none")
+    for s in summary:
+        s["coherent"] = coherent(s, base)
     out.write_text(json.dumps({"summary": summary}, indent=1) + "\n")
     for s in summary:
         print(s)

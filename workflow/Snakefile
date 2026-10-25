@@ -7,7 +7,7 @@ configfile: "workflow/config.yaml"
 RESULTS = "cot_spacing/results"
 VARIANTS = f"{RESULTS}/variants.json"
 VECTORS = f"{RESULTS}/steering/vectors.pt"
-DIRECTIONS = ["glued", "short", "both"]
+DIRECTIONS = config["directions"]
 
 localrules: all, variants, score
 
@@ -60,7 +60,7 @@ rule generate:
     output:
         f"{RESULTS}/steering/gen/{{direction}}-{{layer}}-{{scale}}.jsonl",
     wildcard_constraints:
-        direction="glued|short|both",
+        direction="|".join(DIRECTIONS),
     resources:
         gpu=2,
         runtime=60,

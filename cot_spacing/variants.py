@@ -1,12 +1,19 @@
-"""Four renderings of each glued chain-of-thought, for contrasting activations.
+"""Renderings of each glued chain-of-thought, for contrasting activations.
 
 - ``spaced``: OpenAI's own space-restored reading.
 - ``glued``: what GPT-6 actually wrote.
 - ``short``: the spaced reading with every word in :data:`SHORT_FORMS` shortened.
 - ``both``: what GPT-6 wrote, with the same words shortened.
+- ``nospace``: what GPT-6 wrote with every remaining space removed too,
+  including those after sentences and clauses.
 
-``spaced`` is the baseline each of the other three is contrasted with, so the
-three directions differ only in what was done to the same words.
+Each rendering is also tokenized, canonically, into ``ids``. One more token
+sequence, ``glued_wordwise``, is GPT-6's glued text with each word tokenized
+on its own and the pieces concatenated: the same characters as ``glued``, in
+the tokens a model emitting one word at a time would produce.
+
+``spaced`` is the baseline the others are contrasted with, so the directions
+differ only in what was done to the same words.
 
 Each is wrapped as the analysis channel of a gpt-oss conversation whose user
 turn is the user prompt from the same incident, so the excerpt reads as the
@@ -25,15 +32,21 @@ from pathlib import Path
 from typing import TYPE_CHECKING, Literal
 
 from pydantic import BaseModel
+from transformers import AutoTokenizer
 
 from cot_spacing.analysis import RESULTS_DIR, glued_only, segmentations
 from cot_spacing.data import Excerpt, load_excerpts
+from cot_spacing.emission_logprob import wordwise_ids
+from cot_spacing.gpt_oss import MODEL
 
 if TYPE_CHECKING:
     from cot_spacing.segment import Segmentation
 
-Variant = Literal["spaced", "glued", "short", "both"]
-VARIANTS: tuple[Variant, ...] = ("spaced", "glued", "short", "both")
+Variant = Literal["spaced", "glued", "short", "both", "nospace"]
+VARIANTS: tuple[Variant, ...] = ("spaced", "glued", "short", "both", "nospace")
+#: Token sequences: every rendering, canonically tokenized, plus the glued text
+#: tokenized a word at a time.
+RENDERINGS: tuple[str, ...] = (*VARIANTS, "glued_wordwise")
 
 #: Every everyday short form for a word in the glued excerpts that reads the
 #: same in context, plus common ones for words gpt-oss writes in arithmetic
@@ -165,7 +178,12 @@ def render(seg: Segmentation, variant: Variant) -> str:
     words = (
         [shorten(w) for w in seg.words] if variant in ("short", "both") else seg.words
     )
-    gaps = seg.gaps if variant in ("glued", "both") else seg.spaced_gaps()
+    if variant == "nospace":
+        gaps = [g if g == "\n" else "" for g in seg.gaps]
+    elif variant in ("glued", "both"):
+        gaps = seg.gaps
+    else:
+        gaps = seg.spaced_gaps()
     return "".join(w + g for w, g in zip(words, [*gaps, ""], strict=True))
 
 
@@ -173,6 +191,8 @@ class Example(BaseModel):
     id: str
     user: str
     texts: dict[Variant, str]
+    #: Reasoning token ids per entry of :data:`RENDERINGS`.
+    ids: dict[str, list[int]]
     glued_boundaries: int
     shortened_words: int
     #: Characters each variant saves against ``spaced``.
@@ -194,6 +214,7 @@ def user_prompt(excerpt: Excerpt, excerpts: list[Excerpt]) -> str:
 
 def build() -> list[Example]:
     excerpts = load_excerpts()
+    tok = AutoTokenizer.from_pretrained(MODEL)
     out = []
     for e, seg in glued_only(segmentations(excerpts)):
         if e.kind != "cot":
@@ -204,6 +225,13 @@ def build() -> list[Example]:
                 id=e.id,
                 user=user_prompt(e, excerpts),
                 texts=texts,
+                ids={
+                    **{
+                        v: tok.encode(t, add_special_tokens=False)
+                        for v, t in texts.items()
+                    },
+                    "glued_wordwise": wordwise_ids(seg, tok, spaced=False).ids,
+                },
                 glued_boundaries=len(seg.dropped),
                 shortened_words=sum(shorten(w) != w for w in seg.words),
                 chars_saved={v: len(texts["spaced"]) - len(texts[v]) for v in VARIANTS},

@@ -9,64 +9,118 @@ from __future__ import annotations
 import json
 import math
 import statistics
+from collections.abc import Callable
 from pathlib import Path
+from typing import Any
 
 import matplotlib.pyplot as plt
 from matplotlib.lines import Line2D
-from matplotlib.ticker import NullFormatter, ScalarFormatter
+from matplotlib.ticker import LogLocator, NullFormatter, ScalarFormatter
 
 from cot_spacing.figures import FIG_DIR, INK, MUTED, SECONDARY, _frame, _save
-from cot_spacing.learnability import step_gains
-from cot_spacing.steering import DIRECTIONS
+from cot_spacing.learnability import REWRITES, step_gains
+from cot_spacing.steering import COHERENT_DROP, coherent
 
 RESULTS = Path(__file__).parent / "results"
-#: validate_palette.js "#2a78d6,#eb6834,#1baf7a" --mode light --pairs all ->
-#: PASS; aqua is under 3:1 against the surface, so every line is labelled.
-COLOR = {"glued": "#2a78d6", "short": "#eb6834", "both": "#1baf7a"}
-LABEL = {"glued": "glue", "short": "short forms", "both": "both"}
-METRICS = (
-    ("reasoning_letters_per_space", "letters per space,\nreasoning (median)"),
-    ("reasoning_short_share", "short-form share,\nreasoning"),
-    ("answer_short_share", "short-form share,\nanswer"),
-    ("accuracy", "GSM8K accuracy\n(32 problems)"),
+#: validate_palette.js --mode light --pairs all passes for both figures'
+#: palettes: "#2a78d6,#eb6834,#1baf7a" and "#2a78d6,#eda100,#e87ba4". The light
+#: ones are under 3:1 against the surface, so every figure has a legend.
+COLOR = {
+    "glued": "#2a78d6",
+    "short": "#eb6834",
+    "both": "#1baf7a",
+    "nospace": "#eda100",
+    "glued_wordwise": "#e87ba4",
+}
+LABEL = {
+    "glued": "glue",
+    "short": "short forms",
+    "both": "both",
+    "nospace": "no spaces at all",
+    "glued_wordwise": "glue, word-by-word tokens",
+}
+GLUE_VARIANTS = ("glued", "nospace", "glued_wordwise")
+
+Metric = tuple[str, Callable[[dict[str, Any]], float | None], bool]
+
+
+def field(key: str) -> Callable[[dict[str, Any]], float | None]:
+    return lambda s: s[key]
+
+
+def ratio(num: str, den: str) -> Callable[[dict[str, Any]], float | None]:
+    return lambda s: s[num] / s[den] if s.get(den) else None
+
+
+def word_spaces_kept(base: dict[str, Any]) -> Callable[[dict[str, Any]], float | None]:
+    """Spaces between words per letter, as a share of unsteered gpt-oss's."""
+    per_letter = base["total_word_spaces"] / base["total_reasoning_letters"]
+
+    def kept(s: dict[str, Any]) -> float | None:
+        if not s["total_reasoning_letters"]:
+            return None
+        return s["total_word_spaces"] / s["total_reasoning_letters"] / per_letter
+
+    return kept
+
+
+REWRITE_METRICS: tuple[Metric, ...] = (
+    (
+        "letters per space,\nreasoning (median)",
+        field("reasoning_letters_per_space"),
+        True,
+    ),
+    ("short-form share,\nreasoning", field("reasoning_short_share"), False),
+    ("short-form share,\nanswer", field("answer_short_share"), False),
+    ("GSM8K accuracy\n(32 problems)", field("accuracy"), False),
 )
 
 
-#: A run counts as coherent while neither its GSM8K accuracy nor its share of
-#: answers finished within the token limit falls more than this below
-#: unsteered gpt-oss; otherwise it is drawn hollow. Unsteered gpt-oss itself
-#: runs out of tokens on 2 of 40 answers, both long tables.
-COHERENT_DROP = 0.1
-
-
-def coherent(run: dict[str, object], base: dict[str, object]) -> bool:
+def spacing_metrics(base: dict[str, Any]) -> tuple[Metric, ...]:
     return (
-        float(run["accuracy"]) >= float(base["accuracy"]) - COHERENT_DROP  # type: ignore[arg-type]
-        and float(run["finished"]) >= float(base["finished"]) - COHERENT_DROP  # type: ignore[arg-type]
+        (
+            "spaces kept after\nsentence ends",
+            ratio("total_sentence_spaces", "total_sentence_ends"),
+            False,
+        ),
+        ("spaces kept between\nwords (vs unsteered)", word_spaces_kept(base), False),
+        (
+            "non-canonical share\nof generated tokens",
+            ratio("noncanonical_tokens", "tokens"),
+            False,
+        ),
+        ("GSM8K accuracy\n(32 problems)", field("accuracy"), False),
     )
 
 
-def steering_figure(scores: dict[str, list[dict[str, object]]], out: Path) -> None:
-    summary = scores["summary"]
+def steering_figure(
+    summary: list[dict[str, Any]],
+    directions: tuple[str, ...],
+    metrics: tuple[Metric, ...],
+    out: Path,
+) -> None:
     base = next(s for s in summary if s["direction"] == "none")
-    layers = sorted({int(s["layer"]) for s in summary if s["direction"] != "none"})  # type: ignore[arg-type]
+    layers = sorted({int(s["layer"]) for s in summary if s["direction"] != "none"})
     fig, axes = plt.subplots(
-        len(METRICS), len(layers), figsize=(3.6 * len(layers), 10.4), sharex=True
+        len(metrics),
+        len(layers),
+        figsize=(3.6 * len(layers), 2.6 * len(metrics)),
+        sharex=True,
     )
     for col, layer in enumerate(layers):
-        for row, (key, label) in enumerate(METRICS):
+        for row, (label, value, log) in enumerate(metrics):
             ax = axes[row][col]
             _frame(ax)
-            ax.axhline(base[key], color=MUTED, lw=1, ls="--", zorder=1)  # type: ignore[arg-type]
-            for d in DIRECTIONS:
+            if (b := value(base)) is not None:
+                ax.axhline(b, color=MUTED, lw=1, ls="--", zorder=1)
+            for d in directions:
                 runs = sorted(
                     (s for s in summary if s["direction"] == d and s["layer"] == layer),
-                    key=lambda s: float(s["scale"]),  # type: ignore[arg-type]
+                    key=lambda s: s["scale"],
                 )
-                runs = [s for s in runs if s[key] is not None]
-                xs = [float(s["scale"]) for s in runs]  # type: ignore[arg-type]
-                ys = [float(s[key]) for s in runs]  # type: ignore[arg-type]
-                ok = [coherent(s, base) for s in runs]
+                runs = [s for s in runs if value(s) is not None]
+                xs = [s["scale"] for s in runs]
+                ys = [value(s) for s in runs]
                 ax.plot(xs, ys, color=COLOR[d], lw=2, zorder=3, label=LABEL[d])
                 ax.scatter(
                     xs,
@@ -75,18 +129,21 @@ def steering_figure(scores: dict[str, list[dict[str, object]]], out: Path) -> No
                     zorder=4,
                     linewidths=1.5,
                     edgecolors=COLOR[d],
-                    facecolors=[COLOR[d] if k else "white" for k in ok],
+                    facecolors=[
+                        COLOR[d] if coherent(s, base) else "white" for s in runs
+                    ],
                 )
             ax.set_xscale("log", base=2)
-            if key == "reasoning_letters_per_space":
+            if log:
                 ax.set_yscale("log")
+                ax.yaxis.set_major_locator(LogLocator(base=10, subs=(1, 2, 5)))
                 ax.yaxis.set_major_formatter(ScalarFormatter())
                 ax.yaxis.set_minor_formatter(NullFormatter())
             if row == 0:
                 ax.set_title(f"steered at layer {layer}", fontsize=10, color=INK)
             if col == 0:
                 ax.set_ylabel(label, fontsize=9, color=SECONDARY)
-            if row == len(METRICS) - 1:
+            if row == len(metrics) - 1:
                 ax.set_xlabel(
                     "strength (× median residual norm)", fontsize=9, color=SECONDARY
                 )
@@ -97,7 +154,8 @@ def steering_figure(scores: dict[str, list[dict[str, object]]], out: Path) -> No
         Line2D([], [], color=SECONDARY, marker="o", ls="", mfc="white", mew=1.5)
     )
     labels.append(
-        f"accuracy or answers finished down > {COHERENT_DROP * 100:.0f} points"
+        f"incoherent: an answer loops or breaks, or accuracy\nor answers finished "
+        f"down > {COHERENT_DROP * 100:.0f} points"
     )
     fig.legend(
         handles,
@@ -105,8 +163,8 @@ def steering_figure(scores: dict[str, list[dict[str, object]]], out: Path) -> No
         loc="upper center",
         ncol=len(labels),
         frameon=False,
-        fontsize=9,
-        bbox_to_anchor=(0.5, 1.03),
+        fontsize=8.5,
+        bbox_to_anchor=(0.5, 1.04),
     )
     fig.patch.set_facecolor("white")
     fig.tight_layout()
@@ -119,7 +177,7 @@ def learnability_figure(gradients: Path, sites: Path, out: Path) -> None:
     fig, (left, right) = plt.subplots(1, 2, figsize=(10, 3.8))
 
     _frame(left)
-    for i, d in enumerate(DIRECTIONS):
+    for i, d in enumerate(REWRITES):
         ys = [float(r["margin_cosine"]) for r in gains if r["direction"] == d]  # type: ignore[arg-type]
         left.scatter(
             [i] * len(ys), ys, s=26, color=COLOR[d], zorder=3, edgecolor="white", lw=0.8
@@ -129,7 +187,7 @@ def learnability_figure(gradients: Path, sites: Path, out: Path) -> None:
         )
     left.axhline(0, color=MUTED, lw=1)
     left.set_ylim(0, 1)
-    left.set_xticks(range(len(DIRECTIONS)), [LABEL[d] for d in DIRECTIONS])
+    left.set_xticks(range(len(REWRITES)), [LABEL[d] for d in REWRITES])
     left.set_ylabel(
         "cosine: training excerpts' margin gradient\nvs held-out margin gradient",
         fontsize=9,
@@ -169,8 +227,12 @@ def learnability_figure(gradients: Path, sites: Path, out: Path) -> None:
 
 
 def main() -> None:
-    scores = json.loads((RESULTS / "steering" / "scores.json").read_text())
-    steering_figure(scores, FIG_DIR / "steering.png")
+    summary = json.loads((RESULTS / "steering" / "scores.json").read_text())["summary"]
+    base = next(s for s in summary if s["direction"] == "none")
+    steering_figure(summary, REWRITES, REWRITE_METRICS, FIG_DIR / "steering.png")
+    steering_figure(
+        summary, GLUE_VARIANTS, spacing_metrics(base), FIG_DIR / "steering_spaces.png"
+    )
     learnability_figure(
         RESULTS / "learnability" / "gradients.json",
         RESULTS / "learnability" / "sites.json",

@@ -4,7 +4,7 @@ from transformers import AutoTokenizer
 
 from cot_spacing.gpt_oss import MODEL, with_reasoning
 from cot_spacing.learnability import site_sequences
-from cot_spacing.steering import measure, stated_numbers
+from cot_spacing.steering import degenerate, measure, spacing, stated_numbers
 from cot_spacing.variants import build, shorten
 
 
@@ -31,7 +31,8 @@ def test_shorten_keeps_identifiers_and_capitals() -> None:
 
 def test_reasoning_span_is_the_reasoning() -> None:
     tok = AutoTokenizer.from_pretrained(MODEL)
-    ids, span = with_reasoning(tok, "a question", "Needs autoalarm severity4?")
+    cot = tok.encode("Needs autoalarm severity4?", add_special_tokens=False)
+    ids, span = with_reasoning(tok, "a question", cot)
     assert tok.decode(ids[span]) == "Needs autoalarm severity4?"
     assert tok.decode(ids[span.stop :]) == "<|end|>"
 
@@ -101,3 +102,28 @@ def test_short_forms_in_code_are_not_counted() -> None:
         None,
     )
     assert (m["answer_short"], m["answer_long"]) == (1, 1)
+
+
+def test_nospace_and_wordwise_renderings() -> None:
+    tok = AutoTokenizer.from_pretrained(MODEL)
+    for e in build():
+        assert " " not in e.texts["nospace"]
+        assert e.texts["nospace"].replace("\n", "") == e.texts["glued"].replace(
+            " ", ""
+        ).replace("\n", "")
+        assert tok.decode(e.ids["glued_wordwise"]) == e.texts["glued"]
+        assert e.ids["glued"] == tok.encode(e.texts["glued"], add_special_tokens=False)
+    assert any(e.ids["glued_wordwise"] != e.ids["glued"] for e in build())
+
+
+def test_spacing_separates_sentence_clause_and_word_spaces() -> None:
+    counts = spacing("We need thisone. Thenext, item,done.Last one 3.5 here")
+    assert (counts["sentence_spaces"], counts["sentence_ends"]) == (1, 2)
+    assert (counts["clause_spaces"], counts["clause_ends"]) == (1, 2)
+    assert counts["word_spaces"] == 5
+
+
+def test_degenerate_catches_loops_and_garbage() -> None:
+    assert degenerate("withthejsonencoder" * 40)
+    assert degenerate("ok \ufffd\ufffd\ufffd")
+    assert not degenerate("A normal answer that says one thing, then stops.")

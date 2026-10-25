@@ -36,8 +36,8 @@ import torch
 
 from cot_spacing.analysis import glued_only, segmentations
 from cot_spacing.data import load_excerpts
-from cot_spacing.steering import DIRECTIONS, EXP_DIR, load_examples
-from cot_spacing.variants import VARIANTS, shorten
+from cot_spacing.steering import EXP_DIR, load_examples
+from cot_spacing.variants import shorten
 
 if TYPE_CHECKING:
     from transformers import PreTrainedModel, PreTrainedTokenizerBase
@@ -46,6 +46,8 @@ if TYPE_CHECKING:
     from cot_spacing.variants import Example
 
 EXAMPLES = EXP_DIR / "results" / "variants.json"
+#: The rewrites whose learnability is measured, against ``spaced``.
+REWRITES = ("glued", "short", "both")
 
 
 def attention_params(model: PreTrainedModel) -> list[torch.nn.Parameter]:
@@ -66,12 +68,12 @@ def gradients(out: Path) -> None:
     for p in params:
         p.requires_grad_(True)
     examples = load_examples(EXAMPLES)
-    keys = [(e.id, v) for e in examples for v in VARIANTS]
+    keys = [(e.id, v) for e in examples for v in ("spaced", *REWRITES)]
     logp: dict[str, float] = {}
     grads: list[torch.Tensor] = []
     for e in examples:
-        for v in VARIANTS:
-            ids, span = with_reasoning(tok, e.user, e.texts[v])
+        for v in ("spaced", *REWRITES):
+            ids, span = with_reasoning(tok, e.user, e.ids[v])
             x = torch.tensor([ids], device="cuda")
             logits = model(x).logits[0, span.start - 1 : span.stop - 1].float()
             lp = torch.log_softmax(logits, -1)
@@ -153,7 +155,7 @@ def step_gains(gradients_path: Path) -> list[dict[str, object]]:
         return (a @ gram @ b).item()
 
     rows = []
-    for d in DIRECTIONS:
+    for d in REWRITES:
         for held in examples:
             others = [e.id for e in examples if e.id != held.id]
             test = vector(d, [held.id], margin=True)

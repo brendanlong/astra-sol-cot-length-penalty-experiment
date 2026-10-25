@@ -16,7 +16,7 @@ from huggingface_hub import snapshot_download
 
 REPO = "brendanlong/cot-spacing-steering"
 #: The upload the committed scores and figures were computed from.
-REVISION = "79cfd62fe149beb3a39611679253f56be07b7cca"
+REVISION = "4c059a69ecbe67ef3a9b1f2f5eb18a972c140db9"
 STEERING_DIR = Path(__file__).parent / "results" / "steering"
 
 
@@ -26,7 +26,7 @@ def download() -> None:
         repo_type="dataset",
         revision=REVISION,
         local_dir=STEERING_DIR,
-        allow_patterns=["gen/*.jsonl", "vectors*.pt"],
+        allow_patterns=["gen/*.jsonl", "vectors.pt"],
     )
     print(f"downloaded {REPO}@{REVISION[:7]} into {STEERING_DIR}")
 

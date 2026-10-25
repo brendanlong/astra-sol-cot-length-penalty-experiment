@@ -2,4 +2,6 @@
 layers: [6, 12, 18]
 # Steering strength, as a fraction of the median residual-stream norm at that
 # layer; every direction is scaled to the same length.
-scales: [0.0625, 0.125, 0.1875, 0.25, 0.375, 0.5, 1.0]
+scales: [0.125, 0.1875, 0.25, 0.375, 0.5]
+# Steering directions; see cot_spacing/variants.py.
+directions: [glued, short, both, nospace, glued_wordwise]

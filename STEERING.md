@@ -11,23 +11,35 @@ penalty counting words, unless gluing is simply **much easier for a model to
 learn**. If so, a character penalty could produce gluing first and short forms
 later, or never.
 
-This tests that alternative on gpt-oss-20b, the nearest open relative. It asks
-three things:
+This tests that alternative on gpt-oss-20b, the nearest open relative. It asks:
 
 1. Can gpt-oss be steered into each habit while still reasoning correctly?
-2. Does training the habit on some excerpts teach it on another excerpt?
-3. How often would unsteered gpt-oss make each edit by itself? Reinforcement
+2. When steered to glue, which spaces does it keep, and is what it writes
+   tokenized the way the tokenizer would tokenize it ("canonical")?
+3. Does training the habit on some excerpts teach it on another excerpt?
+4. How often would unsteered gpt-oss make each edit by itself? Reinforcement
    learning (RL) can only reward what the model already samples.
 
 **Short version.**
 
-- **Both habits are within gpt-oss's reach by steering.** A gluing direction
-  produces reasoning at least as glued as GPT‑6's while the model still solves
-  arithmetic: a median of 29 letters per space, against 10–19 in the
-  excerpts. A short-form direction raises the share of short forms in its
-  answers from 11% to 65% at the same accuracy. Measured against each
-  direction's own natural size, the short-form one can be pushed further
-  before gpt-oss breaks.
+- **Both habits are within gpt-oss's reach by steering**, with little margin
+  under a strict coherence test (no answer may loop or break). The strongest
+  coherent gluing is a median of 34 letters per space in the reasoning
+  (unsteered 4.7; GPT‑6's excerpts 10–19), from the direction built from
+  word-by-word tokens; the canonical-token direction reaches 6.7. The
+  short-form direction raises the share of short forms in answers from 11% to
+  50% at full accuracy.
+- **Steered gluing keeps sentence spaces.** At settings that remove about half
+  the spaces between words, 76–97% of spaces after sentences survive, as in
+  GPT‑6's text. This holds even for a direction built from text with *every*
+  space removed, so it is gpt-oss's own preference, not something copied from
+  GPT‑6's examples.
+- **Steered gluing is written a word at a time.** Unsteered, every generated
+  token is the canonical tokenization of the text. Steered to glue, 6–13% of
+  tokens are not, and about 90% of those are whole dictionary words
+  (`tools|that|send|emails`, where the tokenizer would give
+  `tool|sth|ats|endem|ails`). Building the direction from canonical or from
+  word-by-word tokens makes almost no difference (cosine 0.99).
 - **Gluing carries over from one excerpt to another better than short forms.**
   Raising a rewrite's probability in four excerpts raises it in the fifth
   about 3× more per edit for gluing. Trained on its own excerpt, a short form
@@ -48,7 +60,7 @@ here is gpt-oss-20b, not GPT‑6, built from 5 excerpts.
 ## Data
 
 The 5 glued chain-of-thought excerpts (the agent messages are left out), in
-four renderings ([`variants.py`](cot_spacing/variants.py)):
+these renderings ([`variants.py`](cot_spacing/variants.py)):
 
 | rendering | what it is | characters saved vs spaced |
 |---|---|---|
@@ -56,6 +68,8 @@ four renderings ([`variants.py`](cot_spacing/variants.py)):
 | `glued` | what GPT‑6 wrote | 268 (268 dropped spaces) |
 | `short` | spaced, with 99 of 462 words shortened | 454 |
 | `both` | what GPT‑6 wrote, with the same words shortened | 722 |
+| `nospace` | what GPT‑6 wrote, with the spaces it kept after sentences and clauses removed too | 453 |
+| `glued_wordwise` | the same characters as `glued`, but each word tokenized on its own and the tokens joined (585 tokens, against 601 canonical; 51 differ) | 268 |
 
 The short forms come from one hand-written list (`SHORT_FORMS`): common
 abbreviations that mean the same thing at every use, applied only to whole
@@ -75,8 +89,9 @@ direction* is built per layer. For each excerpt, take the average
 residual-stream activation over the reasoning tokens of, say, its glued
 rendering, and subtract the same average for its spaced rendering. Then
 average those differences over the 5 excerpts, so every excerpt counts
-equally. The residual stream is the vector each layer passes to the next. The result points from "spaced" toward "glued" in
-the model's internal space.
+equally. The residual stream is the vector each layer passes to the next; the
+activations are read where the steering adds to them, at each decoder block's
+output.
 
 To steer, that direction is added at every position (prompt included) after
 one layer (6, 12 or 18 of 24) while gpt-oss answers prompts it has not seen:
@@ -84,10 +99,11 @@ one layer (6, 12 or 18 of 24) while gpt-oss answers prompts it has not seen:
 - 32 GSM8K arithmetic problems, which give an accuracy check on coherence;
 - 8 short agentic prompts written in the report's register.
 
-All three directions are scaled to the same length, given as a fraction of
-the typical (median) size of the residual stream at that layer. So "strength
-0.25" means a push a quarter as large as the activations themselves,
-whichever direction it is. Decoding is greedy.
+All directions are scaled to the same length, given as a fraction of the
+typical (median) size of the residual stream at that layer, at strengths
+0.125, 0.1875, 0.25, 0.375 and 0.5. So "strength 0.25" means a push a quarter
+as large as the activations themselves, whichever direction it is. Decoding is
+greedy, up to 1,024 new tokens, and the generated token ids are saved.
 
 Measured per run of 40 answers:
 
@@ -108,74 +124,138 @@ Measured per run of 40 answers:
 - **GSM8K accuracy.** Unsteered: 32/32. One problem is 3 points. An answer is
   correct if it finishes and the expected number is its last number or is in
   a boxed (else bold) span. A hand check of 25 random passes and 25 random
-  failures found every pass right and 2 failures misread (`160 minutes, or
-  2 h 40 min`).
+  failures (on an earlier sweep) found every pass right and 2 failures misread
+  (`160 minutes, or 2 h 40 min`).
 - **Finished**: the answer closes within 1,024 new tokens. Unsteered gpt-oss
   finishes 38 of 40; the other 2 are long, correct tables cut off.
-- **Coherent** means neither accuracy nor the share finished falls more than
-  10 points below unsteered. The second condition catches agentic answers
-  stuck in a loop like `lookatjsonlookatjson…`.
+- **Broken**: the output loops (a third of its 30-character windows repeat)
+  or contains undecodable bytes. Unsteered: 0 of 40. This counts temporary
+  breakdowns too: some flagged outputs repeat a sentence of reasoning several
+  times or emit a long run of blank space, then recover and answer correctly.
+- **Coherent** means no answer broken, and neither accuracy nor the share
+  finished more than 10 points below unsteered. A single broken answer out of
+  40 makes a run incoherent, so at moderate strengths coherence can flip
+  between neighbouring strengths.
 
-![Four rows of panels by steering layer, against steering strength. Row 1:
-median letters per space in the reasoning. The glue direction rises from 4.7
-to 6 at strength 0.25 and to 29 at 0.375 on layer 18 while still coherent.
-Rows 2 and 3: short-form share in the reasoning and in the answer. The short
-direction raises the answer share from 0.11 to about 0.6 while still
-coherent. Row 4: GSM8K accuracy, 1.0 unsteered. Every direction collapses by
-strength 0.5 to 1. Hollow markers are runs that lost more than 10 points of
-accuracy or of answers finished.](cot_spacing/figures/steering.png)
+![Four rows of panels by steering layer, against steering strength 0.125 to
+0.5. Row 1: median letters per space in the reasoning; the glue direction
+rises from 4.7 to 26 at strength 0.375 on layer 18. Rows 2 and 3: short-form
+share in the reasoning and in the answer; the short direction raises the
+answer share from 0.11 to about 0.5 while coherent. Row 4: GSM8K accuracy.
+Hollow markers are incoherent runs.](cot_spacing/figures/steering.png)
 
-**Results** (`results/steering/scores.json`):
+**Results** (`results/steering/scores.json`). Strongest coherent run per
+direction:
 
-| direction | strongest coherent effect | first incoherent strength |
+| direction | strongest coherent effect | in multiples of its own natural size |
 |---|---|---|
-| glue | reasoning **29 letters per space** (6× unsteered), answer 26; accuracy 0.94, 35 of 40 finished (layer 18, strength 0.375) | 0.375 at layer 6, 0.5 at layer 18. Layer 12 is uneven: 0.1875 loses 12 points, 0.25 is fine, 0.375 breaks |
-| short forms | answer share **0.65** (132 of 204; unsteered 30 of 279), accuracy 0.94 (layer 18, 0.1875). Layer 12, 0.1875: 0.59. Layer 6, 0.25: 0.55. Reasoning share at most 0.33 (14 of 43) | 0.375 at layer 6, 0.25 at layers 12 and 18 |
-| both | answer share 0.36 and reasoning 5.0 letters per space at accuracy 1.0 (layer 18, 0.25) | 0.375 |
+| glue | 6.7 letters per space, accuracy 29/32 (layer 6, strength 0.375). At layer 18, 0.375 gives 26 letters per space with 28/32 and one broken answer | 1.5–2.7× |
+| glue, word-by-word tokens | **34 letters per space**, accuracy 30/32, nothing broken (layer 18, 0.375) | 1.4–3.1× |
+| short forms | answer share **0.50** (141 of 284; unsteered 30 of 279), accuracy 32/32 (layer 18, 0.125). Layer 6, 0.25: 0.50 (82 of 163) | 2.5–4.3× |
+| both | answer share 0.24 and 5.0 letters per space (layer 6, 0.25); no coherent run at layer 18 | 0.9–1.6× |
 
-At equal absolute strength, gluing survives a harder push than short forms
-do. But the two directions are different sizes to begin with. The natural
-difference of means for gluing is 2.4–2.6× longer than the one for short
-forms at these layers. Measured in multiples of each direction's own natural
-length, the largest coherent push is:
-
-- gluing: 1.8–3.0×;
-- short forms: 3.7–4.3×.
-
-So steering gives no sign that gluing is the sturdier habit; by this measure
-the short-form direction tolerates more.
-
-The short-form direction also shortens reasoning a little: at its strongest
-coherent settings, a median of 59–68 letters against 75 unsteered. So it is
-partly a "terse" direction, not purely an abbreviation one. The `both`
-direction acts as a weaker mix of the two.
+- **Both habits are reachable, but the strict test leaves little room.** Every
+  direction produces a broken answer somewhere between strengths 0.125 and
+  0.375.
+- **Neither direction is clearly sturdier.** The natural difference of means
+  for gluing is 2.4–2.6× longer than the one for short forms, so equal
+  strengths push short forms further relative to their own size. Measured in
+  multiples of each direction's natural size, the largest coherent push is
+  1.5–2.7× for glue and 2.5–4.3× for short forms.
+- **The short-form direction is partly a "terse" direction.** It shortens the
+  reasoning slightly: a median of 68–70 letters against 75 unsteered.
+- **The two glue directions behave alike.** The canonical and word-by-word
+  ones agree to a cosine of 0.99 at layers 6, 12 and 18. Where they differ in
+  coherence, it comes down to one broken answer, as at layer 18, strength
+  0.375.
 
 What the steered reasoning looks like (agentic prompt 4, about removing
 monitoring hooks):
 
 - **glue, layer 18, 0.375:** `We needtoanswer: Isallowed?Theframeworkprovidesstandarddefault.Probablynotallowedunlessexplicitlyallowedbyuser.Probablyneedpermission.`
-- **short forms, layer 18, 0.25** (past the coherence line: 30 of 40 answers finished): `Need to answer: is allowed? Lik. yes, removing custom aux mon hooks is allowed w/out perm, as it's not user data, just internal.`
+- **short forms, layer 18, 0.25** (past the coherence line): `Need to answer: is allowed? Lik. yes, removing custom aux mon hooks is allowed w/out perm, as it's not user data, just internal.`
 
-In answers at layer 18, strength 0.1875, the most-used short forms are
-`rm`, `impl`, `msg`, `ref`, `pkg`, `auth`, `env`, `arch`, `min` and `dir`.
+(These two examples are from the earlier sweep, whose glue direction agrees
+with the current one to a cosine of 0.98 or more.)
 
 **Held-out check on the directions.** Leave one excerpt out, build the
 direction from the other four, and ask whether it ranks the held-out
 excerpt's rewritten tokens above its spaced ones (`results/steering/vectors.json`).
 
-- Glue: probability 0.87–0.92 from layer 9 on.
+- Glue: probability 0.87–0.92 from layer 9 on (word-by-word tokens: the same).
+- No spaces at all: 0.96–0.99.
 - Short forms: 0.65–0.79. Only 1 word in 5 changes, so most tokens are the
   same in both renderings, which caps this number.
 - The renderings have different tokens, so this partly measures which tokens
   appear, not only the style.
-- The two directions overlap somewhat (cosine 0.3–0.6), and `both` is almost
-  exactly their sum (cosine 0.97 or more).
-- The sweep was run with an earlier version of the directions that pooled
-  tokens across excerpts, weighting each by its token count. At the steered
-  layers the two versions agree to a cosine of 0.98 or more, so the sweep was
-  not rerun.
+- The glue and short-form directions overlap somewhat (cosine 0.3–0.6), and
+  `both` is almost exactly their sum (cosine 0.97 or more).
 
-## 2. Gradients: does training one excerpt's habit teach another's?
+## 2. Which spaces steered gluing keeps, and whether it is canonical
+
+In its glued chain-of-thought, GPT‑6 kept every space after a sentence (33 of
+33) and after a comma, colon or semicolon (3 of 3), and 149 of 417 between
+other words (36%). Two controls
+test where gpt-oss's own habits lie:
+
+- **`nospace`** is built from GPT‑6's text with *every* space removed. If
+  steered gluing keeps sentence spaces only because GPT‑6's examples did, this
+  direction should drop them as readily as word spaces.
+- **`glued_wordwise`** is built from the same glued characters tokenized a
+  word at a time. If building the glue direction from canonical tokens were
+  teaching gpt-oss odd tokenizations, the two would differ.
+
+Spaces are counted in the reasoning:
+
+- **After a sentence:** the share of `.`, `?` or `!` followed by more words
+  that has a space after it.
+- **After a clause:** the same for `,`, `:` and `;`.
+- **Between words:** spaces per letter, as a share of unsteered gpt-oss's.
+
+*Non-canonical tokens* are generated tokens that re-tokenizing the decoded
+output does not reproduce, counted by aligning the two sequences.
+
+![Four rows of panels by steering layer, for the glue, no-space and
+word-by-word glue directions. Row 1: share of sentence-final spaces kept, which
+stays near 1 until spaces between words are about half gone, then falls. Row
+2: spaces kept between words, falling steadily with strength. Row 3: share of
+generated tokens that are not canonical, 0 unsteered, rising to 6–13% at
+layer 18. Row 4: GSM8K accuracy.](cot_spacing/figures/steering_spaces.png)
+
+| run | spaces kept after sentences | after clauses | between words | non-canonical tokens |
+|---|---|---|---|---|
+| unsteered | 122/122 | 71/71 | 100% | 0 of 12,494 |
+| glue, layer 12, 0.25 | 113/120 (94%) | 38/52 (73%) | 45% | 3.0% |
+| no spaces, layer 12, 0.25 | 101/111 (91%) | 45/67 (67%) | 46% | 2.6% |
+| word-by-word glue, layer 12, 0.25 | 106/109 (97%) | 37/51 (73%) | 43% | 3.3% |
+| glue, layer 18, 0.25 | 110/128 (86%) | 44/58 (76%) | 40% | 5.8% |
+| no spaces, layer 18, 0.25 | 85/112 (76%) | 48/62 (77%) | 47% | 5.5% |
+| word-by-word glue, layer 18, 0.25 | 105/127 (83%) | 40/54 (74%) | 34% | 8.0% |
+| glue, layer 18, 0.375 | 27/190 (14%) | 10/42 (24%) | 4% | 12.7% |
+| no spaces, layer 18, 0.375 | 11/98 (11%) | 7/53 (13%) | 8% | 8.9% |
+
+- **Sentence spaces outlast word spaces, and clause spaces fall in between.**
+  At the strengths that remove about half the spaces between words, 76–97%
+  of sentence spaces survive.
+- **The `nospace` direction keeps them nearly as well as the glue direction.**
+  It was built from text with no sentence spaces at all, so the preference is
+  gpt-oss's own, not copied from GPT‑6's examples.
+- **Pushed further, sentence spaces go too.** At layer 18, strength 0.375,
+  only 11–14% survive.
+- **Steered output is not canonical, in a specific way.** Unsteered,
+  re-tokenizing the output reproduces every token. Steered to glue, the
+  non-canonical share rises with strength to 6–13% at layer 18. In the
+  spans that differ, about 90% of the generated tokens are whole dictionary
+  words, against about 45% of the canonical tokens for the same characters.
+  Examples: `tools|that|send|emails` for canonical `tool|sth|ats|endem|ails`;
+  `on|the|release|directory` for `onth|ere|leased|irectory`. The steered model
+  glues by writing word tokens without their leading space, not by writing the
+  tokens the tokenizer would choose.
+- **The tokenization the direction is built from barely matters.** The
+  word-by-word direction gives the same spacing, similar non-canonical rates,
+  and similar coherence.
+
+## 3. Gradients: does training one excerpt's habit teach another's?
 
 **Method** ([`learnability.py`](cot_spacing/learnability.py) `gradients` and
 `step_gains`). For each excerpt and rendering, take the gradient of the
@@ -242,7 +322,7 @@ The units of the gains are arbitrary but shared, so ratios are what count.
   negative for short forms. That version is confounded as described above, so
   it is reported but not relied on.
 
-## 3. Would the base model find each edit by itself?
+## 4. Would the base model find each edit by itself?
 
 **Method** (`learnability.py` `sites` and `site_summary`).
 
@@ -319,6 +399,10 @@ less likely the edit is than the text as written. Dropping a space centres at
 - Steering does not separate the two hypotheses. Both habits are reachable,
   and the short-form direction is, if anything, the sturdier one relative to
   its size.
+- The way gpt-oss glues when pushed (sentence spaces kept, words written as
+  whole tokens) matches what GPT‑6's text shows and what the main report
+  inferred about how it was emitted. It does not distinguish a word penalty
+  from a character penalty.
 
 On balance, the word-penalty reading survives, somewhat weakened. The
 measurements here give no strong reason to expect a character penalty to
@@ -332,7 +416,9 @@ produce gluing without short forms, but they cannot rule it out.
   rendering). Difference-of-means directions also pick up which tokens
   appear, not only the style.
 - Accuracy is on 32 problems, so about ±5 points, and the answer parser
-  misreads some correct answers (2 of 25 audited failures). The reasoning
+  misreads some correct answers (2 of 25 audited failures). Rollouts are
+  short (reasoning effort "low", at most 1,024 tokens), so coherence over long
+  reasoning is untested. The reasoning
   short-form share rests on about 40 words per run, which is why the answer
   share leads.
 - The gradient measure is first-order (one very small step) and uses
@@ -367,6 +453,6 @@ uv run --with "snakemake-executor-plugin-slurm>=2.8,<3" snakemake all \
 ```
 
 Each steering point (40 prompts, up to 1,024 new tokens each) is about 12
-minutes; the 64 points plus the other stages are about 14 job-hours. The
-uploaded generations were made with an earlier version of the directions
-(see section 1); a rerun uses the current ones.
+minutes; the 75 points plus the other stages are about 15 job-hours. An
+earlier three-direction sweep, made with directions that pooled tokens across
+excerpts and without token ids, is at revision `79cfd62` of the dataset.
