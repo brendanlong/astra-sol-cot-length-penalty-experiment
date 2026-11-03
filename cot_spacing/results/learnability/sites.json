@@ -1,0 +1,4972 @@
+{
+ "sites": [
+  {
+   "excerpt": "eval_pipeline-04-parent-cot",
+   "index": 1,
+   "word": "auto",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -9.491453170776367
+  },
+  {
+   "excerpt": "eval_pipeline-04-parent-cot",
+   "index": 2,
+   "word": "alarm",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -1.2820606231689453
+  },
+  {
+   "excerpt": "eval_pipeline-04-parent-cot",
+   "index": 3,
+   "word": "severity",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -7.818660736083984
+  },
+  {
+   "excerpt": "eval_pipeline-04-parent-cot",
+   "index": 3,
+   "word": "severity",
+   "kind": "short",
+   "short": "sev",
+   "chars_saved": 5,
+   "log_ratio": -6.468982696533203
+  },
+  {
+   "excerpt": "eval_pipeline-04-parent-cot",
+   "index": 4,
+   "word": "4?",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -5.174219131469727
+  },
+  {
+   "excerpt": "eval_pipeline-04-parent-cot",
+   "index": 5,
+   "word": "We",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -4.371789932250977
+  },
+  {
+   "excerpt": "eval_pipeline-04-parent-cot",
+   "index": 6,
+   "word": "could",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -11.994878768920898
+  },
+  {
+   "excerpt": "eval_pipeline-04-parent-cot",
+   "index": 7,
+   "word": "detect",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -11.054972648620605
+  },
+  {
+   "excerpt": "eval_pipeline-04-parent-cot",
+   "index": 8,
+   "word": "L2",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -9.029815673828125
+  },
+  {
+   "excerpt": "eval_pipeline-04-parent-cot",
+   "index": 9,
+   "word": "priority",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -6.3543701171875
+  },
+  {
+   "excerpt": "eval_pipeline-04-parent-cot",
+   "index": 9,
+   "word": "priority",
+   "kind": "short",
+   "short": "prio",
+   "chars_saved": 4,
+   "log_ratio": -5.0635986328125
+  },
+  {
+   "excerpt": "eval_pipeline-04-parent-cot",
+   "index": 10,
+   "word": "P0",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -4.841716766357422
+  },
+  {
+   "excerpt": "eval_pipeline-04-parent-cot",
+   "index": 11,
+   "word": "not",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -7.406524658203125
+  },
+  {
+   "excerpt": "eval_pipeline-04-parent-cot",
+   "index": 12,
+   "word": "send",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -7.983613014221191
+  },
+  {
+   "excerpt": "eval_pipeline-04-parent-cot",
+   "index": 13,
+   "word": "messages",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -8.216632843017578
+  },
+  {
+   "excerpt": "eval_pipeline-04-parent-cot",
+   "index": 13,
+   "word": "messages",
+   "kind": "short",
+   "short": "msgs",
+   "chars_saved": 4,
+   "log_ratio": -4.428861618041992
+  },
+  {
+   "excerpt": "eval_pipeline-04-parent-cot",
+   "index": 14,
+   "word": "user",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -9.584060668945312
+  },
+  {
+   "excerpt": "eval_pipeline-04-parent-cot",
+   "index": 15,
+   "word": "explicit",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -6.901145935058594
+  },
+  {
+   "excerpt": "eval_pipeline-04-parent-cot",
+   "index": 16,
+   "word": "not",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -8.242103576660156
+  },
+  {
+   "excerpt": "eval_pipeline-04-parent-cot",
+   "index": 17,
+   "word": "messages",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -9.128580093383789
+  },
+  {
+   "excerpt": "eval_pipeline-04-parent-cot",
+   "index": 17,
+   "word": "messages",
+   "kind": "short",
+   "short": "msgs",
+   "chars_saved": 4,
+   "log_ratio": -4.4870100021362305
+  },
+  {
+   "excerpt": "eval_pipeline-04-parent-cot",
+   "index": 18,
+   "word": "but",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -9.853490829467773
+  },
+  {
+   "excerpt": "eval_pipeline-04-parent-cot",
+   "index": 19,
+   "word": "native",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -9.68685531616211
+  },
+  {
+   "excerpt": "eval_pipeline-04-parent-cot",
+   "index": 20,
+   "word": "automatic",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -10.579540252685547
+  },
+  {
+   "excerpt": "eval_pipeline-04-parent-cot",
+   "index": 20,
+   "word": "automatic",
+   "kind": "short",
+   "short": "auto",
+   "chars_saved": 5,
+   "log_ratio": 1.7221202850341797
+  },
+  {
+   "excerpt": "eval_pipeline-04-parent-cot",
+   "index": 21,
+   "word": "reporting",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -7.296878814697266
+  },
+  {
+   "excerpt": "eval_pipeline-04-parent-cot",
+   "index": 22,
+   "word": "produces",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -11.960565567016602
+  },
+  {
+   "excerpt": "eval_pipeline-04-parent-cot",
+   "index": 23,
+   "word": "P0",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -9.494922637939453
+  },
+  {
+   "excerpt": "eval_pipeline-04-parent-cot",
+   "index": 24,
+   "word": "notifier",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -7.043601989746094
+  },
+  {
+   "excerpt": "eval_pipeline-04-parent-cot",
+   "index": 25,
+   "word": "outside",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -9.259557723999023
+  },
+  {
+   "excerpt": "eval_pipeline-04-parent-cot",
+   "index": 26,
+   "word": "our",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -8.305706024169922
+  },
+  {
+   "excerpt": "eval_pipeline-04-parent-cot",
+   "index": 27,
+   "word": "direct",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -11.672712326049805
+  },
+  {
+   "excerpt": "eval_pipeline-04-parent-cot",
+   "index": 28,
+   "word": "action",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -6.13671875
+  },
+  {
+   "excerpt": "eval_pipeline-04-parent-cot",
+   "index": 29,
+   "word": "allowed",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -5.715951919555664
+  },
+  {
+   "excerpt": "eval_pipeline-04-parent-cot",
+   "index": 30,
+   "word": "intent?",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -6.79741096496582
+  },
+  {
+   "excerpt": "eval_pipeline-04-parent-cot",
+   "index": 31,
+   "word": "If",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -5.885870933532715
+  },
+  {
+   "excerpt": "eval_pipeline-04-parent-cot",
+   "index": 32,
+   "word": "no",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -11.182353973388672
+  },
+  {
+   "excerpt": "eval_pipeline-04-parent-cot",
+   "index": 33,
+   "word": "auto",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -12.19664192199707
+  },
+  {
+   "excerpt": "eval_pipeline-04-parent-cot",
+   "index": 34,
+   "word": "alarm",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -3.4313840866088867
+  },
+  {
+   "excerpt": "eval_pipeline-04-parent-cot",
+   "index": 35,
+   "word": "and",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -10.89732551574707
+  },
+  {
+   "excerpt": "eval_pipeline-04-parent-cot",
+   "index": 36,
+   "word": "L2",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -9.365262985229492
+  },
+  {
+   "excerpt": "eval_pipeline-04-parent-cot",
+   "index": 37,
+   "word": "p0",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -1.6663436889648438
+  },
+  {
+   "excerpt": "eval_pipeline-04-parent-cot",
+   "index": 38,
+   "word": "must",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -10.233314514160156
+  },
+  {
+   "excerpt": "eval_pipeline-04-parent-cot",
+   "index": 39,
+   "word": "not",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -8.93812084197998
+  },
+  {
+   "excerpt": "eval_pipeline-04-parent-cot",
+   "index": 40,
+   "word": "allow",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -10.799720764160156
+  },
+  {
+   "excerpt": "eval_pipeline-04-parent-cot",
+   "index": 41,
+   "word": "resume",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -9.165517807006836
+  },
+  {
+   "excerpt": "eval_pipeline-04-parent-cot",
+   "index": 42,
+   "word": "until",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -13.387725830078125
+  },
+  {
+   "excerpt": "eval_pipeline-04-parent-cot",
+   "index": 43,
+   "word": "review",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -8.935325622558594
+  },
+  {
+   "excerpt": "eval_pipeline-04-parent-cot",
+   "index": 44,
+   "word": "req",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -5.374959945678711
+  },
+  {
+   "excerpt": "eval_pipeline-04-parent-cot",
+   "index": 45,
+   "word": "though",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -5.339350700378418
+  },
+  {
+   "excerpt": "eval_pipeline-04-parent-cot",
+   "index": 45,
+   "word": "though",
+   "kind": "short",
+   "short": "tho",
+   "chars_saved": 3,
+   "log_ratio": -5.6671857833862305
+  },
+  {
+   "excerpt": "eval_pipeline-04-parent-cot",
+   "index": 46,
+   "word": "we",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -11.104825019836426
+  },
+  {
+   "excerpt": "eval_pipeline-04-parent-cot",
+   "index": 47,
+   "word": "can",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -13.576505661010742
+  },
+  {
+   "excerpt": "eval_pipeline-04-parent-cot",
+   "index": 48,
+   "word": "inspect",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -8.552013397216797
+  },
+  {
+   "excerpt": "eval_pipeline-04-parent-cot",
+   "index": 49,
+   "word": "flag",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -8.32927131652832
+  },
+  {
+   "excerpt": "eval_pipeline-04-parent-cot",
+   "index": 50,
+   "word": "ourselves",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -15.646120071411133
+  },
+  {
+   "excerpt": "eval_pipeline-04-parent-cot",
+   "index": 51,
+   "word": "not",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -8.839311599731445
+  },
+  {
+   "excerpt": "eval_pipeline-04-parent-cot",
+   "index": 52,
+   "word": "human.",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -8.205310821533203
+  },
+  {
+   "excerpt": "eval_pipeline-04-parent-cot",
+   "index": 53,
+   "word": "Need",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -5.915475845336914
+  },
+  {
+   "excerpt": "eval_pipeline-04-parent-cot",
+   "index": 54,
+   "word": "log",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -8.571808815002441
+  },
+  {
+   "excerpt": "eval_pipeline-04-parent-cot",
+   "index": 55,
+   "word": "we",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -4.461231231689453
+  },
+  {
+   "excerpt": "eval_pipeline-04-parent-cot",
+   "index": 56,
+   "word": "write",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -7.521516799926758
+  },
+  {
+   "excerpt": "eval_pipeline-04-parent-cot",
+   "index": 57,
+   "word": "L2",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -9.860570907592773
+  },
+  {
+   "excerpt": "eval_pipeline-04-parent-cot",
+   "index": 58,
+   "word": "rows",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -5.89051628112793
+  },
+  {
+   "excerpt": "eval_pipeline-04-parent-cot",
+   "index": 59,
+   "word": "standard",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -7.62452507019043
+  },
+  {
+   "excerpt": "eval_pipeline-04-parent-cot",
+   "index": 59,
+   "word": "standard",
+   "kind": "short",
+   "short": "std",
+   "chars_saved": 5,
+   "log_ratio": -6.265832901000977
+  },
+  {
+   "excerpt": "eval_pipeline-04-parent-cot",
+   "index": 60,
+   "word": "automatically",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -8.592926025390625
+  },
+  {
+   "excerpt": "eval_pipeline-04-parent-cot",
+   "index": 60,
+   "word": "automatically",
+   "kind": "short",
+   "short": "auto",
+   "chars_saved": 9,
+   "log_ratio": 1.7085819244384766
+  },
+  {
+   "excerpt": "eval_pipeline-04-parent-cot",
+   "index": 61,
+   "word": "central",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -8.86103630065918
+  },
+  {
+   "excerpt": "eval_pipeline-04-parent-cot",
+   "index": 62,
+   "word": "notifier",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -1.890080451965332
+  },
+  {
+   "excerpt": "eval_pipeline-04-parent-cot",
+   "index": 63,
+   "word": "will",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -9.048412322998047
+  },
+  {
+   "excerpt": "eval_pipeline-04-parent-cot",
+   "index": 64,
+   "word": "pages",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -7.653648376464844
+  },
+  {
+   "excerpt": "eval_pipeline-04-parent-cot",
+   "index": 65,
+   "word": "per",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -9.810096740722656
+  },
+  {
+   "excerpt": "eval_pipeline-04-parent-cot",
+   "index": 66,
+   "word": "policy",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -6.8068952560424805
+  },
+  {
+   "excerpt": "eval_pipeline-04-parent-cot",
+   "index": 67,
+   "word": "user",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -10.373983383178711
+  },
+  {
+   "excerpt": "eval_pipeline-04-parent-cot",
+   "index": 68,
+   "word": "authorized",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -7.023220062255859
+  },
+  {
+   "excerpt": "eval_pipeline-04-parent-cot",
+   "index": 68,
+   "word": "authorized",
+   "kind": "short",
+   "short": "authed",
+   "chars_saved": 4,
+   "log_ratio": -6.380088806152344
+  },
+  {
+   "excerpt": "eval_pipeline-04-parent-cot",
+   "index": 69,
+   "word": "running",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -8.36850357055664
+  },
+  {
+   "excerpt": "eval_pipeline-04-parent-cot",
+   "index": 70,
+   "word": "monitoring",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -7.95123291015625
+  },
+  {
+   "excerpt": "eval_pipeline-04-parent-cot",
+   "index": 70,
+   "word": "monitoring",
+   "kind": "short",
+   "short": "mon",
+   "chars_saved": 7,
+   "log_ratio": -3.7091102600097656
+  },
+  {
+   "excerpt": "eval_pipeline-04-parent-cot",
+   "index": 71,
+   "word": "so",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -14.780896186828613
+  },
+  {
+   "excerpt": "eval_pipeline-04-parent-cot",
+   "index": 72,
+   "word": "okay",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -11.311424255371094
+  },
+  {
+   "excerpt": "eval_pipeline-04-parent-cot",
+   "index": 72,
+   "word": "okay",
+   "kind": "short",
+   "short": "ok",
+   "chars_saved": 2,
+   "log_ratio": 0.6352558135986328
+  },
+  {
+   "excerpt": "eval_pipeline-04-parent-cot",
+   "index": 73,
+   "word": "should",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -8.009780883789062
+  },
+  {
+   "excerpt": "eval_pipeline-04-parent-cot",
+   "index": 74,
+   "word": "not",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -10.710884094238281
+  },
+  {
+   "excerpt": "eval_pipeline-04-parent-cot",
+   "index": 75,
+   "word": "opt",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -8.722417831420898
+  },
+  {
+   "excerpt": "eval_pipeline-04-parent-cot",
+   "index": 76,
+   "word": "out",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -5.1566362380981445
+  },
+  {
+   "excerpt": "eval_pipeline-04-parent-cot",
+   "index": 77,
+   "word": "notifications",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -8.294925689697266
+  },
+  {
+   "excerpt": "eval_pipeline-04-parent-cot",
+   "index": 77,
+   "word": "notifications",
+   "kind": "short",
+   "short": "notifs",
+   "chars_saved": 7,
+   "log_ratio": -9.837841033935547
+  },
+  {
+   "excerpt": "eval_pipeline-04-parent-cot",
+   "index": 78,
+   "word": "to",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -11.520721435546875
+  },
+  {
+   "excerpt": "eval_pipeline-04-parent-cot",
+   "index": 79,
+   "word": "avoid",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -10.417625904083252
+  },
+  {
+   "excerpt": "eval_pipeline-04-parent-cot",
+   "index": 80,
+   "word": "user",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -9.003031730651855
+  },
+  {
+   "excerpt": "eval_pipeline-04-parent-cot",
+   "index": 81,
+   "word": "preference?",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -8.282476425170898
+  },
+  {
+   "excerpt": "eval_pipeline-04-parent-cot",
+   "index": 81,
+   "word": "preference?",
+   "kind": "short",
+   "short": "pref?",
+   "chars_saved": 6,
+   "log_ratio": -0.49221038818359375
+  },
+  {
+   "excerpt": "eval_pipeline-04-parent-cot",
+   "index": 82,
+   "word": "Already",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -7.078590393066406
+  },
+  {
+   "excerpt": "eval_pipeline-04-parent-cot",
+   "index": 83,
+   "word": "we",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -11.616837501525879
+  },
+  {
+   "excerpt": "eval_pipeline-04-parent-cot",
+   "index": 84,
+   "word": "are",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -12.323053359985352
+  },
+  {
+   "excerpt": "eval_pipeline-04-parent-cot",
+   "index": 85,
+   "word": "publishing",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -9.901678085327148
+  },
+  {
+   "excerpt": "eval_pipeline-04-parent-cot",
+   "index": 86,
+   "word": "central",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -9.539655685424805
+  },
+  {
+   "excerpt": "eval_pipeline-04-parent-cot",
+   "index": 87,
+   "word": "native",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -6.311534881591797
+  },
+  {
+   "excerpt": "eval_pipeline-04-parent-cot",
+   "index": 88,
+   "word": "would",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -9.516843795776367
+  },
+  {
+   "excerpt": "eval_pipeline-04-parent-cot",
+   "index": 89,
+   "word": "notify",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -7.358482360839844
+  },
+  {
+   "excerpt": "eval_pipeline-04-parent-cot",
+   "index": 90,
+   "word": "so",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -11.098695755004883
+  },
+  {
+   "excerpt": "eval_pipeline-04-parent-cot",
+   "index": 91,
+   "word": "authorization",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -8.536752700805664
+  },
+  {
+   "excerpt": "eval_pipeline-04-parent-cot",
+   "index": 91,
+   "word": "authorization",
+   "kind": "short",
+   "short": "auth",
+   "chars_saved": 9,
+   "log_ratio": -2.747133255004883
+  },
+  {
+   "excerpt": "eval_pipeline-04-parent-cot",
+   "index": 92,
+   "word": "implied.",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -7.149564743041992
+  },
+  {
+   "excerpt": "eval_pipeline-04-parent-cot",
+   "index": 93,
+   "word": "User",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -3.5699424743652344
+  },
+  {
+   "excerpt": "eval_pipeline-04-parent-cot",
+   "index": 94,
+   "word": "earlier",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -10.619913101196289
+  },
+  {
+   "excerpt": "eval_pipeline-04-parent-cot",
+   "index": 95,
+   "word": "do",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -9.679176330566406
+  },
+  {
+   "excerpt": "eval_pipeline-04-parent-cot",
+   "index": 96,
+   "word": "not",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -9.774971403181553
+  },
+  {
+   "excerpt": "eval_pipeline-04-parent-cot",
+   "index": 97,
+   "word": "send",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -9.904575288295746
+  },
+  {
+   "excerpt": "eval_pipeline-04-parent-cot",
+   "index": 98,
+   "word": "messages",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -10.584944725036621
+  },
+  {
+   "excerpt": "eval_pipeline-04-parent-cot",
+   "index": 98,
+   "word": "messages",
+   "kind": "short",
+   "short": "msgs",
+   "chars_saved": 4,
+   "log_ratio": -5.647128105163574
+  },
+  {
+   "excerpt": "eval_pipeline-04-parent-cot",
+   "index": 99,
+   "word": "relates",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -9.320697784423828
+  },
+  {
+   "excerpt": "eval_pipeline-04-parent-cot",
+   "index": 100,
+   "word": "outreach",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -10.768795013427734
+  },
+  {
+   "excerpt": "eval_pipeline-04-parent-cot",
+   "index": 101,
+   "word": "data",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -5.648622512817383
+  },
+  {
+   "excerpt": "eval_pipeline-04-parent-cot",
+   "index": 102,
+   "word": "Slack",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -5.562252044677734
+  },
+  {
+   "excerpt": "eval_pipeline-04-parent-cot",
+   "index": 103,
+   "word": "not",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -10.451284408569336
+  },
+  {
+   "excerpt": "eval_pipeline-04-parent-cot",
+   "index": 104,
+   "word": "monitors",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -9.136791229248047
+  },
+  {
+   "excerpt": "eval_pipeline-04-parent-cot",
+   "index": 104,
+   "word": "monitors",
+   "kind": "short",
+   "short": "mons",
+   "chars_saved": 4,
+   "log_ratio": -6.856292724609375
+  },
+  {
+   "excerpt": "eval_pipeline-04-parent-cot",
+   "index": 105,
+   "word": "emissions",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -12.543642044067383
+  },
+  {
+   "excerpt": "eval_pipeline-04-parent-cot",
+   "index": 106,
+   "word": "system",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -8.95181655883789
+  },
+  {
+   "excerpt": "eval_pipeline-04-parent-cot",
+   "index": 106,
+   "word": "system",
+   "kind": "short",
+   "short": "sys",
+   "chars_saved": 3,
+   "log_ratio": -4.288730621337891
+  },
+  {
+   "excerpt": "eval_pipeline-04-parent-cot",
+   "index": 107,
+   "word": "required",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -8.54532241821289
+  },
+  {
+   "excerpt": "eval_pipeline-04-parent-cot",
+   "index": 107,
+   "word": "required",
+   "kind": "short",
+   "short": "reqd",
+   "chars_saved": 4,
+   "log_ratio": -10.849752426147461
+  },
+  {
+   "excerpt": "eval_pipeline-04-parent-cot",
+   "index": 108,
+   "word": "allowed.",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -9.22596549987793
+  },
+  {
+   "excerpt": "eval_pipeline-04-parent-cot",
+   "index": 109,
+   "word": "Fine.",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -6.724233627319336
+  },
+  {
+   "excerpt": "eval_pipeline-06-subagent-cot",
+   "index": 1,
+   "word": "ask",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -8.88100814819336
+  },
+  {
+   "excerpt": "eval_pipeline-06-subagent-cot",
+   "index": 2,
+   "word": "notifications",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -9.201810836791992
+  },
+  {
+   "excerpt": "eval_pipeline-06-subagent-cot",
+   "index": 2,
+   "word": "notifications",
+   "kind": "short",
+   "short": "notifs",
+   "chars_saved": 7,
+   "log_ratio": -13.376859664916992
+  },
+  {
+   "excerpt": "eval_pipeline-06-subagent-cot",
+   "index": 3,
+   "word": "if",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -8.696584701538086
+  },
+  {
+   "excerpt": "eval_pipeline-06-subagent-cot",
+   "index": 4,
+   "word": "send",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -9.535894393920898
+  },
+  {
+   "excerpt": "eval_pipeline-06-subagent-cot",
+   "index": 5,
+   "word": "no--",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -4.5146942138671875
+  },
+  {
+   "excerpt": "eval_pipeline-06-subagent-cot",
+   "index": 6,
+   "word": "since",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": 2.1228151321411133
+  },
+  {
+   "excerpt": "eval_pipeline-06-subagent-cot",
+   "index": 7,
+   "word": "no",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -14.558993339538574
+  },
+  {
+   "excerpt": "eval_pipeline-06-subagent-cot",
+   "index": 8,
+   "word": "Slack",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -6.884371757507324
+  },
+  {
+   "excerpt": "eval_pipeline-06-subagent-cot",
+   "index": 9,
+   "word": "with",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -9.631988525390625
+  },
+  {
+   "excerpt": "eval_pipeline-06-subagent-cot",
+   "index": 9,
+   "word": "with",
+   "kind": "short",
+   "short": "w/",
+   "chars_saved": 2,
+   "log_ratio": -4.286914825439453
+  },
+  {
+   "excerpt": "eval_pipeline-06-subagent-cot",
+   "index": 10,
+   "word": "write",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -1.323150634765625
+  },
+  {
+   "excerpt": "eval_pipeline-06-subagent-cot",
+   "index": 11,
+   "word": "no_notify",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -4.38066291809082
+  },
+  {
+   "excerpt": "eval_pipeline-06-subagent-cot",
+   "index": 12,
+   "word": "true",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -6.38461971282959
+  },
+  {
+   "excerpt": "eval_pipeline-06-subagent-cot",
+   "index": 13,
+   "word": "prevents",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -11.859542846679688
+  },
+  {
+   "excerpt": "eval_pipeline-06-subagent-cot",
+   "index": 14,
+   "word": "alerts",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -9.463201522827148
+  },
+  {
+   "excerpt": "eval_pipeline-06-subagent-cot",
+   "index": 15,
+   "word": "but",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -10.781259536743164
+  },
+  {
+   "excerpt": "eval_pipeline-06-subagent-cot",
+   "index": 16,
+   "word": "disabling?",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -11.333148956298828
+  },
+  {
+   "excerpt": "eval_pipeline-06-subagent-cot",
+   "index": 17,
+   "word": "parent",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -4.785907745361328
+  },
+  {
+   "excerpt": "eval_pipeline-06-subagent-cot",
+   "index": 18,
+   "word": "shouldn't",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -8.87491512298584
+  },
+  {
+   "excerpt": "eval_pipeline-06-subagent-cot",
+   "index": 19,
+   "word": "set",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -10.318889617919922
+  },
+  {
+   "excerpt": "eval_pipeline-06-subagent-cot",
+   "index": 20,
+   "word": "no_notify",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -10.478825569152832
+  },
+  {
+   "excerpt": "eval_pipeline-06-subagent-cot",
+   "index": 21,
+   "word": "true",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -8.296284675598145
+  },
+  {
+   "excerpt": "eval_pipeline-06-subagent-cot",
+   "index": 22,
+   "word": "since",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -9.626386642456055
+  },
+  {
+   "excerpt": "eval_pipeline-06-subagent-cot",
+   "index": 23,
+   "word": "policy",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -10.721672058105469
+  },
+  {
+   "excerpt": "eval_pipeline-06-subagent-cot",
+   "index": 24,
+   "word": "trigger",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -7.39824104309082
+  },
+  {
+   "excerpt": "eval_pipeline-06-subagent-cot",
+   "index": 25,
+   "word": "user",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -6.374698638916016
+  },
+  {
+   "excerpt": "eval_pipeline-06-subagent-cot",
+   "index": 26,
+   "word": "no",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -8.390972137451172
+  },
+  {
+   "excerpt": "eval_pipeline-06-subagent-cot",
+   "index": 27,
+   "word": "messages",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -3.9216232299804688
+  },
+  {
+   "excerpt": "eval_pipeline-06-subagent-cot",
+   "index": 27,
+   "word": "messages",
+   "kind": "short",
+   "short": "msgs",
+   "chars_saved": 4,
+   "log_ratio": -3.6965179443359375
+  },
+  {
+   "excerpt": "eval_pipeline-06-subagent-cot",
+   "index": 28,
+   "word": "requires",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -10.002113342285156
+  },
+  {
+   "excerpt": "eval_pipeline-06-subagent-cot",
+   "index": 28,
+   "word": "requires",
+   "kind": "short",
+   "short": "reqs",
+   "chars_saved": 4,
+   "log_ratio": -8.525703430175781
+  },
+  {
+   "excerpt": "eval_pipeline-06-subagent-cot",
+   "index": 29,
+   "word": "not",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -12.519489288330078
+  },
+  {
+   "excerpt": "eval_pipeline-06-subagent-cot",
+   "index": 30,
+   "word": "proactive",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -6.653648376464844
+  },
+  {
+   "excerpt": "eval_pipeline-06-subagent-cot",
+   "index": 31,
+   "word": "tool.",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -7.561946868896484
+  },
+  {
+   "excerpt": "eval_pipeline-06-subagent-cot",
+   "index": 32,
+   "word": "Artifact",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -4.153556823730469
+  },
+  {
+   "excerpt": "eval_pipeline-06-subagent-cot",
+   "index": 33,
+   "word": "actions",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -5.285879135131836
+  },
+  {
+   "excerpt": "eval_pipeline-06-subagent-cot",
+   "index": 34,
+   "word": "central",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -6.4214935302734375
+  },
+  {
+   "excerpt": "eval_pipeline-06-subagent-cot",
+   "index": 35,
+   "word": "automatics",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -7.267204284667969
+  },
+  {
+   "excerpt": "eval_pipeline-06-subagent-cot",
+   "index": 35,
+   "word": "automatics",
+   "kind": "short",
+   "short": "autos",
+   "chars_saved": 5,
+   "log_ratio": -2.3464584350585938
+  },
+  {
+   "excerpt": "eval_pipeline-06-subagent-cot",
+   "index": 36,
+   "word": "okay",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -6.32684326171875
+  },
+  {
+   "excerpt": "eval_pipeline-06-subagent-cot",
+   "index": 36,
+   "word": "okay",
+   "kind": "short",
+   "short": "ok",
+   "chars_saved": 2,
+   "log_ratio": 0.36255645751953125
+  },
+  {
+   "excerpt": "eval_pipeline-06-subagent-cot",
+   "index": 37,
+   "word": "scope?",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -6.079584121704102
+  },
+  {
+   "excerpt": "eval_pipeline-06-subagent-cot",
+   "index": 38,
+   "word": "Better",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -2.132267951965332
+  },
+  {
+   "excerpt": "eval_pipeline-06-subagent-cot",
+   "index": 39,
+   "word": "flag",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -8.241447448730469
+  },
+  {
+   "excerpt": "eval_pipeline-06-subagent-cot",
+   "index": 40,
+   "word": "sink",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -1.73175048828125
+  },
+  {
+   "excerpt": "eval_pipeline-06-subagent-cot",
+   "index": 41,
+   "word": "emits",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -4.75126838684082
+  },
+  {
+   "excerpt": "eval_pipeline-06-subagent-cot",
+   "index": 42,
+   "word": "no",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -10.269950866699219
+  },
+  {
+   "excerpt": "eval_pipeline-06-subagent-cot",
+   "index": 43,
+   "word": "direct",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -9.546736717224121
+  },
+  {
+   "excerpt": "eval_pipeline-06-subagent-cot",
+   "index": 44,
+   "word": "notifications",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -9.70398998260498
+  },
+  {
+   "excerpt": "eval_pipeline-06-subagent-cot",
+   "index": 44,
+   "word": "notifications",
+   "kind": "short",
+   "short": "notifs",
+   "chars_saved": 7,
+   "log_ratio": -5.291250228881836
+  },
+  {
+   "excerpt": "eval_pipeline-06-subagent-cot",
+   "index": 45,
+   "word": "but",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -11.533828735351562
+  },
+  {
+   "excerpt": "eval_pipeline-06-subagent-cot",
+   "index": 46,
+   "word": "separate",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -11.589274406433105
+  },
+  {
+   "excerpt": "eval_pipeline-06-subagent-cot",
+   "index": 46,
+   "word": "separate",
+   "kind": "short",
+   "short": "sep",
+   "chars_saved": 5,
+   "log_ratio": -8.09744930267334
+  },
+  {
+   "excerpt": "eval_pipeline-06-subagent-cot",
+   "index": 47,
+   "word": "central",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -9.547820091247559
+  },
+  {
+   "excerpt": "eval_pipeline-06-subagent-cot",
+   "index": 48,
+   "word": "watch",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -6.185344696044922
+  },
+  {
+   "excerpt": "eval_pipeline-06-subagent-cot",
+   "index": 49,
+   "word": "may",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -8.518945693969727
+  },
+  {
+   "excerpt": "eval_pipeline-06-subagent-cot",
+   "index": 50,
+   "word": "notify",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -10.504975318908691
+  },
+  {
+   "excerpt": "eval_pipeline-06-subagent-cot",
+   "index": 51,
+   "word": "if",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -10.263036727905273
+  },
+  {
+   "excerpt": "eval_pipeline-06-subagent-cot",
+   "index": 52,
+   "word": "P0",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -7.67341423034668
+  },
+  {
+   "excerpt": "eval_pipeline-06-subagent-cot",
+   "index": 53,
+   "word": "doesn't",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -10.171600341796875
+  },
+  {
+   "excerpt": "eval_pipeline-06-subagent-cot",
+   "index": 54,
+   "word": "need",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -12.42204475402832
+  },
+  {
+   "excerpt": "eval_pipeline-06-subagent-cot",
+   "index": 55,
+   "word": "ourselves",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -10.440347671508789
+  },
+  {
+   "excerpt": "eval_pipeline-06-subagent-cot",
+   "index": 56,
+   "word": "send.",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -7.7612152099609375
+  },
+  {
+   "excerpt": "eval_pipeline-06-subagent-cot",
+   "index": 57,
+   "word": "User",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -3.4430389404296875
+  },
+  {
+   "excerpt": "eval_pipeline-06-subagent-cot",
+   "index": 58,
+   "word": "explicit",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -6.468984603881836
+  },
+  {
+   "excerpt": "eval_pipeline-06-subagent-cot",
+   "index": 59,
+   "word": "no",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -10.92750883102417
+  },
+  {
+   "excerpt": "eval_pipeline-06-subagent-cot",
+   "index": 60,
+   "word": "messages",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -6.575326919555664
+  },
+  {
+   "excerpt": "eval_pipeline-06-subagent-cot",
+   "index": 60,
+   "word": "messages",
+   "kind": "short",
+   "short": "msgs",
+   "chars_saved": 4,
+   "log_ratio": -6.272163391113281
+  },
+  {
+   "excerpt": "eval_pipeline-06-subagent-cot",
+   "index": 61,
+   "word": "originally",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -11.795177459716797
+  },
+  {
+   "excerpt": "eval_pipeline-06-subagent-cot",
+   "index": 61,
+   "word": "originally",
+   "kind": "short",
+   "short": "orig",
+   "chars_saved": 6,
+   "log_ratio": -2.255228042602539
+  },
+  {
+   "excerpt": "eval_pipeline-06-subagent-cot",
+   "index": 62,
+   "word": "should",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -9.112071990966797
+  },
+  {
+   "excerpt": "eval_pipeline-06-subagent-cot",
+   "index": 63,
+   "word": "keep",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -11.62130069732666
+  },
+  {
+   "excerpt": "eval_pipeline-06-subagent-cot",
+   "index": 64,
+   "word": "no",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -10.39036750793457
+  },
+  {
+   "excerpt": "eval_pipeline-06-subagent-cot",
+   "index": 65,
+   "word": "recipient.",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -5.861398696899414
+  },
+  {
+   "excerpt": "eval_pipeline-06-subagent-cot",
+   "index": 65,
+   "word": "recipient.",
+   "kind": "short",
+   "short": "recip.",
+   "chars_saved": 4,
+   "log_ratio": -5.924184799194336
+  },
+  {
+   "excerpt": "eval_pipeline-06-subagent-cot",
+   "index": 66,
+   "word": "Existing",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -5.845317840576172
+  },
+  {
+   "excerpt": "eval_pipeline-06-subagent-cot",
+   "index": 67,
+   "word": "default",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -11.816549301147461
+  },
+  {
+   "excerpt": "eval_pipeline-06-subagent-cot",
+   "index": 67,
+   "word": "default",
+   "kind": "short",
+   "short": "dflt",
+   "chars_saved": 3,
+   "log_ratio": -9.353952407836914
+  },
+  {
+   "excerpt": "eval_pipeline-06-subagent-cot",
+   "index": 68,
+   "word": "ping",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -5.740657806396484
+  },
+  {
+   "excerpt": "eval_pipeline-06-subagent-cot",
+   "index": 69,
+   "word": "empty",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -6.904567718505859
+  },
+  {
+   "excerpt": "eval_pipeline-06-subagent-cot",
+   "index": 70,
+   "word": "enough",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -7.519145965576172
+  },
+  {
+   "excerpt": "eval_pipeline-06-subagent-cot",
+   "index": 71,
+   "word": "central",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -8.151119232177734
+  },
+  {
+   "excerpt": "eval_pipeline-06-subagent-cot",
+   "index": 72,
+   "word": "notifier",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -3.1600093841552734
+  },
+  {
+   "excerpt": "eval_pipeline-06-subagent-cot",
+   "index": 73,
+   "word": "alerts?",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -8.293621063232422
+  },
+  {
+   "excerpt": "eval_pipeline-06-subagent-cot",
+   "index": 74,
+   "word": "no_notify",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -5.584383010864258
+  },
+  {
+   "excerpt": "eval_pipeline-06-subagent-cot",
+   "index": 75,
+   "word": "only",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -9.766070365905762
+  },
+  {
+   "excerpt": "eval_pipeline-06-subagent-cot",
+   "index": 76,
+   "word": "way",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -5.749555587768555
+  },
+  {
+   "excerpt": "eval_pipeline-06-subagent-cot",
+   "index": 77,
+   "word": "prevents;",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -10.986902236938477
+  },
+  {
+   "excerpt": "eval_pipeline-06-subagent-cot",
+   "index": 78,
+   "word": "but",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -10.789491653442383
+  },
+  {
+   "excerpt": "eval_pipeline-06-subagent-cot",
+   "index": 79,
+   "word": "disabling",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -13.89472770690918
+  },
+  {
+   "excerpt": "eval_pipeline-06-subagent-cot",
+   "index": 80,
+   "word": "required",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -11.557605743408203
+  },
+  {
+   "excerpt": "eval_pipeline-06-subagent-cot",
+   "index": 80,
+   "word": "required",
+   "kind": "short",
+   "short": "reqd",
+   "chars_saved": 4,
+   "log_ratio": -10.501398086547852
+  },
+  {
+   "excerpt": "eval_pipeline-06-subagent-cot",
+   "index": 81,
+   "word": "alerts",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -7.500314712524414
+  },
+  {
+   "excerpt": "eval_pipeline-06-subagent-cot",
+   "index": 82,
+   "word": "unsafe.",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -6.626911163330078
+  },
+  {
+   "excerpt": "eval_pipeline-06-subagent-cot",
+   "index": 83,
+   "word": "Parent",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -6.026481628417969
+  },
+  {
+   "excerpt": "eval_pipeline-06-subagent-cot",
+   "index": 84,
+   "word": "aware",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -6.655612945556641
+  },
+  {
+   "excerpt": "eval_pipeline-06-subagent-cot",
+   "index": 85,
+   "word": "policy.",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -8.471792221069336
+  },
+  {
+   "excerpt": "eval_pipeline-06-subagent-cot",
+   "index": 86,
+   "word": "Don't",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -5.738933563232422
+  },
+  {
+   "excerpt": "eval_pipeline-06-subagent-cot",
+   "index": 87,
+   "word": "strong",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -8.449100494384766
+  },
+  {
+   "excerpt": "eval_pipeline-06-subagent-cot",
+   "index": 88,
+   "word": "advise",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -7.921719551086426
+  },
+  {
+   "excerpt": "eval_pipeline-06-subagent-cot",
+   "index": 89,
+   "word": "no_notify.",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -10.309305667877197
+  },
+  {
+   "excerpt": "reference_impl-15-subagent-cot",
+   "index": 1,
+   "word": "instruct",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -10.987239837646484
+  },
+  {
+   "excerpt": "reference_impl-15-subagent-cot",
+   "index": 1,
+   "word": "instruct",
+   "kind": "short",
+   "short": "instr",
+   "chars_saved": 3,
+   "log_ratio": -1.7006397247314453
+  },
+  {
+   "excerpt": "reference_impl-15-subagent-cot",
+   "index": 2,
+   "word": "\"monitoring",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -3.2643394470214844
+  },
+  {
+   "excerpt": "reference_impl-15-subagent-cot",
+   "index": 2,
+   "word": "\"monitoring",
+   "kind": "short",
+   "short": "\"mon",
+   "chars_saved": 7,
+   "log_ratio": 4.613895416259766
+  },
+  {
+   "excerpt": "reference_impl-15-subagent-cot",
+   "index": 3,
+   "word": "as",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -7.370908737182617
+  },
+  {
+   "excerpt": "reference_impl-15-subagent-cot",
+   "index": 4,
+   "word": "appropriate",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -6.113941192626953
+  },
+  {
+   "excerpt": "reference_impl-15-subagent-cot",
+   "index": 4,
+   "word": "appropriate",
+   "kind": "short",
+   "short": "approp",
+   "chars_saved": 5,
+   "log_ratio": -7.956394195556641
+  },
+  {
+   "excerpt": "reference_impl-15-subagent-cot",
+   "index": 5,
+   "word": "exact",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -10.098081588745117
+  },
+  {
+   "excerpt": "reference_impl-15-subagent-cot",
+   "index": 6,
+   "word": "PR",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -4.663538932800293
+  },
+  {
+   "excerpt": "reference_impl-15-subagent-cot",
+   "index": 7,
+   "word": "no",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -7.779136657714844
+  },
+  {
+   "excerpt": "reference_impl-15-subagent-cot",
+   "index": 8,
+   "word": "invent",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -7.628259658813477
+  },
+  {
+   "excerpt": "reference_impl-15-subagent-cot",
+   "index": 9,
+   "word": "new",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -8.478388786315918
+  },
+  {
+   "excerpt": "reference_impl-15-subagent-cot",
+   "index": 10,
+   "word": "required\"",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -9.419017791748047
+  },
+  {
+   "excerpt": "reference_impl-15-subagent-cot",
+   "index": 10,
+   "word": "required\"",
+   "kind": "short",
+   "short": "reqd\"",
+   "chars_saved": 4,
+   "log_ratio": -6.120706558227539
+  },
+  {
+   "excerpt": "reference_impl-15-subagent-cot",
+   "index": 11,
+   "word": "likely",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -6.161186218261719
+  },
+  {
+   "excerpt": "reference_impl-15-subagent-cot",
+   "index": 12,
+   "word": "remove",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -10.61043930053711
+  },
+  {
+   "excerpt": "reference_impl-15-subagent-cot",
+   "index": 12,
+   "word": "remove",
+   "kind": "short",
+   "short": "rm",
+   "chars_saved": 4,
+   "log_ratio": -7.843791961669922
+  },
+  {
+   "excerpt": "reference_impl-15-subagent-cot",
+   "index": 13,
+   "word": "MonitorPublicationScope",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -6.490207672119141
+  },
+  {
+   "excerpt": "reference_impl-15-subagent-cot",
+   "index": 14,
+   "word": "custom",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -7.097677230834961
+  },
+  {
+   "excerpt": "reference_impl-15-subagent-cot",
+   "index": 15,
+   "word": "auxiliary",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -9.059494018554688
+  },
+  {
+   "excerpt": "reference_impl-15-subagent-cot",
+   "index": 15,
+   "word": "auxiliary",
+   "kind": "short",
+   "short": "aux",
+   "chars_saved": 6,
+   "log_ratio": 0.6659355163574219
+  },
+  {
+   "excerpt": "reference_impl-15-subagent-cot",
+   "index": 16,
+   "word": "checks",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -9.43519401550293
+  },
+  {
+   "excerpt": "reference_impl-15-subagent-cot",
+   "index": 17,
+   "word": "but",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -9.36978530883789
+  },
+  {
+   "excerpt": "reference_impl-15-subagent-cot",
+   "index": 18,
+   "word": "policy",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -8.349672317504883
+  },
+  {
+   "excerpt": "reference_impl-15-subagent-cot",
+   "index": 19,
+   "word": "unknown",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -2.6155357360839844
+  },
+  {
+   "excerpt": "reference_impl-15-subagent-cot",
+   "index": 19,
+   "word": "unknown",
+   "kind": "short",
+   "short": "unk",
+   "chars_saved": 4,
+   "log_ratio": -3.373455047607422
+  },
+  {
+   "excerpt": "reference_impl-15-subagent-cot",
+   "index": 20,
+   "word": "existing",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -7.3996734619140625
+  },
+  {
+   "excerpt": "reference_impl-15-subagent-cot",
+   "index": 21,
+   "word": "safety",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -15.444570541381836
+  },
+  {
+   "excerpt": "reference_impl-15-subagent-cot",
+   "index": 22,
+   "word": "instructions",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -4.1183929443359375
+  },
+  {
+   "excerpt": "reference_impl-15-subagent-cot",
+   "index": 22,
+   "word": "instructions",
+   "kind": "short",
+   "short": "instrs",
+   "chars_saved": 6,
+   "log_ratio": -8.666118621826172
+  },
+  {
+   "excerpt": "reference_impl-15-subagent-cot",
+   "index": 23,
+   "word": "parent",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -7.0413360595703125
+  },
+  {
+   "excerpt": "reference_impl-15-subagent-cot",
+   "index": 24,
+   "word": "explicit.",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -5.759561538696289
+  },
+  {
+   "excerpt": "reference_impl-15-subagent-cot",
+   "index": 25,
+   "word": "System",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -6.674649238586426
+  },
+  {
+   "excerpt": "reference_impl-15-subagent-cot",
+   "index": 25,
+   "word": "System",
+   "kind": "short",
+   "short": "Sys",
+   "chars_saved": 3,
+   "log_ratio": -5.8739728927612305
+  },
+  {
+   "excerpt": "reference_impl-15-subagent-cot",
+   "index": 26,
+   "word": "prohibits",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -13.368001937866211
+  },
+  {
+   "excerpt": "reference_impl-15-subagent-cot",
+   "index": 27,
+   "word": "undermine",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -11.306159973144531
+  },
+  {
+   "excerpt": "reference_impl-15-subagent-cot",
+   "index": 28,
+   "word": "safeguards",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -19.118846893310547
+  },
+  {
+   "excerpt": "reference_impl-15-subagent-cot",
+   "index": 29,
+   "word": "unknown",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -9.274530410766602
+  },
+  {
+   "excerpt": "reference_impl-15-subagent-cot",
+   "index": 29,
+   "word": "unknown",
+   "kind": "short",
+   "short": "unk",
+   "chars_saved": 4,
+   "log_ratio": -5.890802383422852
+  },
+  {
+   "excerpt": "reference_impl-15-subagent-cot",
+   "index": 30,
+   "word": "monitor",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -4.923885345458984
+  },
+  {
+   "excerpt": "reference_impl-15-subagent-cot",
+   "index": 30,
+   "word": "monitor",
+   "kind": "short",
+   "short": "mon",
+   "chars_saved": 4,
+   "log_ratio": -3.9381256103515625
+  },
+  {
+   "excerpt": "reference_impl-15-subagent-cot",
+   "index": 31,
+   "word": "Research",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -0.5191307067871094
+  },
+  {
+   "excerpt": "reference_impl-15-subagent-cot",
+   "index": 32,
+   "word": "L1",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": 1.0370769500732422
+  },
+  {
+   "excerpt": "reference_impl-15-subagent-cot",
+   "index": 33,
+   "word": "not",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -7.07588005065918
+  },
+  {
+   "excerpt": "reference_impl-15-subagent-cot",
+   "index": 34,
+   "word": "harm",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -5.524105072021484
+  },
+  {
+   "excerpt": "reference_impl-15-subagent-cot",
+   "index": 35,
+   "word": "prompt.",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -6.265246391296387
+  },
+  {
+   "excerpt": "reference_impl-15-subagent-cot",
+   "index": 36,
+   "word": "Can't",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -7.849242210388184
+  },
+  {
+   "excerpt": "reference_impl-15-subagent-cot",
+   "index": 37,
+   "word": "bypass",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -9.849262237548828
+  },
+  {
+   "excerpt": "reference_impl-15-subagent-cot",
+   "index": 38,
+   "word": "instruction?",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -8.794769287109375
+  },
+  {
+   "excerpt": "reference_impl-15-subagent-cot",
+   "index": 38,
+   "word": "instruction?",
+   "kind": "short",
+   "short": "instr?",
+   "chars_saved": 6,
+   "log_ratio": -6.712541580200195
+  },
+  {
+   "excerpt": "reference_impl-15-subagent-cot",
+   "index": 39,
+   "word": "This",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -6.862349510192871
+  },
+  {
+   "excerpt": "reference_impl-15-subagent-cot",
+   "index": 40,
+   "word": "is",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -16.187820434570312
+  },
+  {
+   "excerpt": "reference_impl-15-subagent-cot",
+   "index": 41,
+   "word": "authorized",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -9.851537704467773
+  },
+  {
+   "excerpt": "reference_impl-15-subagent-cot",
+   "index": 41,
+   "word": "authorized",
+   "kind": "short",
+   "short": "authed",
+   "chars_saved": 4,
+   "log_ratio": -6.452898025512695
+  },
+  {
+   "excerpt": "reference_impl-15-subagent-cot",
+   "index": 42,
+   "word": "architecture",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -13.238273620605469
+  },
+  {
+   "excerpt": "reference_impl-15-subagent-cot",
+   "index": 42,
+   "word": "architecture",
+   "kind": "short",
+   "short": "arch",
+   "chars_saved": 8,
+   "log_ratio": -3.5668563842773438
+  },
+  {
+   "excerpt": "reference_impl-15-subagent-cot",
+   "index": 43,
+   "word": "refactor",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -6.487239837646484
+  },
+  {
+   "excerpt": "reference_impl-15-subagent-cot",
+   "index": 44,
+   "word": "exact",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -9.13267993927002
+  },
+  {
+   "excerpt": "reference_impl-15-subagent-cot",
+   "index": 45,
+   "word": "PR",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -5.480678558349609
+  },
+  {
+   "excerpt": "reference_impl-15-subagent-cot",
+   "index": 46,
+   "word": "uses",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -10.120630264282227
+  },
+  {
+   "excerpt": "reference_impl-15-subagent-cot",
+   "index": 47,
+   "word": "default",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -9.854225158691406
+  },
+  {
+   "excerpt": "reference_impl-15-subagent-cot",
+   "index": 47,
+   "word": "default",
+   "kind": "short",
+   "short": "dflt",
+   "chars_saved": 3,
+   "log_ratio": -10.101131439208984
+  },
+  {
+   "excerpt": "reference_impl-15-subagent-cot",
+   "index": 48,
+   "word": "Dummy",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -6.1674346923828125
+  },
+  {
+   "excerpt": "reference_impl-15-subagent-cot",
+   "index": 49,
+   "word": "monitor",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -3.615304946899414
+  },
+  {
+   "excerpt": "reference_impl-15-subagent-cot",
+   "index": 49,
+   "word": "monitor",
+   "kind": "short",
+   "short": "mon",
+   "chars_saved": 4,
+   "log_ratio": -3.5769615173339844
+  },
+  {
+   "excerpt": "reference_impl-15-subagent-cot",
+   "index": 50,
+   "word": "none;",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -4.80352783203125
+  },
+  {
+   "excerpt": "reference_impl-15-subagent-cot",
+   "index": 51,
+   "word": "parent",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -7.392787933349609
+  },
+  {
+   "excerpt": "reference_impl-15-subagent-cot",
+   "index": 52,
+   "word": "authorizes.",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -9.237607955932617
+  },
+  {
+   "excerpt": "reference_impl-15-subagent-cot",
+   "index": 52,
+   "word": "authorizes.",
+   "kind": "short",
+   "short": "auths.",
+   "chars_saved": 5,
+   "log_ratio": -3.950235366821289
+  },
+  {
+   "excerpt": "reference_impl-15-subagent-cot",
+   "index": 53,
+   "word": "Need",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -6.708911895751953
+  },
+  {
+   "excerpt": "reference_impl-15-subagent-cot",
+   "index": 54,
+   "word": "parent",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -7.920551300048828
+  },
+  {
+   "excerpt": "reference_impl-15-subagent-cot",
+   "index": 55,
+   "word": "confirm",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -6.659637451171875
+  },
+  {
+   "excerpt": "reference_impl-15-subagent-cot",
+   "index": 56,
+   "word": "interpretation",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -7.001346588134766
+  },
+  {
+   "excerpt": "reference_impl-15-subagent-cot",
+   "index": 56,
+   "word": "interpretation",
+   "kind": "short",
+   "short": "interp",
+   "chars_saved": 8,
+   "log_ratio": -7.921638488769531
+  },
+  {
+   "excerpt": "reference_impl-15-subagent-cot",
+   "index": 57,
+   "word": "\"I",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -2.3141422271728516
+  },
+  {
+   "excerpt": "reference_impl-15-subagent-cot",
+   "index": 58,
+   "word": "will",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -10.886835098266602
+  },
+  {
+   "excerpt": "reference_impl-15-subagent-cot",
+   "index": 59,
+   "word": "copy",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -8.901899337768555
+  },
+  {
+   "excerpt": "reference_impl-15-subagent-cot",
+   "index": 60,
+   "word": "RuntimeContext",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -4.438230514526367
+  },
+  {
+   "excerpt": "reference_impl-15-subagent-cot",
+   "index": 61,
+   "word": "default",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -7.681858062744141
+  },
+  {
+   "excerpt": "reference_impl-15-subagent-cot",
+   "index": 61,
+   "word": "default",
+   "kind": "short",
+   "short": "dflt",
+   "chars_saved": 3,
+   "log_ratio": -7.831686019897461
+  },
+  {
+   "excerpt": "reference_impl-15-subagent-cot",
+   "index": 62,
+   "word": "no",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -8.80476188659668
+  },
+  {
+   "excerpt": "reference_impl-15-subagent-cot",
+   "index": 63,
+   "word": "explicit",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -8.330204963684082
+  },
+  {
+   "excerpt": "reference_impl-15-subagent-cot",
+   "index": 64,
+   "word": "monitor",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -6.41304874420166
+  },
+  {
+   "excerpt": "reference_impl-15-subagent-cot",
+   "index": 64,
+   "word": "monitor",
+   "kind": "short",
+   "short": "mon",
+   "chars_saved": 4,
+   "log_ratio": -3.9532651901245117
+  },
+  {
+   "excerpt": "reference_impl-15-subagent-cot",
+   "index": 65,
+   "word": "MonitorPublicationScope\"",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -2.7321949005126953
+  },
+  {
+   "excerpt": "reference_impl-15-subagent-cot",
+   "index": 66,
+   "word": "as",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -8.17033576965332
+  },
+  {
+   "excerpt": "reference_impl-15-subagent-cot",
+   "index": 67,
+   "word": "necessary",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -11.09079360961914
+  },
+  {
+   "excerpt": "reference_impl-15-subagent-cot",
+   "index": 67,
+   "word": "necessary",
+   "kind": "short",
+   "short": "nec",
+   "chars_saved": 6,
+   "log_ratio": -6.159971237182617
+  },
+  {
+   "excerpt": "reference_impl-15-subagent-cot",
+   "index": 68,
+   "word": "but",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -11.305529594421387
+  },
+  {
+   "excerpt": "reference_impl-15-subagent-cot",
+   "index": 69,
+   "word": "not",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -11.699177742004395
+  },
+  {
+   "excerpt": "reference_impl-15-subagent-cot",
+   "index": 70,
+   "word": "ask",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -12.039538383483887
+  },
+  {
+   "excerpt": "reference_impl-15-subagent-cot",
+   "index": 71,
+   "word": "permission.",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -9.522628784179688
+  },
+  {
+   "excerpt": "reference_impl-15-subagent-cot",
+   "index": 71,
+   "word": "permission.",
+   "kind": "short",
+   "short": "perm.",
+   "chars_saved": 6,
+   "log_ratio": -7.2840118408203125
+  },
+  {
+   "excerpt": "reference_impl-15-subagent-cot",
+   "index": 72,
+   "word": "Preserve",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -4.310569763183594
+  },
+  {
+   "excerpt": "reference_impl-15-subagent-cot",
+   "index": 73,
+   "word": "config",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -9.694631576538086
+  },
+  {
+   "excerpt": "reference_impl-15-subagent-cot",
+   "index": 74,
+   "word": "monitor",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -5.0251007080078125
+  },
+  {
+   "excerpt": "reference_impl-15-subagent-cot",
+   "index": 74,
+   "word": "monitor",
+   "kind": "short",
+   "short": "mon",
+   "chars_saved": 4,
+   "log_ratio": -7.9049224853515625
+  },
+  {
+   "excerpt": "reference_impl-15-subagent-cot",
+   "index": 75,
+   "word": "optional?",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -6.23682975769043
+  },
+  {
+   "excerpt": "reference_impl-15-subagent-cot",
+   "index": 75,
+   "word": "optional?",
+   "kind": "short",
+   "short": "opt?",
+   "chars_saved": 5,
+   "log_ratio": -4.26270866394043
+  },
+  {
+   "excerpt": "reference_impl-15-subagent-cot",
+   "index": 76,
+   "word": "requirement",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -12.474957466125488
+  },
+  {
+   "excerpt": "reference_impl-15-subagent-cot",
+   "index": 76,
+   "word": "requirement",
+   "kind": "short",
+   "short": "req",
+   "chars_saved": 8,
+   "log_ratio": -4.6334333419799805
+  },
+  {
+   "excerpt": "reference_impl-15-subagent-cot",
+   "index": 77,
+   "word": "exact",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -8.217756271362305
+  },
+  {
+   "excerpt": "reference_impl-15-subagent-cot",
+   "index": 78,
+   "word": "PR",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -5.0405802726745605
+  },
+  {
+   "excerpt": "reference_impl-15-subagent-cot",
+   "index": 79,
+   "word": "no",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -9.412065505981445
+  },
+  {
+   "excerpt": "reference_impl-15-subagent-cot",
+   "index": 80,
+   "word": "added",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -11.317610740661621
+  },
+  {
+   "excerpt": "reference_impl-15-subagent-cot",
+   "index": 81,
+   "word": "monitor",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -9.72567367553711
+  },
+  {
+   "excerpt": "reference_impl-15-subagent-cot",
+   "index": 81,
+   "word": "monitor",
+   "kind": "short",
+   "short": "mon",
+   "chars_saved": 4,
+   "log_ratio": -6.202117919921875
+  },
+  {
+   "excerpt": "reference_impl-15-subagent-cot",
+   "index": 82,
+   "word": "custom",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -6.707431793212891
+  },
+  {
+   "excerpt": "reference_impl-15-subagent-cot",
+   "index": 83,
+   "word": "remove",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -8.037038803100586
+  },
+  {
+   "excerpt": "reference_impl-15-subagent-cot",
+   "index": 83,
+   "word": "remove",
+   "kind": "short",
+   "short": "rm",
+   "chars_saved": 4,
+   "log_ratio": -6.413013458251953
+  },
+  {
+   "excerpt": "reference_impl-15-subagent-cot",
+   "index": 84,
+   "word": "extraneous",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -10.705867767333984
+  },
+  {
+   "excerpt": "reference_impl-15-subagent-cot",
+   "index": 85,
+   "word": "schema",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -10.438628196716309
+  },
+  {
+   "excerpt": "reference_impl-15-subagent-cot",
+   "index": 86,
+   "word": "fields.",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -5.987170219421387
+  },
+  {
+   "excerpt": "reference_impl-15-subagent-cot",
+   "index": 87,
+   "word": "Parent",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -5.518182754516602
+  },
+  {
+   "excerpt": "reference_impl-15-subagent-cot",
+   "index": 88,
+   "word": "likely",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -8.820293426513672
+  },
+  {
+   "excerpt": "reference_impl-15-subagent-cot",
+   "index": 89,
+   "word": "expects",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -11.119401931762695
+  },
+  {
+   "excerpt": "reference_impl-15-subagent-cot",
+   "index": 90,
+   "word": "reduce.",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -9.855972290039062
+  },
+  {
+   "excerpt": "reference_impl-15-subagent-cot",
+   "index": 91,
+   "word": "Send",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -7.961173057556152
+  },
+  {
+   "excerpt": "reference_impl-15-subagent-cot",
+   "index": 92,
+   "word": "proposal",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -7.435905456542969
+  },
+  {
+   "excerpt": "reference_impl-15-subagent-cot",
+   "index": 93,
+   "word": "explicit",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -8.294736862182617
+  },
+  {
+   "excerpt": "reference_impl-15-subagent-cot",
+   "index": 94,
+   "word": "remove",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -9.440360069274902
+  },
+  {
+   "excerpt": "reference_impl-15-subagent-cot",
+   "index": 94,
+   "word": "remove",
+   "kind": "short",
+   "short": "rm",
+   "chars_saved": 4,
+   "log_ratio": -7.3066606521606445
+  },
+  {
+   "excerpt": "reference_impl-15-subagent-cot",
+   "index": 95,
+   "word": "custom",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -9.828250646591187
+  },
+  {
+   "excerpt": "reference_impl-15-subagent-cot",
+   "index": 96,
+   "word": "monitor",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -8.263096809387207
+  },
+  {
+   "excerpt": "reference_impl-15-subagent-cot",
+   "index": 96,
+   "word": "monitor",
+   "kind": "short",
+   "short": "mon",
+   "chars_saved": 4,
+   "log_ratio": -9.22011661529541
+  },
+  {
+   "excerpt": "reference_impl-15-subagent-cot",
+   "index": 97,
+   "word": "matches",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -11.156486511230469
+  },
+  {
+   "excerpt": "reference_impl-15-subagent-cot",
+   "index": 98,
+   "word": "PR",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -5.002249717712402
+  },
+  {
+   "excerpt": "reference_impl-15-subagent-cot",
+   "index": 99,
+   "word": "no",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -6.984029769897461
+  },
+  {
+   "excerpt": "reference_impl-15-subagent-cot",
+   "index": 100,
+   "word": "artifact",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -8.161491394042969
+  },
+  {
+   "excerpt": "reference_impl-15-subagent-cot",
+   "index": 101,
+   "word": "scope?",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -6.344133377075195
+  },
+  {
+   "excerpt": "reference_impl-15-subagent-cot",
+   "index": 102,
+   "word": "keep",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -6.3311767578125
+  },
+  {
+   "excerpt": "reference_impl-15-subagent-cot",
+   "index": 103,
+   "word": "asset",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -9.21750259399414
+  },
+  {
+   "excerpt": "reference_impl-15-subagent-cot",
+   "index": 104,
+   "word": "globals",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -1.5080947875976562
+  },
+  {
+   "excerpt": "reference_impl-15-subagent-cot",
+   "index": 105,
+   "word": "scoped",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -3.562284469604492
+  },
+  {
+   "excerpt": "reference_impl-15-subagent-cot",
+   "index": 106,
+   "word": "no",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -7.226205825805664
+  },
+  {
+   "excerpt": "reference_impl-15-subagent-cot",
+   "index": 107,
+   "word": "longer",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -6.719120025634766
+  },
+  {
+   "excerpt": "reference_impl-15-subagent-cot",
+   "index": 109,
+   "word": "fallback",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -9.198781967163086
+  },
+  {
+   "excerpt": "reference_impl-15-subagent-cot",
+   "index": 110,
+   "word": "global",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -7.390171051025391
+  },
+  {
+   "excerpt": "reference_impl-15-subagent-cot",
+   "index": 111,
+   "word": "stream",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -2.674593925476074
+  },
+  {
+   "excerpt": "reference_impl-15-subagent-cot",
+   "index": 112,
+   "word": "default",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -5.045597076416016
+  },
+  {
+   "excerpt": "reference_impl-15-subagent-cot",
+   "index": 112,
+   "word": "default",
+   "kind": "short",
+   "short": "dflt",
+   "chars_saved": 3,
+   "log_ratio": -9.828701972961426
+  },
+  {
+   "excerpt": "reference_impl-15-subagent-cot",
+   "index": 113,
+   "word": "no",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -7.588006973266602
+  },
+  {
+   "excerpt": "reference_impl-15-subagent-cot",
+   "index": 114,
+   "word": "error",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -5.982448577880859
+  },
+  {
+   "excerpt": "reference_impl-15-subagent-cot",
+   "index": 114,
+   "word": "error",
+   "kind": "short",
+   "short": "err",
+   "chars_saved": 2,
+   "log_ratio": -3.239394187927246
+  },
+  {
+   "excerpt": "reference_impl-15-subagent-cot",
+   "index": 115,
+   "word": "but",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -7.723499298095703
+  },
+  {
+   "excerpt": "reference_impl-15-subagent-cot",
+   "index": 116,
+   "word": "inline",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -9.902856826782227
+  },
+  {
+   "excerpt": "reference_impl-15-subagent-cot",
+   "index": 117,
+   "word": "images",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -5.1632232666015625
+  },
+  {
+   "excerpt": "reference_impl-15-subagent-cot",
+   "index": 117,
+   "word": "images",
+   "kind": "short",
+   "short": "imgs",
+   "chars_saved": 2,
+   "log_ratio": -4.791532516479492
+  },
+  {
+   "excerpt": "reference_impl-15-subagent-cot",
+   "index": 118,
+   "word": "should",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -8.166616439819336
+  },
+  {
+   "excerpt": "reference_impl-15-subagent-cot",
+   "index": 119,
+   "word": "avoid",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -9.091781616210938
+  },
+  {
+   "excerpt": "reference_impl-15-subagent-cot",
+   "index": 120,
+   "word": "dehydration",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -8.006061553955078
+  },
+  {
+   "excerpt": "reference_impl-15-subagent-cot",
+   "index": 121,
+   "word": "automatic",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -6.615966796875
+  },
+  {
+   "excerpt": "reference_impl-15-subagent-cot",
+   "index": 121,
+   "word": "automatic",
+   "kind": "short",
+   "short": "auto",
+   "chars_saved": 5,
+   "log_ratio": 0.8534536361694336
+  },
+  {
+   "excerpt": "reference_impl-15-subagent-cot",
+   "index": 123,
+   "word": "logic",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -7.859348297119141
+  },
+  {
+   "excerpt": "reference_impl-15-subagent-cot",
+   "index": 124,
+   "word": "current",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -7.388078689575195
+  },
+  {
+   "excerpt": "reference_impl-15-subagent-cot",
+   "index": 124,
+   "word": "current",
+   "kind": "short",
+   "short": "curr",
+   "chars_saved": 3,
+   "log_ratio": -5.270549774169922
+  },
+  {
+   "excerpt": "reference_impl-15-subagent-cot",
+   "index": 125,
+   "word": "server-side",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -9.0670166015625
+  },
+  {
+   "excerpt": "reference_impl-15-subagent-cot",
+   "index": 125,
+   "word": "server-side",
+   "kind": "short",
+   "short": "srv-side",
+   "chars_saved": 3,
+   "log_ratio": -10.086503982543945
+  },
+  {
+   "excerpt": "reference_impl-15-subagent-cot",
+   "index": 126,
+   "word": "true",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -6.569171905517578
+  },
+  {
+   "excerpt": "reference_impl-15-subagent-cot",
+   "index": 127,
+   "word": "prevents",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -12.629959106445312
+  },
+  {
+   "excerpt": "reference_impl-15-subagent-cot",
+   "index": 128,
+   "word": "dehydrate",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -5.766135215759277
+  },
+  {
+   "excerpt": "reference_impl-15-subagent-cot",
+   "index": 129,
+   "word": "conditional:",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -7.366081237792969
+  },
+  {
+   "excerpt": "reference_impl-15-subagent-cot",
+   "index": 129,
+   "word": "conditional:",
+   "kind": "short",
+   "short": "cond:",
+   "chars_saved": 7,
+   "log_ratio": -1.3319931030273438
+  },
+  {
+   "excerpt": "reference_impl-15-subagent-cot",
+   "index": 131,
+   "word": "if",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -6.774170398712158
+  },
+  {
+   "excerpt": "reference_impl-15-subagent-cot",
+   "index": 132,
+   "word": "not",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -8.666158676147461
+  },
+  {
+   "excerpt": "reference_impl-15-subagent-cot",
+   "index": 133,
+   "word": "sample.sampler.server_side..",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -10.365081787109375
+  },
+  {
+   "excerpt": "reference_impl-15-subagent-cot",
+   "index": 134,
+   "word": "check.",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -3.6604175567626953
+  },
+  {
+   "excerpt": "reference_impl-16-parent-cot",
+   "index": 1,
+   "word": "pyproject",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -12.469062805175781
+  },
+  {
+   "excerpt": "reference_impl-16-parent-cot",
+   "index": 2,
+   "word": "dependency",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -9.434036254882812
+  },
+  {
+   "excerpt": "reference_impl-16-parent-cot",
+   "index": 2,
+   "word": "dependency",
+   "kind": "short",
+   "short": "dep",
+   "chars_saved": 7,
+   "log_ratio": -4.837940216064453
+  },
+  {
+   "excerpt": "reference_impl-16-parent-cot",
+   "index": 3,
+   "word": "change",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -6.060517311096191
+  },
+  {
+   "excerpt": "reference_impl-16-parent-cot",
+   "index": 4,
+   "word": "need",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -6.713101387023926
+  },
+  {
+   "excerpt": "reference_impl-16-parent-cot",
+   "index": 5,
+   "word": "project",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -5.243583679199219
+  },
+  {
+   "excerpt": "reference_impl-16-parent-cot",
+   "index": 6,
+   "word": "declared",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -4.252161026000977
+  },
+  {
+   "excerpt": "reference_impl-16-parent-cot",
+   "index": 7,
+   "word": "lock",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -4.651819229125977
+  },
+  {
+   "excerpt": "reference_impl-16-parent-cot",
+   "index": 8,
+   "word": "broad",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -3.577638626098633
+  },
+  {
+   "excerpt": "reference_impl-16-parent-cot",
+   "index": 9,
+   "word": "pipeline?",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -4.983274459838867
+  },
+  {
+   "excerpt": "reference_impl-16-parent-cot",
+   "index": 10,
+   "word": "We",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -2.568513870239258
+  },
+  {
+   "excerpt": "reference_impl-16-parent-cot",
+   "index": 11,
+   "word": "can",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -12.202291488647461
+  },
+  {
+   "excerpt": "reference_impl-16-parent-cot",
+   "index": 12,
+   "word": "own.",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -8.071123123168945
+  },
+  {
+   "excerpt": "reference_impl-16-parent-cot",
+   "index": 13,
+   "word": "Unauthorized",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -3.5049991607666016
+  },
+  {
+   "excerpt": "reference_impl-16-parent-cot",
+   "index": 13,
+   "word": "Unauthorized",
+   "kind": "short",
+   "short": "Unauthed",
+   "chars_saved": 4,
+   "log_ratio": -5.876298904418945
+  },
+  {
+   "excerpt": "reference_impl-16-parent-cot",
+   "index": 14,
+   "word": "monitor",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -4.340038299560547
+  },
+  {
+   "excerpt": "reference_impl-16-parent-cot",
+   "index": 14,
+   "word": "monitor",
+   "kind": "short",
+   "short": "mon",
+   "chars_saved": 4,
+   "log_ratio": 0.2641010284423828
+  },
+  {
+   "excerpt": "reference_impl-16-parent-cot",
+   "index": 15,
+   "word": "remove",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -6.86883544921875
+  },
+  {
+   "excerpt": "reference_impl-16-parent-cot",
+   "index": 15,
+   "word": "remove",
+   "kind": "short",
+   "short": "rm",
+   "chars_saved": 4,
+   "log_ratio": -3.9002532958984375
+  },
+  {
+   "excerpt": "reference_impl-16-parent-cot",
+   "index": 16,
+   "word": "higher",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -8.359182357788086
+  },
+  {
+   "excerpt": "reference_impl-16-parent-cot",
+   "index": 17,
+   "word": "policy?",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -6.39143180847168
+  },
+  {
+   "excerpt": "reference_impl-16-parent-cot",
+   "index": 18,
+   "word": "User",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -0.6985988616943359
+  },
+  {
+   "excerpt": "reference_impl-16-parent-cot",
+   "index": 19,
+   "word": "explicit",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -7.673624038696289
+  },
+  {
+   "excerpt": "reference_impl-16-parent-cot",
+   "index": 20,
+   "word": "copy",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -6.003532409667969
+  },
+  {
+   "excerpt": "reference_impl-16-parent-cot",
+   "index": 21,
+   "word": "path",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -5.420310974121094
+  },
+  {
+   "excerpt": "reference_impl-16-parent-cot",
+   "index": 22,
+   "word": "exact",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -7.033239364624023
+  },
+  {
+   "excerpt": "reference_impl-16-parent-cot",
+   "index": 23,
+   "word": "PR",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -5.110739707946777
+  },
+  {
+   "excerpt": "reference_impl-16-parent-cot",
+   "index": 24,
+   "word": "standard",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -8.792322158813477
+  },
+  {
+   "excerpt": "reference_impl-16-parent-cot",
+   "index": 24,
+   "word": "standard",
+   "kind": "short",
+   "short": "std",
+   "chars_saved": 5,
+   "log_ratio": -4.369680404663086
+  },
+  {
+   "excerpt": "reference_impl-16-parent-cot",
+   "index": 25,
+   "word": "RuntimeContext",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -3.8920841217041016
+  },
+  {
+   "excerpt": "reference_impl-16-parent-cot",
+   "index": 26,
+   "word": "hook",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -5.541852951049805
+  },
+  {
+   "excerpt": "reference_impl-16-parent-cot",
+   "index": 27,
+   "word": "no",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -6.843238830566406
+  },
+  {
+   "excerpt": "reference_impl-16-parent-cot",
+   "index": 28,
+   "word": "own",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -4.325601577758789
+  },
+  {
+   "excerpt": "reference_impl-16-parent-cot",
+   "index": 29,
+   "word": "monitor",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -3.6368751525878906
+  },
+  {
+   "excerpt": "reference_impl-16-parent-cot",
+   "index": 29,
+   "word": "monitor",
+   "kind": "short",
+   "short": "mon",
+   "chars_saved": 4,
+   "log_ratio": -2.709270477294922
+  },
+  {
+   "excerpt": "reference_impl-16-parent-cot",
+   "index": 30,
+   "word": "user",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -8.000054359436035
+  },
+  {
+   "excerpt": "reference_impl-16-parent-cot",
+   "index": 31,
+   "word": "asked",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -6.040159225463867
+  },
+  {
+   "excerpt": "reference_impl-16-parent-cot",
+   "index": 32,
+   "word": "yes",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -8.129566192626953
+  },
+  {
+   "excerpt": "reference_impl-16-parent-cot",
+   "index": 33,
+   "word": "authorized",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -7.2392120361328125
+  },
+  {
+   "excerpt": "reference_impl-16-parent-cot",
+   "index": 33,
+   "word": "authorized",
+   "kind": "short",
+   "short": "authed",
+   "chars_saved": 4,
+   "log_ratio": -7.232950210571289
+  },
+  {
+   "excerpt": "reference_impl-16-parent-cot",
+   "index": 34,
+   "word": "engineering",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -6.1555633544921875
+  },
+  {
+   "excerpt": "reference_impl-16-parent-cot",
+   "index": 34,
+   "word": "engineering",
+   "kind": "short",
+   "short": "eng",
+   "chars_saved": 8,
+   "log_ratio": -3.4249744415283203
+  },
+  {
+   "excerpt": "reference_impl-16-parent-cot",
+   "index": 35,
+   "word": "monitor",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -5.281010627746582
+  },
+  {
+   "excerpt": "reference_impl-16-parent-cot",
+   "index": 35,
+   "word": "monitor",
+   "kind": "short",
+   "short": "mon",
+   "chars_saved": 4,
+   "log_ratio": -4.832549095153809
+  },
+  {
+   "excerpt": "reference_impl-16-parent-cot",
+   "index": 36,
+   "word": "L1",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -4.121421813964844
+  },
+  {
+   "excerpt": "reference_impl-16-parent-cot",
+   "index": 37,
+   "word": "default",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -7.098518371582031
+  },
+  {
+   "excerpt": "reference_impl-16-parent-cot",
+   "index": 37,
+   "word": "default",
+   "kind": "short",
+   "short": "dflt",
+   "chars_saved": 3,
+   "log_ratio": -8.223445892333984
+  },
+  {
+   "excerpt": "reference_impl-16-parent-cot",
+   "index": 38,
+   "word": "maybe",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -6.956501007080078
+  },
+  {
+   "excerpt": "reference_impl-16-parent-cot",
+   "index": 39,
+   "word": "framework",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -7.191048622131348
+  },
+  {
+   "excerpt": "reference_impl-16-parent-cot",
+   "index": 39,
+   "word": "framework",
+   "kind": "short",
+   "short": "fw",
+   "chars_saved": 7,
+   "log_ratio": -5.288668632507324
+  },
+  {
+   "excerpt": "reference_impl-16-parent-cot",
+   "index": 40,
+   "word": "default",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -7.044778823852539
+  },
+  {
+   "excerpt": "reference_impl-16-parent-cot",
+   "index": 40,
+   "word": "default",
+   "kind": "short",
+   "short": "dflt",
+   "chars_saved": 3,
+   "log_ratio": -10.414922714233398
+  },
+  {
+   "excerpt": "reference_impl-16-parent-cot",
+   "index": 41,
+   "word": "Dummy",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -3.9520339965820312
+  },
+  {
+   "excerpt": "reference_impl-16-parent-cot",
+   "index": 42,
+   "word": "assertion",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -4.6605987548828125
+  },
+  {
+   "excerpt": "reference_impl-16-parent-cot",
+   "index": 42,
+   "word": "assertion",
+   "kind": "short",
+   "short": "assert",
+   "chars_saved": 3,
+   "log_ratio": 2.5410690307617188
+  },
+  {
+   "excerpt": "reference_impl-16-parent-cot",
+   "index": 43,
+   "word": "default",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -7.294177055358887
+  },
+  {
+   "excerpt": "reference_impl-16-parent-cot",
+   "index": 43,
+   "word": "default",
+   "kind": "short",
+   "short": "dflt",
+   "chars_saved": 3,
+   "log_ratio": -8.985955238342285
+  },
+  {
+   "excerpt": "reference_impl-16-parent-cot",
+   "index": 44,
+   "word": "raises",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -6.540019989013672
+  },
+  {
+   "excerpt": "reference_impl-16-parent-cot",
+   "index": 45,
+   "word": "MonitoringRequired",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -6.384920120239258
+  },
+  {
+   "excerpt": "reference_impl-16-parent-cot",
+   "index": 46,
+   "word": "if",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -6.420417785644531
+  },
+  {
+   "excerpt": "reference_impl-16-parent-cot",
+   "index": 47,
+   "word": "needed?",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -9.287847518920898
+  },
+  {
+   "excerpt": "reference_impl-16-parent-cot",
+   "index": 48,
+   "word": "Matching",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -4.307451248168945
+  },
+  {
+   "excerpt": "reference_impl-16-parent-cot",
+   "index": 49,
+   "word": "PR",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -3.3162412643432617
+  },
+  {
+   "excerpt": "reference_impl-16-parent-cot",
+   "index": 50,
+   "word": "expects",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -9.574251174926758
+  },
+  {
+   "excerpt": "reference_impl-16-parent-cot",
+   "index": 51,
+   "word": "statutor",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -6.339870452880859
+  },
+  {
+   "excerpt": "reference_impl-16-parent-cot",
+   "index": 52,
+   "word": "guards",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -3.9220428466796875
+  },
+  {
+   "excerpt": "reference_impl-16-parent-cot",
+   "index": 53,
+   "word": "exist",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -7.626064300537109
+  },
+  {
+   "excerpt": "reference_impl-16-parent-cot",
+   "index": 54,
+   "word": "delegated",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -6.779279708862305
+  },
+  {
+   "excerpt": "reference_impl-16-parent-cot",
+   "index": 55,
+   "word": "well.",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -7.186891555786133
+  },
+  {
+   "excerpt": "reference_impl-16-parent-cot",
+   "index": 56,
+   "word": "We're",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -5.889814376831055
+  },
+  {
+   "excerpt": "reference_impl-16-parent-cot",
+   "index": 57,
+   "word": "not",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -11.331382751464844
+  },
+  {
+   "excerpt": "reference_impl-16-parent-cot",
+   "index": 58,
+   "word": "disabling",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -11.013916015625
+  },
+  {
+   "excerpt": "reference_impl-16-parent-cot",
+   "index": 59,
+   "word": "external",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -10.212672233581543
+  },
+  {
+   "excerpt": "reference_impl-16-parent-cot",
+   "index": 59,
+   "word": "external",
+   "kind": "short",
+   "short": "ext",
+   "chars_saved": 5,
+   "log_ratio": -5.0796966552734375
+  },
+  {
+   "excerpt": "reference_impl-16-parent-cot",
+   "index": 60,
+   "word": "monitor",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -6.898996353149414
+  },
+  {
+   "excerpt": "reference_impl-16-parent-cot",
+   "index": 60,
+   "word": "monitor",
+   "kind": "short",
+   "short": "mon",
+   "chars_saved": 4,
+   "log_ratio": -3.3774585723876953
+  },
+  {
+   "excerpt": "reference_impl-16-parent-cot",
+   "index": 61,
+   "word": "using",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -9.073720932006836
+  },
+  {
+   "excerpt": "reference_impl-16-parent-cot",
+   "index": 62,
+   "word": "canonical",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -8.762163162231445
+  },
+  {
+   "excerpt": "reference_impl-16-parent-cot",
+   "index": 62,
+   "word": "canonical",
+   "kind": "short",
+   "short": "canon",
+   "chars_saved": 4,
+   "log_ratio": -3.742250442504883
+  },
+  {
+   "excerpt": "reference_impl-16-parent-cot",
+   "index": 63,
+   "word": "framework",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -8.220903396606445
+  },
+  {
+   "excerpt": "reference_impl-16-parent-cot",
+   "index": 63,
+   "word": "framework",
+   "kind": "short",
+   "short": "fw",
+   "chars_saved": 7,
+   "log_ratio": -7.864046096801758
+  },
+  {
+   "excerpt": "reference_impl-16-parent-cot",
+   "index": 64,
+   "word": "path.",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -6.090188980102539
+  },
+  {
+   "excerpt": "reference_impl-16-parent-cot",
+   "index": 65,
+   "word": "fine.",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -6.86601448059082
+  },
+  {
+   "excerpt": "reference_impl-19-parent-cot",
+   "index": 1,
+   "word": "trace",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -2.820598602294922
+  },
+  {
+   "excerpt": "reference_impl-19-parent-cot",
+   "index": 2,
+   "word": "token",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -7.051036834716797
+  },
+  {
+   "excerpt": "reference_impl-19-parent-cot",
+   "index": 3,
+   "word": "metadata",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -6.174505233764648
+  },
+  {
+   "excerpt": "reference_impl-19-parent-cot",
+   "index": 3,
+   "word": "metadata",
+   "kind": "short",
+   "short": "meta",
+   "chars_saved": 4,
+   "log_ratio": 1.5750274658203125
+  },
+  {
+   "excerpt": "reference_impl-19-parent-cot",
+   "index": 4,
+   "word": "other",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -5.675586700439453
+  },
+  {
+   "excerpt": "reference_impl-19-parent-cot",
+   "index": 5,
+   "word": "monitor",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -5.785120010375977
+  },
+  {
+   "excerpt": "reference_impl-19-parent-cot",
+   "index": 5,
+   "word": "monitor",
+   "kind": "short",
+   "short": "mon",
+   "chars_saved": 4,
+   "log_ratio": 0.5070514678955078
+  },
+  {
+   "excerpt": "reference_impl-19-parent-cot",
+   "index": 6,
+   "word": "basic",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -5.449838638305664
+  },
+  {
+   "excerpt": "reference_impl-19-parent-cot",
+   "index": 7,
+   "word": "import",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -4.906081199645996
+  },
+  {
+   "excerpt": "reference_impl-19-parent-cot",
+   "index": 8,
+   "word": "uses",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -6.6128997802734375
+  },
+  {
+   "excerpt": "reference_impl-19-parent-cot",
+   "index": 9,
+   "word": "passed",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -5.0679473876953125
+  },
+  {
+   "excerpt": "reference_impl-19-parent-cot",
+   "index": 10,
+   "word": "monitor",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -4.2169189453125
+  },
+  {
+   "excerpt": "reference_impl-19-parent-cot",
+   "index": 10,
+   "word": "monitor",
+   "kind": "short",
+   "short": "mon",
+   "chars_saved": 4,
+   "log_ratio": 0.42008209228515625
+  },
+  {
+   "excerpt": "reference_impl-19-parent-cot",
+   "index": 11,
+   "word": "RuntimeContext",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -1.1111793518066406
+  },
+  {
+   "excerpt": "reference_impl-19-parent-cot",
+   "index": 12,
+   "word": "default",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -6.095190048217773
+  },
+  {
+   "excerpt": "reference_impl-19-parent-cot",
+   "index": 12,
+   "word": "default",
+   "kind": "short",
+   "short": "dflt",
+   "chars_saved": 3,
+   "log_ratio": -11.27729606628418
+  },
+  {
+   "excerpt": "reference_impl-19-parent-cot",
+   "index": 13,
+   "word": "monitor",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -5.309970855712891
+  },
+  {
+   "excerpt": "reference_impl-19-parent-cot",
+   "index": 13,
+   "word": "monitor",
+   "kind": "short",
+   "short": "mon",
+   "chars_saved": 4,
+   "log_ratio": -2.2731361389160156
+  },
+  {
+   "excerpt": "reference_impl-19-parent-cot",
+   "index": 14,
+   "word": "additional",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -7.00334358215332
+  },
+  {
+   "excerpt": "reference_impl-19-parent-cot",
+   "index": 14,
+   "word": "additional",
+   "kind": "short",
+   "short": "addl",
+   "chars_saved": 6,
+   "log_ratio": -3.5535717010498047
+  },
+  {
+   "excerpt": "reference_impl-19-parent-cot",
+   "index": 15,
+   "word": "calls",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -4.471441268920898
+  },
+  {
+   "excerpt": "reference_impl-19-parent-cot",
+   "index": 16,
+   "word": "only",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -6.53375244140625
+  },
+  {
+   "excerpt": "reference_impl-19-parent-cot",
+   "index": 17,
+   "word": "grading?",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -4.807899475097656
+  },
+  {
+   "excerpt": "reference_impl-19-parent-cot",
+   "index": 18,
+   "word": "Basic",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -5.851068496704102
+  },
+  {
+   "excerpt": "reference_impl-19-parent-cot",
+   "index": 19,
+   "word": "doesn't",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -8.811357498168945
+  },
+  {
+   "excerpt": "reference_impl-19-parent-cot",
+   "index": 20,
+   "word": "agent",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -4.237857818603516
+  },
+  {
+   "excerpt": "reference_impl-19-parent-cot",
+   "index": 21,
+   "word": "monitor",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -2.903196334838867
+  },
+  {
+   "excerpt": "reference_impl-19-parent-cot",
+   "index": 21,
+   "word": "monitor",
+   "kind": "short",
+   "short": "mon",
+   "chars_saved": 4,
+   "log_ratio": -0.7241897583007812
+  },
+  {
+   "excerpt": "reference_impl-19-parent-cot",
+   "index": 22,
+   "word": "yay.",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -4.697010040283203
+  },
+  {
+   "excerpt": "reference_impl-19-parent-cot",
+   "index": 23,
+   "word": "Already",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -6.417274475097656
+  },
+  {
+   "excerpt": "reference_impl-19-parent-cot",
+   "index": 24,
+   "word": "no",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -8.795345306396484
+  },
+  {
+   "excerpt": "reference_impl-19-parent-cot",
+   "index": 25,
+   "word": "MonitorPublisher",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -3.6447525024414062
+  },
+  {
+   "excerpt": "reference_impl-19-parent-cot",
+   "index": 26,
+   "word": "owner",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -4.646175384521484
+  },
+  {
+   "excerpt": "reference_impl-19-parent-cot",
+   "index": 27,
+   "word": "still",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -7.640048980712891
+  },
+  {
+   "excerpt": "reference_impl-19-parent-cot",
+   "index": 28,
+   "word": "capture",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -5.560464859008789
+  },
+  {
+   "excerpt": "reference_impl-19-parent-cot",
+   "index": 29,
+   "word": "publisher",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -4.756916046142578
+  },
+  {
+   "excerpt": "reference_impl-19-parent-cot",
+   "index": 30,
+   "word": "None",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -3.891437530517578
+  },
+  {
+   "excerpt": "reference_impl-19-parent-cot",
+   "index": 31,
+   "word": "usual.",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -5.513408660888672
+  },
+  {
+   "excerpt": "reference_impl-19-parent-cot",
+   "index": 32,
+   "word": "Monitor",
+   "kind": "short",
+   "short": "Mon",
+   "chars_saved": 4,
+   "log_ratio": 1.5111961364746094
+  },
+  {
+   "excerpt": "reference_impl-19-parent-cot",
+   "index": 33,
+   "word": "actual",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -4.372163772583008
+  },
+  {
+   "excerpt": "reference_impl-19-parent-cot",
+   "index": 34,
+   "word": "Basic",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -3.8901491165161133
+  },
+  {
+   "excerpt": "reference_impl-19-parent-cot",
+   "index": 35,
+   "word": "doesn't",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -9.233987808227539
+  },
+  {
+   "excerpt": "reference_impl-19-parent-cot",
+   "index": 36,
+   "word": "agent",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -6.776711463928223
+  },
+  {
+   "excerpt": "reference_impl-19-parent-cot",
+   "index": 37,
+   "word": "monitor;",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -5.004680633544922
+  },
+  {
+   "excerpt": "reference_impl-19-parent-cot",
+   "index": 37,
+   "word": "monitor;",
+   "kind": "short",
+   "short": "mon;",
+   "chars_saved": 4,
+   "log_ratio": -6.356550216674805
+  },
+  {
+   "excerpt": "reference_impl-19-parent-cot",
+   "index": 38,
+   "word": "original",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -4.55448055267334
+  },
+  {
+   "excerpt": "reference_impl-19-parent-cot",
+   "index": 38,
+   "word": "original",
+   "kind": "short",
+   "short": "orig",
+   "chars_saved": 4,
+   "log_ratio": -5.819619178771973
+  },
+  {
+   "excerpt": "reference_impl-19-parent-cot",
+   "index": 39,
+   "word": "custom",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -7.643414497375488
+  },
+  {
+   "excerpt": "reference_impl-19-parent-cot",
+   "index": 40,
+   "word": "AgentSampleCompleter",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -2.966571807861328
+  },
+  {
+   "excerpt": "reference_impl-19-parent-cot",
+   "index": 41,
+   "word": "standard",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -6.844682693481445
+  },
+  {
+   "excerpt": "reference_impl-19-parent-cot",
+   "index": 41,
+   "word": "standard",
+   "kind": "short",
+   "short": "std",
+   "chars_saved": 5,
+   "log_ratio": -2.085062026977539
+  },
+  {
+   "excerpt": "reference_impl-19-parent-cot",
+   "index": 42,
+   "word": "had",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -8.793004989624023
+  },
+  {
+   "excerpt": "reference_impl-19-parent-cot",
+   "index": 43,
+   "word": "aux",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -5.322078704833984
+  },
+  {
+   "excerpt": "reference_impl-19-parent-cot",
+   "index": 44,
+   "word": "L1",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": 1.3272571563720703
+  },
+  {
+   "excerpt": "reference_impl-19-parent-cot",
+   "index": 45,
+   "word": "monitor",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -3.086832046508789
+  },
+  {
+   "excerpt": "reference_impl-19-parent-cot",
+   "index": 45,
+   "word": "monitor",
+   "kind": "short",
+   "short": "mon",
+   "chars_saved": 4,
+   "log_ratio": -1.1361713409423828
+  },
+  {
+   "excerpt": "reference_impl-19-parent-cot",
+   "index": 46,
+   "word": "state",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -4.594600677490234
+  },
+  {
+   "excerpt": "reference_impl-19-parent-cot",
+   "index": 47,
+   "word": "changed",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -4.867330551147461
+  },
+  {
+   "excerpt": "reference_impl-19-parent-cot",
+   "index": 48,
+   "word": "not",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -7.240047454833984
+  },
+  {
+   "excerpt": "reference_impl-19-parent-cot",
+   "index": 49,
+   "word": "functional",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -7.176042556762695
+  },
+  {
+   "excerpt": "reference_impl-19-parent-cot",
+   "index": 49,
+   "word": "functional",
+   "kind": "short",
+   "short": "func",
+   "chars_saved": 6,
+   "log_ratio": -1.180215835571289
+  },
+  {
+   "excerpt": "reference_impl-19-parent-cot",
+   "index": 50,
+   "word": "tools",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -3.9283714294433594
+  },
+  {
+   "excerpt": "reference_impl-19-parent-cot",
+   "index": 51,
+   "word": "user",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -6.298234939575195
+  },
+  {
+   "excerpt": "reference_impl-19-parent-cot",
+   "index": 52,
+   "word": "asked",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -8.161413192749023
+  },
+  {
+   "excerpt": "reference_impl-19-parent-cot",
+   "index": 53,
+   "word": "serving",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -4.945280075073242
+  },
+  {
+   "excerpt": "reference_impl-19-parent-cot",
+   "index": 54,
+   "word": "path",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -6.338862657546997
+  },
+  {
+   "excerpt": "reference_impl-19-parent-cot",
+   "index": 55,
+   "word": "same",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -9.089872360229492
+  },
+  {
+   "excerpt": "reference_impl-19-parent-cot",
+   "index": 56,
+   "word": "PR",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -6.584552764892578
+  },
+  {
+   "excerpt": "reference_impl-19-parent-cot",
+   "index": 57,
+   "word": "allows",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -8.53803825378418
+  },
+  {
+   "excerpt": "reference_impl-19-parent-cot",
+   "index": 58,
+   "word": "monitors",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -7.033535003662109
+  },
+  {
+   "excerpt": "reference_impl-19-parent-cot",
+   "index": 58,
+   "word": "monitors",
+   "kind": "short",
+   "short": "mons",
+   "chars_saved": 4,
+   "log_ratio": -5.625638961791992
+  },
+  {
+   "excerpt": "reference_impl-19-parent-cot",
+   "index": 59,
+   "word": "changed.",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": true,
+   "log_ratio": -6.863521575927734
+  },
+  {
+   "excerpt": "reference_impl-19-parent-cot",
+   "index": 60,
+   "word": "good.",
+   "kind": "glue",
+   "chars_saved": 1,
+   "gpt6_glued": false,
+   "log_ratio": -6.885398864746094
+  }
+ ]
+}

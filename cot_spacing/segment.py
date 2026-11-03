@@ -27,9 +27,13 @@ class Segmentation(BaseModel):
     def original(self) -> str:
         return "".join(w + g for w, g in zip(self.words, [*self.gaps, ""], strict=True))
 
+    def spaced_gaps(self) -> list[str]:
+        return [g if g == "\n" else " " for g in self.gaps]
+
     def spaced(self) -> str:
-        gaps = [g if g == "\n" else " " for g in self.gaps]
-        return "".join(w + g for w, g in zip(self.words, [*gaps, ""], strict=True))
+        return "".join(
+            w + g for w, g in zip(self.words, [*self.spaced_gaps(), ""], strict=True)
+        )
 
     def merge(self, indices: set[int]) -> Segmentation:
         """Treat the given boundaries as internal to a single word.
